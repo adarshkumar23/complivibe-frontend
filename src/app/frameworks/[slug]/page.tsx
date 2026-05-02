@@ -159,20 +159,24 @@ const fallbackData: FrameworkData = {
   relatedFeatures: ["Evidence Vault", "Readiness Dashboard", "Audit Trail", "48-Hour Engine"],
 };
 
-const allSlugs = [
-  "soc2", "iso-42001", "fcra", "iso-27001", "hipaa", "tisax",
-  "fedramp", "pci-dss", "gdpr", "rbi-sar", "csa-star", "iso-9001",
-  "iso-27017", "pipeda", "eu-ai-act", "dpdp", "nist",
-];
+const frameworkSlugAliases: Record<string, string> = {
+  iso27001: "iso-27001",
+  iso27017: "iso-27017",
+  iso9001: "iso-9001",
+};
 
-export function generateStaticParams() {
-  return allSlugs.map((slug) => ({ slug }));
-}
+const allSlugs = [
+  "soc2", "iso-42001", "fcra", "iso27001", "hipaa", "tisax",
+  "fedramp", "pci-dss", "gdpr", "rbi-sar", "csa-star", "iso9001",
+  "iso27017", "pipeda", "eu-ai-act", "dpdp", "iso-27001",
+  "iso-27017", "iso-9001", "nist",
+];
 
 export default async function FrameworkDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (!allSlugs.includes(slug)) notFound();
-  const data = frameworksData[slug] || { ...fallbackData, name: slug.toUpperCase().replace(/-/g, " ") };
+  const resolvedSlug = frameworkSlugAliases[slug] ?? slug;
+  const data = frameworksData[resolvedSlug] || { ...fallbackData, name: resolvedSlug.toUpperCase().replace(/-/g, " ") };
 
   return (
     <div className="min-h-screen bg-black text-white">

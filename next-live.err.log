@@ -1,0 +1,98 @@
+ ⨯ [Error: Cannot find module './vendor-chunks/framer-motion.js'
+Require stack:
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\webpack-runtime.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\app\solutions\[slug]\page.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\require.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\load-components.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\build\utils.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\dev\static-paths-worker.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/solutions/mid-market'
+}
+ ⨯ [Error: Cannot find module './vendor-chunks/framer-motion.js'
+Require stack:
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\webpack-runtime.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\app\solutions\[slug]\page.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\require.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\load-components.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\build\utils.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\dev\static-paths-worker.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/solutions/mid-market'
+}
+ ⨯ [Error: Cannot find module './vendor-chunks/framer-motion.js'
+Require stack:
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\webpack-runtime.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\app\solutions\[slug]\page.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\require.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\load-components.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\build\utils.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\dev\static-paths-worker.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/solutions/enterprise'
+}
+ ⨯ [Error: Cannot find module './vendor-chunks/framer-motion.js'
+Require stack:
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\webpack-runtime.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\app\frameworks\[slug]\page.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\require.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\load-components.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\build\utils.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\dev\static-paths-worker.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/frameworks/eu-ai-act'
+}
+ ⨯ [Error: Cannot find module './vendor-chunks/framer-motion.js'
+Require stack:
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\webpack-runtime.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\app\solutions\[slug]\page.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\require.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\load-components.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\build\utils.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\dev\static-paths-worker.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/solutions/mid-market'
+}
+ ⨯ [Error: Cannot find module './vendor-chunks/framer-motion.js'
+Require stack:
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\webpack-runtime.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\app\solutions\[slug]\page.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\require.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\load-components.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\build\utils.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\dev\static-paths-worker.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/solutions/mid-market'
+}
+ ⨯ [Error: Cannot find module './vendor-chunks/framer-motion.js'
+Require stack:
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\webpack-runtime.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\app\solutions\[slug]\page.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\require.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\load-components.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\build\utils.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\server\dev\static-paths-worker.js
+- D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/solutions/mid-market'
+}

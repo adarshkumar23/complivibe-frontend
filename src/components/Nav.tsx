@@ -1,258 +1,484 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronDown, Menu, X, Shield } from "lucide-react";
-import { clsx } from "clsx";
-import RegFeed from "./RegFeed";
+import { useEffect, useRef, useState } from "react";
+import {
+  Activity,
+  Award,
+  BadgeCheck,
+  BookOpen,
+  Bot,
+  Brain,
+  Building2,
+  Car,
+  ChevronDown,
+  ClipboardList,
+  Cloud,
+  Compass,
+  CreditCard,
+  DollarSign,
+  Eye,
+  FileCheck,
+  FileText,
+  Flag,
+  Github,
+  GitCommit,
+  GitMerge,
+  GitPullRequest,
+  Globe,
+  GraduationCap,
+  Heart,
+  Landmark,
+  Layers,
+  Link2,
+  Lock,
+  MapPin,
+  Network,
+  Plane,
+  PlayCircle,
+  Rocket,
+  Scale,
+  Server,
+  Shield,
+  ShieldCheck,
+  Star,
+  TrendingUp,
+  Users,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
+import {
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
+  NavBody,
+  Navbar,
+  NavbarButton,
+  NavbarLogo,
+} from "@/components/ui/resizable-navbar";
 
-const platformItems = [
-  { label: "Governance OS", desc: "End-to-end compliance platform", href: "/platform" },
-  { label: "48-Hour Engine", desc: "Fastest regulatory updates in market", href: "/platform#engine" },
-  { label: "CI/CD Gate", desc: "Block non-compliant deploys", href: "/platform#cicd" },
-  { label: "Audit Trail", desc: "Hash-chained tamper-proof logs", href: "/platform#audit" },
-  { label: "Live Monitor", desc: "Real-time obligation drift tracking", href: "/platform#monitor" },
-];
-
-const solutionsBySize = [
-  { label: "Startup", desc: "Get compliant fast, stay lean", href: "/solutions/startup" },
-  { label: "Mid-Market", desc: "Scale compliance with your team", href: "/solutions/enterprise" },
-  { label: "Enterprise", desc: "Multi-jurisdiction governance OS", href: "/solutions/enterprise" },
-  { label: "IT Teams", desc: "Integrate compliance into your stack", href: "/solutions" },
-  { label: "CISO", desc: "Risk visibility across all AI systems", href: "/solutions" },
-  { label: "GRC", desc: "Governance, risk & compliance workflows", href: "/solutions" },
-];
-
-const solutionsByIndustry = [
-  { label: "Healthcare", desc: "HIPAA + EU AI Act Article 22", href: "/solutions/healthcare" },
-  { label: "Fintech", desc: "RBI SAR + GDPR dual compliance", href: "/solutions/fintech" },
-  { label: "SaaS", desc: "Unblock EU deals now", href: "/solutions/startup" },
-  { label: "Government", desc: "Public sector AI governance", href: "/solutions" },
-  { label: "Travel", desc: "Cross-border data compliance", href: "/solutions" },
-];
-
-const solutionsPacks = [
-  { label: "EU Export Pack", desc: "Sell to EU customers, unblocked", href: "/solutions" },
-  { label: "India-First Onboarding", desc: "DPDP-native compliance setup", href: "/solutions" },
-  { label: "US SaaS Onboarding", desc: "SOC2 + AI Act alignment", href: "/solutions" },
-];
-
-const frameworkItems = [
-  { label: "EU AI Act", desc: "Full Annex IV documentation", href: "/frameworks/eu-ai-act" },
-  { label: "India DPDP", desc: "Digital Personal Data Protection", href: "/frameworks/dpdp" },
-  { label: "GDPR", desc: "General Data Protection Regulation", href: "/frameworks/gdpr" },
-  { label: "ISO 42001", desc: "AI Management System Standard", href: "/frameworks/iso-42001" },
-  { label: "NIST AI RMF", desc: "Risk Management Framework", href: "/frameworks/nist" },
-  { label: "SOC 2", desc: "Trust Services Criteria", href: "/frameworks/soc2" },
-];
-
-const resourceItems = [
-  { label: "Compliance Compass", desc: "Blog & regulatory insights", href: "/resources" },
-  { label: "Customer Stories", desc: "How teams use CompliVibe", href: "/resources" },
-  { label: "Demo Videos", desc: "See the platform in action", href: "/resources" },
-  { label: "Ebooks & Guides", desc: "Deep-dive compliance resources", href: "/resources" },
-  { label: "Training & Events", desc: "Workshops and Trust Week", href: "/resources" },
-];
-
-type NavItem = {
-  label: string;
+type NavLinkItem = {
+  name: string;
+  description: string;
   href: string;
-  megaMenu?: boolean;
-  children?: { label: string; desc: string; href: string }[];
+  icon: LucideIcon;
 };
 
-const navItems: NavItem[] = [
-  { label: "Platform", href: "/platform", children: platformItems },
-  { label: "Solutions", href: "/solutions", megaMenu: true },
-  { label: "Resources", href: "/resources", children: resourceItems },
-  { label: "Frameworks", href: "/frameworks", children: frameworkItems },
-  { label: "Pricing", href: "/pricing" },
+type NavTab = {
+  name: string;
+  links: NavLinkItem[];
+};
+
+type DropdownName = "Platform" | "Solutions" | "Resources" | "Frameworks";
+
+type MegaMenu = {
+  name: DropdownName;
+  href: string;
+  panelClassName: "min-w-[720px]" | "min-w-[640px]";
+  tabs: NavTab[];
+};
+
+const megaMenus: MegaMenu[] = [
+  {
+    name: "Platform",
+    href: "/platform",
+    panelClassName: "min-w-[720px]",
+    tabs: [
+      {
+        name: "Governance",
+        links: [
+          { name: "Governance OS Engine", description: "Central operating layer for AI governance controls.", href: "/platform", icon: Shield },
+          { name: "Dual Obligation Engine", description: "Maps overlapping duties across frameworks automatically.", href: "/platform", icon: GitMerge },
+          { name: "FRIA+DPIA Fusion", description: "Unified risk assessments for AI and privacy obligations.", href: "/platform", icon: Layers },
+          { name: "Hash-Chained Audit Trail", description: "Tamper-evident lineage for every policy and action.", href: "/platform", icon: Link2 },
+        ],
+      },
+      {
+        name: "Automation",
+        links: [
+          { name: "Auto-Evidence Agents", description: "Continuously collect and organize audit-ready evidence.", href: "/platform", icon: Bot },
+          { name: "CI/CD Compliance Gate", description: "Stops non-compliant releases before they go live.", href: "/platform", icon: GitPullRequest },
+          { name: "GitHub Integration", description: "Connect policy checks directly into engineering workflows.", href: "/platform", icon: Github },
+          { name: "48-Hour Regulatory Engine", description: "Pushes major regulation deltas in near real time.", href: "/platform", icon: Zap },
+        ],
+      },
+      {
+        name: "Monitoring",
+        links: [
+          { name: "Live Model Monitor", description: "Track model risk posture and control health in production.", href: "/platform", icon: Activity },
+          { name: "LLM Vendor Watch", description: "Monitor third-party model risk and policy changes.", href: "/platform", icon: Eye },
+          { name: "Agent-Aware Governance", description: "Govern autonomous agents with policy-aware guardrails.", href: "/platform", icon: Network },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Solutions",
+    href: "/solutions",
+    panelClassName: "min-w-[720px]",
+    tabs: [
+      {
+        name: "By Size",
+        links: [
+          { name: "Startup", description: "Fast compliance setup for lean, shipping-first teams.", href: "/solutions/startup", icon: Rocket },
+          { name: "Mid-Market", description: "Scale governance without adding process drag.", href: "/solutions/mid-market", icon: Building2 },
+          { name: "Enterprise", description: "Coordinate controls across functions and geographies.", href: "/solutions/enterprise", icon: Landmark },
+          { name: "IT Teams", description: "Embed controls into delivery and infrastructure pipelines.", href: "/solutions/it-teams", icon: Server },
+          { name: "CISO", description: "Unified AI risk visibility and accountability reporting.", href: "/solutions/ciso", icon: Lock },
+          { name: "GRC", description: "Operationalize policy into repeatable workflows.", href: "/solutions/grc", icon: ClipboardList },
+        ],
+      },
+      {
+        name: "By Industry",
+        links: [
+          { name: "Healthcare", description: "Clinical AI safeguards with privacy-by-design controls.", href: "/solutions/healthcare", icon: Heart },
+          { name: "Fintech", description: "Regulated AI oversight for high-trust financial use cases.", href: "/solutions/fintech", icon: TrendingUp },
+          { name: "SaaS", description: "Ship globally while staying continuously audit-ready.", href: "/solutions/saas", icon: Cloud },
+          { name: "Govt", description: "Public-sector governance for accountable AI deployment.", href: "/solutions/govt", icon: Flag },
+          { name: "Travel", description: "Cross-border data and AI risk controls for mobility platforms.", href: "/solutions/travel", icon: Plane },
+        ],
+      },
+      {
+        name: "Onboarding Packs",
+        links: [
+          { name: "EU Export Pack", description: "Accelerate EU market entry with ready control bundles.", href: "/solutions/eu-export", icon: Globe },
+          { name: "India-First Pack", description: "DPDP-first operating posture for India launches.", href: "/solutions/india-first", icon: MapPin },
+          { name: "US SaaS Pack", description: "SOC 2-oriented governance for US SaaS growth.", href: "/solutions/us-saas", icon: DollarSign },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Resources",
+    href: "/resources",
+    panelClassName: "min-w-[640px]",
+    tabs: [
+      {
+        name: "Learn",
+        links: [
+          { name: "Compliance Compass", description: "Practical guides for modern AI governance teams.", href: "/resources", icon: Compass },
+          { name: "Ebooks", description: "Deep-dive books across major compliance frameworks.", href: "/resources", icon: BookOpen },
+          { name: "Training & Events", description: "Workshops and live sessions with policy operators.", href: "/resources", icon: GraduationCap },
+          { name: "Trust Week", description: "A focused series on transparency and assurance practices.", href: "/resources", icon: BadgeCheck },
+        ],
+      },
+      {
+        name: "Watch",
+        links: [{ name: "Demo Videos", description: "Product demos and implementation walkthroughs.", href: "/resources", icon: PlayCircle }],
+      },
+      {
+        name: "Read",
+        links: [
+          { name: "Customer Stories", description: "How teams ship safely with governance in place.", href: "/customer-stories", icon: Users },
+          { name: "Blog", description: "Commentary and explainers on evolving AI regulations.", href: "/blog", icon: FileText },
+          { name: "Changelog", description: "Latest feature releases and product improvements.", href: "/changelog", icon: GitCommit },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Frameworks",
+    href: "/frameworks",
+    panelClassName: "min-w-[640px]",
+    tabs: [
+      {
+        name: "AI & Privacy",
+        links: [
+          { name: "EU AI Act", description: "Coverage for high-risk AI obligations and controls.", href: "/frameworks/eu-ai-act", icon: Brain },
+          { name: "ISO 42001", description: "AI management system alignment and readiness.", href: "/frameworks/iso-42001", icon: Shield },
+          { name: "GDPR", description: "Privacy governance mapped to AI data workflows.", href: "/frameworks/gdpr", icon: Lock },
+          { name: "DPDP", description: "India privacy compliance mapped to product operations.", href: "/frameworks/dpdp", icon: Scale },
+        ],
+      },
+      {
+        name: "Security",
+        links: [
+          { name: "SOC2", description: "Trust service controls aligned to AI delivery.", href: "/frameworks/soc2", icon: BadgeCheck },
+          { name: "ISO 27001", description: "ISMS controls for secure AI lifecycle management.", href: "/frameworks/iso27001", icon: ShieldCheck },
+          { name: "ISO 27017", description: "Cloud security controls for hosted AI systems.", href: "/frameworks/iso27017", icon: Cloud },
+          { name: "CSA STAR", description: "Cloud assurance mappings for vendor trust posture.", href: "/frameworks/csa-star", icon: Star },
+          { name: "TISAX", description: "Security and trust controls for automotive ecosystems.", href: "/frameworks/tisax", icon: Car },
+        ],
+      },
+      {
+        name: "Industry",
+        links: [
+          { name: "HIPAA", description: "Healthcare privacy and security control alignment.", href: "/frameworks/hipaa", icon: Heart },
+          { name: "FCRA", description: "Fair-credit obligations embedded in AI decisioning.", href: "/frameworks/fcra", icon: FileCheck },
+          { name: "RBI SAR", description: "Banking supervisory expectations for AI governance.", href: "/frameworks/rbi-sar", icon: Landmark },
+          { name: "PCI-DSS", description: "Payment-data security controls for AI-enabled flows.", href: "/frameworks/pci-dss", icon: CreditCard },
+          { name: "FedRAMP", description: "US public-sector cloud authorization alignment.", href: "/frameworks/fedramp", icon: Flag },
+          { name: "PIPEDA", description: "Canadian privacy obligations integrated with controls.", href: "/frameworks/pipeda", icon: Globe },
+          { name: "ISO 9001", description: "Quality management rigor for AI-enabled delivery.", href: "/frameworks/iso9001", icon: Award },
+        ],
+      },
+    ],
+  },
 ];
 
-function DropdownMenu({ items }: { items: { label: string; desc: string; href: string }[] }) {
+const mobileLinks = [
+  { name: "Platform", href: "/platform" },
+  { name: "Solutions", href: "/solutions" },
+  { name: "Resources", href: "/resources" },
+  { name: "Frameworks", href: "/frameworks" },
+  { name: "Pricing", href: "/pricing" },
+];
+
+function PromoCard() {
+  const [daysRemaining, setDaysRemaining] = useState(0);
+
+  useEffect(() => {
+    const nextValue = Math.max(
+      0,
+      Math.ceil((new Date("2026-08-02").getTime() - new Date().getTime()) / 86400000),
+    );
+    setDaysRemaining(nextValue);
+  }, []);
+
   return (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-xl border border-white/10 bg-[#0a0a0a] shadow-2xl shadow-black/50 overflow-hidden z-50">
-      <div className="p-1.5">
-        {items.map((item) => (
+    <div className="w-[260px] shrink-0 p-4">
+      <div className="h-full rounded-xl bg-[#0A0A0A] p-4">
+        <div className="border-l-2 border-[#0070F3] pl-4">
+          <div className="mb-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.14em]">
+            <span className="text-red-500">LIVE</span>
+            <span className="text-[#0070F3]">REGULATORY UPDATE</span>
+          </div>
+          <p className="text-sm font-semibold text-white">
+            EU AI Act enforcement in {daysRemaining} days
+          </p>
+          <p className="mt-2 text-xs text-neutral-500">
+            3 new obligations added this week
+          </p>
           <Link
-            key={item.label}
-            href={item.href}
-            className="flex flex-col gap-0.5 rounded-lg px-3 py-2.5 hover:bg-white/5 transition-colors"
+            href="/resources"
+            className="mt-4 inline-block text-sm font-medium text-[#0070F3] transition hover:opacity-90"
           >
-            <span className="text-sm font-medium text-white">{item.label}</span>
-            <span className="text-xs text-[#888]">{item.desc}</span>
+            View Live Feed {"->"}
           </Link>
-        ))}
+        </div>
       </div>
     </div>
   );
 }
 
-function SolutionsMegaMenu() {
+type MegaNavProps = {
+  activeDropdown: string | null;
+  activeTabs: Record<DropdownName, string>;
+  openDropdown: (name: DropdownName) => void;
+  closeDropdown: () => void;
+  setActiveTab: (name: DropdownName, tabName: string) => void;
+};
+
+function MegaNav({
+  activeDropdown,
+  activeTabs,
+  openDropdown,
+  closeDropdown,
+  setActiveTab,
+}: MegaNavProps) {
   return (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[680px] rounded-xl border border-white/10 bg-[#0a0a0a] shadow-2xl shadow-black/50 overflow-hidden z-50">
-      <div className="grid grid-cols-3 gap-0 divide-x divide-white/[0.06]">
-        {/* By Size */}
-        <div className="p-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#555] mb-3 px-2">By Size</p>
-          {solutionsBySize.map((item) => (
-            <Link key={item.label} href={item.href} className="flex flex-col gap-0.5 rounded-lg px-2 py-2 hover:bg-white/5 transition-colors">
-              <span className="text-sm font-medium text-white">{item.label}</span>
-              <span className="text-[11px] text-[#666]">{item.desc}</span>
-            </Link>
-          ))}
-        </div>
-        {/* By Industry */}
-        <div className="p-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#555] mb-3 px-2">By Industry</p>
-          {solutionsByIndustry.map((item) => (
-            <Link key={item.label} href={item.href} className="flex flex-col gap-0.5 rounded-lg px-2 py-2 hover:bg-white/5 transition-colors">
-              <span className="text-sm font-medium text-white">{item.label}</span>
-              <span className="text-[11px] text-[#666]">{item.desc}</span>
-            </Link>
-          ))}
-        </div>
-        {/* Packs */}
-        <div className="p-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#555] mb-3 px-2">Onboarding Packs</p>
-          {solutionsPacks.map((item) => (
-            <Link key={item.label} href={item.href} className="flex flex-col gap-0.5 rounded-lg px-2 py-2 hover:bg-white/5 transition-colors">
-              <span className="text-sm font-medium text-white">{item.label}</span>
-              <span className="text-[11px] text-[#666]">{item.desc}</span>
-            </Link>
-          ))}
-        </div>
-      </div>
+    <div className="hidden items-center gap-1 lg:flex">
+      {megaMenus.map((menu) => {
+        const selectedTabName = activeTabs[menu.name] ?? menu.tabs[0].name;
+        const selectedTab =
+          menu.tabs.find((tab) => tab.name === selectedTabName) ?? menu.tabs[0];
+        const isOpen = activeDropdown === menu.name;
+
+        return (
+          <div
+            key={menu.name}
+            className="relative"
+            onMouseEnter={() => openDropdown(menu.name)}
+            onMouseLeave={closeDropdown}
+          >
+            <button
+              type="button"
+              className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold text-neutral-300 transition hover:bg-white/5 hover:text-white"
+            >
+              <span>{menu.name}</span>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            {isOpen && (
+              <div
+                className={`absolute left-1/2 top-full z-[80] mt-2 -translate-x-1/2 overflow-hidden rounded-xl border border-[#1a1a1a] bg-[#0A0A0A] shadow-2xl transition duration-150 ${menu.panelClassName}`}
+                onMouseEnter={() => openDropdown(menu.name)}
+                onMouseLeave={closeDropdown}
+              >
+                <div className="flex">
+                  <div className="w-44 border-r border-[#1a1a1a] py-3">
+                    {menu.tabs.map((tab) => {
+                      const isActive = selectedTab.name === tab.name;
+                      return (
+                        <button
+                          key={`${menu.name}-${tab.name}`}
+                          type="button"
+                          onMouseEnter={() => setActiveTab(menu.name, tab.name)}
+                          className={`w-full border-l-2 px-4 py-2.5 text-left text-sm transition ${
+                            isActive
+                              ? "border-[#0070F3] bg-white/5 text-white"
+                              : "border-transparent text-neutral-400 hover:bg-white/5 hover:text-white"
+                          }`}
+                        >
+                          {tab.name}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <div className="grid flex-1 grid-cols-1 gap-1 p-4">
+                    {selectedTab.links.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <Link
+                          key={`${selectedTab.name}-${item.name}`}
+                          href={item.href}
+                          className="rounded-lg p-3 transition hover:bg-white/5"
+                        >
+                          <div className="flex items-start gap-3">
+                            <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[#0070F3]" />
+                            <div>
+                              <p className="text-sm font-semibold text-white">{item.name}</p>
+                              <p className="mt-1 text-xs leading-5 text-neutral-400">
+                                {item.description}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+
+                  <PromoCard />
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      <Link
+        href="/pricing"
+        className="rounded-full px-3 py-2 text-sm font-semibold text-neutral-300 transition hover:bg-white/5 hover:text-white"
+      >
+        Pricing
+      </Link>
     </div>
   );
 }
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeTabs, setActiveTabs] = useState<Record<DropdownName, string>>({
+    Platform: "Governance",
+    Solutions: "By Size",
+    Resources: "Learn",
+    Frameworks: "AI & Privacy",
+  });
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openDropdown = (name: DropdownName) => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setActiveDropdown(name);
+  };
+
+  const closeDropdown = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+    }
+    closeTimer.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
+  };
+
+  const setActiveTab = (name: DropdownName, tabName: string) => {
+    setActiveTabs((current) => ({
+      ...current,
+      [name]: tabName,
+    }));
+  };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      if (closeTimer.current) {
+        clearTimeout(closeTimer.current);
+      }
+    };
   }, []);
 
   return (
-    <>
-      <RegFeed />
+    <Navbar>
+      <NavBody>
+        <NavbarLogo />
 
-      {/* Main nav */}
-      <header
-        className={clsx(
-          "sticky top-0 z-40 w-full transition-all duration-200",
-          scrolled
-            ? "border-b border-white/[0.08] bg-black/80 backdrop-blur-xl"
-            : "border-b border-transparent bg-transparent"
-        )}
-      >
-        <nav className="mx-auto flex h-14 max-w-[1200px] items-center gap-6 px-6">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0" aria-label="CompliVibe Home">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-compliance-green to-cv-blue">
-              <Shield className="h-4.5 w-4.5 text-white" strokeWidth={2.5} />
-            </div>
-            <span className="text-base font-bold tracking-tight text-white">CompliVibe</span>
-          </Link>
+        <MegaNav
+          activeDropdown={activeDropdown}
+          activeTabs={activeTabs}
+          openDropdown={openDropdown}
+          closeDropdown={closeDropdown}
+          setActiveTab={setActiveTab}
+        />
 
-          {/* Desktop nav items */}
-          <div className="hidden lg:flex items-center gap-0.5 flex-1">
-            {navItems.map((item) => (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => (item.children || item.megaMenu) && setActiveDropdown(item.label)}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-1 rounded-md px-3 py-1.5 text-sm text-[#888] hover:text-white transition-colors"
-                >
-                  {item.label}
-                  {(item.children || item.megaMenu) && <ChevronDown className="h-3.5 w-3.5" />}
-                </Link>
-                {item.children && !item.megaMenu && activeDropdown === item.label && (
-                  <DropdownMenu items={item.children} />
-                )}
-                {item.megaMenu && activeDropdown === item.label && (
-                  <SolutionsMegaMenu />
-                )}
-              </div>
-            ))}
-          </div>
+        <div className="relative z-20 hidden items-center gap-2 lg:flex">
+          <NavbarButton href="/login" variant="secondary" className="text-white">
+            Login
+          </NavbarButton>
+          <NavbarButton href="/book-demo" variant="primary">
+            Book Demo
+          </NavbarButton>
+        </div>
+      </NavBody>
 
-          {/* Right actions */}
-          <div className="hidden lg:flex items-center gap-3 ml-auto">
-            <Link
-              href="/contact"
-              className="text-sm text-[#888] hover:text-white transition-colors px-3 py-1.5"
+      <MobileNav>
+        <MobileNavHeader>
+          <NavbarLogo />
+          <MobileNavToggle
+            isOpen={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen((open) => !open)}
+          />
+        </MobileNavHeader>
+
+        <MobileNavMenu
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+        >
+          {mobileLinks.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="relative text-neutral-300"
             >
-              Contact
-            </Link>
-            <Link
+              <span className="block text-sm font-medium">{item.name}</span>
+            </a>
+          ))}
+          <div className="flex w-full flex-col gap-4">
+            <NavbarButton
               href="/login"
-              className="text-sm text-[#888] hover:text-white transition-colors px-3 py-1.5"
+              onClick={() => setIsMobileMenuOpen(false)}
+              variant="secondary"
+              className="w-full text-white"
             >
-              Log In
-            </Link>
-            <Link
-              href="/signup"
-              className="inline-flex h-8 items-center justify-center rounded-full bg-white px-4 text-sm font-medium text-black hover:bg-[#ededed] transition-colors"
+              Login
+            </NavbarButton>
+            <NavbarButton
+              href="/book-demo"
+              onClick={() => setIsMobileMenuOpen(false)}
+              variant="primary"
+              className="w-full"
             >
-              Start Free →
-            </Link>
+              Book Demo
+            </NavbarButton>
           </div>
-
-          {/* Mobile toggle */}
-          <button
-            className="lg:hidden ml-auto text-[#888] hover:text-white"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </nav>
-
-        {/* Mobile menu */}
-        {mobileOpen && (
-          <div className="lg:hidden border-t border-white/[0.08] bg-black/95 backdrop-blur-xl">
-            <div className="flex flex-col px-6 py-4 gap-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="py-2.5 text-sm text-[#888] hover:text-white transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="pt-4 mt-2 border-t border-white/[0.08] flex flex-col gap-2">
-                <Link
-                  href="/login"
-                  className="py-2.5 text-sm text-[#888] hover:text-white transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Log In
-                </Link>
-                <Link
-                  href="/signup"
-                  className="flex h-10 items-center justify-center rounded-full bg-white text-sm font-medium text-black hover:bg-[#ededed] transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Start Free →
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
-      </header>
-    </>
+        </MobileNavMenu>
+      </MobileNav>
+    </Navbar>
   );
 }
-

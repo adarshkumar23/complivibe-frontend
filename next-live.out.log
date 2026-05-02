@@ -1,0 +1,48 @@
+   ▲ Next.js 15.5.15
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.8:3000
+
+ ✓ Starting...
+ ✓ Ready in 6.7s
+ ○ Compiling / ...
+ ✓ Compiled / in 12.1s (1612 modules)
+ GET / 200 in 15277ms
+ ✓ Compiled in 3.7s (731 modules)
+ GET / 200 in 6887ms
+ GET / 200 in 5932ms
+ ✓ Compiled in 10.7s (1612 modules)
+ ✓ Compiled in 1566ms (731 modules)
+ ✓ Compiled in 2.2s (731 modules)
+ ✓ Compiled in 7s (1612 modules)
+ GET / 200 in 1338ms
+ ○ Compiling /pricing ...
+ ✓ Compiled /solutions/[slug] in 12.7s (1622 modules)
+ GET /platform 200 in 8932ms
+ GET /resources 200 in 8991ms
+ GET /pricing 200 in 13767ms
+ ○ Compiling /solutions/it-teams ...
+ ✓ Compiled /_error in 8.6s (1974 modules)
+ GET /solutions/ciso 200 in 11867ms
+ GET /solutions/startup 500 in 18242ms
+ GET /solutions/mid-market 500 in 18241ms
+ GET /solutions/it-teams 200 in 11921ms
+ GET /solutions/enterprise 500 in 11932ms
+ GET /platform 200 in 6522ms
+ GET / 200 in 1218ms
+ ○ Compiling /book-demo ...
+ ✓ Compiled /signup in 4.2s (1852 modules)
+ ✓ Compiled in 861ms (868 modules)
+ GET / 200 in 5359ms
+ GET /signup 200 in 4691ms
+ GET / 200 in 3224ms
+ GET / 200 in 1453ms
+ ○ Compiling /frameworks/[slug] ...
+ ✓ Compiled /frameworks/[slug] in 2.7s (998 modules)
+ ✓ Compiled in 1875ms (868 modules)
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 1800ms (1967 modules)
+ GET /frameworks/eu-ai-act 500 in 13658ms
+ GET /solutions/startup 500 in 13552ms
+ GET /solutions/enterprise 500 in 13430ms
+ GET /solutions/mid-market 500 in 13682ms
+[?25h

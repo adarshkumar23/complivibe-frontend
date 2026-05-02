@@ -1,0 +1,130 @@
+ ⨯ ./src/components/Nav.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\src\components\Nav.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./src/components/Nav.tsx
+ ⨯ ./src/components/Nav.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\src\components\Nav.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./src/components/Nav.tsx
+ ⨯ ./src/components/Nav.tsx
+Error:   [31mx[0m Unexpected token. Did you mean `{'>'}` or `&gt;`?
+     ,-[[36;1;4mD:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\src\components\Nav.tsx[0m:258:1]
+ [2m255[0m |             href="/resources"
+ [2m256[0m |             className="mt-4 inline-block text-sm font-medium text-[#0070F3] transition hover:opacity-90"
+ [2m257[0m |           >
+ [2m258[0m |             View Live Feed ->
+     : [35;1m                            ^[0m
+ [2m259[0m |           </Link>
+ [2m260[0m |         </div>
+ [2m261[0m |       </div>
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/Nav.tsx
+ ⨯ [Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json',
+  page: '/'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\fallback-build-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\fallback-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json',
+  page: '/'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\fallback-build-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\fallback-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\fallback-build-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\fallback-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json',
+  page: '/'
+}
+[Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\fallback-build-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\fallback-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json',
+  page: '/'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\server\next-font-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\server\\next-font-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'D:\Ideas\1. EU AI Act. & DPDP Act\Software\website\try 4 on vercel fram\.next\fallback-build-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Ideas\\1. EU AI Act. & DPDP Act\\Software\\website\\try 4 on vercel fram\\.next\\fallback-build-manifest.json'
+}

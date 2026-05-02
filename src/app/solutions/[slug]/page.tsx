@@ -184,13 +184,33 @@ const solutions: Record<string, SolutionData> = {
   },
 };
 
-export function generateStaticParams() {
-  return Object.keys(solutions).map((slug) => ({ slug }));
-}
+const solutionSlugAliases: Record<string, string> = {
+  govt: "government",
+};
+
+const solutionSlugs = [
+  "startup",
+  "mid-market",
+  "enterprise",
+  "it-teams",
+  "ciso",
+  "grc",
+  "healthcare",
+  "fintech",
+  "saas",
+  "govt",
+  "travel",
+  "eu-export",
+  "india-first",
+  "us-saas",
+  "government",
+];
 
 export default async function SolutionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const data = solutions[slug];
+  const resolvedSlug = solutionSlugAliases[slug] ?? slug;
+  if (!solutionSlugs.includes(slug) && !solutionSlugs.includes(resolvedSlug)) notFound();
+  const data = solutions[resolvedSlug];
   if (!data) notFound();
 
   return (
