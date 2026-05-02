@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/Pc/scoop/shims//**)",
+      "Bash(cmd /c \"node --version 2>&1\")",
+      "Bash(cmd /c \"npm --version 2>&1\")",
+      "Bash(cmd /c \"where node 2>&1\")",
+      "Bash(cmd /c \"where node\")",
+      "Bash(powershell -Command \"Get-Command node -ErrorAction SilentlyContinue | Select-Object Source\")",
+      "Bash(winget install:*)",
+      "Bash(cmd /c \"node --version\")",
+      "Bash(winget list:*)",
+      "Bash(Read the:*)",
+      "Bash(scoop install:*)",
+      "Bash(export PATH=\"/c/Users/Pc/scoop/apps/nodejs-lts/current:/c/Users/Pc/scoop/apps/nodejs-lts/current/bin:$PATH\")",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3000)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(powershell -Command \"Stop-Process -Id 14296 -Force\")"
+    ]
+  }
+}
