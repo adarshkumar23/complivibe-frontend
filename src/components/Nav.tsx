@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
   Award,
@@ -292,70 +293,78 @@ function MegaNav({
             onMouseEnter={() => openDropdown(menu.name)}
             onMouseLeave={closeDropdown}
           >
-            <button
-              type="button"
+            <Link
+              href={menu.href}
               className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold text-neutral-300 transition hover:bg-white/5 hover:text-white"
+              onMouseEnter={() => openDropdown(menu.name)}
             >
               <span>{menu.name}</span>
               <ChevronDown
                 className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
               />
-            </button>
+            </Link>
 
-            {isOpen && (
-              <div
-                className={`absolute left-1/2 top-full z-[80] mt-2 -translate-x-1/2 overflow-hidden rounded-xl border border-[#1a1a1a] bg-[#0A0A0A] shadow-2xl transition duration-150 ${menu.panelClassName}`}
-                onMouseEnter={() => openDropdown(menu.name)}
-                onMouseLeave={closeDropdown}
-              >
-                <div className="flex">
-                  <div className="w-44 border-r border-[#1a1a1a] py-3">
-                    {menu.tabs.map((tab) => {
-                      const isActive = selectedTab.name === tab.name;
-                      return (
-                        <button
-                          key={`${menu.name}-${tab.name}`}
-                          type="button"
-                          onMouseEnter={() => setActiveTab(menu.name, tab.name)}
-                          className={`w-full border-l-2 px-4 py-2.5 text-left text-sm transition ${
-                            isActive
-                              ? "border-[#0070F3] bg-white/5 text-white"
-                              : "border-transparent text-neutral-400 hover:bg-white/5 hover:text-white"
-                          }`}
-                        >
-                          {tab.name}
-                        </button>
-                      );
-                    })}
-                  </div>
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                  className={`absolute left-1/2 top-full z-[100] mt-2 -translate-x-1/2 overflow-hidden rounded-xl border border-[#1a1a1a] bg-[#0A0A0A] shadow-2xl ${menu.panelClassName}`}
+                  onMouseEnter={() => openDropdown(menu.name)}
+                  onMouseLeave={closeDropdown}
+                >
+                  <div className="flex">
+                    <div className="w-44 border-r border-[#1a1a1a] py-3">
+                      {menu.tabs.map((tab) => {
+                        const isActive = selectedTab.name === tab.name;
+                        return (
+                          <button
+                            key={`${menu.name}-${tab.name}`}
+                            type="button"
+                            onMouseEnter={() => setActiveTab(menu.name, tab.name)}
+                            className={`w-full border-l-2 px-4 py-2.5 text-left text-sm transition ${
+                              isActive
+                                ? "border-[#0070F3] bg-white/5 text-white"
+                                : "border-transparent text-neutral-400 hover:bg-white/5 hover:text-white"
+                            }`}
+                          >
+                            {tab.name}
+                          </button>
+                        );
+                      })}
+                    </div>
 
-                  <div className="grid flex-1 grid-cols-1 gap-1 p-4">
-                    {selectedTab.links.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <Link
-                          key={`${selectedTab.name}-${item.name}`}
-                          href={item.href}
-                          className="rounded-lg p-3 transition hover:bg-white/5"
-                        >
-                          <div className="flex items-start gap-3">
-                            <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[#0070F3]" />
-                            <div>
-                              <p className="text-sm font-semibold text-white">{item.name}</p>
-                              <p className="mt-1 text-xs leading-5 text-neutral-400">
-                                {item.description}
-                              </p>
+                    <div className="grid flex-1 grid-cols-1 gap-1 p-4">
+                      {selectedTab.links.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={`${selectedTab.name}-${item.name}`}
+                            href={item.href}
+                            className="rounded-lg p-3 transition hover:bg-white/5"
+                            onClick={closeDropdown}
+                          >
+                            <div className="flex items-start gap-3">
+                              <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[#0070F3]" />
+                              <div>
+                                <p className="text-sm font-semibold text-white">{item.name}</p>
+                                <p className="mt-1 text-xs leading-5 text-neutral-400">
+                                  {item.description}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
 
-                  <PromoCard />
-                </div>
-              </div>
-            )}
+                    <PromoCard />
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         );
       })}
@@ -450,14 +459,14 @@ export default function Nav() {
           onClose={() => setIsMobileMenuOpen(false)}
         >
           {mobileLinks.map((item) => (
-            <a
+            <Link
               key={item.name}
               href={item.href}
               onClick={() => setIsMobileMenuOpen(false)}
               className="relative text-neutral-300"
             >
               <span className="block text-sm font-medium">{item.name}</span>
-            </a>
+            </Link>
           ))}
           <div className="flex w-full flex-col gap-4">
             <NavbarButton
