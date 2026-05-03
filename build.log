@@ -1,0 +1,42 @@
+
+> complivibe-web@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.15
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 25.4s
+   Linting and checking validity of types ...
+
+Failed to compile.
+
+./src/app/contact/page.tsx
+4:39  Warning: 'ArrowRight' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/enterprise/page.tsx
+3:8  Warning: 'Link' is defined but never used.  @typescript-eslint/no-unused-vars
+4:10  Warning: 'ArrowRight' is defined but never used.  @typescript-eslint/no-unused-vars
+4:30  Warning: 'ShieldCheck' is defined but never used.  @typescript-eslint/no-unused-vars
+4:43  Warning: 'Lock' is defined but never used.  @typescript-eslint/no-unused-vars
+4:64  Warning: 'Gauge' is defined but never used.  @typescript-eslint/no-unused-vars
+4:71  Warning: 'FileText' is defined but never used.  @typescript-eslint/no-unused-vars
+4:81  Warning: 'CloudLightning' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/frameworks/page.tsx
+59:7  Warning: 'filters' is assigned a value but only used as a type.  @typescript-eslint/no-unused-vars
+133:71  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+200:59  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./src/app/frameworks/page_broken.tsx
+60:8  Error: Parsing error: ';' expected.
+
+./src/app/page_new.tsx
+4:3  Warning: 'Check' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/app/score/ScoreApp.tsx
+3:8  Warning: 'Link' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/ROICalculator.tsx
+34:9  Warning: 'dealRisk' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
