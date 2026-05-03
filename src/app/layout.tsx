@@ -1,22 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-import { Geist } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const geistSans = localFont({
-  src: "../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "CompliVibe — EU AI Act + India DPDP Compliance Platform",
@@ -53,8 +39,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(geistSans.variable, geistMono.variable, "font-sans", geist.variable)}>
-      <body className="bg-black text-white font-sans antialiased">{children}</body>
+    <html
+      lang="en"
+      className={cn(GeistSans.variable, GeistMono.variable, "font-sans dark")}
+      suppressHydrationWarning
+    >
+      <body className="min-h-screen bg-black text-white font-sans antialiased">{children}</body>
     </html>
   );
 }
