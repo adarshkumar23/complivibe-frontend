@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 
 const useCases = [
   {
+    slug: "healthtech-annex-iv",
     icon: Heart,
     sector: "HealthTech",
     color: "text-urgency",
@@ -38,6 +39,7 @@ const useCases = [
       "CompliVibe classifies the system as HIGH RISK under Annex III (healthcare AI) and generates all 8 mandatory Annex IV sections. The documentation is ready for procurement review in minutes, not months.",
   },
   {
+    slug: "fintech-dpdp-gdpr",
     icon: TrendingUp,
     sector: "Fintech",
     color: "text-cv-blue",
@@ -52,6 +54,7 @@ const useCases = [
       "CompliVibe's 828-mapping cross-jurisdiction engine identifies exact overlaps and gaps between their DPDP and GDPR obligations. A single dashboard tracks both frameworks with automatic updates when either regulation changes.",
   },
   {
+    slug: "saas-annex-iii",
     icon: Users,
     sector: "B2B SaaS",
     color: "text-compliance-green",
@@ -113,6 +116,13 @@ export default function CustomerStoriesPage() {
                     <div>
                       <div className="text-[11px] uppercase tracking-[0.12em] text-compliance-green mb-2">With CompliVibe</div>
                       <p className="text-[#888] text-sm leading-relaxed">{uc.outcome}</p>
+                      <Link
+                        href={`/customer-stories/${uc.slug}`}
+                        className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-white hover:text-compliance-green transition-colors"
+                      >
+                        Read full story
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
                     </div>
                   </div>
                 </div>

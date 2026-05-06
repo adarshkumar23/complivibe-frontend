@@ -1,7 +1,6 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Link from "next/link";
-import { ArrowRight, Shield, ShieldCheck, Lock, Globe2, Users, Gauge, FileText, CloudLightning } from "lucide-react";
+import { Shield, Globe2, Users } from "lucide-react";
 
 export default function EnterprisePage() {
   return (

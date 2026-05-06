@@ -31,7 +31,6 @@ export default function ROICalculator() {
 
   const compliVibeCost = aiSystems <= 3 ? 350 * 12 : aiSystems <= 10 ? 3500 * 12 : 12000 * 12;
   const savingsMultiple = Math.round(maxFine / compliVibeCost);
-  const dealRisk = Math.min(dealSize * 3, maxFine);
 
   return (
     <section className="relative py-20 overflow-hidden">

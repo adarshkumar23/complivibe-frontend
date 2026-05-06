@@ -172,6 +172,12 @@ const allSlugs = [
   "iso-27017", "iso-9001", "nist",
 ];
 
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return allSlugs.map((slug) => ({ slug }));
+}
+
 export default async function FrameworkDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (!allSlugs.includes(slug)) notFound();

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -207,15 +208,15 @@ export const ProductCard = ({
       whileHover={{ y: -20 }}
       className="group/product relative h-96 w-[min(85vw,30rem)] shrink-0 sm:w-[30rem]"
     >
-      <a href={product.link} className="block group-hover/product:shadow-2xl">
-        <img
+      <Link href={product.link} className="block group-hover/product:shadow-2xl">
+        <Image
           src={product.thumbnail}
-          height="600"
-          width="600"
+          fill
+          sizes="(max-width: 640px) 85vw, 30rem"
           className="absolute inset-0 h-full w-full object-cover object-left-top"
           alt={product.title}
         />
-      </a>
+      </Link>
       <div className="pointer-events-none absolute inset-0 h-full w-full bg-black opacity-0 group-hover/product:opacity-80"></div>
       <h2 className="absolute bottom-4 left-4 text-white opacity-0 group-hover/product:opacity-100">
         {product.title}

@@ -206,6 +206,12 @@ const solutionSlugs = [
   "government",
 ];
 
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return solutionSlugs.map((slug) => ({ slug }));
+}
+
 export default async function SolutionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const resolvedSlug = solutionSlugAliases[slug] ?? slug;
