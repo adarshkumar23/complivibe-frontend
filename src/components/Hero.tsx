@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, Shield, FileText, AlertTriangle, Globe2 } from "lucide-react";
 import ComplianceCountdown from "./ComplianceCountdown";
@@ -9,14 +8,6 @@ import { Spotlight } from "./ui/spotlight";
 import { cn } from "@/lib/utils";
 
 
-const rotatingTexts = [
-  "Selling to EU customers",
-  "Indian SaaS companies",
-  "Fintech platforms",
-  "Healthcare AI",
-  "Enterprise governance",
-];
-
 const trustBadges = [
   "ISO 42001 Aligned",
   "DPDP Compliant",
@@ -24,17 +15,21 @@ const trustBadges = [
   "256-bit Encrypted",
 ];
 
-const companies = ["AWS", "Google Cloud", "Azure", "Bhashini", "ISO 42001", "GDPR"];
+const frameworks = [
+  { label: "EU AI Act", flag: "🇪🇺" },
+  { label: "India DPDP", flag: "🇮🇳" },
+  { label: "ISO 42001", flag: null },
+  { label: "GDPR", flag: null },
+  { label: "SOC 2", flag: null },
+];
 
 function ComplianceDashboardVisual() {
   return (
     <div className="relative w-full max-w-2xl mx-auto">
-      {/* Glow effect */}
       <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
       <div className="absolute inset-0 rounded-2xl bg-gradient-radial from-compliance-green/10 via-transparent to-transparent pointer-events-none" />
 
       <div className="relative rounded-2xl border border-white/[0.08] bg-[#0A0A0A] overflow-hidden">
-        {/* Dashboard header */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.06] bg-[#111]">
           <div className="flex items-center gap-2">
             <Shield className="h-4 w-4 text-compliance-green" />
@@ -46,9 +41,7 @@ function ComplianceDashboardVisual() {
           </div>
         </div>
 
-        {/* Dashboard body */}
         <div className="p-6 space-y-5">
-          {/* Readiness Score */}
           <div className="flex items-center justify-between">
             <div>
               <div className="text-xs text-[#555] uppercase tracking-wider mb-1">Compliance Readiness</div>
@@ -63,14 +56,13 @@ function ComplianceDashboardVisual() {
             </div>
           </div>
 
-          {/* Stats Row */}
           <div className="grid grid-cols-3 gap-3">
             <div className="rounded-lg bg-white/[0.03] border border-white/[0.06] p-3">
               <div className="text-lg font-bold text-white">14</div>
               <div className="text-[10px] text-[#555]">Frameworks</div>
             </div>
             <div className="rounded-lg bg-white/[0.03] border border-white/[0.06] p-3">
-              <div className="text-lg font-bold text-white">247</div>
+              <div className="text-lg font-bold text-white">719</div>
               <div className="text-[10px] text-[#555]">Obligations</div>
             </div>
             <div className="rounded-lg bg-white/[0.03] border border-white/[0.06] p-3">
@@ -79,7 +71,6 @@ function ComplianceDashboardVisual() {
             </div>
           </div>
 
-          {/* Recent Activity */}
           <div className="space-y-2">
             <div className="text-xs text-[#555] uppercase tracking-wider">Recent Activity</div>
             {[
@@ -97,7 +88,6 @@ function ComplianceDashboardVisual() {
           </div>
         </div>
 
-        {/* Status bar */}
         <div className="flex items-center justify-between px-5 py-2.5 border-t border-white/[0.06] bg-[#111]">
           <div className="flex items-center gap-2 text-xs text-compliance-green">
             <div className="h-1.5 w-1.5 rounded-full bg-compliance-green" />
@@ -111,15 +101,6 @@ function ComplianceDashboardVisual() {
 }
 
 export default function Hero() {
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTextIndex((prev) => (prev + 1) % rotatingTexts.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="relative min-h-screen flex flex-col items-center overflow-hidden">
       <div
@@ -155,26 +136,23 @@ export default function Hero() {
               backgroundClip: "text",
             }}
           >
-            EU AI Act + India DPDP.
+            AI compliance is now law.
             <br />
-            One platform. Zero blocked deals.
+            Are you ready?
           </span>
         </h1>
 
-        {/* Rotating sub-headline */}
+        {/* Sub-tagline */}
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-3 text-sm text-[#888] font-medium border border-white/10 bg-white/5 rounded-full px-4 py-1.5 mb-2">
             <span>🇮🇳 India DPDP</span>
             <span className="w-1 h-1 rounded-full bg-white/20" />
             <span>🇪🇺 EU AI Act</span>
           </div>
-          <div className="max-w-[560px] text-balance leading-relaxed" style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)" }}>
-            <span className="text-[#888]">Built for </span>
-            <span className="text-white font-medium transition-all duration-300">
-              {rotatingTexts[currentTextIndex]}
-            </span>
-            <span className="text-[#888]"> — classify, document, and prove compliance before August 2026.</span>
-          </div>
+          <p className="max-w-[620px] text-balance leading-relaxed text-[#888]" style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}>
+            The only platform that maps EU AI Act obligations to India DPDP — so Indian AI companies{" "}
+            <span className="text-white font-medium">close EU deals instead of losing them.</span>
+          </p>
         </div>
 
         {/* CTA buttons */}
@@ -211,17 +189,30 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Social proof */}
-        <div className="flex flex-col items-center gap-4 mt-6">
+        {/* Social proof + Frameworks strip */}
+        <div className="flex flex-col items-center gap-5 mt-6 w-full">
           <p className="text-sm text-[#888] font-medium">
-            Used by compliance teams at <span className="text-white font-bold">50+</span> companies
+            Join the first{" "}
+            <span className="text-white font-bold">10</span>{" "}
+            Indian AI companies to be EU-ready before August 2026 enforcement.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 opacity-60 hover:opacity-100 transition-opacity">
-            {companies.map((c) => (
-              <div key={c} className="flex items-center gap-2 text-[#666] hover:text-white transition-colors cursor-default">
-                <span className="text-xs font-mono font-bold tracking-wider">{c.toUpperCase()}</span>
-              </div>
-            ))}
+
+          {/* Frameworks strip */}
+          <div className="flex flex-col items-center gap-3 w-full">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.12em]" style={{ color: "#555" }}>
+              Frameworks covered
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {frameworks.map((fw) => (
+                <div
+                  key={fw.label}
+                  className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs font-medium text-[#888]"
+                >
+                  {fw.flag && <span>{fw.flag}</span>}
+                  {fw.label}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

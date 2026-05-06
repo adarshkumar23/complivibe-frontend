@@ -2,54 +2,54 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { Server, ArrowRight, CheckCircle2 } from "lucide-react";
+import { TrendingUp, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "IT Teams | CompliVibe",
-  description: "Shift AI compliance left into engineering workflows — classify AI systems pre-launch, generate documentation in CI/CD, catch high-risk features before deployment.",
-  alternates: { canonical: "https://complivibe.in/solutions/it-teams" },
+  title: "Fintech | CompliVibe",
+  description: "Fintech-specific Annex IV for credit AI, automated Annex III classification for financial AI, and DPDP + GDPR financial data mapping for Indian Fintech companies.",
+  alternates: { canonical: "https://complivibe.in/solutions/fintech" },
   openGraph: {
-    title: "IT Teams | CompliVibe",
-    description: "Compliance shouldn't block your release cycle. CompliVibe integrates AI compliance into your dev workflow.",
-    url: "https://complivibe.in/solutions/it-teams",
+    title: "Fintech | CompliVibe",
+    description: "Credit scoring AI is high-risk under EU law. Yours needs documentation. CompliVibe generates it.",
+    url: "https://complivibe.in/solutions/fintech",
     images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
   },
 };
 
 const features = [
-  "Annex III classifier API — classify AI systems programmatically before any deployment decision",
-  "CI/CD compliance gate — catches high-risk AI feature launches before they hit production",
-  "Annex IV documentation generated via API — no legal review bottleneck in the release cycle",
-  "48-hour regulatory updates delivered to your engineering dashboard, not a legal inbox",
+  "Fintech-specific Annex IV generation for credit scoring, insurance pricing, and financial advisory AI",
+  "Annex III classification for financial AI — automated identification of high-risk financial use cases",
+  "DPDP + GDPR financial data overlap mapping — 828 cross-jurisdiction obligations",
+  "Article 13 transparency statements for EU banking and lending clients",
 ];
 
-export default function ITTeamsPage() {
+export default function FintechPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       <Nav />
       <main>
         <section className="mx-auto max-w-[1100px] px-6 pt-32 pb-20">
           <div className="inline-flex items-center gap-2 rounded-full border border-cv-blue/20 bg-cv-blue/5 px-4 py-1.5 text-xs text-cv-blue font-medium mb-8">
-            <Server className="h-3 w-3" />
-            For Engineering & IT Teams
+            <TrendingUp className="h-3 w-3" />
+            For Fintech
           </div>
           <h1
             className="text-white mb-6 max-w-[820px]"
             style={{ fontSize: "clamp(2rem, 5vw, 4rem)", lineHeight: "1.05", fontWeight: "700", letterSpacing: "-0.04em" }}
           >
-            Compliance shouldn&apos;t block
+            Credit scoring AI is high-risk
             <br />
-            <span className="text-[#666]">your release cycle.</span>
+            <span className="text-[#666]">under EU law. Yours needs documentation.</span>
           </h1>
           <p className="text-lg text-[#888] max-w-[580px] leading-relaxed mb-8">
-            Legal and compliance reviews slow down AI feature launches. No tooling exists to shift EU AI Act and DPDP compliance left into the dev workflow — until now.
+            AI used in credit decisions, insurance pricing, or financial advice is Annex III high-risk under EU AI Act. EU regulators and enterprise clients demand technical documentation. Indian Fintech companies serving EU banking clients need it yesterday.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link href="/signup" className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-black hover:bg-[#ededed] transition-colors">
-              Explore API <ArrowRight className="h-4 w-4" />
+              Generate Annex IV <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/book-demo" className="inline-flex h-11 items-center gap-2 rounded-full border border-white/[0.15] bg-white/[0.04] px-6 text-sm font-semibold text-white hover:bg-white/[0.08] transition-all">
-              Book a technical demo
+              Book a Fintech demo
             </Link>
           </div>
         </section>
@@ -60,27 +60,27 @@ export default function ITTeamsPage() {
               <div>
                 <div className="text-xs uppercase tracking-[0.12em] text-urgency mb-4 font-semibold">The problem</div>
                 <h2 className="text-white font-bold text-2xl mb-4 leading-tight">
-                  Compliance reviews are a release bottleneck — and the bottleneck is getting worse
+                  EU banks and regulators are applying AI documentation requirements now — not in 2026
                 </h2>
                 <p className="text-[#888] leading-relaxed mb-4">
-                  Every new AI feature at an Indian company with EU customers now needs a compliance review before launch. Legal teams don&apos;t understand models. Engineering teams don&apos;t understand Annex III. The review takes weeks and blocks the release.
+                  EU AI Act Annex III explicitly lists AI used in creditworthiness assessment, insurance risk scoring, and financial advice as high-risk. This affects every Indian Fintech with EU banking, lending, or payments clients. EU financial institutions and regulators are already requiring Annex IV documentation in vendor due diligence.
                 </p>
                 <p className="text-[#888] leading-relaxed">
-                  EU AI Act enforcement begins August 2026. Without a programmatic compliance gate, every AI feature launch is an unreviewed risk. Indian IT companies serving $50B+ in EU exports cannot afford ad-hoc compliance checks at scale.
+                  Indian Fintech companies also process financial data of Indian borrowers under DPDP — creating simultaneous DPDP and GDPR obligations when EU clients are involved. Fine exposure: <span className="text-urgency font-semibold">€30M or 6% of global annual turnover</span> under EU AI Act, plus ₹250 crore per breach under DPDP.
                 </p>
               </div>
               <div className="rounded-2xl border border-cv-blue/20 bg-cv-blue/[0.03] p-8">
-                <div className="text-xs uppercase tracking-[0.12em] text-cv-blue mb-4">Developer-first compliance</div>
+                <div className="text-xs uppercase tracking-[0.12em] text-cv-blue mb-4">Fintech compliance stakes</div>
                 <div className="flex flex-col gap-4">
                   {[
-                    { label: "Classification API response", value: "< 3 seconds" },
-                    { label: "Annex IV generation", value: "API call, not weeks" },
-                    { label: "CI/CD integration", value: "GitHub Actions ready" },
-                    { label: "Regulatory update delivery", value: "Dashboard + webhook" },
+                    { label: "EU AI Act risk category", value: "Annex III HIGH RISK" },
+                    { label: "Credit AI classification", value: "Mandatory before EU deployment" },
+                    { label: "DPDP + GDPR overlap", value: "828 cross-mappings" },
+                    { label: "Enforcement date", value: "August 2, 2026" },
                   ].map((item) => (
                     <div key={item.label} className="flex justify-between items-center border-b border-white/[0.04] pb-3 last:border-0 last:pb-0">
                       <span className="text-xs text-[#555]">{item.label}</span>
-                      <span className="text-sm font-semibold text-cv-blue">{item.value}</span>
+                      <span className="text-sm font-semibold text-cv-blue text-right max-w-[180px]">{item.value}</span>
                     </div>
                   ))}
                 </div>
@@ -92,7 +92,7 @@ export default function ITTeamsPage() {
         <section className="border-t border-white/[0.06]">
           <div className="mx-auto max-w-[1100px] px-6 py-20">
             <div className="text-xs uppercase tracking-[0.12em] text-compliance-green mb-4 font-semibold">How CompliVibe solves it</div>
-            <h2 className="text-white font-bold text-2xl mb-10">Shift compliance left. Ship faster.</h2>
+            <h2 className="text-white font-bold text-2xl mb-10">Fintech-specific AI documentation. DPDP + GDPR mapped.</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {features.map((f) => (
                 <div key={f} className="flex items-start gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
@@ -106,10 +106,10 @@ export default function ITTeamsPage() {
 
         <section className="border-t border-white/[0.06]">
           <div className="mx-auto max-w-[1100px] px-6 py-16 text-center">
-            <h2 className="text-white font-bold text-2xl mb-3">Compliance that ships with your code</h2>
-            <p className="text-[#888] mb-8 max-w-[440px] mx-auto">Classify, document, and release — without waiting for legal.</p>
+            <h2 className="text-white font-bold text-2xl mb-3">Your EU banking client is waiting for your AI documentation</h2>
+            <p className="text-[#888] mb-8 max-w-[440px] mx-auto">Generate fintech-specific Annex IV in minutes. Keep the contract moving.</p>
             <Link href="/signup" className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-black hover:bg-[#ededed] transition-colors">
-              Explore the API <ArrowRight className="h-4 w-4" />
+              Generate Annex IV now <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </section>

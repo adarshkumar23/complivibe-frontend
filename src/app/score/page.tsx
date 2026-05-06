@@ -1,30 +1,25 @@
-
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Page | CompliVibe",
-  description: "Learn more about Page on CompliVibe, the Governance OS for AI compliance.",
-  keywords: ["Page", "CompliVibe", "compliance", "EU AI Act", "DPDP"],
-  alternates: {
-    canonical: "https://complivibe.com/Page",
-  },
-  openGraph: {
-    title: "Page | CompliVibe",
-    description: "Learn more about Page on CompliVibe, the Governance OS for AI compliance.",
-    url: "https://complivibe.com/Page",
-    images: [{ url: "https://complivibe.com/og-placeholder.png", width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Page | CompliVibe",
-    description: "Learn more about Page on CompliVibe, the Governance OS for AI compliance.",
-    images: ["https://complivibe.com/og-placeholder.png"],
-  },
-};
-
 import ScoreApp from "./ScoreApp";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "AI Risk Assessment | CompliVibe",
+  description: "Classify your AI system against EU AI Act Annex III in 7 questions — determine your risk category, matched obligations, and EU + DPDP applicability.",
+  alternates: { canonical: "https://complivibe.in/score" },
+  openGraph: {
+    title: "AI Risk Assessment | CompliVibe",
+    description: "7-question AI scope assessment: find your EU AI Act risk category and DPDP obligations.",
+    url: "https://complivibe.in/score",
+    images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Risk Assessment | CompliVibe",
+    description: "7-question AI scope assessment: find your EU AI Act risk category and DPDP obligations.",
+    images: ["https://complivibe.in/og-placeholder.png"],
+  },
+};
 
 export default function ScorePage() {
   return (

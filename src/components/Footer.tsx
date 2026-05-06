@@ -10,26 +10,23 @@ const footerLinks = {
     { label: "Live Monitor", href: "/platform#monitor" },
   ],
   Resources: [
-    { label: "Compliance Compass", href: "/resources" },
+    { label: "Compliance Hub", href: "/resources" },
     { label: "Demo Videos", href: "/resources" },
-    { label: "Customer Stories", href: "/resources" },
+    { label: "Customer Stories", href: "/customer-stories" },
     { label: "Ebooks", href: "/resources" },
-    { label: "Training & Events", href: "/resources" },
-    { label: "Trust Week", href: "/resources" },
+    { label: "Changelog", href: "/changelog" },
   ],
   Company: [
     { label: "About", href: "/about" },
-    { label: "Team", href: "/about" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
     { label: "Book a Demo", href: "/book-demo" },
-    { label: "Blog", href: "/resources" },
+    { label: "Security", href: "/security" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/legal/privacy-policy" },
     { label: "Terms of Service", href: "/legal/terms" },
     { label: "Cookie Policy", href: "/legal/cookies" },
-    { label: "Security", href: "/security" },
     { label: "GDPR DPA", href: "/legal/dpa" },
   ],
 };
@@ -37,7 +34,7 @@ const footerLinks = {
 const legalLinks = [
   { label: "Privacy Policy", href: "/legal/privacy-policy" },
   { label: "Terms of Service", href: "/legal/terms" },
-  { label: "Cookie Preferences", href: "#" },
+  { label: "Cookie Policy", href: "/legal/cookies" },
   { label: "Security", href: "/security" },
 ];
 
@@ -58,6 +55,14 @@ export default function Footer() {
             <p className="text-sm text-[#555] leading-relaxed max-w-[200px]">
               EU AI Act + India DPDP compliance platform. One platform. Zero blocked deals.
             </p>
+
+            {/* Support email */}
+            <div className="flex flex-col gap-1.5 text-xs text-[#555]">
+              <span className="uppercase tracking-[0.1em] text-[10px] text-[#444]">Support</span>
+              <a href="mailto:contact@complivibe.in" className="text-compliance-green hover:text-compliance-green/80 transition-colors">
+                contact@complivibe.in
+              </a>
+            </div>
 
             {/* Status indicator */}
             <div className="flex items-center gap-2 text-xs text-compliance-green">
@@ -130,7 +135,7 @@ export default function Footer() {
 
         {/* Compliance badges */}
         <div className="flex flex-wrap items-center justify-center gap-4 py-8 border-t border-white/[0.06] opacity-60">
-          {["ISO 42001", "GDPR", "India DPDP", "SOC 2 Type II"].map((badge) => (
+          {["EU AI Act", "India DPDP", "ISO 42001", "GDPR", "SOC 2"].map((badge) => (
             <div key={badge} className="flex items-center gap-2 px-3 py-1.5 rounded border border-white/10 bg-white/5 text-xs text-[#888]">
               <Shield className="h-3 w-3" />
               {badge}
@@ -141,7 +146,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 border-t border-white/[0.06]">
           <p className="text-xs text-[#444]">
-            © {new Date().getFullYear()} CompliVibe Technologies Pvt. Ltd. All rights reserved.
+            © 2026 ValersAI Connect Pvt. Ltd. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-6">
             {legalLinks.map((l) => (

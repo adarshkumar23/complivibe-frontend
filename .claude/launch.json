@@ -3,10 +3,10 @@
   "configurations": [
     {
       "name": "vercel-clone",
-      "runtimeExecutable": "C:/Users/Pc/scoop/apps/nodejs-lts/current/node.exe",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
       "runtimeArgs": ["node_modules/next/dist/bin/next", "dev"],
       "env": {
-        "PATH": "C:/Users/Pc/scoop/apps/nodejs-lts/current;C:/Users/Pc/scoop/apps/nodejs-lts/current/bin;C:/Windows/system32;C:/Windows"
+        "PATH": "C:/Program Files/nodejs;C:/Windows/system32;C:/Windows"
       },
       "port": 3000,
       "autoPort": false
