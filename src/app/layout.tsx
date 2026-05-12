@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     "GDPR",
     "risk classification",
   ],
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "CompliVibe — EU AI Act + India DPDP Compliance Platform",
     description:

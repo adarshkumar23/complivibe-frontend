@@ -37,3 +37,11 @@ next-env.d.ts
 # python
 recreate_missing.py
 build_log.txt
+
+# log files
+*.log
+build.log
+devserver.*.log
+nextdev.*.log
+next-debug.*.log
+next-live.*.log

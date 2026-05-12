@@ -17,12 +17,12 @@ const featureGroups = [
   {
     eyebrow: "Generate",
     headline: "Annex IV Auto-Generator.",
-    body: "Generate complete EU AI Act Annex IV technical documentation from a single system description. Powered by RAG against the actual regulation text — not generic templates.",
+    body: "Most AI teams discover they need Annex IV documentation the week before a deal closes or an audit lands. CompliVibe generates all 11 required sections in under 48 hours — grounded in the actual regulation text via RAG, not recycled templates your auditor has already seen.",
     cta: { label: "Try the Generator", href: "/platform#generator" },
     features: [
-      { icon: FileText, label: "Full Annex IV Coverage", desc: "All 11 required sections" },
-      { icon: CloudLightning, label: "48-Hour Updates", desc: "Regulatory changes reflected instantly" },
-      { icon: Gauge, label: "PDF Export", desc: "Audit-ready professional documents" },
+      { icon: FileText, label: "Full Annex IV Coverage", desc: "All 11 mandatory sections. Article 11 compliant. Audit-ready from day one." },
+      { icon: CloudLightning, label: "48-Hour Updates", desc: "When the regulation changes, your documentation changes with it. Automatically." },
+      { icon: Gauge, label: "PDF Export", desc: "One-click export in auditor-preferred format. Sign, stamp, submit." },
     ],
     visual: "generate",
     flip: true,
@@ -93,12 +93,11 @@ function ClassifyVisual() {
 
 function GenerateVisual() {
   return (
-    <div className="relative rounded-xl border border-white/[0.08] bg-[#0A0A0A] p-6 font-mono text-sm overflow-hidden">
+    <div className="relative w-full min-w-[280px] rounded-xl border border-white/[0.08] bg-[#0A0A0A] p-6 font-mono text-sm overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-v-blue/5 to-transparent" />
       <div className="relative">
         <div className="flex items-center justify-between mb-3">
           <span className="text-xs text-[#555]">Annex IV Document Generator</span>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-v-blue/10 text-v-blue border border-v-blue/20">Gemini 2.5 Flash</span>
         </div>
         <div className="space-y-1.5 text-xs">
           {[
@@ -111,7 +110,7 @@ function GenerateVisual() {
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-3">
               <span className={`w-4 text-center ${item.color}`}>{item.status}</span>
-              <span className="text-[#888]">{item.section}</span>
+              <span className="whitespace-nowrap text-[#888]">{item.section}</span>
             </div>
           ))}
         </div>
@@ -226,12 +225,16 @@ export default function Features() {
         {featureGroups.map((group, i) => (
           <div
             key={i}
-            className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${
-              group.flip ? "lg:flex lg:flex-row-reverse" : ""
-            }`}
+            className={
+              group.visual === "generate"
+                ? "flex flex-col lg:flex-row items-start gap-12"
+                : `grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${
+                    group.flip ? "lg:flex lg:flex-row-reverse" : ""
+                  }`
+            }
           >
             {/* Text side */}
-            <div className="flex flex-col gap-6">
+            <div className={`flex flex-col gap-6 ${group.visual === "generate" ? "lg:order-2" : ""}`}>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-compliance-green">
                 {group.eyebrow}
               </p>
@@ -277,7 +280,7 @@ export default function Features() {
             </div>
 
             {/* Visual side */}
-            <div className="relative">
+            <div className={`relative ${group.visual === "generate" ? "shrink-0 lg:order-1 lg:w-[320px]" : ""}`}>
               {/* Glow behind visual */}
               <div className="absolute -inset-8 bg-gradient-radial from-compliance-green/10 via-transparent to-transparent rounded-full pointer-events-none" />
               {visuals[group.visual]}
