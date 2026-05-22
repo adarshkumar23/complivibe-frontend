@@ -49,6 +49,9 @@ export default function RootLayout({
       className={cn(GeistSans.variable, GeistMono.variable, "font-sans dark")}
       suppressHydrationWarning
     >
+      <head>
+        <script defer data-domain="complivibe.in" src="https://analytics.adarshkumar.app/js/script.outbound-links.js"></script>
+      </head>
       <body className="min-h-screen bg-black text-white font-sans antialiased">{children}</body>
     </html>
   );
