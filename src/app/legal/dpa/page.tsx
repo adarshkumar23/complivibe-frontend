@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     url: "https://complivibe.in/legal/dpa",
     images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Data Processing Agreement | CompliVibe",
+    images: ["https://complivibe.in/og-placeholder.png"],
+  },
 };
 
 const sections = [

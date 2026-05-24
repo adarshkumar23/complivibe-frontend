@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /signup
+Disallow: /api/
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+Sitemap: https://complivibe.in/sitemap.xml

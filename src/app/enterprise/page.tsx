@@ -1,3 +1,22 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Enterprise",
+  description: "Enterprise-grade AI compliance infrastructure with advanced controls, custom workflows, dedicated support, and SLA-backed uptime.",
+  alternates: { canonical: "https://complivibe.in/enterprise" },
+  openGraph: {
+    title: "Enterprise | CompliVibe",
+    description: "Enterprise-grade AI compliance infrastructure with advanced controls, custom workflows, dedicated support, and SLA-backed uptime.",
+    url: "https://complivibe.in/enterprise",
+    images: [{ url: "https://complivibe.in/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Enterprise | CompliVibe",
+    images: ["https://complivibe.in/og-image.png"],
+  },
+};
+
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { Shield, Globe2, Users } from "lucide-react";

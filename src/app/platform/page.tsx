@@ -1,3 +1,22 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Platform",
+  description: "48-hour regulatory engine, CI/CD compliance gates, live obligation monitoring, and hash-chained audit vault for EU AI Act and India DPDP.",
+  alternates: { canonical: "https://complivibe.in/platform" },
+  openGraph: {
+    title: "Platform | CompliVibe",
+    description: "48-hour regulatory engine, CI/CD compliance gates, live obligation monitoring, and hash-chained audit vault for EU AI Act and India DPDP.",
+    url: "https://complivibe.in/platform",
+    images: [{ url: "https://complivibe.in/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Platform | CompliVibe",
+    images: ["https://complivibe.in/og-image.png"],
+  },
+};
+
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Link from "next/link";

@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     url: "https://complivibe.in/legal/cookies",
     images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cookie Policy | CompliVibe",
+    images: ["https://complivibe.in/og-placeholder.png"],
+  },
 };
 
 export default function CookiePolicyPage() {
