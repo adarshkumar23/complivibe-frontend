@@ -88,6 +88,15 @@ const config: Config = {
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "hero-gradient": "radial-gradient(ellipse 80% 50% at 50% -20%,rgba(120,119,198,0.3),hsla(0,0%,100%,0))",
         "beam-gradient": "linear-gradient(180deg,transparent,rgba(255,255,255,.1) 50%,transparent)",
+        "grid-fine":
+          "repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 30px), repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 30px)",
+        "hero-glow":
+          "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,112,243,0.18) 0%, rgba(121,40,202,0.08) 50%, transparent 70%)",
+      },
+      boxShadow: {
+        "glow-blue": "0 0 20px rgba(0,112,243,0.3), 0 0 60px rgba(0,112,243,0.10)",
+        "glow-green": "0 0 20px rgba(0,196,140,0.3), 0 0 60px rgba(0,196,140,0.10)",
+        "card-lifted": "0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06)",
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out forwards",
@@ -97,6 +106,12 @@ const config: Config = {
         "countdown-pulse": "countdown-pulse 2s ease-in-out infinite",
         "ticker-scroll": "ticker-scroll 30s linear infinite",
         spotlight: "spotlight 2s ease 0.75s 1 forwards",
+        float: "float 6s ease-in-out infinite",
+        shimmer: "shimmer 2.5s linear infinite",
+        "gradient-x": "gradient-x 6s ease infinite",
+        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
+        "animate-shimmer": "shimmer 4s linear infinite",
+        "animate-float": "float 8s ease-in-out infinite",
       },
       keyframes: {
         "fade-in": { "0%": { opacity: "0" }, "100%": { opacity: "1" } },
@@ -119,6 +134,22 @@ const config: Config = {
             opacity: "1",
             transform: "translate(-50%, -40%) scale(1)",
           },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-14px)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        "gradient-x": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "glow-pulse": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(0,196,140,0)" },
+          "50%": { boxShadow: "0 0 30px 6px rgba(0,196,140,0.15)" },
         },
       },
       borderRadius: {

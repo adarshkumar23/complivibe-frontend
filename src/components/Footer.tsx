@@ -41,19 +41,44 @@ const legalLinks = [
 export default function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-[#050505]">
+      <div
+        className="h-px w-full"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 0%, rgba(0,112,243,0.4) 25%, rgba(0,196,140,0.4) 75%, transparent 100%)",
+        }}
+      />
       <div className="mx-auto max-w-[1200px] px-6">
         {/* Main footer grid */}
         <div className="py-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10">
           {/* Brand column */}
           <div className="col-span-2 sm:col-span-3 lg:col-span-1 flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-2" aria-label="CompliVibe Home">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-compliance-green to-cv-blue">
-                <Shield className="h-4 w-4 text-white" strokeWidth={2.5} />
-              </div>
-              <span className="text-sm font-bold tracking-tight text-white">CompliVibe</span>
+            <Link href="/" className="flex items-center gap-2.5" aria-label="CompliVibe Home">
+              <span
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[13px] font-black tracking-tight text-white"
+                style={{
+                  background: "linear-gradient(135deg, #0070F3 0%, #7928CA 100%)",
+                  boxShadow: "0 0 16px rgba(0,112,243,0.3)",
+                }}
+              >
+                CV
+              </span>
+              <span className="text-base font-semibold text-white">
+                Compli
+                <span
+                  style={{
+                    background: "linear-gradient(135deg,#0070F3,#00C48C)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  Vibe
+                </span>
+              </span>
             </Link>
             <p className="text-sm text-[#555] leading-relaxed max-w-[200px]">
-              EU AI Act + India DPDP compliance platform. One platform. Zero blocked deals.
+              The AI governance platform for the regulation era. Govern, monitor, document, and prove AI compliance in one command center.
             </p>
 
             {/* Support email */}
@@ -122,7 +147,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-[#555] hover:text-white transition-colors"
+                      className="text-sm text-[#555] hover:text-white hover:translate-x-0.5 transition-all duration-150"
                     >
                       {link.label}
                     </Link>
@@ -153,7 +178,7 @@ export default function Footer() {
               <Link
                 key={l.label}
                 href={l.href}
-                className="text-xs text-[#444] hover:text-[#888] transition-colors"
+                className="text-xs text-[#555] hover:text-white hover:translate-x-0.5 transition-all duration-150"
               >
                 {l.label}
               </Link>

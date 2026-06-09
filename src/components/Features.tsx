@@ -1,11 +1,16 @@
-import { Shield, FileText, AlertTriangle, Globe2, ShieldCheck, Gauge, CloudLightning, Scale } from "lucide-react";
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Shield, FileText, AlertTriangle, Globe2, ShieldCheck, Gauge, CloudLightning, Scale, ChevronRight } from "lucide-react";
 
 const featureGroups = [
   {
-    eyebrow: "Classify",
-    headline: "Dual-Jurisdiction Engine.",
-    body: "Map your AI systems against EU AI Act and India DPDP simultaneously. One input, two compliance profiles. Know your risk tier, obligations, and deadlines in minutes.",
-    cta: { label: "See Classification", href: "/platform" },
+    eyebrow: "AI CLASSIFICATION ENGINE",
+    eyebrowColor: "#0070F3",
+    headline: "Know your risk tier in minutes. Not months.",
+    body: "CompliVibe maps your AI systems to EU AI Act Annex III and India DPDP simultaneously. One input, dual compliance profile, zero legal overhead.",
+    cta: { label: "See how classification works", href: "/platform" },
     features: [
       { icon: Shield, label: "Risk Classification", desc: "AUTO / HIGH / LIMITED / MINIMAL" },
       { icon: Scale, label: "Cross-Regulation Mapping", desc: "EU + India obligations aligned" },
@@ -15,22 +20,24 @@ const featureGroups = [
     flip: false,
   },
   {
-    eyebrow: "Generate",
-    headline: "Annex IV Auto-Generator.",
-    body: "Most AI teams discover they need Annex IV documentation the week before a deal closes or an audit lands. CompliVibe generates all 11 required sections in under 48 hours — grounded in the actual regulation text via RAG, not recycled templates your auditor has already seen.",
-    cta: { label: "Try the Generator", href: "/platform#generator" },
+    eyebrow: "DOCUMENTATION ENGINE",
+    eyebrowColor: "#00C48C",
+    headline: "Annex IV in 48 hours. Not 48 weeks.",
+    body: "Stop manually writing governance documentation. CompliVibe generates all 11 Annex IV sections grounded in actual regulation text — updated automatically when regulations change.",
+    cta: { label: "Try the document generator", href: "/platform#generator" },
     features: [
-      { icon: FileText, label: "Full Annex IV Coverage", desc: "All 11 mandatory sections. Article 11 compliant. Audit-ready from day one." },
-      { icon: CloudLightning, label: "48-Hour Updates", desc: "When the regulation changes, your documentation changes with it. Automatically." },
-      { icon: Gauge, label: "PDF Export", desc: "One-click export in auditor-preferred format. Sign, stamp, submit." },
+      { icon: FileText, label: "Full Annex IV Coverage", desc: "All 11 mandatory sections, Article 11 compliant" },
+      { icon: CloudLightning, label: "48-Hour Updates", desc: "Regulations change, your docs change automatically" },
+      { icon: Gauge, label: "PDF Export", desc: "Auditor-preferred format, one click" },
     ],
     visual: "generate",
     flip: true,
   },
   {
-    eyebrow: "Protect",
-    headline: "Fine Killer. Know your exposure.",
-    body: "Calculate your maximum fine exposure across both EU and Indian jurisdictions. €35M or ₹250Cr — know the number before regulators calculate it for you.",
+    eyebrow: "RISK INTELLIGENCE",
+    eyebrowColor: "#FF3B3B",
+    headline: "See your fine exposure before regulators do.",
+    body: "Calculate maximum penalty across EU and Indian jurisdictions. Know your €35M or ₹250Cr exposure before it becomes a headline.",
     cta: { label: "Calculate Exposure", href: "/score" },
     features: [
       { icon: AlertTriangle, label: "Fine Calculator", desc: "Real-time exposure by jurisdiction" },
@@ -41,14 +48,15 @@ const featureGroups = [
     flip: false,
   },
   {
-    eyebrow: "Audit",
-    headline: "Evidence Vault. Tamper-proof.",
-    body: "Every compliance action logged with hash-chained integrity. When auditors arrive, your evidence trail is ready — timestamped, immutable, and exportable.",
-    cta: { label: "See the Vault", href: "/platform#audit" },
+    eyebrow: "EVIDENCE INFRASTRUCTURE",
+    eyebrowColor: "#7928CA",
+    headline: "Every action logged. Tamper-proof.",
+    body: "Hash-chained audit trails mean every compliance action has an immutable record. When auditors arrive, your evidence package is already complete.",
+    cta: { label: "See the evidence vault", href: "/platform#audit" },
     features: [
-      { icon: ShieldCheck, label: "Hash-Chained Logs", desc: "Tamper-proof audit trail" },
+      { icon: ShieldCheck, label: "Hash-Chained Logs", desc: "Tamper-proof, timestamped, immutable" },
       { icon: Gauge, label: "Readiness Score", desc: "Real-time compliance percentage" },
-      { icon: FileText, label: "Export Anywhere", desc: "PDF, JSON, CSV for any audit" },
+      { icon: FileText, label: "Export Anywhere", desc: "PDF, JSON, CSV for any audit format" },
     ],
     visual: "audit",
     flip: true,
@@ -56,6 +64,14 @@ const featureGroups = [
 ];
 
 function ClassifyVisual() {
+  const terminalLines = [
+    "Analyzing EU AI Act Annex III...",
+    "Cross-referencing DPDP Section 4...",
+    "→ Risk Tier: HIGH RISK",
+    "✓ 47 obligations mapped",
+    "✓ Annex IV documentation required",
+  ];
+
   return (
     <div className="relative rounded-xl border border-white/[0.08] bg-[#0A0A0A] p-6 font-mono text-sm overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-compliance-green/5 to-transparent" />
@@ -72,11 +88,24 @@ function ClassifyVisual() {
           </div>
           <div className="h-px bg-white/[0.06] my-2" />
           <div className="space-y-1.5 pl-4 border-l border-white/[0.06]">
-            <div className="text-[#666] text-xs">Analyzing EU AI Act Annex III...</div>
-            <div className="text-[#666] text-xs">Cross-referencing DPDP Section 4...</div>
-            <div className="text-urgency text-xs font-semibold">→ Risk Tier: HIGH RISK</div>
-            <div className="text-compliance-green text-xs">✓ 47 obligations mapped</div>
-            <div className="text-compliance-green text-xs">✓ Annex IV documentation required</div>
+            {terminalLines.map((line, index) => (
+              <motion.div
+                key={line}
+                className={
+                  index === 2
+                    ? "text-urgency text-xs font-semibold"
+                    : index > 2
+                      ? "text-compliance-green text-xs"
+                      : "text-[#666] text-xs"
+                }
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: index * 0.12, duration: 0.3 }}
+                viewport={{ once: true }}
+              >
+                {line}
+              </motion.div>
+            ))}
           </div>
         </div>
         <div className="mt-4 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs">
@@ -92,8 +121,11 @@ function ClassifyVisual() {
 }
 
 function GenerateVisual() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.3 });
+
   return (
-    <div className="relative w-full min-w-[280px] rounded-xl border border-white/[0.08] bg-[#0A0A0A] p-6 font-mono text-sm overflow-hidden">
+    <div ref={ref} className="relative w-full min-w-[280px] rounded-xl border border-white/[0.08] bg-[#0A0A0A] p-6 font-mono text-sm overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-v-blue/5 to-transparent" />
       <div className="relative">
         <div className="flex items-center justify-between mb-3">
@@ -120,7 +152,12 @@ function GenerateVisual() {
             <span className="inline-block w-1.5 h-3 bg-v-blue/60 animate-pulse" />
           </div>
           <div className="mt-2 w-full bg-[#111] rounded-full h-1.5">
-            <div className="bg-gradient-to-r from-compliance-green to-v-blue h-1.5 rounded-full" style={{ width: "72%" }} />
+            <motion.div
+              className="bg-gradient-to-r from-compliance-green to-v-blue h-1.5 rounded-full"
+              initial={{ width: "0%" }}
+              animate={inView ? { width: "72%" } : { width: "0%" }}
+              transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+            />
           </div>
         </div>
       </div>
@@ -218,74 +255,94 @@ const visuals: Record<string, React.ReactNode> = {
   audit: <AuditVisual />,
 };
 
+function FeatureGroupBlock({ group }: { group: (typeof featureGroups)[number] }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.15 });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="grid grid-cols-1 items-center gap-20 lg:grid-cols-2"
+    >
+      <motion.div
+        className={`flex flex-col gap-5 ${group.flip ? "lg:order-2" : ""}`}
+        initial={{ opacity: 0, x: group.flip ? 30 : -30 }}
+        animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: group.flip ? 30 : -30 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <p className="text-[12px] font-semibold uppercase tracking-[0.15em]" style={{ color: group.eyebrowColor }}>
+          {group.eyebrow}
+        </p>
+        <h2
+          className="text-balance"
+          style={{
+            fontSize: "clamp(1.8rem,3.5vw,2.75rem)",
+            fontWeight: 700,
+            letterSpacing: "-0.03em",
+            lineHeight: 1.15,
+            background: "linear-gradient(to bottom, #fff, rgba(255,255,255,0.6))",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          {group.headline}
+        </h2>
+        <p className="max-w-[440px] text-[16px] leading-relaxed text-[#555]">{group.body}</p>
+
+        <div className="space-y-3">
+          {group.features.map((f, j) => (
+            <motion.div
+              key={j}
+              className="flex items-start gap-3"
+              initial={{ opacity: 0, y: 8 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+              transition={{ delay: j * 0.08, duration: 0.35 }}
+            >
+              <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md border border-white/[0.07] bg-white/[0.04]">
+                <f.icon className="h-[11px] w-[11px] text-[#888]" />
+              </div>
+              <div>
+                <p className="text-[13px] font-semibold text-white">{f.label}</p>
+                <p className="mt-0.5 text-[12px] text-[#444]">{f.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <a
+          href={group.cta.href}
+          className="mt-2 inline-flex w-fit items-center gap-1.5 text-[13px] font-medium text-white transition-colors hover:text-[#888]"
+        >
+          {group.cta.label}
+          <ChevronRight className="h-3.5 w-3.5" />
+        </a>
+      </motion.div>
+
+      <motion.div
+        className={`relative ${group.flip ? "lg:order-1" : ""}`}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+      >
+        <div
+          className="pointer-events-none absolute -inset-8"
+          style={{
+            background: "radial-gradient(ellipse at center, rgba(0,112,243,0.06) 0%, transparent 60%)",
+          }}
+        />
+        {visuals[group.visual]}
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function Features() {
   return (
-    <section className="py-24 overflow-hidden">
-      <div className="mx-auto max-w-[1200px] px-6 space-y-32">
+    <section className="overflow-hidden py-8">
+      <div className="mx-auto max-w-[1200px] space-y-40 px-6">
         {featureGroups.map((group, i) => (
-          <div
-            key={i}
-            className={
-              group.visual === "generate"
-                ? "flex flex-col lg:flex-row items-start gap-12"
-                : `grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${
-                    group.flip ? "lg:flex lg:flex-row-reverse" : ""
-                  }`
-            }
-          >
-            {/* Text side */}
-            <div className={`flex flex-col gap-6 ${group.visual === "generate" ? "lg:order-2" : ""}`}>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-compliance-green">
-                {group.eyebrow}
-              </p>
-              <h2
-                className="text-balance"
-                style={{
-                  fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)",
-                  lineHeight: "1.15",
-                  letterSpacing: "-0.03em",
-                  fontWeight: "700",
-                  background: "linear-gradient(to bottom, #fff, rgba(255,255,255,0.6))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {group.headline}
-              </h2>
-              <p className="text-[#666] leading-relaxed text-base">{group.body}</p>
-
-              {/* Sub-features */}
-              <div className="grid grid-cols-1 gap-4 mt-2">
-                {group.features.map((f, j) => (
-                  <div key={j} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 mt-0.5 rounded-lg border border-white/[0.08] bg-white/[0.03] p-2">
-                      <f.icon className="h-4 w-4 text-[#888]" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium text-white">{f.label}</div>
-                      <div className="text-xs text-[#555] mt-0.5">{f.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <a
-                href={group.cta.href}
-                className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-white hover:text-[#888] transition-colors mt-2"
-              >
-                {group.cta.label}
-                <span aria-hidden>→</span>
-              </a>
-            </div>
-
-            {/* Visual side */}
-            <div className={`relative ${group.visual === "generate" ? "shrink-0 lg:order-1 lg:w-[320px]" : ""}`}>
-              {/* Glow behind visual */}
-              <div className="absolute -inset-8 bg-gradient-radial from-compliance-green/10 via-transparent to-transparent rounded-full pointer-events-none" />
-              {visuals[group.visual]}
-            </div>
-          </div>
+          <FeatureGroupBlock key={i} group={group} />
         ))}
       </div>
     </section>

@@ -1,74 +1,102 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowRight, Shield } from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight, ChevronRight, Zap } from "lucide-react";
 
 export default function CTA() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.35 });
+
   return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Background glow */}
+    <section ref={ref} className="relative overflow-hidden bg-black py-40">
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,196,140,0.12) 0%, rgba(0,112,243,0.06) 40%, rgba(0,0,0,0) 70%)",
+            "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,112,243,0.12) 0%, rgba(0,196,140,0.06) 40%, transparent 70%)",
         }}
       />
 
-      {/* Grid lines */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          maskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent)",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-[1200px] px-6 flex flex-col items-center text-center gap-8">
-        {/* CompliVibe logo mark */}
-        <div className="rounded-2xl border border-white/[0.08] bg-gradient-to-br from-compliance-green/10 to-cv-blue/10 p-4">
-          <Shield className="h-8 w-8 text-compliance-green" />
-        </div>
-
-        <h2
-          className="max-w-3xl text-balance"
-          style={{
-            fontSize: "clamp(2rem, 5vw, 4rem)",
-            lineHeight: "1.1",
-            letterSpacing: "-0.04em",
-            fontWeight: "700",
-            background: "linear-gradient(to bottom right, #fff 40%, rgba(255,255,255,0.35))",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
+      <div className="relative mx-auto flex max-w-[600px] flex-col items-center gap-8 px-6 text-center">
+        <motion.div
+          className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-1.5"
+          initial={{ opacity: 0, y: -10 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+          transition={{ duration: 0.5 }}
         >
-          Get compliant before August 2026.
-        </h2>
+          <Zap className="h-3 w-3 text-[#0070F3]" />
+          <span className="text-[12px] text-[#555]">Ready when you are</span>
+        </motion.div>
 
-        <p className="max-w-md text-[#666] text-base leading-relaxed">
-          Join compliance leaders using CompliVibe to classify, document, and prove AI compliance across India and Europe.
+        <motion.h2
+          style={{
+            fontSize: "clamp(2.5rem,6vw,4.5rem)",
+            fontWeight: 800,
+            letterSpacing: "-0.04em",
+            lineHeight: 1.05,
+            textAlign: "center",
+          }}
+          initial={{ opacity: 0, filter: "blur(10px)", y: 18 }}
+          animate={inView ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(10px)", y: 18 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span
+            className="block"
+            style={{
+              background: "linear-gradient(to bottom, #fff, rgba(255,255,255,0.6))",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Govern your AI.
+          </span>
+          <span
+            className="block"
+            style={{
+              background: "linear-gradient(135deg, #0070F3, #00C48C)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Start today.
+          </span>
+        </motion.h2>
+
+        <p className="mx-auto max-w-[420px] text-[16px] leading-relaxed text-[#555]">
+          Join AI companies using CompliVibe to classify, document, and prove compliance before regulation blocks their growth.
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="/signup"
-            className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-8 text-sm font-semibold text-black hover:bg-[#ededed] transition-colors"
-          >
-            Start Free
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/book-demo"
-            className="inline-flex h-12 items-center rounded-full border border-white/[0.15] bg-white/[0.04] px-8 text-sm font-semibold text-white hover:bg-white/[0.08] transition-all"
-          >
-            Book a Demo
-          </Link>
+        <div className="flex items-center justify-center gap-3">
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            <Link
+              href="/score"
+              className="shine inline-flex h-12 items-center gap-2 rounded-full px-7 text-[14px] font-semibold text-white"
+              style={{
+                background: "linear-gradient(135deg, #0070F3 0%, #7928CA 100%)",
+                boxShadow: "0 0 0 1px rgba(0,112,243,0.4), 0 4px 24px rgba(0,112,243,0.25)",
+              }}
+            >
+              Get Started Free
+              <ArrowRight className="h-[15px] w-[15px]" strokeWidth={2.5} />
+            </Link>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Link
+              href="/book-demo"
+              className="inline-flex h-12 items-center gap-2 rounded-full border border-white/[0.10] px-7 text-[14px] font-medium text-[#999] transition-all duration-200 hover:border-white/[0.20] hover:text-white"
+            >
+              Book a Demo
+              <ChevronRight className="h-[15px] w-[15px]" />
+            </Link>
+          </motion.div>
         </div>
 
-        <p className="text-xs text-[#444]">
-          Free trial available. No credit card required.
-        </p>
+        <p className="text-[11px] text-[#333]">Free assessment available · No credit card required</p>
       </div>
     </section>
   );
