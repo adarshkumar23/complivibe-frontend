@@ -41,6 +41,30 @@ const legalLinks = [
 export default function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-[#050505]">
+      {/* Pre-footer divider section */}
+      <div className="py-16 border-b border-white/[0.06] bg-[#050505]">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex flex-col gap-2 text-center md:text-left">
+              <p className="text-[22px] font-bold text-white">
+                Still deciding? Talk to a human.
+              </p>
+              <p className="text-[14px] text-[#555]">
+                Our team can walk you through the platform in 20 minutes.
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Link href="/book-demo" className="inline-flex h-11 items-center gap-2 rounded-full px-6 text-[13px] font-semibold text-white bg-[#0070F3] hover:bg-[#0060D1] transition-colors">
+                Book a 20-min call
+              </Link>
+              <Link href="/contact" className="inline-flex h-11 items-center gap-2 rounded-full px-6 text-[13px] text-[#888] border border-white/[0.10] hover:border-white/[0.18] hover:text-white transition-all">
+                Send us a message
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div
         className="h-px w-full"
         style={{
@@ -170,9 +194,14 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 border-t border-white/[0.06]">
-          <p className="text-xs text-[#444]">
-            © 2026 ValersAI Connect Pvt. Ltd. All rights reserved.
-          </p>
+          <div className="flex flex-col gap-1 items-center sm:items-start text-center sm:text-left">
+            <p className="text-xs text-[#444]">
+              © 2026 ValersAI Connect Pvt. Ltd. All rights reserved.
+            </p>
+            <p className="text-[11px] text-[#333]">
+              AI Governance Infrastructure for the Regulation Era
+            </p>
+          </div>
           <div className="flex flex-wrap items-center gap-6">
             {legalLinks.map((l) => (
               <Link

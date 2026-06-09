@@ -122,14 +122,16 @@ export default function Pricing() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,196,140,0.08) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(121,40,202,0.06) 0%, transparent 60%)",
         }}
       />
 
       <div className="relative mx-auto max-w-[1200px] px-6">
         {/* Heading */}
         <div className="flex flex-col items-center text-center gap-4 mb-16">
-          <p className="text-xs text-[#555] uppercase tracking-[0.2em] font-medium">Pricing</p>
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#7928CA] font-semibold">
+            PRICING
+          </p>
           <h2
             style={{
               fontSize: "clamp(1.75rem, 4vw, 3rem)",
@@ -149,16 +151,16 @@ export default function Pricing() {
           </p>
 
           {/* Currency toggle */}
-          <div className="flex items-center gap-1 mt-2 p-1 rounded-full border border-white/[0.08] bg-white/[0.03]">
+          <div className="flex items-center gap-1 mt-4 p-1 rounded-full border border-white/[0.08] bg-white/[0.03]">
             {(["INR", "USD", "EUR"] as Currency[]).map((c) => (
               <button
                 key={c}
                 onClick={() => setCurrency(c)}
                 className={clsx(
-                  "px-4 py-1.5 rounded-full text-xs font-medium transition-all",
+                  "px-4 py-1.5 rounded-full text-[13px] font-medium transition-all duration-200 border",
                   currency === c
-                    ? "bg-white text-black"
-                    : "text-[#666] hover:text-white"
+                    ? "bg-white/[0.08] text-white border-white/[0.12]"
+                    : "text-[#555] hover:text-[#888] border-transparent"
                 )}
               >
                 {c === "INR" ? "🇮🇳 INR" : c === "USD" ? "🇺🇸 USD" : "🇪🇺 EUR"}
@@ -173,15 +175,24 @@ export default function Pricing() {
             <div
               key={plan.name}
               className={clsx(
-                "relative flex flex-col rounded-2xl border p-8 transition-all",
+                "relative flex flex-col rounded-2xl border p-8 transition-all z-10",
                 plan.highlighted
-                  ? "border-white/20 bg-white/[0.04]"
+                  ? "border-transparent bg-[#080808]"
                   : "border-white/[0.08] bg-[#050505]"
               )}
             >
               {/* Glow for highlighted */}
               {plan.highlighted && (
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-compliance-green/20 to-transparent pointer-events-none" />
+                <>
+                  <div 
+                    className="absolute -inset-px rounded-2xl pointer-events-none z-[-1]" 
+                    style={{
+                      background: "linear-gradient(135deg, #0070F3, #00C48C, #7928CA)",
+                      opacity: 0.5
+                    }}
+                  />
+                  <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-compliance-green/20 to-transparent pointer-events-none" />
+                </>
               )}
 
               {plan.badge && (

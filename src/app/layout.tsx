@@ -1,8 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { cn } from "@/lib/utils";
+import ScrollProgress from "@/components/ScrollProgress";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://complivibe.in"),
@@ -116,7 +123,10 @@ export default function RootLayout({
           offers: { "@type": "Offer", priceCurrency: "INR", price: "24999" },
         })}} />
       </head>
-      <body className="min-h-screen bg-black text-white font-sans antialiased">{children}</body>
+      <body className="min-h-screen bg-black text-white font-sans antialiased">
+        <ScrollProgress />
+        {children}
+      </body>
     </html>
   );
 }
