@@ -27,9 +27,8 @@ import Features from "@/components/Features";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
 import ProductBentoGrid from "@/components/ProductBentoGrid";
-import AITrustGraph from "@/components/AITrustGraph";
+import AITrustGraph from "@/components/sections/AITrustGraph";
 import DemoVideo from "@/components/DemoVideo";
-import InvestorSection from "@/components/InvestorSection";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import ROICalculator from "@/components/ROICalculator";
@@ -52,7 +51,6 @@ export default function Home() {
         <ProductBentoGrid />
         <AITrustGraph />
         <DemoVideo />
-        <InvestorSection />
         <Testimonials />
         <Pricing />
         <ROICalculator />
