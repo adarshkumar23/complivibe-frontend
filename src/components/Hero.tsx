@@ -65,18 +65,18 @@ function ScoreCard({ card }: { card: (typeof scoreCards)[number] }) {
   const Icon = card.Icon;
 
   return (
-    <div className="col-span-1 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
+    <div className="col-span-6 md:col-span-3 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3 md:p-4">
       <div className="flex items-center justify-between">
-        <span className="text-[9px] uppercase tracking-widest text-[#444]">{card.label}</span>
+        <span className="text-[8px] md:text-[9px] uppercase tracking-widest text-[#444]">{card.label}</span>
         <Icon className="h-[11px] w-[11px]" style={{ color: card.color }} />
       </div>
       <div className="mt-2 flex items-end gap-2">
-        <span className="font-mono text-[32px] font-bold leading-none" style={{ color: card.color }}>
+        <span className="font-mono text-[24px] md:text-[32px] font-bold leading-none" style={{ color: card.color }}>
           {card.value}
         </span>
         <span className="text-[12px] text-[#333]">/100</span>
       </div>
-      <div className="mt-1 text-[9px] text-[#444]">{card.sub}</div>
+      <div className="mt-1 text-[9px] text-[#444] hidden md:block">{card.sub}</div>
       <div className="mt-2 h-[3px] rounded-full bg-[#111]">
         <div className={`h-full rounded-full bg-gradient-to-r ${card.gradient}`} style={{ width: card.progress }} />
       </div>
@@ -86,13 +86,13 @@ function ScoreCard({ card }: { card: (typeof scoreCards)[number] }) {
 
 function DashboardVisual() {
   return (
-    <div className="mx-auto mt-14 w-full max-w-[960px]">
+    <div className="mx-auto mt-14 w-full max-w-[960px] overflow-hidden">
       <motion.div
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: 9, ease: "easeInOut", repeat: Infinity }}
       >
         <motion.div
-          className="relative"
+          className="relative overflow-hidden w-full"
           initial={{ opacity: 0, y: 40, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -105,7 +105,7 @@ function DashboardVisual() {
           />
 
           <div
-            className="relative overflow-hidden rounded-xl border border-white/[0.10] bg-[#080808]"
+            className="relative overflow-x-hidden rounded-xl border border-white/[0.10] bg-[#080808]"
             style={{
               boxShadow: "0 0 0 1px rgba(255,255,255,0.04), 0 50px 120px rgba(0,0,0,0.9)",
             }}
@@ -118,9 +118,9 @@ function DashboardVisual() {
               </div>
               <div className="mx-1 h-3.5 w-px bg-white/[0.08]" />
               <div className="mx-4 flex-1">
-                <div className="mx-auto flex h-6 max-w-[280px] items-center gap-2 rounded-md border border-white/[0.06] bg-[#1a1a1a] px-3">
-                  <Lock className="h-2.5 w-2.5 text-[#333]" />
-                  <span className="font-mono text-[10px] text-[#333]">app.complivibe.in/dashboard</span>
+                <div className="mx-auto flex h-6 max-w-[160px] md:max-w-[280px] items-center gap-2 rounded-md border border-white/[0.06] bg-[#1a1a1a] px-3">
+                  <Lock className="h-2.5 w-2.5 text-[#333] shrink-0" />
+                  <span className="font-mono text-[10px] text-[#333] truncate">app.complivibe.in/dashboard</span>
                 </div>
               </div>
               <div className="ml-auto flex items-center gap-2">
@@ -134,8 +134,8 @@ function DashboardVisual() {
             </div>
 
             <div className="bg-[#080808] p-4">
-              <div className="flex h-[520px] flex-row overflow-hidden">
-                <aside className="flex w-[180px] shrink-0 flex-col border-r border-white/[0.06] bg-[#0D0D0D] py-3">
+              <div className="flex h-[420px] md:h-[520px] flex-row overflow-hidden">
+                <aside className="hidden md:flex w-[180px] shrink-0 flex-col border-r border-white/[0.06] bg-[#0D0D0D] py-3">
                   <div className="mb-4 flex items-center gap-2 px-4">
                     <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#0070F3] to-[#7928CA]">
                       <span className="text-[11px] font-black text-white">CV</span>
@@ -171,56 +171,58 @@ function DashboardVisual() {
                   </div>
                 </aside>
 
-                <main className="flex flex-1 flex-col overflow-hidden">
-                  <div className="flex h-10 items-center gap-3 border-b border-white/[0.06] bg-[#0D0D0D] px-4">
+                <main className="flex flex-1 w-full flex-col overflow-hidden">
+                  <div className="flex h-10 items-center gap-3 border-b border-white/[0.06] bg-[#0D0D0D] px-3 md:px-4">
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-semibold text-white">Command Center</span>
-                      <span className="text-[9px] text-[#333]">/</span>
-                      <span className="text-[9px] text-[#444]">Overview</span>
+                      <span className="text-[11px] font-semibold text-white truncate">Command Center</span>
+                      <span className="text-[9px] text-[#333] hidden md:inline">/</span>
+                      <span className="text-[9px] text-[#444] hidden md:inline">Overview</span>
                     </div>
-                    <div className="mx-4 max-w-[220px] flex-1">
+                    <div className="mx-2 md:mx-4 max-w-[220px] flex-1">
                       <div className="flex h-6 items-center gap-2 rounded-md border border-white/[0.06] bg-[#111] px-2.5">
-                        <Search className="h-2.5 w-2.5 text-[#333]" />
-                        <span className="text-[10px] text-[#333]">Search systems, risks...</span>
+                        <Search className="h-2.5 w-2.5 text-[#333] shrink-0" />
+                        <span className="text-[10px] text-[#333] truncate hidden sm:inline">Search systems, risks...</span>
                       </div>
                     </div>
                     <div className="ml-auto flex items-center gap-2">
                       <div className="flex items-center gap-1 rounded-md border border-[#0070F3]/30 bg-[#0070F3]/15 px-2 py-0.5">
                         <Sparkles className="h-2.5 w-2.5 text-[#0070F3]" />
-                        <span className="text-[9px] font-semibold text-[#0070F3]">Ask Copilot</span>
+                        <span className="text-[9px] font-semibold text-[#0070F3] hidden sm:inline">Ask Copilot</span>
                       </div>
-                      <div className="flex h-6 w-6 items-center justify-center rounded-full border border-white/[0.08] bg-[#1a1a1a]">
+                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-[#1a1a1a]">
                         <Bell className="h-[11px] w-[11px] text-[#555]" />
                       </div>
-                      <div className="flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-[#0070F3] to-[#7928CA]">
+                      <div className="flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-[#0070F3] to-[#7928CA]">
                         <span className="text-[9px] font-bold text-white">A</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid flex-1 grid-cols-12 gap-3 overflow-hidden p-4">
-                    <div className="col-span-12 grid grid-cols-4 gap-3">
+                  <div className="grid flex-1 grid-cols-12 gap-2 md:gap-3 overflow-hidden p-3 md:p-4">
+                    <div className="col-span-12 grid grid-cols-12 gap-2 md:gap-3">
                       {scoreCards.map((card) => (
                         <ScoreCard key={card.label} card={card} />
                       ))}
                     </div>
 
-                    <div className="col-span-12 grid grid-cols-12 gap-3">
-                      <div className="col-span-5 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
+                    <div className="col-span-12 grid grid-cols-12 gap-2 md:gap-3">
+                      <div className="col-span-12 md:col-span-5 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
                         <div className="mb-2 text-[9px] uppercase tracking-widest text-[#444]">Compliance Readiness</div>
-                        {readinessRows.map((row) => (
-                          <div key={row.label} className="flex items-center gap-2 border-b border-white/[0.04] py-1 last:border-0">
-                            <span className="w-5 text-[9px] text-[#555]">{row.marker}</span>
-                            <span className="flex-1 text-[10px] text-[#666]">{row.label}</span>
-                            <div className="h-[3px] flex-1 rounded-full bg-[#111]">
-                              <div className="h-full rounded-full" style={{ width: row.value, backgroundColor: row.color }} />
+                        <div className="[&>div:nth-child(n+5)]:hidden md:[&>div:nth-child(n+5)]:flex flex-col">
+                          {readinessRows.map((row) => (
+                            <div key={row.label} className="flex items-center gap-2 border-b border-white/[0.04] py-1 last:border-0">
+                              <span className="w-5 text-[9px] text-[#555]">{row.marker}</span>
+                              <span className="flex-1 text-[10px] text-[#666] truncate">{row.label}</span>
+                              <div className="h-[3px] flex-1 rounded-full bg-[#111]">
+                                <div className="h-full rounded-full" style={{ width: row.value, backgroundColor: row.color }} />
+                              </div>
+                              <span className="w-8 text-right font-mono text-[10px] text-[#555]">{row.value}</span>
                             </div>
-                            <span className="w-8 text-right font-mono text-[10px] text-[#555]">{row.value}</span>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
 
-                      <div className="col-span-4 overflow-hidden rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
+                      <div className="col-span-12 md:col-span-4 overflow-hidden rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3 hidden md:block">
                         <div className="mb-2 flex items-center justify-between">
                           <span className="text-[9px] uppercase tracking-widest text-[#444]">AI Trust Graph</span>
                           <span className="cursor-pointer text-[9px] text-[#0070F3]">Explore →</span>
@@ -252,7 +254,7 @@ function DashboardVisual() {
                         <div className="mt-1 text-[9px] text-[#333]">6 nodes · 15 edges · 23 risks mapped</div>
                       </div>
 
-                      <div className="col-span-3 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
+                      <div className="col-span-12 md:col-span-3 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3 hidden md:block">
                         <div className="mb-2 text-[9px] uppercase tracking-widest text-[#444]">Priority Actions</div>
                         {priorityActions.map((action) => {
                           const badgeClass =
@@ -266,22 +268,22 @@ function DashboardVisual() {
                             <div key={action.title} className="flex flex-col gap-0.5 border-b border-white/[0.04] py-1.5 last:border-0">
                               <div className="mb-0.5 flex items-center gap-1.5">
                                 <span className={`rounded px-1 py-0.5 text-[8px] font-bold ${badgeClass}`}>{action.badge}</span>
-                                <span className="text-[9px] font-medium text-[#888]">{action.title}</span>
+                                <span className="text-[9px] font-medium text-[#888] truncate">{action.title}</span>
                               </div>
                               <span className="text-[8px] text-[#444]">{action.due}</span>
-                              <span className="text-[8px] text-[#333]">{action.detail}</span>
+                              <span className="text-[8px] text-[#333] truncate">{action.detail}</span>
                             </div>
                           );
                         })}
                       </div>
                     </div>
 
-                    <div className="col-span-12 flex items-center gap-4 overflow-hidden rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
-                      <div className="mr-4 shrink-0 text-[9px] uppercase tracking-widest text-[#444]">Activity</div>
-                      {activityEvents.map((event) => (
-                        <div key={event.text} className="flex shrink-0 items-center gap-1.5 border-r border-white/[0.06] px-3 last:border-0">
-                          <div className="h-[5px] w-[5px] rounded-full" style={{ backgroundColor: event.color }} />
-                          <span className="text-[9px] text-[#555]">{event.text}</span>
+                    <div className="col-span-12 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-4 overflow-hidden rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
+                      <div className="mr-2 md:mr-4 shrink-0 text-[9px] uppercase tracking-widest text-[#444]">Activity</div>
+                      {activityEvents.map((event, i) => (
+                        <div key={event.text} className={`flex shrink-0 items-center gap-1.5 md:border-r border-white/[0.06] md:px-3 last:border-0 ${i >= 2 ? 'hidden md:flex' : ''}`}>
+                          <div className="h-[5px] w-[5px] rounded-full shrink-0" style={{ backgroundColor: event.color }} />
+                          <span className="text-[9px] text-[#555] truncate">{event.text}</span>
                         </div>
                       ))}
                     </div>
@@ -323,20 +325,21 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="mx-auto inline-flex items-center gap-3 rounded-full border border-white/[0.10] bg-white/[0.03] px-4 py-1.5">
-            <div className="flex items-center gap-1">
+          <div className="mx-auto inline-flex flex-wrap justify-center items-center gap-2 md:gap-3 rounded-full border border-white/[0.10] bg-white/[0.03] px-4 py-1.5">
+            <div className="flex items-center gap-1 shrink-0">
               <div className="h-[5px] w-[5px] rounded-full bg-[#0070F3]" />
               <div className="h-[5px] w-[5px] rounded-full bg-[#00C48C]" />
               <div className="h-[5px] w-[5px] rounded-full bg-[#7928CA]" />
             </div>
-            <div className="h-3 w-px bg-white/[0.12]" />
-            <span className="text-[12px] font-medium tracking-[0.01em] text-[#555]">
+            <div className="hidden md:block h-3 w-px bg-white/[0.12]" />
+            <span className="text-[11px] md:text-[12px] font-medium tracking-[0.01em] text-[#555] text-center">
               AI Governance · Compliance · Observability
             </span>
           </div>
         </motion.div>
 
         <motion.h1
+          className="px-4 md:px-0"
           style={{
             fontSize: "clamp(3.2rem, 8.5vw, 6.5rem)",
             fontWeight: 800,
@@ -389,7 +392,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          className="flex items-center justify-center gap-3"
+          className="flex flex-wrap items-center justify-center gap-3"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.32 }}
@@ -426,22 +429,22 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          className="flex items-center justify-center gap-5"
+          className="flex flex-wrap items-center justify-center gap-3 md:gap-5"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.44 }}
         >
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 shrink-0">
             <CheckCircle2 className="h-3 w-3 text-[#0070F3]" />
             <span className="text-[11px] text-[#444]">3 paying customers</span>
           </div>
-          <span className="text-[10px] text-[#222]">·</span>
-          <div className="flex items-center gap-1.5">
+          <span className="text-[10px] text-[#222] hidden md:inline">·</span>
+          <div className="flex items-center gap-1.5 shrink-0">
             <ShieldCheck className="h-3 w-3 text-[#00C48C]" />
             <span className="text-[11px] text-[#444]">EU AI Act ready</span>
           </div>
-          <span className="text-[10px] text-[#222]">·</span>
-          <div className="flex items-center gap-1.5">
+          <span className="text-[10px] text-[#222] hidden md:inline">·</span>
+          <div className="flex items-center gap-1.5 shrink-0">
             <Zap className="h-3 w-3 text-[#7928CA]" />
             <span className="text-[11px] text-[#444]">Ships in 48 hours</span>
           </div>
