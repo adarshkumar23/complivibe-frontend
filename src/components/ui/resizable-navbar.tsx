@@ -1,9 +1,13 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+
+const MotionLink = motion(Link);
+const MotionButton = motion.button;
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -187,11 +191,29 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-    <Link href="/" className="relative z-20 flex items-center gap-3 text-sm font-normal text-white">
-      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white text-sm font-black tracking-tight text-black">
+    <Link href="/" className="relative z-20 flex items-center gap-2.5 text-sm font-normal text-white transition-opacity duration-200 hover:opacity-90">
+      <span
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[13px] font-black tracking-tight text-white"
+        style={{
+          background: "linear-gradient(135deg, #0070F3 0%, #7928CA 100%)",
+          boxShadow: "0 0 16px rgba(0,112,243,0.3)",
+        }}
+      >
         CV
       </span>
-      <span className="text-base font-semibold text-white">CompliVibe</span>
+      <span className="text-base font-semibold text-white">
+        Compli
+        <span
+          style={{
+            background: "linear-gradient(135deg,#0070F3,#00C48C)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          Vibe
+        </span>
+      </span>
     </Link>
   );
 };
@@ -210,26 +232,36 @@ export const NavbarButton = ({
   onClick?: () => void;
 }) => {
   const baseStyles =
-    "inline-flex h-11 items-center justify-center rounded-lg px-5 text-sm font-bold transition duration-200 hover:-translate-y-0.5";
+    "inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-bold transition duration-200";
 
   const variantStyles = {
-    primary: "bg-white text-black shadow-[0_10px_30px_rgba(255,255,255,0.08)] hover:bg-neutral-100",
-    secondary: "bg-transparent text-white shadow-none hover:bg-white/5",
+    primary: "bg-[linear-gradient(135deg,#0070F3,#7928CA)] text-white shadow-[0_0_20px_rgba(0,112,243,0.25)] hover:brightness-110 hover:shadow-glow-blue",
+    secondary: "bg-transparent !text-[#888] shadow-none hover:!text-white",
     dark: "bg-black text-white shadow-[0_10px_30px_rgba(0,0,0,0.35)]",
     gradient: "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0_2px_0_rgba(255,255,255,0.25)_inset]",
   };
 
   if (href) {
     return (
-      <Link href={href} onClick={onClick} className={cn(baseStyles, variantStyles[variant], className)}>
+      <MotionLink
+        href={href}
+        onClick={onClick}
+        className={cn(baseStyles, variantStyles[variant], className)}
+        whileHover={variant === "primary" ? { scale: 1.02, filter: "brightness(1.1)" } : undefined}
+      >
         {children}
-      </Link>
+      </MotionLink>
     );
   }
 
   return (
-    <button type="button" onClick={onClick} className={cn(baseStyles, variantStyles[variant], className)}>
+    <MotionButton
+      type="button"
+      onClick={onClick}
+      className={cn(baseStyles, variantStyles[variant], className)}
+      whileHover={variant === "primary" ? { scale: 1.02, filter: "brightness(1.1)" } : undefined}
+    >
       {children}
-    </button>
+    </MotionButton>
   );
 };

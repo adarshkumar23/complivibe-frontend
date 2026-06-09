@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
-import { Check, Minus } from "lucide-react";
+import { Check, Zap, Shield, Activity, CheckCircle2, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { clsx } from "clsx";
+import { motion } from "framer-motion";
 
 type Currency = "INR" | "USD" | "EUR";
 
@@ -15,7 +16,7 @@ const currencyConfig: Record<Currency, { symbol: string; label: string }> = {
 const plans = [
   {
     name: "Starter",
-    price: { INR: 2499, USD: 29, EUR: 27 },
+    price: { INR: 9999, USD: 120, EUR: 110 },
     description: "For startups exploring AI compliance for the first time.",
     cta: { label: "Start Free Trial", href: "/signup?plan=starter" },
     highlighted: false,
@@ -83,33 +84,11 @@ const plans = [
   },
 ];
 
-const comparisonRows = [
-  { label: "AI Systems Registered", starter: "3", growth: "Unlimited", enterprise: "Unlimited" },
-  { label: "Frameworks Covered", starter: "2", growth: "8", enterprise: "14" },
-  { label: "Evidence Vault Storage", starter: "1 GB", growth: "50 GB", enterprise: "Unlimited" },
-  { label: "Regulatory Update Speed", starter: "Weekly", growth: "48 hours", enterprise: "48 hours" },
-  { label: "Annex IV Generation", starter: "3/month", growth: "Unlimited", enterprise: "Unlimited" },
-  { label: "Cross-Regulation Mapping", starter: false, growth: true, enterprise: true },
-  { label: "Fine Exposure Calculator", starter: false, growth: true, enterprise: true },
-  { label: "Export Formats", starter: "PDF", growth: "PDF, JSON", enterprise: "PDF, JSON, CSV, API" },
-  { label: "CI/CD Compliance Gate", starter: false, growth: false, enterprise: true },
-  { label: "SAML SSO", starter: false, growth: false, enterprise: true },
-  { label: "Audit Log API", starter: false, growth: false, enterprise: true },
-  { label: "Support SLA", starter: "Community", growth: "Priority", enterprise: "Dedicated CSM" },
-  { label: "Data Residency", starter: false, growth: false, enterprise: true },
-];
-
 const addons = [
   { label: "Bhashini Consent Module", price: { INR: 4999, USD: 59, EUR: 55 }, desc: "Indian language consent management" },
   { label: "CI/CD Compliance Gate", price: { INR: 9999, USD: 119, EUR: 109 }, desc: "Block non-compliant deployments" },
   { label: "Expert Sign-Off", price: { INR: 14999, USD: 179, EUR: 165 }, desc: "Certified auditor review & sign-off" },
 ];
-
-function CellValue({ val }: { val: boolean | string }) {
-  if (val === true) return <Check className="h-4 w-4 text-compliance-green mx-auto" />;
-  if (val === false) return <Minus className="h-4 w-4 text-[#333] mx-auto" />;
-  return <span className="text-sm text-[#888]">{val}</span>;
-}
 
 export default function Pricing() {
   const [currency, setCurrency] = useState<Currency>("INR");
@@ -122,14 +101,16 @@ export default function Pricing() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,196,140,0.08) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(121,40,202,0.06) 0%, transparent 60%)",
         }}
       />
 
       <div className="relative mx-auto max-w-[1200px] px-6">
         {/* Heading */}
         <div className="flex flex-col items-center text-center gap-4 mb-16">
-          <p className="text-xs text-[#555] uppercase tracking-[0.2em] font-medium">Pricing</p>
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#7928CA] font-semibold">
+            PRICING
+          </p>
           <h2
             style={{
               fontSize: "clamp(1.75rem, 4vw, 3rem)",
@@ -149,16 +130,16 @@ export default function Pricing() {
           </p>
 
           {/* Currency toggle */}
-          <div className="flex items-center gap-1 mt-2 p-1 rounded-full border border-white/[0.08] bg-white/[0.03]">
+          <div className="flex items-center gap-1 mt-4 p-1 rounded-full border border-white/[0.08] bg-white/[0.03]">
             {(["INR", "USD", "EUR"] as Currency[]).map((c) => (
               <button
                 key={c}
                 onClick={() => setCurrency(c)}
                 className={clsx(
-                  "px-4 py-1.5 rounded-full text-xs font-medium transition-all",
+                  "px-4 py-1.5 rounded-full text-[13px] font-medium transition-all duration-200 border",
                   currency === c
-                    ? "bg-white text-black"
-                    : "text-[#666] hover:text-white"
+                    ? "bg-white/[0.08] text-white border-white/[0.12]"
+                    : "text-[#555] hover:text-[#888] border-transparent"
                 )}
               >
                 {c === "INR" ? "🇮🇳 INR" : c === "USD" ? "🇺🇸 USD" : "🇪🇺 EUR"}
@@ -168,20 +149,29 @@ export default function Pricing() {
         </div>
 
         {/* Plan cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           {plans.map((plan) => (
             <div
               key={plan.name}
               className={clsx(
-                "relative flex flex-col rounded-2xl border p-8 transition-all",
+                "relative flex flex-col rounded-2xl border p-8 transition-all z-10",
                 plan.highlighted
-                  ? "border-white/20 bg-white/[0.04]"
+                  ? "border-transparent bg-[#080808]"
                   : "border-white/[0.08] bg-[#050505]"
               )}
             >
               {/* Glow for highlighted */}
               {plan.highlighted && (
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-compliance-green/20 to-transparent pointer-events-none" />
+                <>
+                  <div 
+                    className="absolute -inset-px rounded-2xl pointer-events-none z-[-1]" 
+                    style={{
+                      background: "linear-gradient(135deg, #0070F3, #00C48C, #7928CA)",
+                      opacity: 0.5
+                    }}
+                  />
+                  <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-compliance-green/20 to-transparent pointer-events-none" />
+                </>
               )}
 
               {plan.badge && (
@@ -198,16 +188,21 @@ export default function Pricing() {
                 </div>
 
                 {/* Price */}
-                <div className="flex items-end gap-1.5">
-                  {plan.price[currency] === 0 ? (
-                    <span className="text-4xl font-bold text-white tracking-tight">Custom</span>
-                  ) : (
-                    <>
-                      <span className="text-4xl font-bold text-white tracking-tight">
-                        {curr.symbol}{plan.price[currency].toLocaleString()}
-                      </span>
-                      <span className="text-[#555] text-sm pb-1.5">/ month</span>
-                    </>
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-end gap-1.5">
+                    {plan.price[currency] === 0 ? (
+                      <span className="text-4xl font-bold text-white tracking-tight">Custom</span>
+                    ) : (
+                      <>
+                        <span className="text-4xl font-bold text-white tracking-tight">
+                          {curr.symbol}{plan.price[currency].toLocaleString()}
+                        </span>
+                        <span className="text-[#555] text-sm pb-1.5">/ month</span>
+                      </>
+                    )}
+                  </div>
+                  {plan.name === "Starter" && (
+                    <span className="text-[#444] text-[11px]">~ $120 /mo</span>
                   )}
                 </div>
 
@@ -238,6 +233,11 @@ export default function Pricing() {
           ))}
         </div>
 
+        <p className="text-center text-[11px] text-[#333] mt-8 mb-24">
+          Prices in Indian Rupees (INR). USD equivalents shown.
+          1 USD ≈ ₹83. Billed monthly or annually (save 20%).
+        </p>
+
         {/* Add-ons */}
         <div className="mb-24">
           <h3 className="text-center text-lg font-semibold text-white mb-8">Add-ons</h3>
@@ -254,33 +254,67 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Comparison table */}
-        <div>
-          <h3 className="text-center text-lg font-semibold text-white mb-8">Compare plans</h3>
-          <div className="rounded-2xl border border-white/[0.08] overflow-hidden">
-            {/* Table header */}
-            <div className="grid grid-cols-4 bg-[#0A0A0A] border-b border-white/[0.06]">
-              <div className="px-6 py-4 text-sm font-medium text-[#555]">Feature</div>
-              {["Starter", "Growth", "Enterprise"].map((p) => (
-                <div key={p} className="px-6 py-4 text-sm font-semibold text-white text-center">{p}</div>
-              ))}
-            </div>
-
-            {/* Table rows */}
-            {comparisonRows.map((row, i) => (
-              <div
-                key={i}
-                className={clsx(
-                  "grid grid-cols-4 items-center",
-                  i % 2 === 0 ? "bg-[#050505]" : "bg-[#0A0A0A]",
-                  "border-b border-white/[0.04] last:border-0"
-                )}
+        {/* Value Proposition Cards */}
+        <div className="mt-20 max-w-[900px] mx-auto">
+          <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#333] mb-8">
+            Why teams choose CompliVibe
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              {
+                icon: Zap,
+                color: "#0070F3",
+                title: "48-hour documentation",
+                body: "Annex IV ready in 48 hours. Not 48 weeks. Grounded in actual regulation text, updated automatically when regulations change.",
+                footerIcon: CheckCircle2,
+                footerText: "Article 11 compliant"
+              },
+              {
+                icon: Shield,
+                color: "#00C48C",
+                title: "€35M fine protection",
+                body: "Know your maximum exposure before regulators calculate it for you. Real-time gap analysis across EU and Indian jurisdictions.",
+                footerIcon: ShieldCheck,
+                footerText: "No credit card required"
+              },
+              {
+                icon: Activity,
+                color: "#7928CA",
+                title: "Always audit-ready",
+                body: "Hash-chained evidence vault means every compliance action has an immutable record. When auditors arrive, your package is already complete.",
+                footerIcon: CheckCircle2,
+                footerText: "Tamper-proof audit trail"
+              }
+            ].map((card, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="rounded-2xl bg-[#0A0A0A] border border-white/[0.07] p-6 relative overflow-hidden group"
               >
-                <div className="px-6 py-3.5 text-sm text-[#888]">{row.label}</div>
-                <div className="px-6 py-3.5 text-center"><CellValue val={row.starter} /></div>
-                <div className="px-6 py-3.5 text-center"><CellValue val={row.growth} /></div>
-                <div className="px-6 py-3.5 text-center"><CellValue val={row.enterprise} /></div>
-              </div>
+                <div 
+                  className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ backgroundImage: `linear-gradient(to right, transparent, ${card.color}80, transparent)` }}
+                />
+                
+                <div 
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 border"
+                  style={{ backgroundColor: `${card.color}1A`, borderColor: `${card.color}33` }}
+                >
+                  <card.icon size={18} style={{ color: card.color }} />
+                </div>
+
+                <p className="text-[15px] font-bold text-white mb-2">{card.title}</p>
+                <p className="text-[13px] text-[#555] leading-relaxed mb-4">{card.body}</p>
+
+                <div className="mt-auto pt-4 flex items-center gap-2 border-t border-white/[0.04]">
+                  <card.footerIcon size={12} className={index === 1 ? "text-[#00C48C]" : "text-[#00C48C]"} />
+                  <span className="text-[11px] text-[#444]">{card.footerText}</span>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>

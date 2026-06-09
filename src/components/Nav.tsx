@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
+  ArrowRight,
   Award,
   BadgeCheck,
   BookOpen,
@@ -238,26 +239,37 @@ function PromoCard() {
   }, []);
 
   return (
-    <div className="w-[260px] shrink-0 p-4">
-      <div className="h-full rounded-xl bg-[#0A0A0A] p-4">
-        <div className="border-l-2 border-[#0070F3] pl-4">
-          <div className="mb-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.14em]">
-            <span className="text-red-500">LIVE</span>
-            <span className="text-[#0070F3]">REGULATORY UPDATE</span>
-          </div>
-          <p className="text-sm font-semibold text-white">
-            EU AI Act enforcement in {daysRemaining} days
-          </p>
-          <p className="mt-2 text-xs text-neutral-500">
-            3 new obligations added this week
-          </p>
-          <Link
-            href="/resources"
-            className="mt-4 inline-block text-sm font-medium text-[#0070F3] transition hover:opacity-90"
-          >
-            View Live Feed {"->"}
-          </Link>
+    <div className="w-[240px] shrink-0 p-4 border-l border-white/[0.06]">
+      <div className="rounded-xl bg-[#0D0D0D] border border-white/[0.08] p-4 overflow-hidden relative">
+        {/* Glow */}
+        <div 
+          className="absolute top-0 right-0 w-24 h-24 pointer-events-none opacity-50"
+          style={{
+            background: "radial-gradient(circle at center, rgba(0,112,243,0.15), transparent 70%)"
+          }}
+        />
+
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-[#FF3B3B]/10 border border-[#FF3B3B]/20 px-2 py-0.5 mb-3">
+          <div className="h-1 w-1 rounded-full bg-[#FF3B3B] animate-pulse" />
+          <span className="text-[9px] font-bold text-[#FF3B3B] uppercase tracking-wider">
+            LIVE ENFORCEMENT
+          </span>
         </div>
+
+        <div className="text-[28px] font-bold font-mono text-white leading-none mb-1">
+          {daysRemaining}
+        </div>
+        
+        <p className="text-[11px] text-[#555] mb-3 leading-tight">
+          days until EU AI Act enforcement
+        </p>
+
+        <Link
+          href="/score"
+          className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#0070F3] hover:text-white transition-colors"
+        >
+          Check your readiness <ArrowRight className="h-[11px] w-[11px]" />
+        </Link>
       </div>
     </div>
   );

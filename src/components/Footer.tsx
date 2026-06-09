@@ -41,19 +41,68 @@ const legalLinks = [
 export default function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-[#050505]">
+      {/* Pre-footer divider section */}
+      <div className="py-16 border-b border-white/[0.06] bg-[#050505]">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex flex-col gap-2 text-center md:text-left">
+              <p className="text-[22px] font-bold text-white">
+                Still deciding? Talk to a human.
+              </p>
+              <p className="text-[14px] text-[#555]">
+                Our team can walk you through the platform in 20 minutes.
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Link href="/book-demo" className="inline-flex h-11 items-center gap-2 rounded-full px-6 text-[13px] font-semibold text-white bg-[#0070F3] hover:bg-[#0060D1] transition-colors">
+                Book a 20-min call
+              </Link>
+              <Link href="/contact" className="inline-flex h-11 items-center gap-2 rounded-full px-6 text-[13px] text-[#888] border border-white/[0.10] hover:border-white/[0.18] hover:text-white transition-all">
+                Send us a message
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="h-px w-full"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 0%, rgba(0,112,243,0.4) 25%, rgba(0,196,140,0.4) 75%, transparent 100%)",
+        }}
+      />
       <div className="mx-auto max-w-[1200px] px-6">
         {/* Main footer grid */}
         <div className="py-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10">
           {/* Brand column */}
           <div className="col-span-2 sm:col-span-3 lg:col-span-1 flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-2" aria-label="CompliVibe Home">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-compliance-green to-cv-blue">
-                <Shield className="h-4 w-4 text-white" strokeWidth={2.5} />
-              </div>
-              <span className="text-sm font-bold tracking-tight text-white">CompliVibe</span>
+            <Link href="/" className="flex items-center gap-2.5" aria-label="CompliVibe Home">
+              <span
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[13px] font-black tracking-tight text-white"
+                style={{
+                  background: "linear-gradient(135deg, #0070F3 0%, #7928CA 100%)",
+                  boxShadow: "0 0 16px rgba(0,112,243,0.3)",
+                }}
+              >
+                CV
+              </span>
+              <span className="text-base font-semibold text-white">
+                Compli
+                <span
+                  style={{
+                    background: "linear-gradient(135deg,#0070F3,#00C48C)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  Vibe
+                </span>
+              </span>
             </Link>
             <p className="text-sm text-[#555] leading-relaxed max-w-[200px]">
-              EU AI Act + India DPDP compliance platform. One platform. Zero blocked deals.
+              The AI governance platform for the regulation era. Govern, monitor, document, and prove AI compliance in one command center.
             </p>
 
             {/* Support email */}
@@ -122,7 +171,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-[#555] hover:text-white transition-colors"
+                      className="text-sm text-[#555] hover:text-white hover:translate-x-0.5 transition-all duration-150"
                     >
                       {link.label}
                     </Link>
@@ -145,15 +194,20 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 border-t border-white/[0.06]">
-          <p className="text-xs text-[#444]">
-            © 2026 ValersAI Connect Pvt. Ltd. All rights reserved.
-          </p>
+          <div className="flex flex-col gap-1 items-center sm:items-start text-center sm:text-left">
+            <p className="text-xs text-[#444]">
+              © 2026 ValersAI Connect Pvt. Ltd. All rights reserved.
+            </p>
+            <p className="text-[11px] text-[#333]">
+              AI Governance Infrastructure for the Regulation Era
+            </p>
+          </div>
           <div className="flex flex-wrap items-center gap-6">
             {legalLinks.map((l) => (
               <Link
                 key={l.label}
                 href={l.href}
-                className="text-xs text-[#444] hover:text-[#888] transition-colors"
+                className="text-xs text-[#555] hover:text-white hover:translate-x-0.5 transition-all duration-150"
               >
                 {l.label}
               </Link>
