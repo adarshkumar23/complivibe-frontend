@@ -10,12 +10,12 @@ export const metadata: Metadata = {
     title: "Privacy Policy | CompliVibe",
     description: "How CompliVibe collects, uses, and protects your data — compliant with India DPDP and EU GDPR.",
     url: "https://complivibe.in/legal/privacy-policy",
-    images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
+    images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Privacy Policy | CompliVibe",
-    images: ["https://complivibe.in/og-placeholder.png"],
+    images: ["https://complivibe.in/og-image.svg"],
   },
 };
 
@@ -66,33 +66,43 @@ If you are an EU resident and are not satisfied with our response, you have the 
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="cv-page">
       <Nav />
-      <main className="mx-auto max-w-[800px] px-6 py-24">
-        <div className="mb-12">
-          <div className="text-xs text-[#555] mb-3">Last updated: May 2026</div>
-          <h1
-            className="text-white mb-4"
-            style={{ fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: "1.1", fontWeight: "700", letterSpacing: "-0.03em" }}
-          >
-            Privacy Policy
-          </h1>
-          <p className="text-[#888] leading-relaxed">
-            This policy explains how CompliVibe (operated by CompliVibe Private Limited) collects, uses, and protects your personal data. We process data in compliance with India&apos;s Digital Personal Data Protection Act 2023 (DPDP) and the EU General Data Protection Regulation (GDPR).
-          </p>
-        </div>
+      <main className="aurora-bg relative overflow-hidden">
+        <div className="cv-container py-28 md:py-32">
+          <div className="mx-auto max-w-[820px]">
+            <div className="mb-10">
+              <span className="section-kicker mb-4">Legal</span>
+              <div className="mb-3 text-xs text-[var(--cv-muted)]">Last updated: May 2026</div>
+              <h1
+                className="font-semibold tracking-tight text-[var(--cv-ink)]"
+                style={{ fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1, letterSpacing: "-0.03em" }}
+              >
+                Privacy Policy
+              </h1>
+              <p className="mt-4 text-[15px] leading-relaxed text-[var(--cv-muted)]">
+                This policy explains how CompliVibe (operated by CompliVibe Private Limited) collects, uses, and protects your personal data. We process data in alignment with India&apos;s Digital Personal Data Protection Act 2023 (DPDP) and the EU General Data Protection Regulation (GDPR).
+              </p>
+            </div>
 
-        <div className="flex flex-col gap-10">
-          {sections.map((s) => (
-            <section key={s.title} className="border-t border-white/[0.06] pt-8">
-              <h2 className="text-white font-semibold text-lg mb-4">{s.title}</h2>
-              {s.content.split("\n\n").map((para, i) => (
-                <p key={i} className="text-[#888] text-sm leading-relaxed mb-3 last:mb-0">
-                  {para}
-                </p>
-              ))}
-            </section>
-          ))}
+            <div className="liquid-card glass-highlight p-7 md:p-9">
+              <div className="flex flex-col gap-8">
+                {sections.map((s) => (
+                  <section
+                    key={s.title}
+                    className="border-t border-[var(--cv-border)] pt-7 first:border-t-0 first:pt-0"
+                  >
+                    <h2 className="mb-3 text-lg font-semibold text-[var(--cv-ink)]">{s.title}</h2>
+                    {s.content.split("\n\n").map((para, i) => (
+                      <p key={i} className="mb-3 text-sm leading-relaxed text-[var(--cv-muted)] last:mb-0">
+                        {para}
+                      </p>
+                    ))}
+                  </section>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </main>
       <Footer />

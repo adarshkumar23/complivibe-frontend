@@ -10,12 +10,12 @@ export const metadata: Metadata = {
     description:
       "One operating layer for AI governance, compliance automation, evidence, risk monitoring, and data observability.",
     url: "https://complivibe.in/platform",
-    images: [{ url: "https://complivibe.in/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Platform — The AI Trust OS | CompliVibe",
-    images: ["https://complivibe.in/og-image.png"],
+    images: ["https://complivibe.in/og-image.svg"],
   },
 };
 

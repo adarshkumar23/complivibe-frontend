@@ -13,7 +13,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://complivibe.in"),
-  title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
+  title: "CompliVibe — AI Trust Infrastructure for Modern Companies",
   description:
     "AI governance, compliance automation, evidence management, risk monitoring, and data observability in one trust infrastructure layer for modern companies.",
   keywords: [
@@ -48,28 +48,27 @@ export const metadata: Metadata = {
     apple: "/favicon.svg",
   },
   openGraph: {
-    title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
+    title: "CompliVibe — AI Trust Infrastructure for Modern Companies",
     description:
       "AI governance, compliance automation, evidence management, risk monitoring, and data observability in one trust infrastructure layer for modern companies.",
     type: "website",
     siteName: "CompliVibe",
     url: "https://complivibe.in",
     locale: "en_IN",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "CompliVibe — AI Trust Infrastructure" }],
+    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "CompliVibe — AI Trust Infrastructure" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "CompliVibe — AI Trust Infrastructure",
     description:
       "AI governance, compliance automation, evidence, risk monitoring, and data observability in one trust layer.",
-    images: ["/og-image.png"],
+    images: ["/og-image.svg"],
     site: "@complivibe",
     creator: "@complivibe",
   },
-  verification: {
-    google: "REPLACE_GOOGLE_VERIFICATION_CODE",
-    other: { "msvalidate.01": "REPLACE_BING_VERIFICATION_CODE" },
-  },
+  // Search-engine verification meta tags are injected at deploy time via real
+  // codes (Google Search Console / Bing Webmaster). Placeholder values are
+  // intentionally omitted so no invalid verification tags are emitted.
 };
 
 export default function RootLayout({
@@ -113,11 +112,8 @@ export default function RootLayout({
           "@type": "WebSite",
           name: "CompliVibe",
           url: "https://complivibe.in",
-          potentialAction: {
-            "@type": "SearchAction",
-            target: { "@type": "EntryPoint", urlTemplate: "https://complivibe.in/search?q={search_term_string}" },
-            "query-input": "required name=search_term_string",
-          },
+          description: "AI Trust Infrastructure for modern companies — AI governance, compliance automation, evidence management, risk monitoring, and data observability in one operating layer.",
+          publisher: { "@type": "Organization", name: "CompliVibe" },
         })}} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",

@@ -4,18 +4,18 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Terms of Service | CompliVibe",
-  description: "CompliVibe Terms of Service — governing your use of the EU AI Act and India DPDP compliance platform.",
+  description: "CompliVibe Terms of Service — governing your use of the AI Trust Infrastructure platform for governance, evidence, and compliance automation.",
   alternates: { canonical: "https://complivibe.in/legal/terms" },
   openGraph: {
     title: "Terms of Service | CompliVibe",
-    description: "Terms governing your use of CompliVibe, the AI compliance platform for Indian companies.",
+    description: "Terms governing your use of CompliVibe — AI Trust Infrastructure for modern companies.",
     url: "https://complivibe.in/legal/terms",
-    images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
+    images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Terms of Service | CompliVibe",
-    images: ["https://complivibe.in/og-placeholder.png"],
+    images: ["https://complivibe.in/og-image.svg"],
   },
 };
 
@@ -68,33 +68,43 @@ We may update these Terms from time to time. Material changes will be notified v
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="cv-page">
       <Nav />
-      <main className="mx-auto max-w-[800px] px-6 py-24">
-        <div className="mb-12">
-          <div className="text-xs text-[#555] mb-3">Last updated: May 2026</div>
-          <h1
-            className="text-white mb-4"
-            style={{ fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: "1.1", fontWeight: "700", letterSpacing: "-0.03em" }}
-          >
-            Terms of Service
-          </h1>
-          <p className="text-[#888] leading-relaxed">
-            These terms govern your access to and use of CompliVibe, the AI compliance platform operated by CompliVibe Private Limited. Please read them carefully before using the service.
-          </p>
-        </div>
+      <main className="aurora-bg relative overflow-hidden">
+        <div className="cv-container py-28 md:py-32">
+          <div className="mx-auto max-w-[820px]">
+            <div className="mb-10">
+              <span className="section-kicker mb-4">Legal</span>
+              <div className="mb-3 text-xs text-[var(--cv-muted)]">Last updated: May 2026</div>
+              <h1
+                className="font-semibold tracking-tight text-[var(--cv-ink)]"
+                style={{ fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1, letterSpacing: "-0.03em" }}
+              >
+                Terms of Service
+              </h1>
+              <p className="mt-4 text-[15px] leading-relaxed text-[var(--cv-muted)]">
+                These terms govern your access to and use of CompliVibe, the AI Trust Infrastructure platform operated by CompliVibe Private Limited. Please read them carefully before using the service.
+              </p>
+            </div>
 
-        <div className="flex flex-col gap-10">
-          {sections.map((s) => (
-            <section key={s.title} className="border-t border-white/[0.06] pt-8">
-              <h2 className="text-white font-semibold text-lg mb-4">{s.title}</h2>
-              {s.content.split("\n\n").map((para, i) => (
-                <p key={i} className="text-[#888] text-sm leading-relaxed mb-3 last:mb-0">
-                  {para}
-                </p>
-              ))}
-            </section>
-          ))}
+            <div className="liquid-card glass-highlight p-7 md:p-9">
+              <div className="flex flex-col gap-8">
+                {sections.map((s) => (
+                  <section
+                    key={s.title}
+                    className="border-t border-[var(--cv-border)] pt-7 first:border-t-0 first:pt-0"
+                  >
+                    <h2 className="mb-3 text-lg font-semibold text-[var(--cv-ink)]">{s.title}</h2>
+                    {s.content.split("\n\n").map((para, i) => (
+                      <p key={i} className="mb-3 text-sm leading-relaxed text-[var(--cv-muted)] last:mb-0">
+                        {para}
+                      </p>
+                    ))}
+                  </section>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </main>
       <Footer />

@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     title: "Create Account | CompliVibe",
     description: "Start building your AI trust layer with CompliVibe.",
     url: "https://complivibe.in/signup",
-    images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
+    images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Create Account | CompliVibe",
     description: "Start building your AI trust layer with CompliVibe.",
-    images: ["https://complivibe.in/og-placeholder.png"],
+    images: ["https://complivibe.in/og-image.svg"],
   },
 };
 

@@ -1,0 +1,97 @@
+{
+  "report": "CompliVibe — Complete Site SEO & Redesign Pass",
+  "date": "2026-06-21",
+  "branch": "main",
+  "positioning": "AI Trust Infrastructure / AI Trust OS",
+  "finalVerdict": "Site was ~90% already redesigned with metadata. This was a focused technical-SEO + correctness finishing pass. The 4 legal pages (the last old dark pages) were rebuilt light-first; all broken OG image refs, duplicate next.config, fake SearchAction, a fake-success form, and stale positioning were fixed. build + lint + typecheck all pass.",
+  "pagesAudited": 41,
+  "pagesRedesignedThisPass": [
+    "/legal/privacy-policy",
+    "/legal/terms",
+    "/legal/cookies",
+    "/legal/dpa"
+  ],
+  "pagesAlreadyComplete": [
+    "/", "/platform", "/solutions", "/solutions/[slug] + 13 details",
+    "/frameworks", "/frameworks/[slug] (12)", "/pricing", "/book-demo",
+    "/waitlist", "/login", "/signup", "/score", "/resources", "/docs",
+    "/blog", "/changelog", "/customer-stories", "/customer-stories/[slug]",
+    "/contact", "/trust", "/security", "/about", "/careers", "/enterprise"
+  ],
+  "typoRoutePlatfrom": "does-not-exist (nothing to redirect/noindex)",
+  "metadata": {
+    "allIndexablePagesHaveTitleDescriptionCanonical": true,
+    "ogImageStandardizedTo": "https://complivibe.in/og-image.svg",
+    "previousBrokenOgRefs": ["og-image.png", "og-placeholder.png"],
+    "homeAndLayoutTitle": "CompliVibe — AI Trust Infrastructure for Modern Companies",
+    "metadataBase": "https://complivibe.in",
+    "localhostOrCodespaceUrlsFound": false
+  },
+  "structuredData": {
+    "organization": "retained (accurate, contactPoint to /contact)",
+    "website": "removed fake SearchAction; added description + publisher",
+    "softwareApplication": "retained; no fake ratings/reviews/awards; price unchanged",
+    "unsupportedSchemaAdded": false
+  },
+  "sitemapRobots": {
+    "generator": "next-sitemap (postbuild)",
+    "removedStaleFile": "public/sitemap.xml",
+    "urlCount": 61,
+    "excluded": ["/login", "/signup", "/api/*"],
+    "legalPagesIncluded": true,
+    "robotsTxt": "valid, points to /sitemap.xml"
+  },
+  "internalLinks": {
+    "brokenLinksFound": 0,
+    "verifiedEnterpriseSolutionViaCatchAll": true,
+    "footerPlatformConceptLinks": "resolve to /platform (no dedicated sub-routes yet)"
+  },
+  "oldCopyRemoved": [
+    "site.webmanifest description + dark colors",
+    "og-image.svg old positioning + black background",
+    "/legal/terms meta description (EU AI Act + India DPDP compliance platform)"
+  ],
+  "bannedStringsInSource": {
+    "enforcement era": "none (only historical reports/*.md, past tense)",
+    "fine exposure": "none in source",
+    "Built for the enforcement": "none in source",
+    "1f94a0f6": "none",
+    "ValersAI": "none"
+  },
+  "forms": {
+    "bookDemo": "real Web3Forms",
+    "waitlist": "real Web3Forms",
+    "score": "real Web3Forms (no fake success)",
+    "resourcesSubscribe": "FIXED this pass — was fake setSubmitted(true), now real Web3Forms with error states",
+    "loginAppBridge": "https://app.complivibe.in/login present"
+  },
+  "keySafety": {
+    "web3formsKeyInTrackedFiles": false,
+    "envLocalTracked": false,
+    "envLocalGitignored": true
+  },
+  "theme": {
+    "defaultLight": true,
+    "darkModeClassEnabled": true,
+    "legalPagesUseTokens": true
+  },
+  "mobile": "responsive; no regressions; legal pages stack cleanly",
+  "accessibility": "single H1 per page, semantic headings, aria-labels on icon controls, form labels, token-based contrast, reduced-motion respected",
+  "performance": "static export, images unoptimized, compress on, no new libraries, no new animation loops, legal pages near-zero JS",
+  "buildLintTypecheck": {
+    "tsc": "pass (exit 0)",
+    "lint": "pass (no warnings/errors)",
+    "build": "pass; postbuild next-sitemap generated 61-URL sitemap"
+  },
+  "configChanges": {
+    "removed": ["next.config.js (duplicate)", "public/sitemap.xml (stale)"],
+    "consolidatedTo": "next.config.ts (output export, trailingSlash false, images unoptimized)"
+  },
+  "remainingWarnings": [
+    "OG image is SVG — FB/LinkedIn/X don't reliably render SVG og:image; no raster tooling available to auto-generate. Recommend generating a 1200x630 PNG in CI/design and repointing refs.",
+    "Organization.sameAs lists LinkedIn/Twitter/YouTube/GitHub (pre-existing) — verify each profile is real/owned.",
+    "next-sitemap runs in postbuild — ensure deploys use `npm run build`, not bare `next build`.",
+    "Search-console verification meta omitted by design — add real Google/Bing codes at deploy.",
+    "Footer Platform concept links point to /platform — optional future enhancement to add anchors or dedicated routes."
+  ]
+}

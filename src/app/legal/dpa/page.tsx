@@ -11,12 +11,12 @@ export const metadata: Metadata = {
     title: "Data Processing Agreement | CompliVibe",
     description: "GDPR-compliant DPA for EU customers using the CompliVibe compliance platform.",
     url: "https://complivibe.in/legal/dpa",
-    images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
+    images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Data Processing Agreement | CompliVibe",
-    images: ["https://complivibe.in/og-placeholder.png"],
+    images: ["https://complivibe.in/og-image.svg"],
   },
 };
 
@@ -63,54 +63,68 @@ For EU customers, the Module Two (Controller to Processor) SCCs are hereby incor
 
 export default function DPAPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="cv-page">
       <Nav />
-      <main className="mx-auto max-w-[800px] px-6 py-24">
-        <div className="mb-12">
-          <div className="text-xs text-[#555] mb-3">Last updated: May 2026</div>
-          <h1
-            className="text-white mb-3"
-            style={{ fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: "1.1", fontWeight: "700", letterSpacing: "-0.03em" }}
-          >
-            Data Processing Agreement
-          </h1>
-          <p className="text-[#888] leading-relaxed mb-6">
-            For EU customers requiring a GDPR-compliant DPA governing how CompliVibe processes personal data on your behalf.
-          </p>
-          <div className="rounded-xl border border-compliance-green/20 bg-compliance-green/[0.03] p-4 text-sm text-[#888]">
-            To execute a signed DPA for your organisation, email{" "}
-            <a href="mailto:legal@complivibe.in?subject=DPA Request" className="text-compliance-green hover:underline">
-              legal@complivibe.in
-            </a>{" "}
-            with subject line <span className="font-mono text-white">DPA Request</span>. We respond within 5 business days.
-          </div>
-        </div>
+      <main className="aurora-bg relative overflow-hidden">
+        <div className="cv-container py-28 md:py-32">
+          <div className="mx-auto max-w-[820px]">
+            <div className="mb-10">
+              <span className="section-kicker mb-4">Legal</span>
+              <div className="mb-3 text-xs text-[var(--cv-muted)]">Last updated: May 2026</div>
+              <h1
+                className="font-semibold tracking-tight text-[var(--cv-ink)]"
+                style={{ fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1, letterSpacing: "-0.03em" }}
+              >
+                Data Processing Agreement
+              </h1>
+              <p className="mb-6 mt-4 text-[15px] leading-relaxed text-[var(--cv-muted)]">
+                For EU customers requiring a GDPR-aligned DPA governing how CompliVibe processes personal data on your behalf.
+              </p>
+              <div className="rounded-xl border border-[#10b981]/25 bg-[#10b981]/[0.06] p-4 text-sm text-[var(--cv-muted)]">
+                To execute a signed DPA for your organisation, email{" "}
+                <a href="mailto:legal@complivibe.in?subject=DPA Request" className="font-medium text-[#0f9b6c] hover:opacity-80 dark:text-[#34d399]">
+                  legal@complivibe.in
+                </a>{" "}
+                with subject line <span className="font-mono text-[var(--cv-ink)]">DPA Request</span>. We respond within 5 business days.
+              </div>
+            </div>
 
-        <div className="flex flex-col gap-10">
-          {sections.map((s) => (
-            <section key={s.title} className="border-t border-white/[0.06] pt-8">
-              <h2 className="text-white font-semibold text-lg mb-4">{s.title}</h2>
-              {s.content.split("\n\n").map((para, i) => (
-                <p key={i} className="text-[#888] text-sm leading-relaxed mb-3 last:mb-0">
-                  {para}
-                </p>
-              ))}
-            </section>
-          ))}
-        </div>
+            <div className="liquid-card glass-highlight p-7 md:p-9">
+              <div className="flex flex-col gap-8">
+                {sections.map((s) => (
+                  <section
+                    key={s.title}
+                    className="border-t border-[var(--cv-border)] pt-7 first:border-t-0 first:pt-0"
+                  >
+                    <h2 className="mb-3 text-lg font-semibold text-[var(--cv-ink)]">{s.title}</h2>
+                    {s.content.split("\n\n").map((para, i) => (
+                      <p key={i} className="mb-3 text-sm leading-relaxed text-[var(--cv-muted)] last:mb-0">
+                        {para}
+                      </p>
+                    ))}
+                  </section>
+                ))}
+              </div>
+            </div>
 
-        <div className="mt-14 rounded-2xl border border-white/[0.08] bg-[#0A0A0A] p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 justify-between">
-          <div>
-            <p className="text-white font-semibold mb-1">Ready to execute a signed DPA?</p>
-            <p className="text-[#888] text-sm">We&apos;ll have a signed copy back to you within 5 business days.</p>
+            <div className="liquid-panel mt-10 flex flex-col items-start justify-between gap-6 p-8 sm:flex-row sm:items-center">
+              <div>
+                <p className="mb-1 font-semibold text-[var(--cv-ink)]">Ready to execute a signed DPA?</p>
+                <p className="text-sm text-[var(--cv-muted)]">We&apos;ll have a signed copy back to you within 5 business days.</p>
+              </div>
+              <a
+                href="mailto:legal@complivibe.in?subject=DPA Request"
+                className="inline-flex h-11 shrink-0 items-center gap-2 rounded-full px-5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+                style={{
+                  background: "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)",
+                  boxShadow: "0 8px 24px rgba(37,99,235,0.28)",
+                }}
+              >
+                Request DPA
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
           </div>
-          <a
-            href="mailto:legal@complivibe.in?subject=DPA Request"
-            className="inline-flex shrink-0 h-10 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-black hover:bg-[#ededed] transition-colors"
-          >
-            Request DPA
-            <ArrowRight className="h-4 w-4" />
-          </a>
         </div>
       </main>
       <Footer />

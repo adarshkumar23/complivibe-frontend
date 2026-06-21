@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Mid-Market SaaS | CompliVibe",
     description: "AI Trust Infrastructure for governance, evidence, observability, and trust reporting.",
     url: "https://complivibe.in/solutions/mid-market",
-    images: [{ url: "https://complivibe.in/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
   },
 };
 

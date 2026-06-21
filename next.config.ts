@@ -2,7 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  trailingSlash: true,
+  // Canonicals and the sitemap use non-trailing URLs (e.g. /about), so keep
+  // trailingSlash off to stay consistent and avoid duplicate-URL signals.
+  trailingSlash: false,
   images: {
     unoptimized: true,
   },

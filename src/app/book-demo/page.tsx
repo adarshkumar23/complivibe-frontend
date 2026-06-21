@@ -14,14 +14,14 @@ export const metadata: Metadata = {
     description:
       "See CompliVibe in action — a short walkthrough of AI governance, evidence automation, data observability, and trust reporting.",
     url: "https://complivibe.in/book-demo",
-    images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
+    images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Book a Demo | CompliVibe",
     description:
       "See CompliVibe in action — a short walkthrough of AI governance, evidence automation, data observability, and trust reporting.",
-    images: ["https://complivibe.in/og-placeholder.png"],
+    images: ["https://complivibe.in/og-image.svg"],
   },
 };
 

@@ -13,14 +13,14 @@ export const metadata: Metadata = {
     description:
       "Answer a few questions to understand your AI governance, evidence, compliance, risk, and observability posture.",
     url: "https://complivibe.in/score",
-    images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
+    images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Free AI Trust Score | CompliVibe",
     description:
       "Answer a few questions to understand your AI governance, evidence, compliance, risk, and observability posture.",
-    images: ["https://complivibe.in/og-placeholder.png"],
+    images: ["https://complivibe.in/og-image.svg"],
   },
 };
 

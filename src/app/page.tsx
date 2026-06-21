@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
+  title: "CompliVibe — AI Trust Infrastructure for Modern Companies",
   description: "AI governance, compliance automation, evidence management, risk monitoring, and data observability in one trust infrastructure layer for modern companies.",
   alternates: { canonical: "https://complivibe.in" },
   openGraph: {
-    title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
+    title: "CompliVibe — AI Trust Infrastructure for Modern Companies",
     description: "AI governance, compliance automation, evidence management, risk monitoring, and data observability in one trust infrastructure layer for modern companies.",
     url: "https://complivibe.in",
-    images: [{ url: "https://complivibe.in/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
-    images: ["https://complivibe.in/og-image.png"],
+    title: "CompliVibe — AI Trust Infrastructure for Modern Companies",
+    images: ["https://complivibe.in/og-image.svg"],
   },
 };
 

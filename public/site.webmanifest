@@ -1,10 +1,10 @@
 {
-  "name": "CompliVibe",
+  "name": "CompliVibe — AI Trust Infrastructure",
   "short_name": "CompliVibe",
-  "description": "EU AI Act + India DPDP Compliance Platform",
+  "description": "AI Trust Infrastructure for modern companies — AI governance, compliance automation, evidence, risk monitoring, and data observability in one operating layer.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
   "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
 }
