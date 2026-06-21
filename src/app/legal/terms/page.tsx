@@ -24,7 +24,7 @@ const sections = [
     title: "1. Acceptance",
     content: `By creating an account or using the CompliVibe platform (the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you are using the Service on behalf of a company or other legal entity, you represent that you have authority to bind that entity to these Terms.
 
-These Terms constitute a binding legal agreement between you (or your organisation) and ValersAI Connect Pvt. Ltd. ("CompliVibe", "we", "us"). If you do not agree to these Terms, do not use the Service.`,
+These Terms constitute a binding legal agreement between you (or your organisation) and CompliVibe Private Limited ("CompliVibe", "we", "us"). If you do not agree to these Terms, do not use the Service.`,
   },
   {
     title: "2. Use of service",
@@ -58,7 +58,7 @@ For EU customers: Nothing in these Terms limits your rights under mandatory EU c
     title: "6. Contact",
     content: `For questions about these Terms, contact:
 
-CompliVibe (ValersAI Connect Pvt. Ltd.)
+CompliVibe (CompliVibe Private Limited)
 Email: legal@complivibe.in
 Location: Gurugram, Haryana, India
 
@@ -80,7 +80,7 @@ export default function TermsPage() {
             Terms of Service
           </h1>
           <p className="text-[#888] leading-relaxed">
-            These terms govern your access to and use of CompliVibe, the AI compliance platform operated by ValersAI Connect Pvt. Ltd. Please read them carefully before using the service.
+            These terms govern your access to and use of CompliVibe, the AI compliance platform operated by CompliVibe Private Limited. Please read them carefully before using the service.
           </p>
         </div>
 

@@ -4,19 +4,23 @@ import Footer from "@/components/Footer";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="cv-page">
       <Nav />
-      <main className="mx-auto max-w-[1200px] px-6 py-32 flex flex-col items-center justify-center text-center">
-        <h1 className="text-6xl font-bold mb-4 bg-gradient-to-br from-white to-white/50 bg-clip-text text-transparent">404</h1>
-        <h2 className="text-2xl font-semibold mb-6">Page Not Found</h2>
-        <p className="text-[#888] max-w-md mb-8">
+      <main className="aurora-bg relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden px-6 py-32 text-center">
+        <h1 className="mb-4 text-7xl font-bold tracking-tight text-gradient-trust">404</h1>
+        <h2 className="mb-6 text-2xl font-semibold text-[var(--cv-ink)]">Page not found</h2>
+        <p className="mb-8 max-w-md text-[var(--cv-muted)]">
           The page you are looking for doesn&apos;t exist or has been moved.
         </p>
-        <Link 
+        <Link
           href="/"
-          className="inline-flex h-11 items-center justify-center rounded-full bg-white px-8 text-sm font-semibold text-black hover:bg-[#ededed] transition-colors"
+          className="inline-flex h-11 items-center justify-center rounded-full px-8 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+          style={{
+            background: "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)",
+            boxShadow: "0 8px 24px rgba(37,99,235,0.28)",
+          }}
         >
-          Return Home
+          Return home
         </Link>
       </main>
       <Footer />

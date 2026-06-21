@@ -1,243 +1,132 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { Search, ShieldCheck, Archive, FileBarChart, Sparkles } from "lucide-react";
 
-const TERMINAL_LINES = [
-  { type: "system", text: "$ complivibe scan --system customer-ai-v2", color: "#555" },
-  { type: "info", text: "→ Connecting to governance engine...", color: "#444" },
-  { type: "success", text: "✓ System identified: Customer Scoring Model", color: "#00C48C" },
-  { type: "info", text: "→ Running EU AI Act classification...", color: "#444" },
-  { type: "warning", text: "⚠ Annex III match: Credit + employment decisions", color: "#F5A623" },
-  { type: "critical", text: "✗ Risk tier: HIGH RISK (Article 6)", color: "#FF3B3B" },
-  { type: "info", text: "→ Checking India DPDP scope...", color: "#444" },
-  { type: "warning", text: "⚠ DPDP Section 4: Personal data processing flagged", color: "#F5A623" },
-  { type: "info", text: "→ Generating Annex IV documentation...", color: "#444" },
-  { type: "progress", text: "  §1 System Description .................. ✓", color: "#00C48C" },
-  { type: "progress", text: "  §2 Design Specifications ............... ✓", color: "#00C48C" },
-  { type: "progress", text: "  §3 Development Process ................. ✓", color: "#00C48C" },
-  { type: "progress", text: "  §4-§11 Remaining sections .............. ✓", color: "#00C48C" },
-  { type: "info", text: "→ Building evidence package...", color: "#444" },
-  { type: "success", text: "✓ 147 compliance artifacts hashed and vaulted", color: "#00C48C" },
-  { type: "info", text: "→ Computing readiness scores...", color: "#444" },
-  { type: "success", text: "✓ EU AI Act: 74% ready (↑12% this session)", color: "#0070F3" },
-  { type: "success", text: "✓ India DPDP: 68% ready", color: "#0070F3" },
-  { type: "final", text: "✓ Governance report ready. Audit package exported.", color: "#00C48C" },
-  { type: "system", text: "$ _", color: "#0070F3" },
+const proofs = [
+  "Vessora AI",
+  "Fitlit",
+  "GlideRun AI",
+  "Beta teams",
+  "AI-first SaaS",
+  "Enterprise pilots",
 ];
 
-const steps = [
-  {
-    number: "01",
-    color: "#0070F3",
-    title: "AI System Detected",
-    outcome: "Classified as HIGH RISK",
-    outcomeClassName: "text-[#FF3B3B]",
-    desc: "Automatically mapped to EU AI Act Annex III in 2.3 seconds",
-  },
-  {
-    number: "02",
-    color: "#00C48C",
-    title: "Documentation Gap Found",
-    outcome: "Annex IV Generated",
-    outcomeClassName: "text-[#00C48C]",
-    desc: "All 11 required sections written, grounded in regulation text",
-  },
-  {
-    number: "03",
-    color: "#7928CA",
-    title: "Audit Request Arrives",
-    outcome: "Evidence Package Ready",
-    outcomeClassName: "text-[#7928CA]",
-    desc: "Hash-chained logs, docs, and readiness score exported instantly",
-  },
+const pipeline = [
+  { label: "Discover", icon: Search, color: "#2563eb" },
+  { label: "Govern", icon: ShieldCheck, color: "#7c3aed" },
+  { label: "Evidence", icon: Archive, color: "#10b981" },
+  { label: "Report", icon: FileBarChart, color: "#06b6d4" },
 ];
 
-function fakeTime(index: number) {
-  const seconds = (index * 3) % 60;
-  return `09:42:${seconds.toString().padStart(2, "0")}`;
-}
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
 
-function GovernanceTerminal({ inView }: { inView: boolean }) {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [cycle, setCycle] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-
-    const timeouts: number[] = [];
-    const interval = window.setInterval(() => {
-      setCurrentStep((step) => {
-        if (step >= TERMINAL_LINES.length) {
-          window.clearInterval(interval);
-          const timeout = window.setTimeout(() => {
-            setCurrentStep(0);
-            setCycle((value) => value + 1);
-          }, 2000);
-          timeouts.push(timeout);
-          return step;
-        }
-
-        return step + 1;
-      });
-    }, 800);
-
-    return () => {
-      window.clearInterval(interval);
-      timeouts.forEach((timeout) => window.clearTimeout(timeout));
-    };
-  }, [cycle, inView]);
-
-  const visibleLines = TERMINAL_LINES.slice(0, currentStep);
-  const complete = currentStep >= TERMINAL_LINES.length;
-
-  return (
-    <div
-      className="overflow-hidden rounded-xl border border-white/[0.10] bg-[#080808]"
-      style={{
-        boxShadow: "0 0 0 1px rgba(255,255,255,0.04), 0 20px 60px rgba(0,0,0,0.6)",
-      }}
-    >
-      <div className="flex h-9 items-center gap-2 border-b border-white/[0.07] bg-[#0F0F0F] px-3">
-        <div className="h-2 w-2 rounded-full bg-[#FF5F56]" />
-        <div className="h-2 w-2 rounded-full bg-[#FFBD2E]" />
-        <div className="h-2 w-2 rounded-full bg-[#27C93F]" />
-        <div className="mx-1 h-3 w-px bg-white/[0.08]" />
-        <span className="font-mono text-[10px] text-[#333]">complivibe — governance-engine</span>
-      </div>
-
-      <div className="min-h-[360px] p-5 font-mono text-[11px]">
-        {visibleLines.map((line, index) => (
-          <motion.div
-            key={`${cycle}-${line.type}-${index}`}
-            className="flex items-start gap-3 py-0.5"
-            initial={{ opacity: 0, x: -4 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className="w-14 shrink-0 font-mono text-[10px] text-[#2a2a2a]">{fakeTime(index)}</span>
-            <span style={{ color: line.color }}>
-              {line.text}
-              {index === TERMINAL_LINES.length - 1 && complete && (
-                <motion.span
-                  className="ml-0.5 inline-block h-3 w-1.5 bg-[#0070F3] align-middle"
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                />
-              )}
-            </span>
-          </motion.div>
-        ))}
-
-        <AnimatePresence>
-          {complete && (
-            <motion.div
-              className="mt-4 grid grid-cols-3 gap-3 border-t border-white/[0.07] pt-4"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ delay: 0.5 }}
-            >
-              {[
-                { value: "74%", label: "EU Readiness", className: "text-[#00C48C]" },
-                { value: "11", label: "Docs Generated", className: "text-[#0070F3]" },
-                { value: "48h", label: "Time to ready", className: "text-[#7928CA]" },
-              ].map((stat) => (
-                <div key={stat.label} className="rounded-lg border border-white/[0.06] bg-white/[0.03] p-2.5 text-center">
-                  <div className={`font-mono text-lg font-bold ${stat.className}`}>{stat.value}</div>
-                  <div className="text-[9px] text-[#444]">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-}
+const item: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+};
 
 export default function LogoCloud() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.2 });
+  const reduce = useReducedMotion();
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-black py-32">
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(0,112,243,0.07) 0%, transparent 60%)",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-[1200px] px-6">
-        <p className="mb-16 text-center text-[11px] uppercase tracking-[0.2em] text-[#444]">
-          Watch CompliVibe work
-        </p>
-
-        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+    <section className="aurora-bg overflow-hidden py-24 md:py-28">
+      <div className="cv-container">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Left — copy + proof pills */}
           <motion.div
-            className="order-2 flex flex-col gap-6 lg:order-1"
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={container}
           >
-            <p className="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#0070F3]">LIVE DEMO</p>
-            <h2
-              style={{
-                fontSize: "clamp(2rem,4vw,3rem)",
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-                lineHeight: 1.15,
-                background: "linear-gradient(to bottom, #fff, rgba(255,255,255,0.6))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              From ungoverned AI to audit-ready in 48 hours.
-            </h2>
-            <p className="text-[15px] leading-relaxed text-[#555]">
-              Most AI teams discover they need governance documentation the week before a deal closes or an audit lands. CompliVibe runs continuously so you are always ready.
-            </p>
+            <motion.span variants={item} className="section-kicker mb-4">
+              Early Trust Signals
+            </motion.span>
+            <motion.h2 variants={item} className="section-title mt-4 text-balance">
+              Built for AI teams that need{" "}
+              <span className="text-gradient-trust">trust before scale</span>.
+            </motion.h2>
+            <motion.p variants={item} className="section-subtitle mt-5">
+              CompliVibe helps AI-first teams turn scattered systems, evidence, and risk signals
+              into a customer-ready trust posture.
+            </motion.p>
 
-            <div className="mt-2 space-y-4">
-              {steps.map((step) => (
-                <div key={step.number} className="flex items-start gap-4">
-                  <div
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border bg-white/[0.03]"
-                    style={{ borderColor: `${step.color}66` }}
-                  >
-                    <span className="font-mono text-[11px] text-[#444]">{step.number}</span>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[13px] font-semibold text-white">{step.title}</span>
-                      <span className="text-[#333]">→</span>
-                      <span className={`text-[13px] font-semibold ${step.outcomeClassName}`}>{step.outcome}</span>
-                    </div>
-                    <p className="text-[12px] text-[#444]">{step.desc}</p>
-                  </div>
-                </div>
+            <motion.div variants={item} className="mt-8 flex flex-wrap gap-3">
+              {proofs.map((p) => (
+                <span
+                  key={p}
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--cv-border)] bg-[var(--cv-surface)] px-4 py-2 text-sm font-medium text-[var(--cv-muted)] shadow-[var(--cv-shadow-soft)] backdrop-blur-sm transition-colors duration-200 hover:border-[#2563eb]/25 hover:text-[var(--cv-ink)]"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-[#2563eb] to-[#7c3aed]" />
+                  {p}
+                </span>
               ))}
-            </div>
-
-            <a
-              href="/score"
-              className="inline-flex w-fit items-center gap-1.5 text-[13px] font-medium text-white transition-colors hover:text-[#888]"
-            >
-              See it work on your AI system
-              <ArrowRight className="h-3.5 w-3.5" />
-            </a>
+            </motion.div>
           </motion.div>
 
+          {/* Right — mini trust pipeline */}
           <motion.div
-            className="order-1 lg:order-2"
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="liquid-card glass-highlight p-6 md:p-7"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <GovernanceTerminal inView={inView} />
+            <div className="mb-6 flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-[#2563eb] dark:text-[#3b82f6]" />
+              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--cv-muted)]">
+                Trust pipeline
+              </span>
+            </div>
+
+            <div className="flex items-stretch justify-between gap-2">
+              {pipeline.map((step, i) => {
+                const Icon = step.icon;
+                return (
+                  <div key={step.label} className="flex flex-1 items-center">
+                    <motion.div
+                      className="flex flex-1 flex-col items-center gap-2"
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: reduce ? 0 : 0.15 + i * 0.12, duration: 0.4 }}
+                    >
+                      <span
+                        className="flex h-12 w-12 items-center justify-center rounded-2xl border"
+                        style={{
+                          backgroundColor: `${step.color}14`,
+                          borderColor: `${step.color}33`,
+                        }}
+                      >
+                        <Icon className="h-5 w-5" style={{ color: step.color }} />
+                      </span>
+                      <span className="text-[11px] font-semibold text-[var(--cv-ink)]">{step.label}</span>
+                    </motion.div>
+
+                    {i < pipeline.length - 1 && (
+                      <div className="relative mx-1 h-px flex-1 self-start" style={{ marginTop: "24px" }}>
+                        <div className="absolute inset-0 bg-[var(--cv-border)]" />
+                        <motion.div
+                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#2563eb] to-[#7c3aed]"
+                          initial={{ width: "0%" }}
+                          whileInView={{ width: "100%" }}
+                          viewport={{ once: true }}
+                          transition={{ delay: reduce ? 0 : 0.3 + i * 0.12, duration: 0.5, ease: "easeOut" }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-6 rounded-xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-4 py-3 text-[12px] leading-relaxed text-[var(--cv-muted)]">
+              From first AI system to a continuously updated, customer-ready trust posture.
+            </div>
           </motion.div>
         </div>
       </div>

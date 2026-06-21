@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const sections = [
   {
     title: "1. Parties",
-    content: `This Data Processing Agreement ("DPA") is entered into between the customer entity identified in the CompliVibe subscription order form ("Controller") and ValersAI Connect Pvt. Ltd., operating as CompliVibe, Gurugram, India ("Processor").
+    content: `This Data Processing Agreement ("DPA") is entered into between the customer entity identified in the CompliVibe subscription order form ("Controller") and CompliVibe Private Limited, operating as CompliVibe, Gurugram, India ("Processor").
 
 This DPA supplements the CompliVibe Terms of Service and governs the processing of personal data by CompliVibe on behalf of the Controller in connection with the provision of the CompliVibe platform.`,
   },

@@ -5,9 +5,72 @@
 @tailwind utilities;
 
 :root {
+  /* Legacy CompliVibe accents (kept for existing components) */
   --urgency: #FF3B3B;
   --compliance-green: #00C48C;
   --india-orange: #FF6B35;
+
+  /* =====================================================================
+     CompliVibe — AI Trust Infrastructure design tokens (LIGHT, default)
+     Visual direction: Vision Pro glass + Linear clarity + Vercel sharpness
+     + Stripe elegance. Light-first porcelain surface.
+     ===================================================================== */
+  --cv-bg: #f4f7fc;            /* porcelain white-blue page background */
+  --cv-bg-soft: #eaf0f9;       /* slightly deeper porcelain for bands */
+  --cv-surface: rgba(255, 255, 255, 0.7);   /* glass surface */
+  --cv-surface-strong: #ffffff;              /* solid card surface */
+  --cv-ink: #0b1220;           /* primary text — near-black slate */
+  --cv-muted: #586172;         /* secondary text */
+  --cv-border: rgba(15, 23, 42, 0.08);       /* hairline borders */
+
+  /* Trust spectrum */
+  --cv-blue: #2563eb;
+  --cv-cyan: #06b6d4;
+  --cv-green: #10b981;
+  --cv-purple: #7c3aed;
+  --cv-warning: #f59e0b;
+  --cv-danger: #ef4444;
+
+  /* Radii */
+  --cv-radius-xl: 1rem;
+  --cv-radius-2xl: 1.5rem;
+
+  /* Premium shadows — soft, light, never heavy black */
+  --cv-shadow-soft: 0 1px 2px rgba(15, 23, 42, 0.04),
+    0 10px 30px rgba(15, 23, 42, 0.06);
+  --cv-shadow-glass: 0 8px 32px rgba(15, 23, 42, 0.08),
+    0 2px 8px rgba(15, 23, 42, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  color-scheme: light;
+}
+
+.dark {
+  /* =====================================================================
+     CompliVibe — dark theme (secondary). Still premium, deep slate-black.
+     ===================================================================== */
+  --cv-bg: #06080d;
+  --cv-bg-soft: #0a0e16;
+  --cv-surface: rgba(255, 255, 255, 0.04);
+  --cv-surface-strong: #0e1320;
+  --cv-ink: #f2f6fc;
+  --cv-muted: #94a3b8;
+  --cv-border: rgba(255, 255, 255, 0.1);
+
+  --cv-blue: #3b82f6;
+  --cv-cyan: #22d3ee;
+  --cv-green: #34d399;
+  --cv-purple: #a78bfa;
+  --cv-warning: #fbbf24;
+  --cv-danger: #f87171;
+
+  --cv-shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4),
+    0 10px 30px rgba(0, 0, 0, 0.45);
+  --cv-shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  color-scheme: dark;
 }
 
 * {
@@ -20,44 +83,240 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background: #000;
-  color: #fff;
+  background: var(--cv-bg);
+  color: var(--cv-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Vercel noise/grain texture overlay */
+/* Subtle noise/grain texture overlay (theme-aware via blend mode) */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.03;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* Scrollbar */
+.dark body::before {
+  mix-blend-mode: screen;
+  opacity: 0.03;
+}
+
+/* Scrollbar — light-first */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: rgba(15, 23, 42, 0.2);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 23, 42, 0.35);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #333;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(0, 112, 243, 0.3);
+  background: rgba(37, 99, 235, 0.22);
+}
+
+/* Accessible focus states (kept across themes) */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--cv-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 @layer utilities {
+
+  /* =====================================================================
+     CompliVibe — AI Trust Infrastructure utility system
+     ===================================================================== */
+
+  /* Page + layout */
+  .cv-page {
+    background: var(--cv-bg);
+    color: var(--cv-ink);
+    min-height: 100vh;
+  }
+
+  .cv-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .cv-container {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Liquid glass family — Vision Pro inspired */
+  .liquid-glass {
+    background: var(--cv-surface);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--cv-border);
+    box-shadow: var(--cv-shadow-glass);
+  }
+
+  .liquid-card {
+    position: relative;
+    background: var(--cv-surface);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--cv-border);
+    border-radius: var(--cv-radius-2xl);
+    box-shadow: var(--cv-shadow-glass);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .liquid-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    border-color: rgba(37, 99, 235, 0.25);
+  }
+  .dark .liquid-card:hover {
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    border-color: rgba(59, 130, 246, 0.35);
+  }
+
+  .liquid-panel {
+    background: var(--cv-surface-strong);
+    border: 1px solid var(--cv-border);
+    border-radius: var(--cv-radius-2xl);
+    box-shadow: var(--cv-shadow-soft);
+  }
+  .dark .liquid-panel {
+    background: var(--cv-surface-strong);
+  }
+
+  .bento-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--cv-surface-strong);
+    border: 1px solid var(--cv-border);
+    border-radius: var(--cv-radius-xl);
+    box-shadow: var(--cv-shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .bento-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--cv-shadow-glass);
+    border-color: rgba(37, 99, 235, 0.22);
+  }
+
+  /* Soft multi-hue aurora backdrop */
+  .aurora-bg {
+    position: relative;
+    isolation: isolate;
+  }
+  .aurora-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 15% 0%, rgba(37, 99, 235, 0.16), transparent 60%),
+      radial-gradient(ellipse 50% 45% at 85% 10%, rgba(124, 58, 237, 0.12), transparent 55%),
+      radial-gradient(ellipse 55% 50% at 75% 85%, rgba(6, 182, 212, 0.12), transparent 55%),
+      radial-gradient(ellipse 50% 45% at 20% 90%, rgba(16, 185, 129, 0.1), transparent 55%);
+  }
+  .dark .aurora-bg::before {
+    background:
+      radial-gradient(ellipse 60% 50% at 15% 0%, rgba(59, 130, 246, 0.18), transparent 60%),
+      radial-gradient(ellipse 50% 45% at 85% 10%, rgba(167, 139, 250, 0.14), transparent 55%),
+      radial-gradient(ellipse 55% 50% at 75% 85%, rgba(34, 211, 238, 0.12), transparent 55%),
+      radial-gradient(ellipse 50% 45% at 20% 90%, rgba(52, 211, 153, 0.1), transparent 55%);
+  }
+
+  /* Fine grid overlay */
+  .fine-grid {
+    background-image:
+      repeating-linear-gradient(0deg, var(--cv-border) 0px, var(--cv-border) 1px, transparent 1px, transparent 32px),
+      repeating-linear-gradient(90deg, var(--cv-border) 0px, var(--cv-border) 1px, transparent 1px, transparent 32px);
+  }
+
+  /* Glass highlight — top sheen for liquid surfaces */
+  .glass-highlight {
+    position: relative;
+  }
+  .glass-highlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), transparent 40%);
+    opacity: 0.7;
+  }
+  .dark .glass-highlight::after {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 40%);
+  }
+
+  /* Trust gradient text */
+  .text-gradient-trust {
+    background: linear-gradient(120deg, var(--cv-blue) 0%, var(--cv-cyan) 40%, var(--cv-green) 70%, var(--cv-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section typography */
+  .section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cv-blue);
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 3.5vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: var(--cv-ink);
+  }
+
+  .section-subtitle {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--cv-muted);
+    max-width: 42rem;
+  }
+
+  /* Premium shadow utility */
+  .premium-shadow {
+    box-shadow: var(--cv-shadow-glass);
+  }
+
+  /* Motion utilities (reduced-motion safe — see media query below) */
+  .motion-safe-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .motion-safe-reveal {
+    animation: cv-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
 
   .text-gradient {
     background: linear-gradient(to bottom right, #fff 40%, rgba(255,255,255,0.35));
@@ -310,5 +569,32 @@ body::before {
 
 .animate-scale-in {
   animation: scale-in 0.5s ease forwards;
+}
+
+@keyframes cv-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe-float,
+  .motion-safe-reveal {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 

@@ -1,96 +1,192 @@
-const stats = [
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  animate,
+  type Variants,
+} from "framer-motion";
+import { Users, FlaskConical, ListChecks, FileCheck2, Plug, UserCheck, type LucideIcon } from "lucide-react";
+
+type ProofCard = {
+  icon: LucideIcon;
+  accent: string;
+  value: string;
+  /** numeric target for count-up; omit for non-numeric values */
+  to?: number;
+  suffix?: string;
+  title: string;
+  desc: string;
+};
+
+const cards: ProofCard[] = [
   {
-    value: "€35M",
-    sublabel: "or 7% global turnover",
-    label: "Max EU AI Act Fine",
-    description: "Whichever is higher — applied per violation under EU AI Act enforcement.",
+    icon: Users,
+    accent: "#2563eb",
+    value: "3",
+    to: 3,
+    title: "paying customers",
+    desc: "AI-first teams using CompliVibe for governance and trust readiness.",
   },
   {
-    value: "₹250Cr",
-    sublabel: "maximum penalty",
-    label: "Max India DPDP Fine",
-    description: "Per instance of non-compliance under India's Digital Personal Data Protection Act.",
+    icon: FlaskConical,
+    accent: "#7c3aed",
+    value: "5",
+    to: 5,
+    title: "beta trials",
+    desc: "Teams testing AI governance, evidence, and compliance workflows.",
   },
   {
-    value: "Aug 2, 2026",
-    sublabel: "enforcement begins",
-    label: "EU AI Act Deadline",
-    description: "High-risk AI system obligations go live. Non-compliant systems must be withdrawn.",
+    icon: ListChecks,
+    accent: "#06b6d4",
+    value: "13",
+    to: 13,
+    title: "account waitlist",
+    desc: "Modern companies preparing for AI trust operations.",
   },
   {
-    value: "6–18mo",
-    sublabel: "without tooling",
-    label: "Average Compliance Timeline",
-    description: "Industry estimate for manual compliance programs. CompliVibe targets 48 hours.",
+    icon: FileCheck2,
+    accent: "#10b981",
+    value: "828",
+    to: 828,
+    title: "mapped obligations",
+    desc: "Framework mappings across AI, privacy, security, and trust readiness.",
+  },
+  {
+    icon: Plug,
+    accent: "#f59e0b",
+    value: "23",
+    to: 23,
+    suffix: "+",
+    title: "integrations",
+    desc: "Built for evidence collection across the tools teams already use.",
+  },
+  {
+    icon: UserCheck,
+    accent: "#7c3aed",
+    value: "Human",
+    title: "review model",
+    desc: "AI-assisted workflows with expert/human sign-off before final trust outputs.",
   },
 ];
 
-export default function Testimonials() {
+function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const reduce = useReducedMotion();
+  const [val, setVal] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    if (reduce) {
+      setVal(to);
+      return;
+    }
+    const controls = animate(0, to, {
+      duration: 1.1,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (v) => setVal(Math.round(v)),
+    });
+    return () => controls.stop();
+  }, [inView, to, reduce]);
+
   return (
-    <section className="relative py-24 overflow-hidden">
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,196,140,0.05) 0%, transparent 70%)",
-        }}
-      />
+    <span ref={ref}>
+      {val.toLocaleString()}
+      {suffix}
+    </span>
+  );
+}
 
-      <div className="relative mx-auto max-w-[1200px] px-6">
-        <div className="flex flex-col items-center text-center gap-4 mb-16">
-          <p className="text-xs text-[#555] uppercase tracking-[0.2em] font-medium">
-            The regulatory reality
-          </p>
-          <h2
-            style={{
-              fontSize: "clamp(1.75rem, 4vw, 3rem)",
-              lineHeight: "1.15",
-              letterSpacing: "-0.03em",
-              fontWeight: "700",
-              background: "linear-gradient(to bottom, #fff, rgba(255,255,255,0.5))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            The cost of non-compliance
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+};
+
+export default function Testimonials() {
+  const reduce = useReducedMotion();
+
+  return (
+    <section className="overflow-hidden py-24 md:py-32">
+      <div className="cv-container">
+        {/* Header */}
+        <motion.div
+          className="mx-auto max-w-2xl text-center"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="section-kicker mb-4">Early Momentum</span>
+          <h2 className="section-title mt-4 text-balance">
+            Built with real teams, shaped by real{" "}
+            <span className="text-gradient-trust">trust workflows</span>.
           </h2>
-          <p className="max-w-lg text-[#666] text-base leading-relaxed">
-            Regulators are not waiting. These are the real numbers from EU AI Act and India DPDP legislation.
+          <p className="section-subtitle mx-auto mt-5">
+            CompliVibe is already being used and tested by AI-first teams that need governance,
+            evidence, and trust readiness before scaling.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] rounded-2xl overflow-hidden border border-white/[0.06]">
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className="relative flex flex-col gap-2 bg-[#050505] px-8 py-10 hover:bg-[#0A0A0A] transition-colors group"
-            >
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-compliance-green/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span
-                className="font-bold"
-                style={{
-                  fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
-                  letterSpacing: "-0.04em",
-                  lineHeight: "1",
-                  background: "linear-gradient(to bottom, #fff, rgba(255,255,255,0.7))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
+        {/* Proof cards */}
+        <motion.div
+          className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {cards.map((card) => {
+            const Icon = card.icon;
+            return (
+              <motion.div
+                key={card.title}
+                variants={item}
+                whileHover={reduce ? undefined : { y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                className="bento-card glass-highlight flex flex-col gap-4 p-7"
               >
-                {stat.value}
-              </span>
-              <span className="text-xs text-compliance-green font-medium">{stat.sublabel}</span>
-              <span className="text-sm font-semibold text-white mt-1">{stat.label}</span>
-              <span className="text-xs text-[#555] leading-relaxed">{stat.description}</span>
-            </div>
-          ))}
-        </div>
+                <span
+                  className="flex h-11 w-11 items-center justify-center rounded-xl border"
+                  style={{ backgroundColor: `${card.accent}14`, borderColor: `${card.accent}33` }}
+                >
+                  <Icon className="h-5 w-5" style={{ color: card.accent }} />
+                </span>
 
-        <p className="text-center text-xs text-[#444] mt-6">
-          Sources: EU AI Act (Regulation 2024/1689) · India DPDP Act 2023 · Industry compliance benchmarks
-        </p>
+                <div className="flex items-baseline gap-2">
+                  <span
+                    className="font-mono font-bold leading-none tracking-tight"
+                    style={{ color: card.accent, fontSize: "clamp(1.75rem,3vw,2.5rem)" }}
+                  >
+                    {card.to !== undefined ? <CountUp to={card.to} suffix={card.suffix} /> : card.value}
+                  </span>
+                  <span className="text-base font-semibold text-[var(--cv-ink)]">{card.title}</span>
+                </div>
+
+                <p className="text-sm leading-relaxed text-[var(--cv-muted)]">{card.desc}</p>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Optional honest line */}
+        <motion.p
+          className="mt-10 text-center text-sm text-[var(--cv-muted)]"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Not a static checklist.{" "}
+          <span className="font-semibold text-[var(--cv-ink)]">A live trust infrastructure layer.</span>
+        </motion.p>
       </div>
     </section>
   );

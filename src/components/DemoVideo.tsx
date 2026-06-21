@@ -1,379 +1,402 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 import {
+  ShieldCheck,
+  FileCheck2,
   Activity,
+  Users,
+  CheckCircle2,
   AlertTriangle,
-  CheckCircle,
-  CheckSquare,
-  Cpu,
-  Database,
-  FileText,
-  FolderOpen,
-  LayoutDashboard,
-  Lock,
-  Scale,
-  Shield,
+  Clock,
   Sparkles,
+  ArrowRight,
+  FileText,
+  type LucideIcon,
 } from "lucide-react";
 
-const sidebarItems = [
-  { label: "Command Center", Icon: LayoutDashboard, active: true },
-  { label: "AI Systems", Icon: Cpu },
-  { label: "Governance", Icon: Shield },
-  { label: "Observability", Icon: Activity },
-  { label: "Evidence", Icon: FolderOpen },
-  { label: "Compliance", Icon: Scale },
+type TabKey = "governance" | "compliance" | "observability";
+
+const tabs: { key: TabKey; label: string; icon: LucideIcon; accent: string }[] = [
+  { key: "governance", label: "Governance", icon: ShieldCheck, accent: "#2563eb" },
+  { key: "compliance", label: "Compliance", icon: FileCheck2, accent: "#7c3aed" },
+  { key: "observability", label: "Observability", icon: Activity, accent: "#06b6d4" },
 ];
 
-const scoreCards = [
-  { label: "AI Trust Score", Icon: Shield, value: "87", color: "#0070F3", sub: "Strong governance posture", progress: "87%", gradient: "from-[#0070F3] to-[#00C48C]" },
-  { label: "Governance Score", Icon: CheckSquare, value: "84", color: "#00C48C", sub: "Governance Score", progress: "84%", gradient: "from-[#00C48C] to-[#0070F3]" },
-  { label: "Risk Health", Icon: AlertTriangle, value: "72", color: "#F5A623", sub: "Risk Health", progress: "72%", gradient: "from-[#F5A623] to-[#FF3B3B]" },
-  { label: "Evidence Health", Icon: FolderOpen, value: "91", color: "#7928CA", sub: "Evidence Health", progress: "91%", gradient: "from-[#7928CA] to-[#0070F3]" },
-];
+const panel: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+  exit: { opacity: 0, y: -10, transition: { duration: 0.2 } },
+};
 
-const readinessRows = [
-  { marker: "🇪🇺", label: "EU AI Act", value: "82%", color: "#0070F3" },
-  { marker: "🇮🇳", label: "India DPDP", value: "76%", color: "#00C48C" },
-  { marker: "CO", label: "Colorado AI Act", value: "65%", color: "#F5A623" },
-  { marker: "SOC", label: "SOC 2", value: "90%", color: "#00C48C" },
-  { marker: "ISO", label: "ISO 42001", value: "78%", color: "#7928CA" },
-  { marker: "NI", label: "NIST AI RMF", value: "73%", color: "#0070F3" },
-];
-
-const priorityActions = [
-  { tone: "critical", badge: "HIGH", title: "Address model transparency gap", due: "Due in 2 days", detail: "AI Recommendation Engine" },
-  { tone: "high", badge: "HIGH", title: "Review vendor risk assessment", due: "Due in 3 days", detail: "Vendor LLM API" },
-  { tone: "medium", badge: "MEDIUM", title: "Update data retention policy", due: "Due in 8 days", detail: "Customer data pipeline" },
-];
-
-function ScoreCard({ card }: { card: (typeof scoreCards)[number] }) {
-  const Icon = card.Icon;
-
+/* ----------------------------- Governance ----------------------------- */
+function GovernancePanel() {
+  const systems = [
+    { name: "credit-scoring-ai", owner: "R. Mehta", risk: "High", state: "Review", tone: "warn" },
+    { name: "support-copilot", owner: "A. Khan", risk: "Limited", state: "Approved", tone: "ok" },
+    { name: "fraud-detector", owner: "L. Wong", risk: "High", state: "Sign-off", tone: "warn" },
+    { name: "doc-summarizer", owner: "S. Iyer", risk: "Minimal", state: "Approved", tone: "ok" },
+  ];
   return (
-    <div className="col-span-1 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
-      <div className="flex items-center justify-between">
-        <span className="text-[9px] uppercase tracking-widest text-[#444]">{card.label}</span>
-        <Icon className="h-[11px] w-[11px]" style={{ color: card.color }} />
-      </div>
-      <div className="mt-2 flex items-end gap-2">
-        <span className="font-mono text-[32px] font-bold leading-none" style={{ color: card.color }}>
-          {card.value}
-        </span>
-        <span className="text-[12px] text-[#333]">/100</span>
-      </div>
-      <div className="mt-1 text-[9px] text-[#444]">{card.sub}</div>
-      <div className="mt-2 h-[3px] rounded-full bg-[#111]">
-        <div className={`h-full rounded-full bg-gradient-to-r ${card.gradient}`} style={{ width: card.progress }} />
-      </div>
-    </div>
-  );
-}
-
-function WindowChrome({ url }: { url: string }) {
-  return (
-    <div className="flex h-10 items-center gap-3 border-b border-white/[0.07] bg-[#0F0F0F] px-4">
-      <div className="flex items-center gap-1.5">
-        <div className="h-[9px] w-[9px] rounded-full bg-[#FF5F56]" />
-        <div className="h-[9px] w-[9px] rounded-full bg-[#FFBD2E]" />
-        <div className="h-[9px] w-[9px] rounded-full bg-[#27C93F]" />
-      </div>
-      <div className="mx-1 h-3.5 w-px bg-white/[0.08]" />
-      <div className="mx-4 flex-1">
-        <div className="mx-auto flex h-6 max-w-[280px] items-center gap-2 rounded-md border border-white/[0.06] bg-[#1a1a1a] px-3">
-          <Lock className="h-2.5 w-2.5 text-[#333]" />
-          <span className="font-mono text-[10px] text-[#333]">{url}</span>
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.6fr_1fr]">
+      {/* inventory */}
+      <div className="rounded-xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] p-4">
+        <div className="mb-3 flex items-center justify-between">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--cv-muted)]">
+            AI systems inventory
+          </span>
+          <span className="font-mono text-[11px] text-[var(--cv-muted)]">24 systems</span>
         </div>
-      </div>
-      <div className="ml-auto flex items-center gap-2">
-        <motion.div
-          className="h-1.5 w-1.5 rounded-full bg-[#00C48C]"
-          animate={{ scale: [1, 1.3, 1], opacity: [1, 0.4, 1] }}
-          transition={{ duration: 2.5, repeat: Infinity }}
-        />
-        <span className="font-mono text-[11px] text-[#00C48C]">LIVE</span>
-      </div>
-    </div>
-  );
-}
-
-export default function DemoVideo() {
-  const [activeTab, setActiveTab] = useState("Overview");
-
-  const tabs = ["Overview", "Risk Monitor", "Evidence Vault"];
-
-  return (
-    <section className="relative py-24 bg-[#050505] overflow-hidden">
-      {/* Background glow */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.4]"
-        style={{
-          background: "radial-gradient(circle at 50% 50%, rgba(0,112,243,0.06) 0%, transparent 70%)",
-        }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-[1200px] px-6">
-        <div className="flex flex-col items-center text-center gap-4 mb-12">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-[#0070F3] font-semibold">
-            PRODUCT TOUR
-          </p>
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              lineHeight: "1.1",
-              letterSpacing: "-0.03em",
-              fontWeight: "700",
-              background: "linear-gradient(to bottom, #fff, rgba(255,255,255,0.5))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            See CompliVibe{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #0070F3 0%, #00C48C 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              in action.
-            </span>
-          </h2>
-          <p className="text-[#555] text-base leading-relaxed max-w-[540px]">
-            A 90-second walkthrough of the Governance OS, from AI system classification to audit-ready evidence package.
-          </p>
+        <div className="mb-2 grid grid-cols-[1.4fr_1fr_0.7fr_0.9fr] gap-2 px-1 text-[9px] font-semibold uppercase tracking-wide text-[var(--cv-muted)]">
+          <span>System</span>
+          <span>Owner</span>
+          <span>Risk</span>
+          <span>Status</span>
         </div>
-
-        {/* Tab Bar */}
-        <div className="flex items-center justify-center gap-1 mb-8">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`rounded-full px-5 py-2 text-[13px] font-medium transition-all duration-200 border ${
-                activeTab === tab
-                  ? "bg-white/[0.08] text-white border-white/[0.12]"
-                  : "text-[#555] hover:text-[#888] border-transparent"
-              }`}
+        <div className="space-y-1.5">
+          {systems.map((s, i) => (
+            <motion.div
+              key={s.name}
+              className="grid grid-cols-[1.4fr_1fr_0.7fr_0.9fr] items-center gap-2 rounded-lg border border-[var(--cv-border)] bg-[var(--cv-surface-strong)] px-3 py-2"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.06 }}
             >
-              {tab}
-            </button>
+              <span className="truncate font-mono text-[11px] text-[var(--cv-ink)]">{s.name}</span>
+              <span className="flex items-center gap-1 text-[11px] text-[var(--cv-muted)]">
+                <Users className="h-3 w-3 opacity-60" />
+                {s.owner}
+              </span>
+              <span
+                className={`text-[10px] font-semibold ${
+                  s.risk === "High" ? "text-[#f59e0b]" : s.risk === "Limited" ? "text-[#2563eb]" : "text-[#10b981]"
+                }`}
+              >
+                {s.risk}
+              </span>
+              <span
+                className={`inline-flex w-fit items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-medium ${
+                  s.tone === "ok"
+                    ? "bg-[#10b981]/10 text-[#0f9b6c] dark:text-[#34d399]"
+                    : "bg-[#f59e0b]/10 text-[#b97c0a] dark:text-[#fbbf24]"
+                }`}
+              >
+                {s.tone === "ok" ? <CheckCircle2 className="h-2.5 w-2.5" /> : <AlertTriangle className="h-2.5 w-2.5" />}
+                {s.state}
+              </span>
+            </motion.div>
           ))}
         </div>
+      </div>
 
-        {/* Tab Content Panel */}
-        <div className="relative rounded-2xl border border-white/[0.08] bg-[#080808] overflow-hidden max-w-[900px] mx-auto min-h-[420px] shadow-2xl">
-          <AnimatePresence mode="wait">
-            {activeTab === "Overview" && (
-              <motion.div
-                key="Overview"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.25 }}
-              >
-                <WindowChrome url="app.complivibe.in/dashboard" />
-                <div className="bg-[#080808] p-4">
-                  <div className="flex h-[420px] flex-row overflow-hidden rounded-lg border border-white/[0.05]">
-                    {/* Sidebar reuse */}
-                    <aside className="flex w-[180px] shrink-0 flex-col border-r border-white/[0.06] bg-[#0D0D0D] py-3 hidden md:flex">
-                      <div className="mb-4 flex items-center gap-2 px-4">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#0070F3] to-[#7928CA]">
-                          <span className="text-[11px] font-black text-white">CV</span>
-                        </div>
-                        <span className="text-[13px] font-semibold text-white">CompliVibe</span>
-                      </div>
-                      <nav className="space-y-0.5 px-2">
-                        {sidebarItems.map((item) => {
-                          const Icon = item.Icon;
-                          return (
-                            <div
-                              key={item.label}
-                              className={`flex cursor-default items-center gap-2.5 rounded-lg px-2.5 py-2 text-[11px] font-medium ${
-                                item.active ? "bg-white/[0.08] text-white" : "text-[#555]"
-                              }`}
-                            >
-                              <Icon className="h-3 w-3" />
-                              {item.label}
-                            </div>
-                          );
-                        })}
-                      </nav>
-                    </aside>
-
-                    <main className="flex flex-1 flex-col overflow-hidden">
-                      <div className="flex h-10 items-center gap-3 border-b border-white/[0.06] bg-[#0D0D0D] px-4">
-                        <div className="flex items-center gap-2">
-                          <span className="text-[11px] font-semibold text-white">Command Center</span>
-                        </div>
-                        <div className="ml-auto flex items-center gap-2">
-                          <div className="flex items-center gap-1 rounded-md border border-[#0070F3]/30 bg-[#0070F3]/15 px-2 py-0.5">
-                            <Sparkles className="h-2.5 w-2.5 text-[#0070F3]" />
-                            <span className="text-[9px] font-semibold text-[#0070F3]">Ask Copilot</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="grid flex-1 grid-cols-12 gap-3 overflow-hidden p-4">
-                        <div className="col-span-12 grid grid-cols-2 lg:grid-cols-4 gap-3">
-                          {scoreCards.map((card) => (
-                            <ScoreCard key={card.label} card={card} />
-                          ))}
-                        </div>
-                        <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 gap-3 overflow-hidden">
-                          <div className="rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3 overflow-hidden">
-                            <div className="mb-2 text-[9px] uppercase tracking-widest text-[#444]">Compliance Readiness</div>
-                            {readinessRows.slice(0, 4).map((row) => (
-                              <div key={row.label} className="flex items-center gap-2 border-b border-white/[0.04] py-1 last:border-0">
-                                <span className="w-5 text-[9px] text-[#555]">{row.marker}</span>
-                                <span className="flex-1 text-[10px] text-[#666]">{row.label}</span>
-                                <div className="h-[2px] flex-1 rounded-full bg-[#111]">
-                                  <div className="h-full rounded-full" style={{ width: row.value, backgroundColor: row.color }} />
-                                </div>
-                                <span className="w-8 text-right font-mono text-[9px] text-[#555]">{row.value}</span>
-                              </div>
-                            ))}
-                          </div>
-                          <div className="rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3 hidden md:block">
-                            <div className="mb-2 text-[9px] uppercase tracking-widest text-[#444]">Priority Actions</div>
-                            {priorityActions.slice(0, 2).map((action) => (
-                              <div key={action.title} className="flex flex-col gap-0.5 border-b border-white/[0.04] py-1.5 last:border-0">
-                                <div className="mb-0.5 flex items-center gap-1.5">
-                                  <span className={`rounded px-1 py-0.5 text-[7px] font-bold ${action.tone === "critical" ? "bg-[#FF3B3B]/10 text-[#FF3B3B]" : "bg-[#F5A623]/10 text-[#F5A623]"}`}>{action.badge}</span>
-                                  <span className="text-[9px] font-medium text-[#888]">{action.title}</span>
-                                </div>
-                                <span className="text-[8px] text-[#444]">{action.due}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </main>
-                  </div>
-                  <p className="text-[11px] text-[#333] text-center mt-4">
-                    CompliVibe Command Center — AI Trust Score, Compliance Readiness, Risk Heatmap, and Priority Actions
-                  </p>
-                </div>
-              </motion.div>
-            )}
-
-            {activeTab === "Risk Monitor" && (
-              <motion.div
-                key="RiskMonitor"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.25 }}
-              >
-                <WindowChrome url="app.complivibe.in/risk-monitor" />
-                <div className="p-6 font-mono text-[11px]">
-                  <div className="flex justify-between mb-6">
-                    <div className="flex items-center gap-2">
-                      <div className="h-1.5 w-1.5 rounded-full bg-[#FF3B3B] animate-pulse" />
-                      <span className="text-[#444]">RISK MONITOR — LIVE SCAN</span>
-                    </div>
-                    <span className="text-[#333]">Last scan: 2m ago</span>
-                  </div>
-
-                  <div className="w-full">
-                    <div className="grid grid-cols-4 gap-4 text-[9px] uppercase tracking-widest text-[#333] pb-2 border-b border-white/[0.06]">
-                      <span>System</span>
-                      <span>Risk Level</span>
-                      <span>Regulation</span>
-                      <span>Action Required</span>
-                    </div>
-
-                    <div className="space-y-0">
-                      {[
-                        { name: "Customer AI v2", risk: "HIGH RISK", riskColor: "#FF3B3B", reg: "EU AI Act Annex III", action: "Annex IV required", actionColor: "#F5A623" },
-                        { name: "Rec Engine", risk: "MEDIUM", riskColor: "#F5A623", reg: "DPDP Section 4", action: "DPO review needed", actionColor: "#555" },
-                        { name: "HR Screener", risk: "HIGH RISK", riskColor: "#FF3B3B", reg: "EU AI Act Annex III", action: "FRIA assessment required", actionColor: "#F5A623" },
-                        { name: "Fraud Detection", risk: "LOW", riskColor: "#00C48C", reg: "ISO 42001", action: "Documentation current", actionColor: "#555" },
-                        { name: "Support Bot", risk: "MINIMAL", riskColor: "#555", reg: "GDPR Article 22", action: "Monitoring active", actionColor: "#555" },
-                      ].map((row, i) => (
-                        <div key={i} className="grid grid-cols-4 gap-4 py-3 border-b border-white/[0.04] text-[10px]">
-                          <span className="text-[#888]">{row.name}</span>
-                          <div>
-                            <span 
-                              className="rounded px-1.5 py-0.5 text-[9px] border"
-                              style={{ 
-                                color: row.riskColor, 
-                                backgroundColor: `${row.riskColor}1a`,
-                                borderColor: `${row.riskColor}33`
-                              }}
-                            >
-                              {row.risk}
-                            </span>
-                          </div>
-                          <span className="text-[#555]">{row.reg}</span>
-                          <span style={{ color: row.actionColor }}>{row.action}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between">
-                    <div className="text-[10px] text-[#333]">
-                      12 systems monitored · <span className="text-[#FF3B3B]">3 require immediate action</span>
-                    </div>
-                    <button className="text-[10px] text-[#0070F3] hover:underline transition-all">
-                      Run full scan →
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {activeTab === "Evidence Vault" && (
-              <motion.div
-                key="EvidenceVault"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.25 }}
-              >
-                <WindowChrome url="app.complivibe.in/evidence-vault" />
-                <div className="p-5">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-2">
-                      <FolderOpen className="h-3 w-3 text-[#F5A623]" />
-                      <span className="text-[11px] font-semibold text-[#888]">Evidence Vault</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-[10px] text-[#333]">147 items</span>
-                      <span className="text-[10px] font-mono text-[#00C48C]">Hash integrity: 100%</span>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    {[
-                      { icon: FileText, color: "#0070F3", type: "POLICY", file: "annex-iv-v3.pdf", date: "Jun 1 2026", hash: "0x7f3a...b2c1" },
-                      { icon: Shield, color: "#00C48C", type: "AUDIT", file: "risk-assessment-q2.json", date: "May 28 2026", hash: "0x1a2b...c3d4" },
-                      { icon: Activity, color: "#7928CA", type: "MONITOR", file: "system-logs-052026.csv", date: "May 31 2026", hash: "0x9e8d...f7g6" },
-                      { icon: Scale, color: "#F5A623", type: "LEGAL", file: "dpdp-review-final.pdf", date: "May 20 2026", hash: "0x5h4j...k3l2" },
-                      { icon: CheckCircle, color: "#00C48C", type: "APPROVAL", file: "board-sign-off.pdf", date: "May 15 2026", hash: "0x0m9n...p8q7" },
-                      { icon: Database, color: "#0070F3", type: "DATASET", file: "training-data-card.md", date: "May 10 2026", hash: "0x2r3s...t4u5" },
-                    ].map((card, i) => (
-                      <div key={i} className="rounded-xl bg-[#0D0D0D] border border-white/[0.07] p-3 hover:border-white/[0.15] transition-colors group">
-                        <div className="flex items-center gap-2 mb-2">
-                          <card.icon className="h-3 w-3" style={{ color: card.color }} />
-                          <span className="text-[9px] uppercase tracking-widest text-[#444]">{card.type}</span>
-                        </div>
-                        <div className="text-[11px] font-mono text-[#666] truncate">{card.file}</div>
-                        <div className="text-[9px] text-[#333] mt-1">{card.date}</div>
-                        <div className="text-[8px] font-mono text-[#222] mt-2 group-hover:text-[#333] transition-colors">{card.hash}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+      {/* score + sign-off queue */}
+      <div className="flex flex-col gap-4">
+        <div className="rounded-xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] p-4">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--cv-muted)]">
+            AI Trust Score
+          </span>
+          <div className="mt-1 flex items-end gap-2">
+            <span className="font-mono text-3xl font-bold text-[#2563eb] dark:text-[#3b82f6]">87</span>
+            <span className="mb-1 text-xs text-[var(--cv-muted)]">/ 100</span>
+          </div>
+          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[var(--cv-surface-strong)]">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-[#2563eb] to-[#06b6d4]"
+              initial={{ width: 0 }}
+              animate={{ width: "87%" }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
+            />
+          </div>
         </div>
+        <div className="rounded-xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] p-4">
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--cv-muted)]">
+              Human sign-off queue
+            </span>
+            <span className="rounded-full bg-[#f59e0b]/10 px-2 py-0.5 text-[10px] font-semibold text-[#b97c0a] dark:text-[#fbbf24]">
+              4 pending
+            </span>
+          </div>
+          {["credit-scoring-ai", "fraud-detector"].map((q) => (
+            <div key={q} className="flex items-center justify-between border-b border-[var(--cv-border)] py-1.5 text-[11px] last:border-0">
+              <span className="font-mono text-[var(--cv-ink)]">{q}</span>
+              <span className="text-[#2563eb] dark:text-[#3b82f6]">Awaiting review</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------- Compliance ----------------------------- */
+function CompliancePanel() {
+  const frameworks = [
+    { name: "EU AI Act", pct: 84 },
+    { name: "India DPDP", pct: 91 },
+    { name: "ISO 42001", pct: 78 },
+    { name: "NIST AI RMF", pct: 72 },
+    { name: "SOC 2", pct: 88 },
+    { name: "Colorado AI Act", pct: 65 },
+  ];
+  return (
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.4fr_1fr]">
+      <div className="rounded-xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] p-4">
+        <div className="mb-3 flex items-center justify-between">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--cv-muted)]">
+            Framework readiness
+          </span>
+          <span className="font-mono text-[11px] text-[var(--cv-muted)]">6 tracked</span>
+        </div>
+        <div className="space-y-2.5">
+          {frameworks.map((f, i) => (
+            <motion.div
+              key={f.name}
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.06 }}
+            >
+              <div className="mb-1 flex items-center justify-between text-[11px]">
+                <span className="font-medium text-[var(--cv-ink)]">{f.name}</span>
+                <span className="font-mono text-[var(--cv-muted)]">{f.pct}%</span>
+              </div>
+              <div className="h-1.5 overflow-hidden rounded-full bg-[var(--cv-surface-strong)]">
+                <motion.div
+                  className="h-full rounded-full bg-gradient-to-r from-[#7c3aed] to-[#2563eb]"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${f.pct}%` }}
+                  transition={{ duration: 0.8, delay: 0.1 + i * 0.06, ease: "easeOut" }}
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <div className="rounded-xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] p-4">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--cv-muted)]">
+            Evidence collection
+          </span>
+          <div className="mt-1 flex items-end gap-2">
+            <span className="font-mono text-2xl font-bold text-[#10b981]">147</span>
+            <span className="mb-1 text-xs text-[var(--cv-muted)]">/ 162 items</span>
+          </div>
+          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[var(--cv-surface-strong)]">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-[#06b6d4] to-[#10b981]"
+              initial={{ width: 0 }}
+              animate={{ width: "91%" }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
+            />
+          </div>
+          <div className="mt-2 text-[10px] text-[var(--cv-muted)]">Control → evidence mapping · 828 obligations</div>
+        </div>
+        <button className="flex items-center justify-between rounded-xl border border-[#7c3aed]/30 bg-[#7c3aed]/8 px-4 py-3 text-left transition-colors hover:bg-[#7c3aed]/12">
+          <span className="flex items-center gap-2 text-[12px] font-semibold text-[var(--cv-ink)]">
+            <FileText className="h-4 w-4 text-[#7c3aed] dark:text-[#a78bfa]" />
+            Audit pack generator
+          </span>
+          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#7c3aed] dark:text-[#a78bfa]">
+            Generate <ArrowRight className="h-3 w-3" />
+          </span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------- Observability --------------------------- */
+function ObservabilityPanel() {
+  const reduce = useReducedMotion();
+  const bars = [38, 52, 44, 61, 49, 70, 58, 66, 54, 74, 63, 81];
+  return (
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.5fr_1fr]">
+      <div className="rounded-xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] p-4">
+        <div className="mb-3 flex items-center justify-between">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--cv-muted)]">
+            Usage · latency / error signals
+          </span>
+          <span className="font-mono text-[10px] text-[var(--cv-muted)]">last 24h</span>
+        </div>
+        <div className="flex h-24 items-end gap-1 rounded-lg border border-[var(--cv-border)] bg-[var(--cv-surface-strong)] p-2.5">
+          {bars.map((h, i) => (
+            <motion.div
+              key={i}
+              className="flex-1 rounded-sm bg-gradient-to-t from-[#06b6d4] to-[#10b981]"
+              initial={{ height: 0 }}
+              animate={{ height: `${h}%` }}
+              transition={{ duration: 0.5, delay: reduce ? 0 : i * 0.04, ease: "easeOut" }}
+            />
+          ))}
+        </div>
+        <div className="mt-3 flex items-center gap-2 rounded-lg border border-[#f59e0b]/30 bg-[#f59e0b]/10 px-3 py-2 text-[11px]">
+          <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-[#b97c0a] dark:text-[#fbbf24]" />
+          <span className="text-[var(--cv-ink)]">Drift detected · credit-scoring-ai</span>
+          <span className="ml-auto font-mono text-[10px] text-[var(--cv-muted)]">+3.2σ</span>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="rounded-xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-3 py-3">
+            <div className="text-[9px] uppercase tracking-wide text-[var(--cv-muted)]">Risk health</div>
+            <div className="font-mono text-xl font-bold text-[#f59e0b]">72</div>
+          </div>
+          <div className="rounded-xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-3 py-3">
+            <div className="text-[9px] uppercase tracking-wide text-[var(--cv-muted)]">Incidents</div>
+            <div className="font-mono text-xl font-bold text-[#ef4444]">1</div>
+          </div>
+        </div>
+        <div className="flex items-center justify-between rounded-xl border border-[#10b981]/30 bg-[#10b981]/8 px-4 py-3">
+          <span className="text-[12px] font-semibold text-[var(--cv-ink)]">Live trust posture</span>
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#0f9b6c] dark:text-[#34d399]">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#10b981]" />
+            Healthy
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const panels: Record<TabKey, React.ReactNode> = {
+  governance: <GovernancePanel />,
+  compliance: <CompliancePanel />,
+  observability: <ObservabilityPanel />,
+};
+
+export default function DemoVideo() {
+  const [active, setActive] = useState<TabKey>("governance");
+  const reduce = useReducedMotion();
+
+  return (
+    <section className="aurora-bg overflow-hidden py-24 md:py-32">
+      <div className="cv-container">
+        {/* Header */}
+        <motion.div
+          className="mx-auto max-w-2xl text-center"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="section-kicker mb-4">Product Preview</span>
+          <h2 className="section-title mt-4 text-balance">
+            See the AI trust operating layer in{" "}
+            <span className="text-gradient-trust">action</span>.
+          </h2>
+          <p className="section-subtitle mx-auto mt-5">
+            A single workspace to govern AI systems, automate evidence, monitor trust signals, and
+            generate customer-ready reports.
+          </p>
+        </motion.div>
+
+        {/* Product frame */}
+        <motion.div
+          className="liquid-card glass-highlight mx-auto mt-12 max-w-5xl overflow-hidden p-0"
+          initial={{ opacity: 0, y: 24, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {/* app bar */}
+          <div className="flex items-center gap-3 border-b border-[var(--cv-border)] px-4 py-3">
+            <div className="flex gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]/50" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#f59e0b]/50" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#10b981]/50" />
+            </div>
+            <div className="mx-auto flex h-6 max-w-[260px] flex-1 items-center justify-center rounded-md border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-3">
+              <span className="font-mono text-[10px] text-[var(--cv-muted)]">app.complivibe.in/workspace</span>
+            </div>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-medium text-[#0f9b6c] dark:text-[#34d399]">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#10b981]" /> live
+            </span>
+          </div>
+
+          {/* tabs */}
+          <div className="flex items-center gap-1 border-b border-[var(--cv-border)] px-4 py-3">
+            {tabs.map((t) => {
+              const TabIcon = t.icon;
+              const isActive = t.key === active;
+              return (
+                <button
+                  key={t.key}
+                  onClick={() => setActive(t.key)}
+                  aria-pressed={isActive}
+                  className={`relative inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[13px] font-medium transition-all duration-200 ${
+                    isActive
+                      ? "bg-[var(--cv-surface-strong)] text-[var(--cv-ink)] shadow-[var(--cv-shadow-soft)]"
+                      : "text-[var(--cv-muted)] hover:text-[var(--cv-ink)]"
+                  }`}
+                  style={isActive ? { boxShadow: `inset 0 0 0 1px ${t.accent}40` } : undefined}
+                >
+                  <TabIcon className="h-3.5 w-3.5" style={isActive ? { color: t.accent } : undefined} />
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* body: panel + copilot */}
+          <div className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-[1fr_280px]">
+            <div className="min-h-[300px]">
+              <AnimatePresence mode="wait">
+                <motion.div key={active} variants={panel} initial="hidden" animate="show" exit="exit">
+                  {panels[active]}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Trust Copilot */}
+            <motion.aside
+              className="flex flex-col gap-4 rounded-xl border border-[var(--cv-border)] bg-gradient-to-b from-[#2563eb]/[0.06] to-[#7c3aed]/[0.04] p-4"
+              initial={reduce ? false : { opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="flex items-center gap-2">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#2563eb] to-[#7c3aed]">
+                  <Sparkles className="h-4 w-4 text-white" />
+                </span>
+                <span className="text-sm font-bold text-[var(--cv-ink)]">Trust Copilot</span>
+              </div>
+              <p className="text-[13px] leading-relaxed text-[var(--cv-muted)]">
+                <span className="font-semibold text-[var(--cv-ink)]">3 governance gaps</span> need review.
+                Evidence pack is ready for export.
+              </p>
+              <div className="space-y-1.5">
+                {[
+                  { t: "Model transparency gap", icon: AlertTriangle, c: "#f59e0b" },
+                  { t: "Vendor risk re-score", icon: AlertTriangle, c: "#f59e0b" },
+                  { t: "Evidence pack ready", icon: CheckCircle2, c: "#10b981" },
+                ].map((row) => {
+                  const RowIcon = row.icon;
+                  return (
+                    <div
+                      key={row.t}
+                      className="flex items-center gap-2 rounded-lg border border-[var(--cv-border)] bg-[var(--cv-surface-strong)] px-3 py-2 text-[11px] text-[var(--cv-ink)]"
+                    >
+                      <RowIcon className="h-3.5 w-3.5 shrink-0" style={{ color: row.c }} />
+                      {row.t}
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="mt-auto inline-flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-[#2563eb] to-[#7c3aed] px-4 py-2.5 text-[13px] font-semibold text-white transition-opacity hover:opacity-90">
+                Review gaps
+                <ArrowRight className="h-3.5 w-3.5" />
+              </button>
+              <div className="flex items-center justify-center gap-1.5 text-[10px] text-[var(--cv-muted)]">
+                <Clock className="h-3 w-3" />
+                Updated just now
+              </div>
+            </motion.aside>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

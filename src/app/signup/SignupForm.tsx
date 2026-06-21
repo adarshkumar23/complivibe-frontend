@@ -6,15 +6,22 @@ import WaitlistForm from "../waitlist/WaitlistForm";
 
 export default function SignupForm() {
   return (
-    <div className="flex flex-col items-center gap-5 rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center text-white">
+    <div className="flex flex-col items-center gap-5 rounded-2xl border border-[var(--cv-border)] bg-[var(--cv-surface)] p-6 text-center">
       <div className="flex flex-col gap-2">
-        <p className="text-lg font-semibold">New registrations are currently closed.</p>
-        <p className="text-sm text-[#888]">To get early access, join our waitlist.</p>
+        <p className="text-lg font-semibold text-[var(--cv-ink)]">
+          New registrations are currently invite-only.
+        </p>
+        <p className="text-sm text-[var(--cv-muted)]">
+          Join the waitlist to get early access to the AI trust workspace.
+        </p>
       </div>
 
       <WaitlistForm />
 
-      <Link href="/book-demo" className="text-sm text-[#888] transition-colors hover:text-white">
+      <Link
+        href="/book-demo"
+        className="text-sm font-medium text-[#2563eb] transition-colors hover:opacity-80 dark:text-[#3b82f6]"
+      >
         Need a demo instead? Book here →
       </Link>
     </div>

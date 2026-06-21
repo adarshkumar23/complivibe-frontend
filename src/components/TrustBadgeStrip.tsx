@@ -2,17 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import { Flag, MapPin, Map, Award, BookOpen, Activity, Shield, Globe } from "lucide-react";
+import { ShieldCheck, FileCheck2, Archive, Activity, Globe, AlertTriangle } from "lucide-react";
 
 const badges = [
-  { icon: Flag, label: "EU AI Act", color: "#0070F3" },
-  { icon: MapPin, label: "India DPDP", color: "#00C48C" },
-  { icon: Map, label: "Colorado AI Act", color: "#7928CA" },
-  { icon: Award, label: "ISO 42001", color: "#00C48C" },
-  { icon: BookOpen, label: "NIST AI RMF", color: "#888888" },
-  { icon: Activity, label: "AI Monitoring", color: "#0070F3" },
-  { icon: Shield, label: "Evidence Vault", color: "#00C48C" },
-  { icon: Globe, label: "Trust Center", color: "#7928CA" },
+  { icon: ShieldCheck, label: "AI Governance", color: "#2563eb" },
+  { icon: FileCheck2, label: "Compliance Automation", color: "#7c3aed" },
+  { icon: Archive, label: "Evidence Vault", color: "#10b981" },
+  { icon: Activity, label: "Data Observability", color: "#06b6d4" },
+  { icon: Globe, label: "Trust Center", color: "#2563eb" },
+  { icon: AlertTriangle, label: "Risk Monitoring", color: "#f59e0b" },
 ];
 
 const marqueeBadges = [...badges, ...badges];
@@ -38,7 +36,7 @@ export default function TrustBadgeStrip() {
 
     controls.start({
       x: [0, -loopWidth],
-      transition: { duration: 30, ease: "linear", repeat: Infinity },
+      transition: { duration: 32, ease: "linear", repeat: Infinity },
     });
   }, [controls, loopWidth]);
 
@@ -47,24 +45,18 @@ export default function TrustBadgeStrip() {
 
     controls.start({
       x: [0, -loopWidth],
-      transition: { duration: 30, ease: "linear", repeat: Infinity },
+      transition: { duration: 32, ease: "linear", repeat: Infinity },
     });
   };
 
   return (
     <section
-      className="relative border-y border-white/[0.06] bg-[#050505] py-4 overflow-hidden"
+      className="relative overflow-hidden border-y border-[var(--cv-border)] bg-[var(--cv-bg)] py-5"
       onMouseEnter={() => controls.stop()}
       onMouseLeave={resume}
     >
-      <div
-        className="absolute left-0 inset-y-0 w-20 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to right, #050505, transparent)" }}
-      />
-      <div
-        className="absolute right-0 inset-y-0 w-20 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to left, #050505, transparent)" }}
-      />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[var(--cv-bg)] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[var(--cv-bg)] to-transparent" />
 
       <AnimatePresence initial={false}>
         <motion.div className="flex w-max items-center" animate={controls}>
@@ -75,7 +67,7 @@ export default function TrustBadgeStrip() {
               <div
                 key={`${badge.label}-${index}`}
                 ref={index === 0 ? badgeRef : undefined}
-                className="flex items-center gap-2 px-5 py-2 rounded-full mx-2 border border-white/[0.07] bg-white/[0.02] text-sm font-medium text-[#666] whitespace-nowrap cursor-default select-none hover:border-white/[0.14] hover:text-[#aaa] transition-all duration-200"
+                className="mx-2 flex select-none items-center gap-2 whitespace-nowrap rounded-full border border-[var(--cv-border)] bg-[var(--cv-surface)] px-5 py-2 text-sm font-medium text-[var(--cv-muted)] shadow-[var(--cv-shadow-soft)] backdrop-blur-sm transition-all duration-200 hover:border-[#2563eb]/25 hover:text-[var(--cv-ink)]"
               >
                 <Icon size={14} color={badge.color} />
                 {badge.label}

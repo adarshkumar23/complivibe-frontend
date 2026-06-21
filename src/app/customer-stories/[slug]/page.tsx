@@ -1,8 +1,9 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
-import { ArrowRight } from "lucide-react";
+import { AlertTriangle, Lock, CheckCircle2 } from "lucide-react";
+import PageShell from "@/components/PageShell";
+import PageHero from "@/components/PageHero";
+import PageSection from "@/components/PageSection";
+import PageCTA from "@/components/PageCTA";
 
 type StoryData = {
   title: string;
@@ -12,36 +13,37 @@ type StoryData = {
   outcome: string;
 };
 
+// Anonymized early use-case patterns — no named customers or quotes invented.
 const stories: Record<string, StoryData> = {
   "healthtech-annex-iv": {
-    title: "HealthTech pilot unblocked with Annex IV documentation",
+    title: "Health AI team prepares documentation for a hospital pilot",
     sector: "HealthTech",
     problem:
-      "A Bangalore-based clinical AI company was blocked from renewing a pilot with German hospitals because the procurement team requested Annex IV documentation.",
+      "A clinical AI team needed governance documentation and evidence before a hospital pilot could proceed.",
     blocker:
-      "The engineering team had no Annex IV-ready technical documentation package and legal support timelines were too slow for the procurement window.",
+      "Documentation and evidence were scattered, and review timelines were too slow for the pilot window.",
     outcome:
-      "CompliVibe generated all mandatory Annex IV sections and provided a procurement-ready packet in time for review.",
+      "CompliVibe centralized evidence and generated a review-ready documentation pack in time for the pilot.",
   },
   "fintech-dpdp-gdpr": {
-    title: "Fintech team aligned DPDP + GDPR obligations in one view",
+    title: "Fintech team unifies overlapping framework obligations",
     sector: "Fintech",
     problem:
-      "A Pune fintech API provider serving EU banks had to maintain separate compliance trackers for DPDP and GDPR with high manual overhead.",
+      "A fintech API provider maintained separate trackers for multiple data frameworks with heavy manual overhead.",
     blocker:
-      "The team had no reliable overlap mapping between frameworks, causing duplicated controls and hidden gaps.",
+      "Without overlap mapping between frameworks, controls were duplicated and gaps were hard to see.",
     outcome:
-      "CompliVibe mapped overlap and gap obligations into one dashboard with update tracking when either regulation changed.",
+      "CompliVibe mapped overlapping obligations to controls and evidence in one view with change tracking.",
   },
   "saas-annex-iii": {
-    title: "B2B SaaS classified Annex III risk before enterprise procurement",
+    title: "B2B SaaS maps AI risk before enterprise procurement",
     sector: "B2B SaaS",
     problem:
-      "A hiring SaaS company in Delhi was asked to classify AI risk level under Annex III before an EU enterprise procurement decision.",
+      "A SaaS company was asked to classify and document AI risk before an enterprise procurement decision.",
     blocker:
-      "The founders had no clear classification workflow and faced a short deadline.",
+      "The team had no clear classification workflow and a short response window.",
     outcome:
-      "CompliVibe produced a high-risk classification assessment and initial transparency documentation for procurement response.",
+      "CompliVibe produced a risk classification and transparency documentation for the procurement response.",
   },
 };
 
@@ -53,53 +55,64 @@ export function generateStaticParams() {
   return storySlugs.map((slug) => ({ slug }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const story = stories[slug];
+  if (!story) return {};
+  return {
+    title: `${story.title} | CompliVibe`,
+    description: story.problem,
+    alternates: { canonical: `https://complivibe.in/customer-stories/${slug}` },
+  };
+}
+
 export default async function StoryPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const story = stories[slug];
-
   if (!story) notFound();
 
+  const blocks = [
+    { icon: AlertTriangle, accent: "#f59e0b", label: "The challenge", body: story.problem },
+    { icon: Lock, accent: "#7c3aed", label: "What was blocking trust", body: story.blocker },
+    { icon: CheckCircle2, accent: "#10b981", label: "How CompliVibe helped", body: story.outcome },
+  ];
+
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Nav />
-      <main className="mx-auto max-w-[900px] px-6 py-24">
-        <div className="mb-4 inline-flex items-center rounded-full border border-white/[0.12] bg-white/[0.04] px-3 py-1 text-xs text-[#888]">
-          {story.sector}
+    <PageShell>
+      <PageHero
+        kicker={`Trust Story · ${story.sector}`}
+        title={story.title}
+        subtitle="An anonymized example of how AI-first teams use CompliVibe to turn scattered governance and evidence into customer-ready trust."
+        primary={{ label: "Book a Demo", href: "/book-demo" }}
+        secondary={{ label: "Start Trust Scan", href: "/score" }}
+      />
+
+      <PageSection>
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-3">
+          {blocks.map((b) => {
+            const Icon = b.icon;
+            return (
+              <div key={b.label} className="bento-card glass-highlight flex flex-col gap-3 p-6">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl border" style={{ backgroundColor: `${b.accent}14`, borderColor: `${b.accent}33` }}>
+                  <Icon className="h-5 w-5" style={{ color: b.accent }} />
+                </span>
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--cv-muted)]">{b.label}</h3>
+                <p className="text-sm leading-relaxed text-[var(--cv-ink)]">{b.body}</p>
+              </div>
+            );
+          })}
         </div>
-        <h1 className="mb-8 text-3xl font-bold leading-tight md:text-4xl">{story.title}</h1>
+        <p className="mx-auto mt-8 max-w-xl text-center text-[12px] text-[var(--cv-muted)]">
+          Example use-case pattern. Full named customer stories are coming soon.
+        </p>
+      </PageSection>
 
-        <section className="mb-8 rounded-2xl border border-white/[0.08] bg-[#0A0A0A] p-6">
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-[0.12em] text-[#666]">The situation</h2>
-          <p className="text-[#aaa] leading-relaxed">{story.problem}</p>
-        </section>
-
-        <section className="mb-8 rounded-2xl border border-white/[0.08] bg-[#0A0A0A] p-6">
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-[0.12em] text-[#666]">The blocker</h2>
-          <p className="text-[#aaa] leading-relaxed">{story.blocker}</p>
-        </section>
-
-        <section className="mb-10 rounded-2xl border border-compliance-green/20 bg-compliance-green/5 p-6">
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-[0.12em] text-compliance-green">With CompliVibe</h2>
-          <p className="text-[#ddd] leading-relaxed">{story.outcome}</p>
-        </section>
-
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/book-demo"
-            className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-black transition-colors hover:bg-[#ededed]"
-          >
-            Book a demo
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/customer-stories"
-            className="inline-flex h-11 items-center rounded-full border border-white/[0.15] bg-white/[0.04] px-6 text-sm font-semibold text-white transition-all hover:bg-white/[0.08]"
-          >
-            Back to stories
-          </Link>
-        </div>
-      </main>
-      <Footer />
-    </div>
+      <PageCTA
+        title="Build your own trust story."
+        subtitle="Start with one AI system and expand into the operating layer for governance, evidence, and trust."
+        primary={{ label: "Book a Demo", href: "/book-demo" }}
+        secondary={{ label: "Talk to the team", href: "/contact" }}
+      />
+    </PageShell>
   );
 }

@@ -13,18 +13,19 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://complivibe.in"),
-  title: "CompliVibe — EU AI Act + India DPDP Compliance Platform",
+  title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
   description:
-    "One platform for EU AI Act and India DPDP compliance. Auto-classify AI systems, generate Annex IV docs, track obligations, and prove readiness — in 48 hours, not 48 weeks.",
+    "AI governance, compliance automation, evidence management, risk monitoring, and data observability in one trust infrastructure layer for modern companies.",
   keywords: [
-    "EU AI Act",
-    "India DPDP",
-    "AI compliance",
-    "Annex IV",
-    "regulatory compliance",
+    "AI Trust Infrastructure",
+    "AI governance",
+    "compliance automation",
+    "evidence management",
+    "risk monitoring",
+    "data observability",
+    "model oversight",
+    "vendor risk",
     "CompliVibe",
-    "GDPR",
-    "risk classification",
   ],
   authors: [{ name: "CompliVibe", url: "https://complivibe.in" }],
   creator: "CompliVibe",
@@ -47,20 +48,20 @@ export const metadata: Metadata = {
     apple: "/favicon.svg",
   },
   openGraph: {
-    title: "CompliVibe — EU AI Act + India DPDP Compliance Platform",
+    title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
     description:
-      "One platform for EU AI Act and India DPDP compliance. Auto-classify, generate docs, prove readiness.",
+      "AI governance, compliance automation, evidence management, risk monitoring, and data observability in one trust infrastructure layer for modern companies.",
     type: "website",
     siteName: "CompliVibe",
     url: "https://complivibe.in",
     locale: "en_IN",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "CompliVibe — AI Compliance Platform" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "CompliVibe — AI Trust Infrastructure" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CompliVibe — Compliance Platform",
+    title: "CompliVibe — AI Trust Infrastructure",
     description:
-      "EU AI Act + India DPDP. One platform. Zero blocked deals.",
+      "AI governance, compliance automation, evidence, risk monitoring, and data observability in one trust layer.",
     images: ["/og-image.png"],
     site: "@complivibe",
     creator: "@complivibe",
@@ -79,10 +80,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(GeistSans.variable, GeistMono.variable, "font-sans dark")}
+      className={cn(GeistSans.variable, GeistMono.variable, "font-sans")}
       suppressHydrationWarning
     >
       <head>
+        {/* Theme bootstrap — light by default; applies stored choice before paint to avoid FOUC */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('cv-theme');if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`,
+          }}
+        />
         <script defer data-domain="complivibe.in" src="https://analytics.adarshkumar.app/js/script.outbound-links.js"></script>
         <link rel="manifest" href="/site.webmanifest" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -91,7 +98,7 @@ export default function RootLayout({
           name: "CompliVibe",
           url: "https://complivibe.in",
           logo: "https://complivibe.in/favicon.svg",
-          description: "AI-powered compliance platform for EU AI Act and India DPDP regulations.",
+          description: "AI Trust Infrastructure for AI-first companies — unifying AI governance, compliance automation, evidence management, risk monitoring, model and vendor oversight, trust reporting, and data observability in one operating layer.",
           foundingDate: "2024",
           areaServed: ["IN", "EU"],
           sameAs: [
@@ -119,11 +126,11 @@ export default function RootLayout({
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web",
           url: "https://complivibe.in",
-          description: "AI compliance management platform for EU AI Act and India DPDP.",
+          description: "AI Trust Infrastructure platform unifying AI governance, compliance automation, evidence management, risk monitoring, and data observability.",
           offers: { "@type": "Offer", priceCurrency: "INR", price: "24999" },
         })}} />
       </head>
-      <body className="min-h-screen bg-black text-white font-sans antialiased">
+      <body className="cv-page font-sans antialiased">
         <ScrollProgress />
         {children}
       </body>

@@ -1,70 +1,56 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
-import { FileText, ArrowRight, MessageSquare } from "lucide-react";
+import PageShell from "@/components/PageShell";
+import PageHero from "@/components/PageHero";
+import PageSection from "@/components/PageSection";
+import PageBentoCard from "@/components/PageBentoCard";
+import PageCTA from "@/components/PageCTA";
 
 export const metadata: Metadata = {
   title: "Documentation | CompliVibe",
-  description: "CompliVibe API documentation and integration guides for EU AI Act and India DPDP compliance automation.",
+  description:
+    "CompliVibe documentation — quickstart, platform concepts, AI system inventory, evidence vault, trust graph, integrations, and reports.",
   alternates: { canonical: "https://complivibe.in/docs" },
-  openGraph: {
-    title: "Documentation | CompliVibe",
-    description: "Full API docs and integration guides for CompliVibe compliance automation.",
-    url: "https://complivibe.in/docs",
-    images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Documentation | CompliVibe",
-    description: "Full API docs and integration guides for CompliVibe compliance automation.",
-    images: ["https://complivibe.in/og-placeholder.png"],
-  },
 };
+
+const docs = [
+  { icon: "Rocket", accent: "#2563eb", title: "Quickstart", body: "Map your first AI system and run a trust scan in minutes." },
+  { icon: "BookOpen", accent: "#7c3aed", title: "Platform concepts", body: "How systems, risks, controls, evidence, and reports connect." },
+  { icon: "Boxes", accent: "#2563eb", title: "AI system inventory", body: "Register models, datasets, vendors, owners, and use cases." },
+  { icon: "Archive", accent: "#10b981", title: "Evidence vault", body: "Collect and organize audit-ready proof from your tools." },
+  { icon: "Network", accent: "#7c3aed", title: "Trust graph", body: "Trace every AI decision back to controls and evidence." },
+  { icon: "Plug", accent: "#06b6d4", title: "Integrations", body: "Connect the tools where your AI already runs." },
+  { icon: "FileBarChart", accent: "#f59e0b", title: "Reports", body: "Generate customer-ready and auditor-ready trust reports." },
+];
 
 export default function DocsPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Nav />
-      <main className="mx-auto max-w-[800px] px-6 py-32 flex flex-col items-center text-center gap-8">
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03]">
-          <FileText className="h-7 w-7 text-compliance-green" />
-        </div>
+    <PageShell>
+      <PageHero
+        kicker="Documentation"
+        title="CompliVibe"
+        highlight="documentation."
+        subtitle="Everything you need to set up your AI trust layer — from quickstart to platform concepts, integrations, and reporting."
+        primary={{ label: "Book a Demo", href: "/book-demo" }}
+        secondary={{ label: "Start Trust Scan", href: "/score" }}
+      />
 
-        <div className="flex flex-col gap-3">
-          <h1 className="text-display-lg text-white">Documentation</h1>
-          <p className="text-lg text-[#888] max-w-[500px] leading-relaxed">
-            Full API docs and integration guides are coming. In the meantime, explore the live API reference.
-          </p>
+      <PageSection kicker="Guides" title="Start here">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {docs.map((d) => (
+            <PageBentoCard key={d.title} icon={d.icon} accent={d.accent} title={d.title} body={d.body} />
+          ))}
         </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="http://localhost:8000/docs"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-black hover:bg-[#ededed] transition-colors"
-          >
-            View API Reference
-            <ArrowRight className="h-4 w-4" />
-          </a>
-          <Link
-            href="/contact"
-            className="inline-flex h-11 items-center gap-2 rounded-full border border-white/[0.15] bg-white/[0.04] px-6 text-sm font-semibold text-white hover:bg-white/[0.08] transition-all"
-          >
-            <MessageSquare className="h-4 w-4" />
-            Contact us
-          </Link>
-        </div>
-
-        <p className="text-xs text-[#444] mt-4">
-          Need immediate help?{" "}
-          <a href="mailto:contact@complivibe.in" className="text-compliance-green hover:underline">
-            contact@complivibe.in
-          </a>
+        <p className="mx-auto mt-10 max-w-xl text-center text-sm text-[var(--cv-muted)]">
+          Full developer documentation is expanding. Need something specific? Reach out and we’ll point you to it.
         </p>
-      </main>
-      <Footer />
-    </div>
+      </PageSection>
+
+      <PageCTA
+        title="See the platform in action."
+        subtitle="Book a walkthrough of governance, evidence, observability, and trust reporting."
+        primary={{ label: "Book a Demo", href: "/book-demo" }}
+        secondary={{ label: "Contact us", href: "/contact" }}
+      />
+    </PageShell>
   );
 }

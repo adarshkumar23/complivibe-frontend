@@ -1,92 +1,114 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { CheckCircle2 } from "lucide-react";
+import { Boxes, ShieldCheck, Archive, Activity, FileBarChart } from "lucide-react";
 import BookDemoForm from "./BookDemoForm";
 
 export const metadata: Metadata = {
   title: "Book a Demo | CompliVibe",
-  description: "Book a 30-minute CompliVibe demo to see EU AI Act Annex III classification, Annex IV document generation, and your DPDP obligation map.",
+  description:
+    "See CompliVibe in action — a short walkthrough of AI governance, evidence automation, data observability, and trust reporting.",
   alternates: { canonical: "https://complivibe.in/book-demo" },
   openGraph: {
     title: "Book a Demo | CompliVibe",
-    description: "30 minutes. No sales pitch. See your EU AI Act risk classification and DPDP obligation map live.",
+    description:
+      "See CompliVibe in action — a short walkthrough of AI governance, evidence automation, data observability, and trust reporting.",
     url: "https://complivibe.in/book-demo",
     images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Book a Demo | CompliVibe",
-    description: "30 minutes. No sales pitch. See your EU AI Act risk classification and DPDP obligation map live.",
+    description:
+      "See CompliVibe in action — a short walkthrough of AI governance, evidence automation, data observability, and trust reporting.",
     images: ["https://complivibe.in/og-placeholder.png"],
   },
 };
 
-const reasons = [
-  "See your AI system classified against Annex III in real time",
-  "Generate a sample Annex IV Technical Documentation",
-  "Get your cross-mapped EU + DPDP obligation checklist",
-  "30 minutes. No sales pitch. Just your compliance picture.",
+const seeItems = [
+  { icon: Boxes, accent: "#2563eb", text: "Map AI systems and owners" },
+  { icon: ShieldCheck, accent: "#7c3aed", text: "Review risks and controls" },
+  { icon: Archive, accent: "#10b981", text: "See evidence automation" },
+  { icon: Activity, accent: "#06b6d4", text: "Explore observability signals" },
+  { icon: FileBarChart, accent: "#f59e0b", text: "Generate trust reports" },
 ];
 
 export default function BookDemoPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="cv-page">
       <Nav />
-      <main className="mx-auto max-w-[1100px] px-6 py-24">
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-urgency/20 bg-urgency/5 px-4 py-1.5 text-xs text-urgency font-medium mb-6">
-            EU AI Act enforcement: August 2, 2026
-          </div>
-          <h1
-            className="text-white mb-4"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: "1.1", fontWeight: "700", letterSpacing: "-0.03em" }}
-          >
-            See your compliance picture in 30 minutes
-          </h1>
-          <p className="text-lg text-[#888] max-w-[560px] mx-auto">
-            Real classification. Real documentation. No fluff.
-          </p>
-        </div>
-
-        {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Left: Why book */}
-          <div>
-            <h2 className="text-white font-semibold text-xl mb-6">What you&apos;ll get</h2>
-            <ul className="flex flex-col gap-5">
-              {reasons.map((reason) => (
-                <li key={reason} className="flex items-start gap-4">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-compliance-green mt-0.5" />
-                  <span className="text-[#888] leading-relaxed">{reason}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-10 rounded-2xl border border-white/[0.08] bg-[#0A0A0A] p-6">
-              <div className="text-xs uppercase tracking-[0.12em] text-[#555] mb-3">The stakes</div>
-              <p className="text-sm text-[#888] leading-relaxed">
-                EU AI Act enforcement begins{" "}
-                <span className="text-urgency font-semibold">August 2, 2026</span>. High-risk AI fines: up to{" "}
-                <span className="text-urgency font-semibold">€30M or 6% of global annual turnover</span>. Indian IT + SaaS exports to EU:{" "}
-                <span className="text-white font-semibold">$50B+ market</span>.
+      <main>
+        <section className="aurora-bg relative overflow-hidden pt-32 pb-12 md:pt-40 md:pb-16">
+          <div className="cv-container">
+            <div className="mx-auto max-w-3xl text-center">
+              <span className="section-kicker mb-5">Book a Demo</span>
+              <h1
+                className="font-semibold tracking-tight text-[var(--cv-ink)]"
+                style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", letterSpacing: "-0.04em", lineHeight: 1.07 }}
+              >
+                See CompliVibe{" "}
+                <span className="text-gradient-trust">in action</span>.
+              </h1>
+              <p className="mx-auto mt-6 max-w-2xl text-[1rem] leading-relaxed text-[var(--cv-muted)] md:text-[1.125rem]">
+                A short walkthrough of AI governance, evidence automation, data observability, and
+                trust reporting.
               </p>
             </div>
           </div>
+        </section>
 
-          {/* Right: Form */}
-          <div className="rounded-2xl border border-white/[0.08] bg-[#0A0A0A] p-8">
-            <h2 className="text-white font-semibold text-xl mb-6">Book your demo</h2>
-            <BookDemoForm />
-            <p className="mt-6 text-center text-sm text-[#555]">
-              Prefer email?{" "}
-              <a href="mailto:contact@complivibe.in" className="text-compliance-green hover:underline">
-                contact@complivibe.in
-              </a>
-            </p>
+        <section className="overflow-hidden pb-24 md:pb-32">
+          <div className="cv-container">
+            <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8">
+              {/* Left: what you'll see */}
+              <div className="liquid-card glass-highlight p-7 md:p-8 lg:sticky lg:top-28">
+                <h2 className="text-lg font-bold tracking-tight text-[var(--cv-ink)]">
+                  What you&apos;ll see
+                </h2>
+                <ul className="mt-5 flex flex-col gap-4">
+                  {seeItems.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <li key={item.text} className="flex items-start gap-3.5">
+                        <span
+                          className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border"
+                          style={{ backgroundColor: `${item.accent}14`, borderColor: `${item.accent}33` }}
+                        >
+                          <Icon className="h-[18px] w-[18px]" style={{ color: item.accent }} />
+                        </span>
+                        <span className="pt-1 text-sm leading-relaxed text-[var(--cv-muted)]">
+                          {item.text}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+
+              {/* Right: form */}
+              <div className="liquid-card glass-highlight p-7 md:p-8">
+                <h2 className="text-lg font-bold tracking-tight text-[var(--cv-ink)]">
+                  Book your AI trust walkthrough.
+                </h2>
+                <p className="mt-1.5 text-sm leading-relaxed text-[var(--cv-muted)]">
+                  Tell us about your AI systems and we&apos;ll tailor the session.
+                </p>
+                <div className="mt-6">
+                  <BookDemoForm />
+                </div>
+                <p className="mt-6 text-center text-sm text-[var(--cv-muted)]">
+                  Prefer email?{" "}
+                  <a
+                    href="mailto:contact@complivibe.in"
+                    className="font-medium text-[#2563eb] transition-colors hover:opacity-80 dark:text-[#3b82f6]"
+                  >
+                    contact@complivibe.in
+                  </a>
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
       </main>
       <Footer />
     </div>

@@ -56,7 +56,7 @@ We do not use third-party processors for advertising purposes. A full list of su
     title: "6. Contact",
     content: `For privacy-related queries, requests, or complaints, contact:
 
-CompliVibe (operated by ValersAI Connect Pvt. Ltd.)
+CompliVibe (operated by CompliVibe Private Limited)
 Email: legal@complivibe.in
 Location: Gurugram, Haryana, India
 
@@ -78,7 +78,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="text-[#888] leading-relaxed">
-            This policy explains how CompliVibe (operated by ValersAI Connect Pvt. Ltd.) collects, uses, and protects your personal data. We process data in compliance with India&apos;s Digital Personal Data Protection Act 2023 (DPDP) and the EU General Data Protection Regulation (GDPR).
+            This policy explains how CompliVibe (operated by CompliVibe Private Limited) collects, uses, and protects your personal data. We process data in compliance with India&apos;s Digital Personal Data Protection Act 2023 (DPDP) and the EU General Data Protection Regulation (GDPR).
           </p>
         </div>
 

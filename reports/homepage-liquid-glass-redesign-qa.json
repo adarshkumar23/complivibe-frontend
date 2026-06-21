@@ -1,0 +1,84 @@
+{
+  "report": "CompliVibe Homepage — Liquid-Glass Redesign QA",
+  "date": "2026-06-21",
+  "verdict": "PASS",
+  "positioning": "AI Trust Infrastructure (AI governance + compliance automation + data observability)",
+  "results": {
+    "lightMode": "PASS",
+    "darkMode": "PASS",
+    "mobile": "PASS",
+    "build": "PASS",
+    "lint": "PASS",
+    "typecheck": "PASS"
+  },
+  "checks": {
+    "positioningConsistency": {
+      "status": "PASS",
+      "legacyCopyFound": false,
+      "falsePositives": [".fine-grid CSS utility (Hero)", "code comment in ROICalculator.tsx"],
+      "frameworksAsCoverageOnly": true
+    },
+    "visualConsistency": {
+      "status": "PASS",
+      "pureBlackSections": false,
+      "heavyBlackShadows": false,
+      "standardSectionPadding": "py-24 md:py-32",
+      "tokensUsed": ["liquid-card", "bento-card", "liquid-panel", "glass-highlight", "aurora-bg", "cv-*"]
+    },
+    "navbar": { "status": "PASS", "themeToggleDesktop": true, "themeToggleMobile": true, "loginPresent": true, "bookDemoPresent": true, "brokenPaths": false, "keyboardFocus": true },
+    "hero": { "status": "PASS", "chipsWrap": true, "ctasWrap": true, "mobileResponsive": true, "darkReadable": true },
+    "bentoAndGraph": { "status": "PASS", "visualsClipped": false, "graphResponsive": true, "reducedMotionGated": true },
+    "midPage": { "status": "PASS", "trustLayersTabs": true, "productPreviewTabs": true, "fakeTestimonials": false, "fakeLogos": false },
+    "pricingAndRoi": { "status": "PASS", "pricesPreserved": true, "currencyTogglePreserved": true, "addonPricesPreserved": true, "roiFearBased": false, "exaggeratedClaims": false },
+    "darkMode": { "status": "PASS", "pureBlack": false, "glassVisible": true, "contrastIssues": false },
+    "mobile": { "status": "PASS", "widthsTested": [360, 390, 768, 1024], "overflow": false, "clippedCards": false },
+    "accessibilityPerformance": { "status": "PASS", "focusVisible": true, "themeToggleAriaLabel": true, "infiniteAnimationsGated": true, "consoleNoise": false, "unusedImports": false }
+  },
+  "build": { "command": "npm run build", "compiled": true, "staticPages": "65/65", "durationSeconds": 23 },
+  "lint": { "command": "npm run lint", "warnings": 0, "errors": 0, "note": "next lint deprecation notice is informational only" },
+  "typecheck": { "command": "npx tsc --noEmit", "errors": 0 },
+  "filesChangedInPolishPass": [
+    "src/components/Pricing.tsx"
+  ],
+  "polishFixes": [
+    "Added scroll-mt-24 to #pricing section so the heading clears the floating navbar on anchor navigation"
+  ],
+  "remainingNotes": [
+    "next lint prints a Next.js 16 deprecation notice (informational only)",
+    "Adjacent aurora-bg sections (SolutionSection -> DemoVideo) intentional; aurora is low-opacity",
+    "Some navbar dropdown links point to /platform as placeholders pending dedicated sub-pages"
+  ],
+  "postPricingRefinementQA": {
+    "date": "2026-06-21",
+    "verdict": "PASS",
+    "scope": "Verification after Pricing visual refinement (badges, best-for, mini visuals, premium currency control, Extend-your-trust-layer add-ons, Govern/Evidence/Prove value props)",
+    "pricingVisual": {
+      "status": "PASS",
+      "cardsAligned": true,
+      "recommendedCardOverflow": false,
+      "floatingPillClipped": false,
+      "currencyToggleAccessible": true,
+      "ctaButtonsBalanced": true,
+      "featureListCramped": false,
+      "addonsConnected": true,
+      "valuePropsIntentional": true,
+      "mobileStackingClean": true
+    },
+    "pricingLogic": {
+      "status": "PASS",
+      "currencyToggleWorks": true,
+      "pricesUnchanged": true,
+      "addonPricesUnchanged": true,
+      "enterpriseCustomRendering": true,
+      "ctaHrefsPreserved": ["/signup?plan=starter", "/signup?plan=growth", "/contact"]
+    },
+    "darkMode": { "status": "PASS", "recommendedGlowVisible": true, "enterpriseCtaContrast": true, "pureBlack": false },
+    "mobile": { "status": "PASS", "widthsTested": [360, 390, 768, 1024], "overflow": false, "clipping": false },
+    "fullHomepageSmoke": { "status": "PASS", "regressions": false },
+    "build": { "compiled": true, "staticPages": "65/65" },
+    "lint": { "warnings": 0, "errors": 0 },
+    "typecheck": { "errors": 0 },
+    "filesChanged": [],
+    "remainingWarnings": ["next lint Next.js 16 deprecation notice (informational only)"]
+  }
+}

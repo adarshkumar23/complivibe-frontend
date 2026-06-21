@@ -7,34 +7,32 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Pricing | CompliVibe",
-  description: "CompliVibe pricing plans for Indian AI startups, mid-market, and enterprise — EU AI Act and India DPDP compliance infrastructure starting at ₹24,999/month.",
+  description:
+    "One platform for AI governance, evidence, compliance, and observability — priced for pilots, built for enterprise rollout. Plans for startups, mid-market, and enterprise AI teams.",
   alternates: { canonical: "https://complivibe.in/pricing" },
   openGraph: {
     title: "Pricing | CompliVibe",
-    description: "EU AI Act + India DPDP compliance infrastructure at startup, mid-market, and enterprise pricing.",
+    description:
+      "AI Trust Infrastructure priced for pilots, built for enterprise rollout — governance, evidence, compliance, and observability in one platform.",
     url: "https://complivibe.in/pricing",
     images: [{ url: "https://complivibe.in/og-placeholder.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pricing | CompliVibe",
-    description: "EU AI Act + India DPDP compliance infrastructure at startup, mid-market, and enterprise pricing.",
+    description:
+      "AI Trust Infrastructure priced for pilots, built for enterprise rollout — governance, evidence, compliance, and observability in one platform.",
     images: ["https://complivibe.in/og-placeholder.png"],
   },
 };
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="cv-page">
       <Nav />
-      <main>
-        <div className="pt-24 pb-8 flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-compliance-green/20 bg-compliance-green/5 px-4 py-1.5 text-xs text-compliance-green font-medium">
-            Calculate your fine exposure first.
-          </div>
-        </div>
-        <ROICalculator />
+      <main className="pt-16">
         <Pricing />
+        <ROICalculator />
         <CTA />
       </main>
       <Footer />

@@ -1,507 +1,471 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { 
-  Shield, 
-  FileText, 
-  AlertTriangle, 
-  Globe2, 
-  ShieldCheck, 
-  Gauge, 
-  CloudLightning, 
-  Scale, 
-  ChevronRight,
+import React, { useState } from "react";
+import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
+import {
+  ShieldCheck,
+  FileCheck2,
+  Activity,
+  Users,
+  GitBranch,
   CheckCircle2,
-  Circle,
-  Loader2
+  AlertTriangle,
+  Layers,
+  Gauge,
+  Workflow,
+  LineChart,
+  Boxes,
+  type LucideIcon,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
-const featureGroups = [
-  {
-    eyebrow: "AI CLASSIFICATION ENGINE",
-    eyebrowColor: "#0070F3",
-    headline: "Know your risk tier in minutes. Not months.",
-    body: "CompliVibe maps your AI systems to EU AI Act Annex III and India DPDP simultaneously. One input, dual compliance profile, zero legal overhead.",
-    cta: { label: "See how classification works", href: "/platform" },
-    features: [
-      { icon: Shield, label: "Risk Classification", desc: "AUTO / HIGH / LIMITED / MINIMAL" },
-      { icon: Scale, label: "Cross-Regulation Mapping", desc: "EU + India obligations aligned" },
-      { icon: Globe2, label: "Dual Jurisdiction", desc: "One profile, two frameworks" },
-    ],
-    visual: "classify",
-    flip: false,
-  },
-  {
-    eyebrow: "DOCUMENTATION ENGINE",
-    eyebrowColor: "#00C48C",
-    headline: "Annex IV in 48 hours. Not 48 weeks.",
-    body: "Stop manually writing governance documentation. CompliVibe generates all 11 Annex IV sections grounded in actual regulation text — updated automatically when regulations change.",
-    cta: { label: "Try the document generator", href: "/platform#generator" },
-    features: [
-      { icon: FileText, label: "Full Annex IV Coverage", desc: "All 11 mandatory sections, Article 11 compliant" },
-      { icon: CloudLightning, label: "48-Hour Updates", desc: "Regulations change, your docs change automatically" },
-      { icon: Gauge, label: "PDF Export", desc: "Auditor-preferred format, one click" },
-    ],
-    visual: "generate",
-    flip: true,
-  },
-  {
-    eyebrow: "RISK INTELLIGENCE",
-    eyebrowColor: "#FF3B3B",
-    headline: "See your fine exposure before regulators do.",
-    body: "Calculate maximum penalty across EU and Indian jurisdictions. Know your €35M or ₹250Cr exposure before it becomes a headline.",
-    cta: { label: "Calculate Exposure", href: "/score" },
-    features: [
-      { icon: AlertTriangle, label: "Fine Calculator", desc: "Real-time exposure by jurisdiction" },
-      { icon: Shield, label: "Gap Analysis", desc: "Missing obligations flagged automatically" },
-      { icon: Globe2, label: "EU Export Pack", desc: "Compliance docs for EU market entry" },
-    ],
-    visual: "protect",
-    flip: false,
-  },
-  {
-    eyebrow: "EVIDENCE INFRASTRUCTURE",
-    eyebrowColor: "#7928CA",
-    headline: "Every action logged. Tamper-proof.",
-    body: "Hash-chained audit trails mean every compliance action has an immutable record. When auditors arrive, your evidence package is already complete.",
-    cta: { label: "See the evidence vault", href: "/platform#audit" },
-    features: [
-      { icon: ShieldCheck, label: "Hash-Chained Logs", desc: "Tamper-proof, timestamped, immutable" },
-      { icon: Gauge, label: "Readiness Score", desc: "Real-time compliance percentage" },
-      { icon: FileText, label: "Export Anywhere", desc: "PDF, JSON, CSV for any audit format" },
-    ],
-    visual: "audit",
-    flip: true,
-  },
-];
+/* ------------------------------------------------------------------ */
+/*  Accent system (maps to global --cv tokens)                         */
+/* ------------------------------------------------------------------ */
+type Accent = "blue" | "purple" | "cyan";
 
-function VisualChrome({ title, children }: { title: string; children: React.ReactNode }) {
+const accent: Record<
+  Accent,
+  { text: string; soft: string; ring: string; dot: string; grad: string }
+> = {
+  blue: {
+    text: "text-[#2563eb] dark:text-[#3b82f6]",
+    soft: "bg-[#2563eb]/10 dark:bg-[#3b82f6]/15",
+    ring: "ring-[#2563eb]/30 dark:ring-[#3b82f6]/40",
+    dot: "bg-[#2563eb] dark:bg-[#3b82f6]",
+    grad: "from-[#2563eb] to-[#06b6d4]",
+  },
+  purple: {
+    text: "text-[#7c3aed] dark:text-[#a78bfa]",
+    soft: "bg-[#7c3aed]/10 dark:bg-[#a78bfa]/15",
+    ring: "ring-[#7c3aed]/30 dark:ring-[#a78bfa]/40",
+    dot: "bg-[#7c3aed] dark:bg-[#a78bfa]",
+    grad: "from-[#7c3aed] to-[#2563eb]",
+  },
+  cyan: {
+    text: "text-[#0891b2] dark:text-[#22d3ee]",
+    soft: "bg-[#06b6d4]/10 dark:bg-[#22d3ee]/15",
+    ring: "ring-[#06b6d4]/30 dark:ring-[#22d3ee]/40",
+    dot: "bg-[#06b6d4] dark:bg-[#22d3ee]",
+    grad: "from-[#06b6d4] to-[#10b981]",
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/*  Embedded visuals                                                   */
+/* ------------------------------------------------------------------ */
+
+function VisualShell({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="relative rounded-2xl overflow-hidden bg-[#080808] border border-white/[0.10] shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.5)]">
-      <div className="h-9 bg-[#0F0F0F] border-b border-white/[0.07] flex items-center px-4 gap-2">
+    <div className="liquid-card glass-highlight overflow-hidden">
+      <div className="flex items-center gap-2 border-b border-[var(--cv-border)] px-4 py-3">
         <div className="flex gap-1.5">
-          <div className="w-2 h-2 rounded-full bg-[#FF5F56]" />
-          <div className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
-          <div className="w-2 h-2 rounded-full bg-[#27C93F]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]/60" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#f59e0b]/60" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#10b981]/60" />
         </div>
-        <span className="text-[10px] font-mono text-[#333] ml-2">{title}</span>
+        <span className="ml-1 font-mono text-[11px] text-[var(--cv-muted)]">{title}</span>
+        <span className="ml-auto inline-flex items-center gap-1.5 text-[10px] font-medium text-[var(--cv-muted)]">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#10b981]" />
+          live
+        </span>
       </div>
-      {children}
+      <div className="p-4">{children}</div>
     </div>
   );
 }
 
-function ClassifyVisual() {
-  return (
-    <VisualChrome title="classification-engine.ts">
-      <div className="p-5 space-y-4">
-        <div className="rounded-xl bg-[#0D0D0D] border border-white/[0.07] p-4">
-          <div className="text-[9px] uppercase tracking-widest text-[#444] mb-3">AI System Input</div>
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-[11px] text-[#555]">System name</span>
-              <span className="text-[11px] font-mono text-[#888]">customer-credit-ai-v2</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[11px] text-[#555]">Industry</span>
-              <span className="text-[11px] font-mono text-[#888]">Financial Services</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[11px] text-[#555]">Data processed</span>
-              <span className="text-[11px] font-mono text-[#888]">Personal financial data</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 py-2">
-          <motion.div animate={{ x: [-4, 0, -4] }} transition={{ duration: 1.5, repeat: Infinity }}>
-            <ChevronRight size={12} className="text-[#0070F3]" />
-          </motion.div>
-          <span className="text-[11px] text-[#0070F3]">Analyzing against 47 regulations...</span>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          {/* EU AI Act Card */}
-          <div className="rounded-xl bg-[#0D0D0D] border border-[#FF3B3B]/30 p-3 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FF3B3B]/40 to-transparent" />
-            <span className="text-lg block mb-1">🇪🇺</span>
-            <div className="text-[9px] uppercase tracking-widest text-[#444]">EU AI Act</div>
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-[#FF3B3B]/10 border border-[#FF3B3B]/20 px-2 py-0.5 mt-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#FF3B3B]" />
-              <span className="text-[10px] font-bold text-[#FF3B3B]">HIGH RISK</span>
-            </div>
-            <div className="space-y-1 mt-2">
-              <div className="text-[9px] text-[#444]">Annex III match</div>
-              <div className="text-[9px] text-[#00C48C]">✓ 47 obligations mapped</div>
-              <div className="text-[9px] text-[#00C48C]">✓ Annex IV required</div>
-            </div>
-          </div>
-
-          {/* India DPDP Card */}
-          <div className="rounded-xl bg-[#0D0D0D] border border-[#F5A623]/30 p-3 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F5A623]/40 to-transparent" />
-            <span className="text-lg block mb-1">🇮🇳</span>
-            <div className="text-[9px] uppercase tracking-widest text-[#444]">India DPDP</div>
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-[#F5A623]/10 border border-[#F5A623]/20 px-2 py-0.5 mt-1">
-              <span className="text-[10px] font-bold text-[#F5A623]">SECTION 4 SCOPE</span>
-            </div>
-            <div className="space-y-1 mt-2">
-              <div className="text-[9px] text-[#444]">Personal data flag</div>
-              <div className="text-[9px] text-[#00C48C]">✓ DPO assignment required</div>
-              <div className="text-[9px] text-[#00C48C]">✓ Consent framework needed</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#00C48C] animate-pulse" />
-            <span className="text-[10px] text-[#555]">Classification complete</span>
-          </div>
-          <span className="text-[10px] font-mono text-[#333]">2.3s</span>
-        </div>
-      </div>
-    </VisualChrome>
-  );
-}
-
-function GenerateVisual() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.3 });
-
-  return (
-    <VisualChrome title="annex-iv-generator.ts">
-      <div ref={ref} className="p-5">
-        <div className="rounded-xl bg-[#0D0D0D] border border-[#0070F3]/20 p-4 mb-4">
-          <div className="flex justify-between items-center mb-3">
-            <div className="flex items-center gap-2">
-              <FileText size={12} className="text-[#0070F3]" />
-              <span className="text-[11px] font-semibold text-white">Annex IV — Customer Credit AI v2</span>
-            </div>
-            <div className="inline-flex items-center gap-1 rounded-full bg-[#0070F3]/10 border border-[#0070F3]/20 px-2 py-0.5">
-              <span className="text-[9px] text-[#0070F3]">GENERATING</span>
-            </div>
-          </div>
-
-          <div className="w-full h-1.5 rounded-full bg-[#111] mb-2">
-            <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-[#0070F3] to-[#00C48C]"
-              initial={{ width: "0%" }}
-              animate={inView ? { width: "72%" } : { width: "0%" }}
-              transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
-            />
-          </div>
-
-          <div className="flex justify-between text-[9px] text-[#333]">
-            <span>§5 of §11 complete</span>
-            <span>2,847 words generated</span>
-            <span>~12 min remaining</span>
-          </div>
-        </div>
-
-        <div className="space-y-1.5">
-          {[
-            { id: "1", title: "System Description", status: "complete" },
-            { id: "2", title: "Design Specifications", status: "complete" },
-            { id: "3", title: "Development Process", status: "complete" },
-            { id: "4", title: "Monitoring & Control", status: "complete" },
-            { id: "5", title: "Risk Management", status: "generating" },
-            { id: "6", title: "Changes & Updates", status: "pending" },
-            { id: "7", title: "Training Data", status: "pending" },
-          ].map((item) => (
-            <div key={item.id} className="flex items-center gap-2.5 text-[10px]">
-              {item.status === "complete" ? (
-                <CheckCircle2 size={10} className="text-[#00C48C]" />
-              ) : item.status === "generating" ? (
-                <div className="w-2.5 h-2.5 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0070F3] animate-pulse" />
-                </div>
-              ) : (
-                <Circle size={10} className="text-[#333]" />
-              )}
-              
-              {item.status === "generating" ? (
-                <div className="flex items-center">
-                  <span className="text-[#0070F3]">§{item.id} {item.title}</span>
-                  <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ duration: 0.8, repeat: Infinity }} className="text-[#0070F3] font-mono ml-0.5">|</motion.span>
-                  <span className="text-[9px] text-[#0070F3]/60 ml-1">generating...</span>
-                </div>
-              ) : (
-                <span className={item.status === "complete" ? "text-[#555]" : "text-[#333]"}>§{item.id} {item.title}</span>
-              )}
-            </div>
-          ))}
-          <div className="text-[9px] text-[#222] pl-6">4 more sections queued</div>
-        </div>
-
-        <div className="flex items-center justify-between pt-3 mt-4 border-t border-white/[0.06]">
-          <div className="flex items-center gap-2">
-            <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
-              <Loader2 size={11} className="text-[#0070F3]" />
-            </motion.div>
-            <span className="text-[10px] text-[#0070F3]">Generating §5 Risk Management...</span>
-          </div>
-          <span className="text-[10px] font-mono text-[#333]">72% complete</span>
-        </div>
-      </div>
-    </VisualChrome>
-  );
-}
-
-function ProtectVisual() {
-  return (
-    <VisualChrome title="fine-calculator.ts">
-      <div className="p-5 space-y-4">
-        <div className="grid grid-cols-2 gap-3">
-          {/* EU AI Act Card */}
-          <div className="rounded-xl bg-[#0D0D0D] border border-[#FF3B3B]/25 p-4 relative overflow-hidden">
-            <div className="absolute -top-6 -right-6 w-20 h-20 bg-[radial-gradient(rgba(255,59,59,0.12),transparent)] pointer-events-none" />
-            <span className="text-xl">🇪🇺</span>
-            <div className="text-[9px] uppercase tracking-widest text-[#444] mt-1">EU AI Act</div>
-            <div className="text-[28px] font-bold font-mono text-[#FF3B3B] leading-none mt-2">€35M</div>
-            <div className="text-[9px] text-[#444] mt-1">or 7% global turnover</div>
-            <div className="h-px bg-white/[0.06] my-2" />
-            <div className="text-[9px] text-[#555]">Per prohibited AI practice</div>
-          </div>
-
-          {/* India DPDP Card */}
-          <div className="rounded-xl bg-[#0D0D0D] border border-[#F5A623]/25 p-4 relative overflow-hidden">
-            <div className="absolute -top-6 -right-6 w-20 h-20 bg-[radial-gradient(rgba(245,166,35,0.12),transparent)] pointer-events-none" />
-            <span className="text-xl">🇮🇳</span>
-            <div className="text-[9px] uppercase tracking-widest text-[#444] mt-1">India DPDP</div>
-            <div className="text-[28px] font-bold font-mono text-[#F5A623] leading-none mt-2">₹250Cr</div>
-            <div className="text-[9px] text-[#444] mt-1">per contravention</div>
-            <div className="h-px bg-white/[0.06] my-2" />
-            <div className="text-[9px] text-[#555]">Under DPDP Section 33</div>
-          </div>
-        </div>
-
-        <div className="rounded-xl bg-[#0D0D0D] border border-white/[0.08] p-4">
-          <div className="text-[9px] uppercase tracking-widest text-[#444] mb-3">Gap Analysis — customer-credit-ai-v2</div>
-          <div className="space-y-1.5">
-            {[
-              { label: "Compliance gaps found", value: "12", color: "text-[#FF3B3B]" },
-              { label: "Critical obligations missing", value: "4", color: "text-[#FF3B3B]" },
-              { label: "Estimated remediation time", value: "6 weeks", color: "text-[#00C48C]" },
-              { label: "Estimated fine reduction", value: "~€32.4M", color: "text-[#00C48C]" },
-            ].map((row, i) => (
-              <div key={i} className="flex items-center justify-between py-1.5 border-b border-white/[0.04] last:border-0">
-                <span className="text-[11px] text-[#666]">{row.label}</span>
-                <span className={cn("text-[11px] font-mono font-bold", row.color)}>{row.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck size={11} className="text-[#00C48C]" />
-            <span className="text-[10px] text-[#555]">CompliVibe reduces exposure by 92%</span>
-          </div>
-          <span className="text-[10px] text-[#0070F3] cursor-pointer hover:underline">Full report →</span>
-        </div>
-      </div>
-    </VisualChrome>
-  );
-}
-
-function AuditVisual() {
-  const events = [
-    { time: "09:42:01", type: "LOGGED", msg: "Annex IV doc v3 · hash: 0x7f3a...b2c1", color: "#00C48C" },
-    { time: "09:41:18", type: "LOGGED", msg: "Risk re-classification triggered", color: "#0070F3" },
-    { time: "09:38:55", type: "ALERT", msg: "DPDP Section 8 amendment detected", color: "#F5A623" },
-    { time: "09:35:12", type: "LOGGED", msg: "Evidence hash: 0x9e2d...f4a7", color: "#00C48C" },
-    { time: "09:31:44", type: "EXPORT", msg: "Audit package exported for ISO review", color: "#7928CA" },
-    { time: "09:28:03", type: "SIGNED", msg: "Board approval logged · immutable", color: "#00C48C" },
+/* 1. Governance board */
+function GovernanceVisual() {
+  const rows = [
+    { sys: "credit-scoring-ai", owner: "R. Mehta", risk: "High", state: "Review", tone: "warn" },
+    { sys: "support-copilot", owner: "A. Khan", risk: "Limited", state: "Approved", tone: "ok" },
+    { sys: "fraud-detector", owner: "L. Wong", risk: "High", state: "Pending", tone: "warn" },
+    { sys: "doc-summarizer", owner: "S. Iyer", risk: "Minimal", state: "Approved", tone: "ok" },
   ];
-
   return (
-    <VisualChrome title="evidence-vault.ts">
-      <div className="p-5">
-        <div className="grid grid-cols-3 gap-3 mb-4">
-          <div className="rounded-xl bg-[#0D0D0D] border border-white/[0.07] p-3 text-center">
-            <div className="text-[20px] font-bold font-mono text-white">1,247</div>
-            <div className="text-[9px] text-[#444]">Events logged</div>
-            <div className="flex items-center justify-center gap-1 mt-1">
-              <div className="w-1 h-1 rounded-full bg-[#00C48C]" />
-              <span className="text-[9px] text-[#00C48C]">+23 today</span>
-            </div>
-          </div>
-          <div className="rounded-xl bg-[#0D0D0D] border border-white/[0.07] p-3 text-center">
-            <div className="text-[20px] font-bold font-mono text-[#00C48C]">100%</div>
-            <div className="text-[9px] text-[#444]">Hash integrity</div>
-            <div className="flex items-center justify-center gap-1 mt-1">
-              <ShieldCheck size={10} className="text-[#00C48C]" />
-              <span className="text-[9px] text-[#00C48C]">Verified</span>
-            </div>
-          </div>
-          <div className="rounded-xl bg-[#0D0D0D] border border-white/[0.07] p-3 text-center">
-            <div className="text-[20px] font-bold font-mono text-[#0070F3]">3</div>
-            <div className="text-[9px] text-[#444]">Export ready</div>
-            <span className="text-[9px] text-[#444] mt-1 block">PDF JSON CSV</span>
-          </div>
-        </div>
-
-        <div className="rounded-xl bg-[#0D0D0D] border border-white/[0.07] overflow-hidden">
-          <div className="h-8 border-b border-white/[0.06] flex items-center gap-2 px-3">
-            <motion.div animate={{ scale: [1, 1.4, 1], opacity: [1, 0.4, 1] }} transition={{ duration: 2, repeat: Infinity }}>
-              <div className="w-1.5 h-1.5 rounded-full bg-[#27C93F]" />
-            </motion.div>
-            <span className="text-[9px] font-mono uppercase tracking-widest text-[#333]">EVIDENCE.LOG — LIVE</span>
-          </div>
-          <div className="p-3 space-y-2">
-            {events.map((e, i) => (
-              <motion.div
-                key={i}
-                className="flex items-start gap-2.5 text-[10px] font-mono"
-                initial={{ opacity: 0, x: -6 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.08 }}
-                viewport={{ once: true, amount: 0.3 }}
-              >
-                <span className="text-[#2a2a2a] shrink-0 w-16">{e.time}</span>
-                <span className="text-[9px] font-bold shrink-0 w-14" style={{ color: e.color }}>{e.type}</span>
-                <span className="text-[#444] leading-snug">{e.msg}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+    <VisualShell title="governance-board">
+      <div className="mb-3 grid grid-cols-[1.4fr_1fr_0.8fr_0.9fr] gap-2 px-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--cv-muted)]">
+        <span>AI System</span>
+        <span>Owner</span>
+        <span>Risk</span>
+        <span>Status</span>
       </div>
-    </VisualChrome>
+      <div className="space-y-1.5">
+        {rows.map((r, i) => (
+          <motion.div
+            key={r.sys}
+            className="grid grid-cols-[1.4fr_1fr_0.8fr_0.9fr] items-center gap-2 rounded-lg border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-3 py-2.5"
+            initial={{ opacity: 0, y: 6 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.06 }}
+          >
+            <span className="truncate font-mono text-[11px] text-[var(--cv-ink)]">{r.sys}</span>
+            <span className="flex items-center gap-1.5 text-[11px] text-[var(--cv-muted)]">
+              <Users className="h-3 w-3 opacity-60" />
+              {r.owner}
+            </span>
+            <span
+              className={`text-[10px] font-semibold ${
+                r.risk === "High" ? "text-[#f59e0b]" : r.risk === "Limited" ? "text-[#2563eb]" : "text-[#10b981]"
+              }`}
+            >
+              {r.risk}
+            </span>
+            <span
+              className={`inline-flex w-fit items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                r.tone === "ok"
+                  ? "bg-[#10b981]/10 text-[#0f9b6c] dark:text-[#34d399]"
+                  : "bg-[#f59e0b]/10 text-[#b97c0a] dark:text-[#fbbf24]"
+              }`}
+            >
+              {r.tone === "ok" ? <CheckCircle2 className="h-2.5 w-2.5" /> : <AlertTriangle className="h-2.5 w-2.5" />}
+              {r.state}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+      <div className="mt-3 flex items-center justify-between rounded-lg border border-[var(--cv-border)] bg-[var(--cv-surface-strong)] px-3 py-2 text-[11px]">
+        <span className="flex items-center gap-1.5 text-[var(--cv-muted)]">
+          <GitBranch className="h-3.5 w-3.5 text-[#2563eb]" /> Governance health
+        </span>
+        <span className="font-mono font-semibold text-[#2563eb] dark:text-[#3b82f6]">87 / 100</span>
+      </div>
+    </VisualShell>
   );
 }
 
-const visuals: Record<string, React.ReactNode> = {
-  classify: <ClassifyVisual />,
-  generate: <GenerateVisual />,
-  protect: <ProtectVisual />,
-  audit: <AuditVisual />,
+/* 2. Framework mapping matrix */
+function ComplianceVisual() {
+  const frameworks = [
+    { name: "EU AI Act", pct: 84 },
+    { name: "India DPDP", pct: 91 },
+    { name: "ISO 42001", pct: 78 },
+    { name: "NIST AI RMF", pct: 72 },
+    { name: "SOC 2", pct: 88 },
+  ];
+  return (
+    <VisualShell title="framework-matrix">
+      <div className="mb-3 flex items-center gap-2 text-[11px] text-[var(--cv-muted)]">
+        <Workflow className="h-3.5 w-3.5 text-[#7c3aed]" />
+        Controls
+        <span className="text-[var(--cv-border)]">→</span>
+        Evidence
+        <span className="text-[var(--cv-border)]">→</span>
+        Reports
+      </div>
+      <div className="space-y-2.5">
+        {frameworks.map((f, i) => (
+          <motion.div
+            key={f.name}
+            initial={{ opacity: 0, x: -8 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.07 }}
+          >
+            <div className="mb-1 flex items-center justify-between text-[11px]">
+              <span className="font-medium text-[var(--cv-ink)]">{f.name}</span>
+              <span className="font-mono text-[var(--cv-muted)]">{f.pct}%</span>
+            </div>
+            <div className="h-1.5 overflow-hidden rounded-full bg-[var(--cv-bg-soft)]">
+              <motion.div
+                className="h-full rounded-full bg-gradient-to-r from-[#7c3aed] to-[#2563eb]"
+                initial={{ width: 0 }}
+                whileInView={{ width: `${f.pct}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.9, delay: 0.1 + i * 0.07, ease: "easeOut" }}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      <div className="mt-3 grid grid-cols-3 gap-2">
+        {[
+          { k: "Obligations", v: "828" },
+          { k: "Evidence", v: "147" },
+          { k: "Frameworks", v: "6" },
+        ].map((s) => (
+          <div key={s.k} className="rounded-lg border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-2.5 py-2 text-center">
+            <div className="font-mono text-sm font-bold text-[var(--cv-ink)]">{s.v}</div>
+            <div className="text-[9px] uppercase tracking-wide text-[var(--cv-muted)]">{s.k}</div>
+          </div>
+        ))}
+      </div>
+    </VisualShell>
+  );
+}
+
+/* 3. Observability panel */
+function ObservabilityVisual() {
+  const reduce = useReducedMotion();
+  const bars = [38, 52, 44, 61, 49, 70, 58, 66, 54, 74, 63, 81];
+  return (
+    <VisualShell title="observability">
+      <div className="mb-3 flex items-center justify-between">
+        <span className="flex items-center gap-1.5 text-[11px] font-medium text-[var(--cv-ink)]">
+          <LineChart className="h-3.5 w-3.5 text-[#0891b2] dark:text-[#22d3ee]" /> Usage & latency
+        </span>
+        <span className="font-mono text-[10px] text-[var(--cv-muted)]">last 24h</span>
+      </div>
+      <div className="flex h-20 items-end gap-1 rounded-lg border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] p-2.5">
+        {bars.map((h, i) => (
+          <motion.div
+            key={i}
+            className="flex-1 rounded-sm bg-gradient-to-t from-[#06b6d4] to-[#10b981]"
+            initial={{ height: 0 }}
+            whileInView={{ height: `${h}%` }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: reduce ? 0 : i * 0.04, ease: "easeOut" }}
+          />
+        ))}
+      </div>
+      <div className="mt-3 space-y-1.5">
+        <div className="flex items-center gap-2 rounded-lg border border-[#f59e0b]/30 bg-[#f59e0b]/10 px-3 py-2 text-[11px]">
+          <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-[#b97c0a] dark:text-[#fbbf24]" />
+          <span className="text-[var(--cv-ink)]">Drift detected · credit-scoring-ai</span>
+          <span className="ml-auto font-mono text-[10px] text-[var(--cv-muted)]">+3.2σ</span>
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="rounded-lg border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-3 py-2">
+            <div className="text-[9px] uppercase tracking-wide text-[var(--cv-muted)]">Evidence health</div>
+            <div className="font-mono text-sm font-bold text-[#10b981]">91%</div>
+          </div>
+          <div className="rounded-lg border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-3 py-2">
+            <div className="text-[9px] uppercase tracking-wide text-[var(--cv-muted)]">Risk health</div>
+            <div className="font-mono text-sm font-bold text-[#f59e0b]">72</div>
+          </div>
+        </div>
+      </div>
+    </VisualShell>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Layer data                                                         */
+/* ------------------------------------------------------------------ */
+type Layer = {
+  id: string;
+  tab: string;
+  icon: LucideIcon;
+  accent: Accent;
+  heading: string;
+  bullets: string[];
+  metrics: { value: string; label: string }[];
+  visual: React.ReactNode;
 };
 
-function FeatureGroupBlock({ group, isLast }: { group: (typeof featureGroups)[number]; isLast: boolean }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.15 });
+const layers: Layer[] = [
+  {
+    id: "governance",
+    tab: "AI Governance",
+    icon: ShieldCheck,
+    accent: "blue",
+    heading: "Govern every AI system before it becomes a risk.",
+    bullets: [
+      "AI system inventory",
+      "Model and vendor oversight",
+      "Owner and reviewer workflows",
+      "Human approval checkpoints",
+      "AI policy mapping",
+      "Governance health scoring",
+    ],
+    metrics: [
+      { value: "24", label: "AI systems mapped" },
+      { value: "7", label: "Open risks" },
+      { value: "4", label: "Pending reviews" },
+    ],
+    visual: <GovernanceVisual />,
+  },
+  {
+    id: "compliance",
+    tab: "Compliance Automation",
+    icon: FileCheck2,
+    accent: "purple",
+    heading: "Turn obligations into evidence-backed workflows.",
+    bullets: [
+      "EU AI Act readiness",
+      "India DPDP workflows",
+      "ISO 42001 alignment",
+      "NIST AI RMF mapping",
+      "SOC 2 evidence support",
+      "Colorado AI Act coverage",
+    ],
+    metrics: [
+      { value: "828", label: "Mapped obligations" },
+      { value: "147", label: "Evidence items" },
+      { value: "6", label: "Frameworks tracked" },
+    ],
+    visual: <ComplianceVisual />,
+  },
+  {
+    id: "observability",
+    tab: "Data Observability",
+    icon: Activity,
+    accent: "cyan",
+    heading: "Monitor the trust signals behind production AI.",
+    bullets: [
+      "Usage signals",
+      "Drift indicators",
+      "Incident markers",
+      "Latency and error signals",
+      "Model behavior changes",
+      "Trust posture alerts",
+    ],
+    metrics: [
+      { value: "Live", label: "Signals" },
+      { value: "91%", label: "Evidence health" },
+      { value: "72", label: "Risk health" },
+    ],
+    visual: <ObservabilityVisual />,
+  },
+];
 
-  return (
-    <>
-      <motion.div
-        ref={ref}
-        className="grid grid-cols-1 items-center gap-20 lg:grid-cols-2"
-      >
-        <motion.div
-          className={`flex flex-col gap-5 ${group.flip ? "lg:order-2" : ""}`}
-          initial={{ opacity: 0, x: group.flip ? 30 : -30 }}
-          animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: group.flip ? 30 : -30 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <p className="text-[12px] font-semibold uppercase tracking-[0.15em]" style={{ color: group.eyebrowColor }}>
-            {group.eyebrow}
-          </p>
-          <h2
-            className="text-balance"
-            style={{
-              fontSize: "clamp(1.8rem,3.5vw,2.75rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.15,
-              background: "linear-gradient(to bottom, #fff, rgba(255,255,255,0.6))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            {group.headline}
-          </h2>
-          <p className="max-w-[440px] text-[16px] leading-relaxed text-[#555]">{group.body}</p>
+const tabIcons: Record<string, LucideIcon> = {
+  governance: Boxes,
+  compliance: Layers,
+  observability: Gauge,
+};
 
-          <div className="space-y-3">
-            {group.features.map((f, j) => (
-              <motion.div
-                key={j}
-                className="flex items-start gap-3"
-                initial={{ opacity: 0, y: 8 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-                transition={{ delay: j * 0.08, duration: 0.35 }}
-              >
-                <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-md border border-white/[0.07] bg-white/[0.04]">
-                  <f.icon className="h-[11px] w-[11px] text-[#888]" />
-                </div>
-                <div>
-                  <p className="text-[13px] font-semibold text-white">{f.label}</p>
-                  <p className="mt-0.5 text-[12px] text-[#444]">{f.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+/* ------------------------------------------------------------------ */
+/*  Section                                                            */
+/* ------------------------------------------------------------------ */
+const panelVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], staggerChildren: 0.05 },
+  },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.25 } },
+};
 
-          <a
-            href={group.cta.href}
-            className="mt-2 inline-flex w-fit items-center gap-1.5 text-[13px] font-medium text-white transition-colors hover:text-[#888]"
-          >
-            {group.cta.label}
-            <ChevronRight className="h-3.5 w-3.5" />
-          </a>
-        </motion.div>
-
-        <motion.div
-          className={`relative ${group.flip ? "lg:order-1" : ""}`}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-        >
-          <div
-            className="pointer-events-none absolute -inset-8"
-            style={{
-              background: "radial-gradient(ellipse at center, rgba(0,112,243,0.06) 0%, transparent 60%)",
-            }}
-          />
-          {visuals[group.visual]}
-        </motion.div>
-      </motion.div>
-      
-      {!isLast && (
-        <div className="h-px max-w-[1200px] mx-auto bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.06)_30%,rgba(255,255,255,0.06)_70%,transparent)]" />
-      )}
-    </>
-  );
-}
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  show: { opacity: 1, y: 0 },
+};
 
 export default function Features() {
+  const [active, setActive] = useState(0);
+  const reduce = useReducedMotion();
+  const layer = layers[active];
+  const a = accent[layer.accent];
+
   return (
-    <section className="overflow-hidden py-24 md:py-32">
-      <div className="mx-auto max-w-[1200px] px-6">
-        {/* Section Header */}
-        <div className="text-center mb-24">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-[#00C48C] mb-4">
-            PLATFORM CAPABILITIES
-          </p>
-          <h2
-            className="mb-6 mx-auto"
-            style={{
-              fontSize: "clamp(2rem,4vw,3rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.15,
-              background: "linear-gradient(to bottom, #fff, rgba(255,255,255,0.5))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            <span className="bg-gradient-to-r from-[#0070F3] to-[#00C48C] bg-clip-text text-transparent">Four engines.</span> One governance platform.
+    <section className="aurora-bg overflow-hidden py-24 md:py-32">
+      <div className="cv-container">
+        {/* Header */}
+        <motion.div
+          className="mx-auto max-w-2xl text-center"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="section-kicker mb-4">Trust Layers</span>
+          <h2 className="section-title mt-4 text-balance">
+            Governance, compliance, and observability in one{" "}
+            <span className="text-gradient-trust">trust layer</span>.
           </h2>
-          <p className="text-[#555] text-base leading-relaxed max-w-[500px] mx-auto">
-            Classify AI systems, generate documentation, calculate exposure, and vault your evidence — all in one command center.
+          <p className="section-subtitle mx-auto mt-5">
+            CompliVibe gives modern companies one operating system to govern AI, automate evidence,
+            monitor production signals, and prove trust to customers, auditors, and regulators.
           </p>
+        </motion.div>
+
+        {/* Tabs */}
+        <div className="mx-auto mt-12 flex max-w-2xl flex-col gap-2 sm:flex-row sm:justify-center">
+          {layers.map((l, i) => {
+            const TabIcon = tabIcons[l.id];
+            const isActive = i === active;
+            const la = accent[l.accent];
+            return (
+              <button
+                key={l.id}
+                onClick={() => setActive(i)}
+                aria-pressed={isActive}
+                className={`group relative flex items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-300 ${
+                  isActive
+                    ? `border-transparent bg-[var(--cv-surface-strong)] text-[var(--cv-ink)] shadow-[var(--cv-shadow-soft)] ring-1 ${la.ring}`
+                    : "border-[var(--cv-border)] bg-[var(--cv-surface)] text-[var(--cv-muted)] hover:text-[var(--cv-ink)]"
+                }`}
+              >
+                <TabIcon className={`h-4 w-4 ${isActive ? la.text : "opacity-70"}`} />
+                {l.tab}
+              </button>
+            );
+          })}
         </div>
 
-        <div className="space-y-40">
-          {featureGroups.map((group, i) => (
-            <FeatureGroupBlock key={i} group={group} isLast={i === featureGroups.length - 1} />
-          ))}
-        </div>
+        {/* Active layer panel */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={layer.id}
+            variants={panelVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="mt-12 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14"
+          >
+            {/* Left — copy */}
+            <motion.div variants={itemVariants} className="flex flex-col gap-6">
+              <div className="flex items-center gap-3">
+                <span className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${a.soft} ${a.text}`}>
+                  <layer.icon className="h-5 w-5" />
+                </span>
+                <span className={`text-xs font-semibold uppercase tracking-[0.12em] ${a.text}`}>
+                  {layer.tab}
+                </span>
+              </div>
+
+              <h3 className="text-balance text-2xl font-bold leading-tight tracking-tight text-[var(--cv-ink)] md:text-3xl">
+                {layer.heading}
+              </h3>
+
+              <ul className="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
+                {layer.bullets.map((b) => (
+                  <motion.li
+                    key={b}
+                    variants={itemVariants}
+                    className="flex items-center gap-2.5 text-sm text-[var(--cv-muted)]"
+                  >
+                    <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${a.soft}`}>
+                      <CheckCircle2 className={`h-3.5 w-3.5 ${a.text}`} />
+                    </span>
+                    {b}
+                  </motion.li>
+                ))}
+              </ul>
+
+              {/* Metric / proof card */}
+              <motion.div
+                variants={itemVariants}
+                className="bento-card glass-highlight grid grid-cols-3 divide-x divide-[var(--cv-border)] p-0"
+              >
+                {layer.metrics.map((m) => (
+                  <div key={m.label} className="px-4 py-4 text-center">
+                    <div className={`font-mono text-xl font-bold ${a.text}`}>{m.value}</div>
+                    <div className="mt-1 text-[11px] leading-tight text-[var(--cv-muted)]">{m.label}</div>
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right — embedded visual */}
+            <motion.div
+              variants={itemVariants}
+              className="relative"
+              initial={reduce ? undefined : { scale: 0.97 }}
+              animate={reduce ? undefined : { scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div
+                aria-hidden
+                className={`pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br ${a.grad} opacity-[0.06] blur-2xl`}
+              />
+              {layer.visual}
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

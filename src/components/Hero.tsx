@@ -1,463 +1,447 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
   Activity,
   AlertTriangle,
   ArrowRight,
   Bell,
-  CheckCircle2,
-  CheckSquare,
+  Blocks,
   ChevronRight,
+  Clock,
   Cpu,
   FolderOpen,
   LayoutDashboard,
+  ListChecks,
   Lock,
   Scale,
   Search,
   Shield,
   ShieldCheck,
   Sparkles,
-  Zap,
+  Users,
+  FlaskConical,
 } from "lucide-react";
-import { Spotlight } from "./ui/spotlight";
+
+/* ------------------------------------------------------------------ data */
+
+const proofChips = [
+  { icon: Users, label: "3 paying customers", accent: "#2563eb" },
+  { icon: FlaskConical, label: "5 beta trials", accent: "#06b6d4" },
+  { icon: Clock, label: "13-account waitlist", accent: "#7c3aed" },
+  { icon: ListChecks, label: "828 mapped obligations", accent: "#10b981" },
+  { icon: Blocks, label: "23+ integrations", accent: "#f59e0b" },
+];
 
 const sidebarItems = [
   { label: "Command Center", Icon: LayoutDashboard, active: true },
   { label: "AI Systems", Icon: Cpu },
   { label: "Governance", Icon: Shield },
+  { label: "Compliance", Icon: Scale },
   { label: "Observability", Icon: Activity },
   { label: "Evidence", Icon: FolderOpen },
-  { label: "Compliance", Icon: Scale },
 ];
 
 const scoreCards = [
-  { label: "AI Trust Score", Icon: Shield, value: "87", color: "#0070F3", sub: "Strong governance posture", progress: "87%", gradient: "from-[#0070F3] to-[#00C48C]" },
-  { label: "Governance Score", Icon: CheckSquare, value: "84", color: "#00C48C", sub: "Governance Score", progress: "84%", gradient: "from-[#00C48C] to-[#0070F3]" },
-  { label: "Risk Health", Icon: AlertTriangle, value: "72", color: "#F5A623", sub: "Risk Health", progress: "72%", gradient: "from-[#F5A623] to-[#FF3B3B]" },
-  { label: "Evidence Health", Icon: FolderOpen, value: "91", color: "#7928CA", sub: "Evidence Health", progress: "91%", gradient: "from-[#7928CA] to-[#0070F3]" },
+  { label: "AI Trust Score", Icon: ShieldCheck, value: 87, accent: "#2563eb" },
+  { label: "Governance Health", Icon: Shield, value: 84, accent: "#10b981" },
+  { label: "Evidence Health", Icon: FolderOpen, value: 91, accent: "#7c3aed" },
+  { label: "Risk Health", Icon: AlertTriangle, value: 72, accent: "#f59e0b" },
 ];
 
-const readinessRows = [
-  { marker: "🇪🇺", label: "EU AI Act", value: "82%", color: "#0070F3" },
-  { marker: "🇮🇳", label: "India DPDP", value: "76%", color: "#00C48C" },
-  { marker: "CO", label: "Colorado AI Act", value: "65%", color: "#F5A623" },
-  { marker: "SOC", label: "SOC 2", value: "90%", color: "#00C48C" },
-  { marker: "ISO", label: "ISO 42001", value: "78%", color: "#7928CA" },
-  { marker: "NI", label: "NIST AI RMF", value: "73%", color: "#0070F3" },
+const frameworks = [
+  { label: "EU AI Act", value: 82, accent: "#2563eb" },
+  { label: "India DPDP", value: 76, accent: "#10b981" },
+  { label: "ISO 42001", value: 78, accent: "#7c3aed" },
+  { label: "NIST AI RMF", value: 73, accent: "#2563eb" },
+  { label: "SOC 2", value: 90, accent: "#10b981" },
+  { label: "Colorado AI Act", value: 65, accent: "#f59e0b" },
 ];
 
-const priorityActions = [
-  { tone: "critical", badge: "HIGH", title: "Address model transparency gap", due: "Due in 2 days", detail: "AI Recommendation Engine" },
-  { tone: "high", badge: "HIGH", title: "Review vendor risk assessment", due: "Due in 3 days", detail: "Vendor LLM API" },
-  { tone: "medium", badge: "MEDIUM", title: "Update data retention policy", due: "Due in 8 days", detail: "Customer data pipeline" },
+const trustGraphNodes = [
+  { label: "AI System", accent: "#2563eb" },
+  { label: "Risk", accent: "#f59e0b" },
+  { label: "Control", accent: "#7c3aed" },
+  { label: "Evidence", accent: "#10b981" },
+  { label: "Trust Report", accent: "#06b6d4" },
 ];
 
-const activityEvents = [
-  { color: "#00C48C", text: "Annex IV generated · 4m ago" },
-  { color: "#0070F3", text: "Risk scan complete · 18m ago" },
-  { color: "#F5A623", text: "DPDP update synced · 1h ago" },
-  { color: "#FF3B3B", text: "Vendor alert triggered · 2h ago" },
-];
+/* -------------------------------------------------------------- mockup ui */
 
 function ScoreCard({ card }: { card: (typeof scoreCards)[number] }) {
   const Icon = card.Icon;
-
   return (
-    <div className="col-span-6 md:col-span-3 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3 md:p-4">
+    <div className="rounded-2xl border border-slate-900/[0.06] bg-white/70 p-3 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] md:p-3.5">
       <div className="flex items-center justify-between">
-        <span className="text-[8px] md:text-[9px] uppercase tracking-widest text-[#444]">{card.label}</span>
-        <Icon className="h-[11px] w-[11px]" style={{ color: card.color }} />
+        <span className="text-[8px] font-semibold uppercase tracking-widest text-slate-400 dark:text-neutral-500 md:text-[9px]">
+          {card.label}
+        </span>
+        <Icon className="h-3 w-3" style={{ color: card.accent }} />
       </div>
-      <div className="mt-2 flex items-end gap-2">
-        <span className="font-mono text-[24px] md:text-[32px] font-bold leading-none" style={{ color: card.color }}>
+      <div className="mt-2 flex items-end gap-1">
+        <span className="font-mono text-[26px] font-bold leading-none md:text-[30px]" style={{ color: card.accent }}>
           {card.value}
         </span>
-        <span className="text-[12px] text-[#333]">/100</span>
+        <span className="text-[11px] text-slate-400 dark:text-neutral-600">/100</span>
       </div>
-      <div className="mt-1 text-[9px] text-[#444] hidden md:block">{card.sub}</div>
-      <div className="mt-2 h-[3px] rounded-full bg-[#111]">
-        <div className={`h-full rounded-full bg-gradient-to-r ${card.gradient}`} style={{ width: card.progress }} />
+      <div className="mt-2.5 h-[3px] overflow-hidden rounded-full bg-slate-900/[0.06] dark:bg-white/10">
+        <div className="h-full rounded-full" style={{ width: `${card.value}%`, backgroundColor: card.accent }} />
       </div>
     </div>
   );
 }
 
-function DashboardVisual() {
+function CommandCenter({ reduced }: { reduced: boolean }) {
   return (
-    <div className="mx-auto mt-14 w-full max-w-[960px] overflow-hidden">
+    <motion.div
+      className="mx-auto mt-16 w-full max-w-[1000px]"
+      initial={{ opacity: 0, y: 48, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    >
       <motion.div
-        animate={{ y: [0, -8, 0] }}
+        animate={reduced ? undefined : { y: [0, -10, 0] }}
         transition={{ duration: 9, ease: "easeInOut", repeat: Infinity }}
       >
-        <motion.div
-          className="relative overflow-hidden w-full"
-          initial={{ opacity: 0, y: 40, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        >
+        <div className="relative">
+          {/* Aura behind the panel */}
           <div
-            className="pointer-events-none absolute -inset-8"
+            className="pointer-events-none absolute -inset-10 -z-10"
             style={{
-              background: "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0,112,243,0.10) 0%, transparent 60%)",
+              background:
+                "radial-gradient(ellipse 60% 50% at 50% 40%, rgba(37,99,235,0.18), transparent 65%)",
             }}
           />
 
           <div
-            className="relative overflow-x-hidden rounded-xl border border-white/[0.10] bg-[#080808]"
-            style={{
-              boxShadow: "0 0 0 1px rgba(255,255,255,0.04), 0 50px 120px rgba(0,0,0,0.9)",
-            }}
+            className="liquid-card glass-highlight overflow-hidden"
+            style={{ borderRadius: "1.5rem" }}
           >
-            <div className="flex h-10 items-center gap-3 border-b border-white/[0.07] bg-[#0F0F0F] px-4">
+            {/* App bar */}
+            <div className="flex h-11 items-center gap-3 border-b border-slate-900/[0.06] bg-white/60 px-4 dark:border-white/10 dark:bg-white/[0.03]">
               <div className="flex items-center gap-1.5">
                 <div className="h-[9px] w-[9px] rounded-full bg-[#FF5F56]" />
                 <div className="h-[9px] w-[9px] rounded-full bg-[#FFBD2E]" />
                 <div className="h-[9px] w-[9px] rounded-full bg-[#27C93F]" />
               </div>
-              <div className="mx-1 h-3.5 w-px bg-white/[0.08]" />
               <div className="mx-4 flex-1">
-                <div className="mx-auto flex h-6 max-w-[160px] md:max-w-[280px] items-center gap-2 rounded-md border border-white/[0.06] bg-[#1a1a1a] px-3">
-                  <Lock className="h-2.5 w-2.5 text-[#333] shrink-0" />
-                  <span className="font-mono text-[10px] text-[#333] truncate">app.complivibe.in/dashboard</span>
+                <div className="mx-auto flex h-6 max-w-[150px] items-center gap-2 rounded-md border border-slate-900/[0.06] bg-slate-900/[0.03] px-3 dark:border-white/10 dark:bg-white/5 md:max-w-[280px]">
+                  <Lock className="h-2.5 w-2.5 shrink-0 text-slate-400 dark:text-neutral-500" />
+                  <span className="truncate font-mono text-[10px] text-slate-400 dark:text-neutral-500">
+                    app.complivibe.in/dashboard
+                  </span>
                 </div>
               </div>
-              <div className="ml-auto flex items-center gap-2">
-                <motion.div
-                  className="h-1.5 w-1.5 rounded-full bg-[#00C48C]"
-                  animate={{ scale: [1, 1.3, 1], opacity: [1, 0.4, 1] }}
-                  transition={{ duration: 2.5, repeat: Infinity }}
+              <div className="ml-auto flex shrink-0 items-center gap-1.5 rounded-full border border-[#10b981]/25 bg-[#10b981]/10 px-2 py-0.5">
+                <motion.span
+                  className="h-1.5 w-1.5 rounded-full bg-[#10b981]"
+                  animate={reduced ? undefined : { scale: [1, 1.4, 1], opacity: [1, 0.5, 1] }}
+                  transition={{ duration: 2.4, repeat: Infinity }}
                 />
-                <span className="font-mono text-[11px] text-[#00C48C]">LIVE</span>
+                <span className="text-[9px] font-semibold text-[#059669] dark:text-[#34d399]">Live trust posture</span>
               </div>
             </div>
 
-            <div className="bg-[#080808] p-4">
-              <div className="flex h-[420px] md:h-[520px] flex-row overflow-hidden">
-                <aside className="hidden md:flex w-[180px] shrink-0 flex-col border-r border-white/[0.06] bg-[#0D0D0D] py-3">
-                  <div className="mb-4 flex items-center gap-2 px-4">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#0070F3] to-[#7928CA]">
-                      <span className="text-[11px] font-black text-white">CV</span>
+            {/* Body */}
+            <div className="flex flex-row bg-gradient-to-b from-white/40 to-slate-50/40 dark:from-transparent dark:to-transparent">
+              {/* Sidebar */}
+              <aside className="hidden w-[180px] shrink-0 flex-col border-r border-slate-900/[0.06] py-3 dark:border-white/10 md:flex">
+                <div className="mb-4 flex items-center gap-2 px-4">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#2563eb] to-[#7c3aed]">
+                    <span className="text-[11px] font-black text-white">CV</span>
+                  </div>
+                  <span className="text-[13px] font-semibold text-slate-800 dark:text-white">CompliVibe</span>
+                </div>
+                <nav className="space-y-0.5 px-2">
+                  {sidebarItems.map((item) => {
+                    const Icon = item.Icon;
+                    return (
+                      <div
+                        key={item.label}
+                        className={`flex cursor-default items-center gap-2.5 rounded-lg px-2.5 py-2 text-[11px] font-medium ${
+                          item.active
+                            ? "bg-[#2563eb]/[0.08] text-[#2563eb] dark:bg-white/[0.08] dark:text-white"
+                            : "text-slate-500 dark:text-neutral-500"
+                        }`}
+                      >
+                        <Icon className="h-3.5 w-3.5" />
+                        {item.label}
+                      </div>
+                    );
+                  })}
+                </nav>
+                <div className="mt-auto px-3 pt-4">
+                  <div className="rounded-xl border border-[#2563eb]/15 bg-[#2563eb]/[0.06] p-2.5">
+                    <div className="mb-0.5 text-[9px] font-semibold text-[#2563eb]">Platform Status</div>
+                    <div className="flex items-center gap-1.5">
+                      <div className="h-[5px] w-[5px] rounded-full bg-[#10b981]" />
+                      <span className="text-[9px] text-slate-500 dark:text-neutral-400">All systems operational</span>
                     </div>
-                    <span className="text-[13px] font-semibold text-white">CompliVibe</span>
+                  </div>
+                </div>
+              </aside>
+
+              {/* Main */}
+              <main className="flex w-full flex-1 flex-col">
+                {/* Toolbar */}
+                <div className="flex h-10 items-center gap-3 border-b border-slate-900/[0.06] px-3 dark:border-white/10 md:px-4">
+                  <span className="truncate text-[11px] font-semibold text-slate-800 dark:text-white">Command Center</span>
+                  <span className="hidden text-[9px] text-slate-300 dark:text-neutral-600 md:inline">/ Overview</span>
+                  <div className="mx-2 hidden max-w-[200px] flex-1 sm:block md:mx-4">
+                    <div className="flex h-6 items-center gap-2 rounded-md border border-slate-900/[0.06] bg-slate-900/[0.03] px-2.5 dark:border-white/10 dark:bg-white/5">
+                      <Search className="h-2.5 w-2.5 shrink-0 text-slate-400 dark:text-neutral-500" />
+                      <span className="truncate text-[10px] text-slate-400 dark:text-neutral-500">Search systems, risks…</span>
+                    </div>
+                  </div>
+                  <div className="ml-auto flex items-center gap-2">
+                    <div className="flex items-center gap-1 rounded-md border border-[#2563eb]/25 bg-[#2563eb]/10 px-2 py-0.5">
+                      <Sparkles className="h-2.5 w-2.5 text-[#2563eb]" />
+                      <span className="hidden text-[9px] font-semibold text-[#2563eb] sm:inline">Ask Copilot</span>
+                    </div>
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-slate-900/[0.06] bg-white/70 dark:border-white/10 dark:bg-white/5">
+                      <Bell className="h-[11px] w-[11px] text-slate-400 dark:text-neutral-500" />
+                    </div>
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2563eb] to-[#7c3aed]">
+                      <span className="text-[9px] font-bold text-white">A</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-col gap-3 p-3 md:p-4">
+                  {/* Score cards */}
+                  <div className="grid grid-cols-2 gap-2.5 md:grid-cols-4 md:gap-3">
+                    {scoreCards.map((card) => (
+                      <ScoreCard key={card.label} card={card} />
+                    ))}
                   </div>
 
-                  <nav className="space-y-0.5 px-2">
-                    {sidebarItems.map((item) => {
-                      const Icon = item.Icon;
-                      return (
-                        <div
-                          key={item.label}
-                          className={`flex cursor-default items-center gap-2.5 rounded-lg px-2.5 py-2 text-[11px] font-medium ${
-                            item.active ? "bg-white/[0.08] text-white" : "text-[#555]"
-                          }`}
-                        >
-                          <Icon className="h-3 w-3" />
-                          {item.label}
+                  {/* Mid row */}
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-12">
+                    {/* Framework readiness */}
+                    <div className="rounded-2xl border border-slate-900/[0.06] bg-white/70 p-3.5 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] md:col-span-5">
+                      <div className="mb-2.5 text-[9px] font-semibold uppercase tracking-widest text-slate-400 dark:text-neutral-500">
+                        Framework Readiness
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        {frameworks.map((f) => (
+                          <div key={f.label} className="flex items-center gap-2">
+                            <span className="w-[88px] shrink-0 truncate text-[10px] text-slate-600 dark:text-neutral-300">{f.label}</span>
+                            <div className="h-[4px] flex-1 overflow-hidden rounded-full bg-slate-900/[0.06] dark:bg-white/10">
+                              <div className="h-full rounded-full" style={{ width: `${f.value}%`, backgroundColor: f.accent }} />
+                            </div>
+                            <span className="w-7 text-right font-mono text-[10px] text-slate-500 dark:text-neutral-400">{f.value}%</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Observability */}
+                    <div className="hidden rounded-2xl border border-slate-900/[0.06] bg-white/70 p-3.5 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] md:col-span-4 md:block">
+                      <div className="mb-2 flex items-center justify-between">
+                        <span className="text-[9px] font-semibold uppercase tracking-widest text-slate-400 dark:text-neutral-500">Observability</span>
+                        <span className="text-[9px] text-[#2563eb]">Live</span>
+                      </div>
+                      <svg className="h-[88px] w-full" viewBox="0 0 240 88" role="img" aria-label="Observability signals">
+                        <defs>
+                          <linearGradient id="usageFill" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#2563eb" stopOpacity="0.25" />
+                            <stop offset="100%" stopColor="#2563eb" stopOpacity="0" />
+                          </linearGradient>
+                        </defs>
+                        {/* usage signal area */}
+                        <path d="M0,60 L30,52 L60,56 L90,40 L120,46 L150,30 L180,38 L210,24 L240,30 L240,88 L0,88 Z" fill="url(#usageFill)" />
+                        <polyline points="0,60 30,52 60,56 90,40 120,46 150,30 180,38 210,24 240,30" fill="none" stroke="#2563eb" strokeWidth="1.5" strokeLinejoin="round" />
+                        {/* drift indicator dashed */}
+                        <polyline points="0,72 40,68 80,70 120,62 160,64 200,58 240,60" fill="none" stroke="#7c3aed" strokeWidth="1.25" strokeDasharray="3 3" />
+                        {/* latency/error line */}
+                        <polyline points="0,80 40,78 80,82 120,76 160,79 200,74 240,77" fill="none" stroke="#f59e0b" strokeWidth="1.25" />
+                      </svg>
+                      <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <Legend color="#2563eb" label="usage signal" />
+                        <Legend color="#7c3aed" label="drift indicator" />
+                        <Legend color="#f59e0b" label="latency / error" />
+                      </div>
+                    </div>
+
+                    {/* Copilot */}
+                    <div className="rounded-2xl border border-[#2563eb]/15 bg-gradient-to-br from-[#2563eb]/[0.07] to-[#7c3aed]/[0.07] p-3.5 dark:border-white/10 md:col-span-3">
+                      <div className="mb-2 flex items-center gap-1.5">
+                        <Sparkles className="h-3.5 w-3.5 text-[#2563eb]" />
+                        <span className="text-[9px] font-semibold uppercase tracking-widest text-[#2563eb]">AI Copilot</span>
+                      </div>
+                      <p className="text-[12px] font-semibold leading-snug text-slate-800 dark:text-white">
+                        3 governance gaps need review
+                      </p>
+                      <p className="mt-1 text-[10px] leading-relaxed text-slate-500 dark:text-neutral-400">
+                        Model transparency, vendor risk, retention policy.
+                      </p>
+                      <div className="mt-2.5 inline-flex items-center gap-1 rounded-full bg-[#2563eb] px-2.5 py-1 text-[10px] font-semibold text-white">
+                        Review <ArrowRight className="h-2.5 w-2.5" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Trust graph */}
+                  <div className="rounded-2xl border border-slate-900/[0.06] bg-white/70 p-3.5 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04]">
+                    <div className="mb-2.5 flex items-center justify-between">
+                      <span className="text-[9px] font-semibold uppercase tracking-widest text-slate-400 dark:text-neutral-500">AI Trust Graph</span>
+                      <span className="hidden text-[9px] text-[#2563eb] sm:inline">Explore →</span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {trustGraphNodes.map((node, i) => (
+                        <div key={node.label} className="flex items-center gap-1.5">
+                          <div
+                            className="flex items-center gap-1.5 rounded-full border px-2.5 py-1"
+                            style={{ borderColor: `${node.accent}40`, backgroundColor: `${node.accent}12` }}
+                          >
+                            <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: node.accent }} />
+                            <span className="text-[10px] font-medium text-slate-700 dark:text-neutral-200">{node.label}</span>
+                          </div>
+                          {i < trustGraphNodes.length - 1 && (
+                            <ChevronRight className="h-3 w-3 text-slate-300 dark:text-neutral-600" />
+                          )}
                         </div>
-                      );
-                    })}
-                  </nav>
-
-                  <div className="mt-auto px-3 pb-2">
-                    <div className="rounded-lg border border-[#0070F3]/20 bg-[#0070F3]/10 p-2.5">
-                      <div className="mb-0.5 text-[9px] font-semibold text-[#0070F3]">Platform Status</div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="h-[5px] w-[5px] rounded-full bg-[#00C48C]" />
-                        <span className="text-[9px] text-[#555]">All systems operational</span>
-                      </div>
-                    </div>
-                  </div>
-                </aside>
-
-                <main className="flex flex-1 w-full flex-col overflow-hidden">
-                  <div className="flex h-10 items-center gap-3 border-b border-white/[0.06] bg-[#0D0D0D] px-3 md:px-4">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-semibold text-white truncate">Command Center</span>
-                      <span className="text-[9px] text-[#333] hidden md:inline">/</span>
-                      <span className="text-[9px] text-[#444] hidden md:inline">Overview</span>
-                    </div>
-                    <div className="mx-2 md:mx-4 max-w-[220px] flex-1">
-                      <div className="flex h-6 items-center gap-2 rounded-md border border-white/[0.06] bg-[#111] px-2.5">
-                        <Search className="h-2.5 w-2.5 text-[#333] shrink-0" />
-                        <span className="text-[10px] text-[#333] truncate hidden sm:inline">Search systems, risks...</span>
-                      </div>
-                    </div>
-                    <div className="ml-auto flex items-center gap-2">
-                      <div className="flex items-center gap-1 rounded-md border border-[#0070F3]/30 bg-[#0070F3]/15 px-2 py-0.5">
-                        <Sparkles className="h-2.5 w-2.5 text-[#0070F3]" />
-                        <span className="text-[9px] font-semibold text-[#0070F3] hidden sm:inline">Ask Copilot</span>
-                      </div>
-                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-[#1a1a1a]">
-                        <Bell className="h-[11px] w-[11px] text-[#555]" />
-                      </div>
-                      <div className="flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-[#0070F3] to-[#7928CA]">
-                        <span className="text-[9px] font-bold text-white">A</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid flex-1 grid-cols-12 gap-2 md:gap-3 overflow-hidden p-3 md:p-4">
-                    <div className="col-span-12 grid grid-cols-12 gap-2 md:gap-3">
-                      {scoreCards.map((card) => (
-                        <ScoreCard key={card.label} card={card} />
                       ))}
                     </div>
-
-                    <div className="col-span-12 grid grid-cols-12 gap-2 md:gap-3">
-                      <div className="col-span-12 md:col-span-5 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
-                        <div className="mb-2 text-[9px] uppercase tracking-widest text-[#444]">Compliance Readiness</div>
-                        <div className="[&>div:nth-child(n+5)]:hidden md:[&>div:nth-child(n+5)]:flex flex-col">
-                          {readinessRows.map((row) => (
-                            <div key={row.label} className="flex items-center gap-2 border-b border-white/[0.04] py-1 last:border-0">
-                              <span className="w-5 text-[9px] text-[#555]">{row.marker}</span>
-                              <span className="flex-1 text-[10px] text-[#666] truncate">{row.label}</span>
-                              <div className="h-[3px] flex-1 rounded-full bg-[#111]">
-                                <div className="h-full rounded-full" style={{ width: row.value, backgroundColor: row.color }} />
-                              </div>
-                              <span className="w-8 text-right font-mono text-[10px] text-[#555]">{row.value}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="col-span-12 md:col-span-4 overflow-hidden rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3 hidden md:block">
-                        <div className="mb-2 flex items-center justify-between">
-                          <span className="text-[9px] uppercase tracking-widest text-[#444]">AI Trust Graph</span>
-                          <span className="cursor-pointer text-[9px] text-[#0070F3]">Explore →</span>
-                        </div>
-                        <svg className="h-[100px] w-full" viewBox="0 0 250 100" role="img" aria-label="AI trust graph preview">
-                          <line x1="20" y1="50" x2="95" y2="30" stroke="rgba(0,112,243,0.3)" strokeWidth="1" />
-                          <line x1="20" y1="50" x2="95" y2="70" stroke="rgba(0,196,140,0.3)" strokeWidth="1" />
-                          <line x1="95" y1="30" x2="170" y2="50" stroke="rgba(121,40,202,0.3)" strokeWidth="1" />
-                          <line x1="95" y1="70" x2="170" y2="50" stroke="rgba(0,196,140,0.3)" strokeWidth="1" />
-                          <line x1="170" y1="50" x2="230" y2="30" stroke="rgba(245,166,35,0.4)" strokeWidth="1" />
-                          <line x1="170" y1="50" x2="230" y2="70" stroke="rgba(121,40,202,0.3)" strokeWidth="1" />
-                          {[
-                            { cx: 20, cy: 50, color: "#0070F3", label: "APP" },
-                            { cx: 95, cy: 30, color: "#7928CA", label: "MDL" },
-                            { cx: 95, cy: 70, color: "#00C48C", label: "DATA" },
-                            { cx: 170, cy: 50, color: "#F5A623", label: "CTRL" },
-                            { cx: 230, cy: 30, color: "#00C48C", label: "EVID" },
-                            { cx: 230, cy: 70, color: "#7928CA", label: "REG" },
-                          ].map((node) => (
-                            <g key={node.label}>
-                              <circle cx={node.cx} cy={node.cy} r="12" fill={`${node.color}26`} stroke={node.color} strokeWidth="1" />
-                              <text x={node.cx} y={node.cy + 2} textAnchor="middle" fontSize="6" fill="#888">
-                                {node.label}
-                              </text>
-                            </g>
-                          ))}
-                          <circle cx="182" cy="38" r="5" fill="#F5A623" />
-                        </svg>
-                        <div className="mt-1 text-[9px] text-[#333]">6 nodes · 15 edges · 23 risks mapped</div>
-                      </div>
-
-                      <div className="col-span-12 md:col-span-3 rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3 hidden md:block">
-                        <div className="mb-2 text-[9px] uppercase tracking-widest text-[#444]">Priority Actions</div>
-                        {priorityActions.map((action) => {
-                          const badgeClass =
-                            action.tone === "critical"
-                              ? "bg-[#FF3B3B]/10 text-[#FF3B3B]"
-                              : action.tone === "high"
-                                ? "bg-[#F5A623]/10 text-[#F5A623]"
-                                : "bg-[#7928CA]/10 text-[#7928CA]";
-
-                          return (
-                            <div key={action.title} className="flex flex-col gap-0.5 border-b border-white/[0.04] py-1.5 last:border-0">
-                              <div className="mb-0.5 flex items-center gap-1.5">
-                                <span className={`rounded px-1 py-0.5 text-[8px] font-bold ${badgeClass}`}>{action.badge}</span>
-                                <span className="text-[9px] font-medium text-[#888] truncate">{action.title}</span>
-                              </div>
-                              <span className="text-[8px] text-[#444]">{action.due}</span>
-                              <span className="text-[8px] text-[#333] truncate">{action.detail}</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    <div className="col-span-12 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-4 overflow-hidden rounded-xl border border-white/[0.07] bg-[#0D0D0D] p-3">
-                      <div className="mr-2 md:mr-4 shrink-0 text-[9px] uppercase tracking-widest text-[#444]">Activity</div>
-                      {activityEvents.map((event, i) => (
-                        <div key={event.text} className={`flex shrink-0 items-center gap-1.5 md:border-r border-white/[0.06] md:px-3 last:border-0 ${i >= 2 ? 'hidden md:flex' : ''}`}>
-                          <div className="h-[5px] w-[5px] rounded-full shrink-0" style={{ backgroundColor: event.color }} />
-                          <span className="text-[9px] text-[#555] truncate">{event.text}</span>
-                        </div>
-                      ))}
-                    </div>
                   </div>
-                </main>
-              </div>
+                </div>
+              </main>
             </div>
           </div>
-        </motion.div>
+        </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 
-export default function Hero() {
+function Legend({ color, label }: { color: string; label: string }) {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-start overflow-hidden bg-black pb-0 pt-32">
-      <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 0%, rgba(0,112,243,0.14) 0%, rgba(121,40,202,0.06) 50%, transparent 70%)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%)",
-        }}
-      />
-      <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="white" />
+    <span className="flex items-center gap-1">
+      <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: color }} />
+      <span className="text-[8.5px] text-slate-500 dark:text-neutral-400">{label}</span>
+    </span>
+  );
+}
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[780px] flex-col items-center gap-7 px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <div className="mx-auto inline-flex flex-wrap justify-center items-center gap-2 md:gap-3 rounded-full border border-white/[0.10] bg-white/[0.03] px-4 py-1.5">
-            <div className="flex items-center gap-1 shrink-0">
-              <div className="h-[5px] w-[5px] rounded-full bg-[#0070F3]" />
-              <div className="h-[5px] w-[5px] rounded-full bg-[#00C48C]" />
-              <div className="h-[5px] w-[5px] rounded-full bg-[#7928CA]" />
-            </div>
-            <div className="hidden md:block h-3 w-px bg-white/[0.12]" />
-            <span className="text-[11px] md:text-[12px] font-medium tracking-[0.01em] text-[#555] text-center">
+/* ---------------------------------------------------------------- hero */
+
+export default function Hero() {
+  const reduced = useReducedMotion() ?? false;
+
+  const fade = (delay: number): Variants => ({
+    hidden: { opacity: 0, y: 16 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] } },
+  });
+
+  return (
+    <section className="aurora-bg relative flex min-h-screen flex-col items-center overflow-hidden px-6 pb-24 pt-32">
+      {/* Fine grid, masked toward the top */}
+      <div
+        className="fine-grid pointer-events-none absolute inset-0 opacity-60"
+        style={{ maskImage: "radial-gradient(ellipse 75% 55% at 50% 0%, black 30%, transparent 100%)", WebkitMaskImage: "radial-gradient(ellipse 75% 55% at 50% 0%, black 30%, transparent 100%)" }}
+      />
+      {/* Deep navy glow for dark mode */}
+      <div
+        className="pointer-events-none absolute inset-0 hidden dark:block"
+        style={{ background: "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30,58,138,0.28), transparent 60%)" }}
+      />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-[820px] flex-col items-center gap-6 text-center">
+        {/* Badge */}
+        <motion.div initial="hidden" animate="show" variants={fade(0)}>
+          <div className="liquid-glass inline-flex items-center gap-2.5 rounded-full px-4 py-1.5">
+            <span className="flex items-center gap-1">
+              <span className="h-[5px] w-[5px] rounded-full bg-[#2563eb]" />
+              <span className="h-[5px] w-[5px] rounded-full bg-[#06b6d4]" />
+              <span className="h-[5px] w-[5px] rounded-full bg-[#7c3aed]" />
+            </span>
+            <span className="h-3 w-px bg-slate-900/10 dark:bg-white/15" />
+            <span className="text-[11px] font-medium tracking-tight text-slate-600 dark:text-neutral-300 md:text-[12px]">
               AI Governance · Compliance · Observability
             </span>
           </div>
         </motion.div>
 
+        {/* Headline with blur-to-clear */}
         <motion.h1
-          className="px-4 md:px-0"
-          style={{
-            fontSize: "clamp(3.2rem, 8.5vw, 6.5rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.04em",
-            lineHeight: 1,
-            textAlign: "center",
-          }}
-          initial={{ opacity: 0, y: 32, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          className="px-2 font-semibold text-slate-900 dark:text-white md:px-0"
+          style={{ fontSize: "clamp(2.6rem, 6.5vw, 5rem)", letterSpacing: "-0.04em", lineHeight: 1.04 }}
+          initial={reduced ? { opacity: 0 } : { opacity: 0, y: 28, filter: "blur(12px)" }}
+          animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.85, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span
-            className="block"
-            style={{
-              background: "linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.75) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Govern your AI.
-          </span>
-          <span
-            className="block"
-            style={{
-              background: "linear-gradient(135deg, #0070F3 0%, #00C48C 50%, #7928CA 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Before the world asks.
-          </span>
+          The <span className="text-gradient-trust">trust layer</span> for every AI system you ship.
         </motion.h1>
 
+        {/* Subheadline */}
         <motion.p
-          style={{
-            fontSize: "clamp(1rem, 2vw, 1.2rem)",
-            color: "#888",
-            lineHeight: 1.7,
-            maxWidth: "520px",
-            margin: "0 auto",
-            textAlign: "center",
-          }}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.22 }}
+          className="max-w-[600px] text-[1rem] leading-relaxed text-slate-500 dark:text-neutral-400 md:text-[1.15rem]"
+          initial="hidden"
+          animate="show"
+          variants={fade(0.22)}
         >
-          The platform that monitors AI systems, automates compliance documentation, and proves regulatory readiness — in one command center.
+          CompliVibe brings AI governance, compliance automation, evidence, risk monitoring, and data
+          observability into one operating layer — so modern companies can prove trust without slowing down.
         </motion.p>
 
+        {/* CTAs */}
         <motion.div
           className="flex flex-wrap items-center justify-center gap-3"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.32 }}
+          initial="hidden"
+          animate="show"
+          variants={fade(0.32)}
         >
-          <motion.div
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          >
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
             <Link
               href="/score"
-              className="shine inline-flex items-center gap-2 rounded-full px-7 text-[14px] font-semibold text-white"
+              className="inline-flex h-12 items-center gap-2 rounded-full px-7 text-[14px] font-semibold text-white"
               style={{
-                height: 48,
-                background: "linear-gradient(135deg, #0070F3 0%, #7928CA 100%)",
-                boxShadow: "0 0 0 1px rgba(0,112,243,0.4), 0 4px 24px rgba(0,112,243,0.25)",
+                background: "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)",
+                boxShadow: "0 8px 24px rgba(37,99,235,0.28), inset 0 1px 0 rgba(255,255,255,0.3)",
               }}
             >
-              Get Started Free
+              Start Trust Scan
               <ArrowRight size={15} strokeWidth={2.5} />
             </Link>
           </motion.div>
 
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link
-              href="/book-demo"
-              className="inline-flex items-center gap-2 rounded-full border border-white/[0.10] px-7 text-[14px] font-medium text-[#999] transition-all duration-200 hover:border-white/[0.20] hover:text-white"
-              style={{ height: 48 }}
+              href="/platform"
+              className="liquid-glass inline-flex h-12 items-center gap-2 rounded-full px-7 text-[14px] font-semibold text-slate-700 transition-colors hover:text-slate-900 dark:text-neutral-200 dark:hover:text-white"
             >
-              Book a Demo
+              View Platform
               <ChevronRight size={15} />
             </Link>
           </motion.div>
         </motion.div>
 
+        {/* Proof chips */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-3 md:gap-5"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.44 }}
+          className="mt-1 flex flex-wrap items-center justify-center gap-2"
+          initial="hidden"
+          animate="show"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.44 } } }}
         >
-          <div className="flex items-center gap-1.5 shrink-0">
-            <CheckCircle2 className="h-3 w-3 text-[#0070F3]" />
-            <span className="text-[11px] text-[#444]">3 paying customers</span>
-          </div>
-          <span className="text-[10px] text-[#222] hidden md:inline">·</span>
-          <div className="flex items-center gap-1.5 shrink-0">
-            <ShieldCheck className="h-3 w-3 text-[#00C48C]" />
-            <span className="text-[11px] text-[#444]">EU AI Act ready</span>
-          </div>
-          <span className="text-[10px] text-[#222] hidden md:inline">·</span>
-          <div className="flex items-center gap-1.5 shrink-0">
-            <Zap className="h-3 w-3 text-[#7928CA]" />
-            <span className="text-[11px] text-[#444]">Ships in 48 hours</span>
-          </div>
+          {proofChips.map((chip) => {
+            const Icon = chip.icon;
+            return (
+              <motion.div
+                key={chip.label}
+                variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-900/[0.07] bg-white/60 px-3 py-1.5 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04]"
+              >
+                <Icon className="h-3 w-3" style={{ color: chip.accent }} />
+                <span className="text-[11px] font-medium text-slate-600 dark:text-neutral-300">{chip.label}</span>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
 
-      <DashboardVisual />
-      <div
-        className="pointer-events-none mt-0 h-40 w-full"
-        style={{
-          background: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 50%, #000 100%)",
-        }}
-      />
+      <CommandCenter reduced={reduced} />
     </section>
   );
 }

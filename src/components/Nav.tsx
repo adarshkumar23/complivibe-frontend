@@ -6,49 +6,37 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
   ArrowRight,
-  Award,
   BadgeCheck,
   BookOpen,
-  Bot,
   Brain,
   Building2,
-  Car,
   ChevronDown,
-  ClipboardList,
   Cloud,
   Compass,
-  CreditCard,
-  DollarSign,
+  Database,
   Eye,
   FileCheck,
   FileText,
-  Flag,
-  Github,
+  Gauge,
   GitCommit,
-  GitMerge,
-  GitPullRequest,
-  Globe,
-  GraduationCap,
   Heart,
   Landmark,
   Layers,
-  Link2,
+  LayoutDashboard,
   Lock,
-  MapPin,
+  Map,
   Network,
-  Plane,
-  PlayCircle,
   Rocket,
+  ScanLine,
   Scale,
-  Server,
   Shield,
   ShieldCheck,
-  Star,
   TrendingUp,
   Users,
-  Zap,
+  Workflow,
   type LucideIcon,
 } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   MobileNav,
   MobileNavHeader,
@@ -60,11 +48,21 @@ import {
   NavbarLogo,
 } from "@/components/ui/resizable-navbar";
 
+type Accent = "blue" | "cyan" | "green" | "purple";
+
+const accentClass: Record<Accent, string> = {
+  blue: "text-[#2563eb]",
+  cyan: "text-[#06b6d4]",
+  green: "text-[#10b981]",
+  purple: "text-[#7c3aed]",
+};
+
 type NavLinkItem = {
   name: string;
   description: string;
   href: string;
   icon: LucideIcon;
+  accent?: Accent;
 };
 
 type NavTab = {
@@ -72,7 +70,12 @@ type NavTab = {
   links: NavLinkItem[];
 };
 
-type DropdownName = "Platform" | "Solutions" | "Resources" | "Frameworks";
+type DropdownName =
+  | "Platform"
+  | "Solutions"
+  | "Trust Layers"
+  | "Frameworks"
+  | "Resources";
 
 type MegaMenu = {
   name: DropdownName;
@@ -88,29 +91,25 @@ const megaMenus: MegaMenu[] = [
     panelClassName: "min-w-[720px]",
     tabs: [
       {
-        name: "Governance",
+        name: "Core",
         links: [
-          { name: "Governance OS Engine", description: "Central operating layer for AI governance controls.", href: "/platform", icon: Shield },
-          { name: "Dual Obligation Engine", description: "Maps overlapping duties across frameworks automatically.", href: "/platform", icon: GitMerge },
-          { name: "FRIA+DPIA Fusion", description: "Unified risk assessments for AI and privacy obligations.", href: "/platform", icon: Layers },
-          { name: "Hash-Chained Audit Trail", description: "Tamper-evident lineage for every policy and action.", href: "/platform", icon: Link2 },
+          { name: "AI Trust Command Center", description: "Unified command center for AI systems, risks, evidence, and trust posture.", href: "/platform", icon: LayoutDashboard, accent: "blue" },
+          { name: "AI Governance OS", description: "Govern AI systems, models, vendors, owners, policies, and approvals.", href: "/platform", icon: Shield, accent: "blue" },
+          { name: "Compliance Automation", description: "Map obligations, collect evidence, and generate audit-ready documentation.", href: "/platform", icon: Workflow, accent: "blue" },
         ],
       },
       {
-        name: "Automation",
+        name: "Data & Evidence",
         links: [
-          { name: "Auto-Evidence Agents", description: "Continuously collect and organize audit-ready evidence.", href: "/platform", icon: Bot },
-          { name: "CI/CD Compliance Gate", description: "Stops non-compliant releases before they go live.", href: "/platform", icon: GitPullRequest },
-          { name: "GitHub Integration", description: "Connect policy checks directly into engineering workflows.", href: "/platform", icon: Github },
-          { name: "48-Hour Regulatory Engine", description: "Pushes major regulation deltas in near real time.", href: "/platform", icon: Zap },
+          { name: "Data Observability", description: "Monitor AI signals, drift indicators, incidents, usage, and production health.", href: "/platform", icon: Activity, accent: "cyan" },
+          { name: "Evidence Vault", description: "Central repository for policies, approvals, logs, controls, and audit evidence.", href: "/platform", icon: Database, accent: "green" },
         ],
       },
       {
-        name: "Monitoring",
+        name: "Trust",
         links: [
-          { name: "Live Model Monitor", description: "Track model risk posture and control health in production.", href: "/platform", icon: Activity },
-          { name: "LLM Vendor Watch", description: "Monitor third-party model risk and policy changes.", href: "/platform", icon: Eye },
-          { name: "Agent-Aware Governance", description: "Govern autonomous agents with policy-aware guardrails.", href: "/platform", icon: Network },
+          { name: "AI Trust Graph", description: "Connect systems, models, datasets, risks, controls, evidence, and reports.", href: "/platform", icon: Network, accent: "purple" },
+          { name: "Trust Center", description: "Publish live trust posture for customers, auditors, and enterprise buyers.", href: "/trust", icon: BadgeCheck, accent: "green" },
         ],
       },
     ],
@@ -121,32 +120,82 @@ const megaMenus: MegaMenu[] = [
     panelClassName: "min-w-[720px]",
     tabs: [
       {
-        name: "By Size",
+        name: "By Stage",
         links: [
-          { name: "Startup", description: "Fast compliance setup for lean, shipping-first teams.", href: "/solutions/startup", icon: Rocket },
-          { name: "Mid-Market", description: "Scale governance without adding process drag.", href: "/solutions/mid-market", icon: Building2 },
-          { name: "Enterprise", description: "Coordinate controls across functions and geographies.", href: "/solutions/enterprise", icon: Landmark },
-          { name: "IT Teams", description: "Embed controls into delivery and infrastructure pipelines.", href: "/solutions/it-teams", icon: Server },
-          { name: "CISO", description: "Unified AI risk visibility and accountability reporting.", href: "/solutions/ciso", icon: Lock },
-          { name: "GRC", description: "Operationalize policy into repeatable workflows.", href: "/solutions/grc", icon: ClipboardList },
+          { name: "AI-first startups", description: "Ship fast with governance and trust built in from day one.", href: "/solutions/startup", icon: Rocket, accent: "blue" },
+          { name: "SaaS companies", description: "Stay continuously audit-ready while you scale globally.", href: "/solutions/saas", icon: Cloud, accent: "blue" },
+          { name: "Enterprise AI teams", description: "Coordinate AI governance across functions and geographies.", href: "/solutions/enterprise", icon: Building2, accent: "blue" },
         ],
       },
       {
         name: "By Industry",
         links: [
-          { name: "Healthcare", description: "Clinical AI safeguards with privacy-by-design controls.", href: "/solutions/healthcare", icon: Heart },
-          { name: "Fintech", description: "Regulated AI oversight for high-trust financial use cases.", href: "/solutions/fintech", icon: TrendingUp },
-          { name: "SaaS", description: "Ship globally while staying continuously audit-ready.", href: "/solutions/saas", icon: Cloud },
-          { name: "Govt", description: "Public-sector governance for accountable AI deployment.", href: "/solutions/govt", icon: Flag },
-          { name: "Travel", description: "Cross-border data and AI risk controls for mobility platforms.", href: "/solutions/travel", icon: Plane },
+          { name: "Fintech", description: "High-trust AI oversight for regulated financial products.", href: "/solutions/fintech", icon: TrendingUp, accent: "cyan" },
+          { name: "Healthcare AI", description: "Privacy-by-design controls for clinical and health AI.", href: "/solutions/healthcare", icon: Heart, accent: "green" },
         ],
       },
       {
-        name: "Onboarding Packs",
+        name: "By Team",
         links: [
-          { name: "EU Export Pack", description: "Accelerate EU market entry with ready control bundles.", href: "/solutions/eu-export", icon: Globe },
-          { name: "India-First Pack", description: "DPDP-first operating posture for India launches.", href: "/solutions/india-first", icon: MapPin },
-          { name: "US SaaS Pack", description: "SOC 2-oriented governance for US SaaS growth.", href: "/solutions/us-saas", icon: DollarSign },
+          { name: "GRC & security teams", description: "Operationalize policy, evidence, and risk in one place.", href: "/solutions/grc", icon: ShieldCheck, accent: "purple" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Trust Layers",
+    href: "/platform",
+    panelClassName: "min-w-[720px]",
+    tabs: [
+      {
+        name: "Inventory & Risk",
+        links: [
+          { name: "AI System Inventory", description: "Track every AI system, model, dataset, vendor, owner, and use case.", href: "/platform", icon: Layers, accent: "blue" },
+          { name: "Model & Vendor Risk", description: "Govern third-party models, AI vendors, APIs, and risk exposure.", href: "/platform", icon: Eye, accent: "purple" },
+        ],
+      },
+      {
+        name: "Evidence & Mapping",
+        links: [
+          { name: "Evidence Automation", description: "Collect proof continuously from tools, workflows, and integrations.", href: "/platform", icon: FileCheck, accent: "green" },
+          { name: "Regulatory Mapping", description: "Map AI and data obligations across global frameworks.", href: "/platform", icon: Map, accent: "blue" },
+        ],
+      },
+      {
+        name: "Signals & Reports",
+        links: [
+          { name: "Observability Signals", description: "Track usage, drift, incidents, latency, and production AI health.", href: "/platform", icon: Activity, accent: "cyan" },
+          { name: "Audit & Trust Reports", description: "Generate board-ready, auditor-ready, and customer-ready trust reports.", href: "/platform", icon: FileText, accent: "blue" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Frameworks",
+    href: "/frameworks",
+    panelClassName: "min-w-[640px]",
+    tabs: [
+      {
+        name: "AI Governance",
+        links: [
+          { name: "EU AI Act", description: "Coverage for high-risk AI obligations and controls.", href: "/frameworks/eu-ai-act", icon: Brain, accent: "blue" },
+          { name: "ISO 42001", description: "AI management system alignment and readiness.", href: "/frameworks/iso-42001", icon: Shield, accent: "blue" },
+          { name: "NIST AI RMF", description: "Risk-based AI governance aligned to the NIST framework.", href: "/frameworks", icon: ShieldCheck, accent: "blue" },
+          { name: "Colorado AI Act", description: "Consumer AI protections mapped to your systems.", href: "/frameworks", icon: Landmark, accent: "blue" },
+        ],
+      },
+      {
+        name: "Privacy",
+        links: [
+          { name: "India DPDP", description: "India data protection mapped to product operations.", href: "/frameworks/dpdp", icon: Scale, accent: "cyan" },
+          { name: "GDPR", description: "Privacy governance mapped to AI data workflows.", href: "/frameworks/gdpr", icon: Lock, accent: "cyan" },
+        ],
+      },
+      {
+        name: "Security",
+        links: [
+          { name: "SOC 2", description: "Trust service controls aligned to AI delivery.", href: "/frameworks/soc2", icon: BadgeCheck, accent: "green" },
+          { name: "ISO 27001", description: "ISMS controls for a secure AI lifecycle.", href: "/frameworks/iso27001", icon: ShieldCheck, accent: "green" },
         ],
       },
     ],
@@ -159,60 +208,17 @@ const megaMenus: MegaMenu[] = [
       {
         name: "Learn",
         links: [
-          { name: "Compliance Compass", description: "Practical guides for modern AI governance teams.", href: "/resources", icon: Compass },
-          { name: "Ebooks", description: "Deep-dive books across major compliance frameworks.", href: "/resources", icon: BookOpen },
-          { name: "Training & Events", description: "Workshops and live sessions with policy operators.", href: "/resources", icon: GraduationCap },
-          { name: "Trust Week", description: "A focused series on transparency and assurance practices.", href: "/resources", icon: BadgeCheck },
+          { name: "Docs", description: "Product documentation and implementation references.", href: "/resources", icon: BookOpen, accent: "blue" },
+          { name: "Guides", description: "Practical playbooks for AI governance teams.", href: "/resources", icon: Compass, accent: "blue" },
+          { name: "Blog", description: "Commentary and explainers on AI trust and governance.", href: "/blog", icon: FileText, accent: "blue" },
         ],
       },
       {
-        name: "Watch",
-        links: [{ name: "Demo Videos", description: "Product demos and implementation walkthroughs.", href: "/resources", icon: PlayCircle }],
-      },
-      {
-        name: "Read",
+        name: "Discover",
         links: [
-          { name: "Customer Stories", description: "How teams ship safely with governance in place.", href: "/customer-stories", icon: Users },
-          { name: "Blog", description: "Commentary and explainers on evolving AI regulations.", href: "/blog", icon: FileText },
-          { name: "Changelog", description: "Latest feature releases and product improvements.", href: "/changelog", icon: GitCommit },
-        ],
-      },
-    ],
-  },
-  {
-    name: "Frameworks",
-    href: "/frameworks",
-    panelClassName: "min-w-[640px]",
-    tabs: [
-      {
-        name: "AI & Privacy",
-        links: [
-          { name: "EU AI Act", description: "Coverage for high-risk AI obligations and controls.", href: "/frameworks/eu-ai-act", icon: Brain },
-          { name: "ISO 42001", description: "AI management system alignment and readiness.", href: "/frameworks/iso-42001", icon: Shield },
-          { name: "GDPR", description: "Privacy governance mapped to AI data workflows.", href: "/frameworks/gdpr", icon: Lock },
-          { name: "DPDP", description: "India privacy compliance mapped to product operations.", href: "/frameworks/dpdp", icon: Scale },
-        ],
-      },
-      {
-        name: "Security",
-        links: [
-          { name: "SOC2", description: "Trust service controls aligned to AI delivery.", href: "/frameworks/soc2", icon: BadgeCheck },
-          { name: "ISO 27001", description: "ISMS controls for secure AI lifecycle management.", href: "/frameworks/iso27001", icon: ShieldCheck },
-          { name: "ISO 27017", description: "Cloud security controls for hosted AI systems.", href: "/frameworks/iso27017", icon: Cloud },
-          { name: "CSA STAR", description: "Cloud assurance mappings for vendor trust posture.", href: "/frameworks/csa-star", icon: Star },
-          { name: "TISAX", description: "Security and trust controls for automotive ecosystems.", href: "/frameworks/tisax", icon: Car },
-        ],
-      },
-      {
-        name: "Industry",
-        links: [
-          { name: "HIPAA", description: "Healthcare privacy and security control alignment.", href: "/frameworks/hipaa", icon: Heart },
-          { name: "FCRA", description: "Fair-credit obligations embedded in AI decisioning.", href: "/frameworks/fcra", icon: FileCheck },
-          { name: "RBI SAR", description: "Banking supervisory expectations for AI governance.", href: "/frameworks/rbi-sar", icon: Landmark },
-          { name: "PCI-DSS", description: "Payment-data security controls for AI-enabled flows.", href: "/frameworks/pci-dss", icon: CreditCard },
-          { name: "FedRAMP", description: "US public-sector cloud authorization alignment.", href: "/frameworks/fedramp", icon: Flag },
-          { name: "PIPEDA", description: "Canadian privacy obligations integrated with controls.", href: "/frameworks/pipeda", icon: Globe },
-          { name: "ISO 9001", description: "Quality management rigor for AI-enabled delivery.", href: "/frameworks/iso9001", icon: Award },
+          { name: "Customer Stories", description: "How modern teams ship AI with trust in place.", href: "/customer-stories", icon: Users, accent: "green" },
+          { name: "Trust Score", description: "Benchmark your AI trust and readiness posture.", href: "/score", icon: Gauge, accent: "cyan" },
+          { name: "Changelog", description: "Latest features and product improvements.", href: "/changelog", icon: GitCommit, accent: "blue" },
         ],
       },
     ],
@@ -222,53 +228,45 @@ const megaMenus: MegaMenu[] = [
 const mobileLinks = [
   { name: "Platform", href: "/platform" },
   { name: "Solutions", href: "/solutions" },
-  { name: "Resources", href: "/resources" },
+  { name: "Trust Layers", href: "/platform" },
   { name: "Frameworks", href: "/frameworks" },
+  { name: "Resources", href: "/resources" },
   { name: "Pricing", href: "/pricing" },
 ];
 
 function PromoCard() {
-  const [daysRemaining, setDaysRemaining] = useState(0);
-
-  useEffect(() => {
-    const nextValue = Math.max(
-      0,
-      Math.ceil((new Date("2026-08-02").getTime() - new Date().getTime()) / 86400000),
-    );
-    setDaysRemaining(nextValue);
-  }, []);
-
   return (
-    <div className="w-[240px] shrink-0 p-4 border-l border-white/[0.06]">
-      <div className="rounded-xl bg-[#0D0D0D] border border-white/[0.08] p-4 overflow-hidden relative">
-        {/* Glow */}
-        <div 
-          className="absolute top-0 right-0 w-24 h-24 pointer-events-none opacity-50"
+    <div className="w-[240px] shrink-0 p-4 border-l border-slate-900/[0.06] dark:border-white/[0.06]">
+      <div className="liquid-panel relative overflow-hidden p-4">
+        {/* Soft blue/cyan glow */}
+        <div
+          className="absolute -top-6 -right-6 h-24 w-24 pointer-events-none opacity-70"
           style={{
-            background: "radial-gradient(circle at center, rgba(0,112,243,0.15), transparent 70%)"
+            background:
+              "radial-gradient(circle at center, rgba(6,182,212,0.18), transparent 70%)",
           }}
         />
 
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-[#FF3B3B]/10 border border-[#FF3B3B]/20 px-2 py-0.5 mb-3">
-          <div className="h-1 w-1 rounded-full bg-[#FF3B3B] animate-pulse" />
-          <span className="text-[9px] font-bold text-[#FF3B3B] uppercase tracking-wider">
-            LIVE ENFORCEMENT
+        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-[#2563eb]/20 bg-[#2563eb]/10 px-2 py-0.5">
+          <ScanLine className="h-3 w-3 text-[#2563eb]" />
+          <span className="text-[9px] font-bold uppercase tracking-wider text-[#2563eb]">
+            Free AI Trust Scan
           </span>
         </div>
 
-        <div className="text-[28px] font-bold font-mono text-white leading-none mb-1">
-          {daysRemaining}
+        <div className="mb-1 font-mono text-[28px] font-bold leading-none text-slate-900 dark:text-white">
+          7 min
         </div>
-        
-        <p className="text-[11px] text-[#555] mb-3 leading-tight">
-          days until EU AI Act enforcement
+
+        <p className="mb-3 text-[11px] leading-tight text-slate-500 dark:text-neutral-400">
+          Map your AI systems, governance gaps, and evidence readiness.
         </p>
 
         <Link
           href="/score"
-          className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#0070F3] hover:text-white transition-colors"
+          className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#2563eb] transition-colors hover:text-[#1d4ed8] dark:hover:text-white"
         >
-          Check your readiness <ArrowRight className="h-[11px] w-[11px]" />
+          Start scan <ArrowRight className="h-[11px] w-[11px]" />
         </Link>
       </div>
     </div>
@@ -307,10 +305,10 @@ function MegaNav({
           >
             <Link
               href={menu.href}
-              className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold text-neutral-300 transition hover:bg-white/5 hover:text-white"
+              className="flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-900/[0.05] hover:text-slate-900 dark:text-neutral-300 dark:hover:bg-white/5 dark:hover:text-white"
               onMouseEnter={() => openDropdown(menu.name)}
             >
-              <span>{menu.name}</span>
+              <span className="whitespace-nowrap">{menu.name}</span>
               <ChevronDown
                 className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
               />
@@ -323,23 +321,29 @@ function MegaNav({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.15, ease: "easeOut" }}
-                  className={`absolute left-1/2 top-full z-[100] mt-2 -translate-x-1/2 overflow-hidden rounded-xl border border-[#1a1a1a] bg-[#0A0A0A] shadow-2xl ${menu.panelClassName}`}
+                  style={{
+                    backdropFilter: "blur(24px) saturate(180%)",
+                    WebkitBackdropFilter: "blur(24px) saturate(180%)",
+                  }}
+                  className={`absolute left-1/2 top-full z-[100] mt-2 -translate-x-1/2 overflow-hidden rounded-2xl border border-white/50 bg-white/85 shadow-[0_24px_60px_rgba(15,23,42,0.16),inset_0_1px_0_rgba(255,255,255,0.6)] dark:border-white/10 dark:bg-[#0b0f17]/90 dark:shadow-[0_24px_60px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] ${menu.panelClassName}`}
                   onMouseEnter={() => openDropdown(menu.name)}
                   onMouseLeave={closeDropdown}
                 >
                   <div className="flex">
-                    <div className="w-44 border-r border-[#1a1a1a] py-3">
+                    <div className="w-44 border-r border-slate-900/[0.06] py-3 dark:border-white/10">
                       {menu.tabs.map((tab) => {
                         const isActive = selectedTab.name === tab.name;
                         return (
                           <button
                             key={`${menu.name}-${tab.name}`}
                             type="button"
+                            aria-current={isActive ? "true" : undefined}
                             onMouseEnter={() => setActiveTab(menu.name, tab.name)}
-                            className={`w-full border-l-2 px-4 py-2.5 text-left text-sm transition ${
+                            onFocus={() => setActiveTab(menu.name, tab.name)}
+                            className={`w-full border-l-2 px-4 py-2.5 text-left text-sm font-medium transition ${
                               isActive
-                                ? "border-[#0070F3] bg-white/5 text-white"
-                                : "border-transparent text-neutral-400 hover:bg-white/5 hover:text-white"
+                                ? "border-[#2563eb] bg-[#2563eb]/[0.06] text-slate-900 dark:bg-white/5 dark:text-white"
+                                : "border-transparent text-slate-500 hover:bg-slate-900/[0.04] hover:text-slate-900 dark:text-neutral-400 dark:hover:bg-white/5 dark:hover:text-white"
                             }`}
                           >
                             {tab.name}
@@ -355,14 +359,14 @@ function MegaNav({
                           <Link
                             key={`${selectedTab.name}-${item.name}`}
                             href={item.href}
-                            className="rounded-lg p-3 transition hover:bg-white/5"
+                            className="rounded-xl p-3 transition hover:bg-slate-900/[0.04] dark:hover:bg-white/5"
                             onClick={closeDropdown}
                           >
                             <div className="flex items-start gap-3">
-                              <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[#0070F3]" />
+                              <Icon className={`mt-0.5 h-4 w-4 shrink-0 ${accentClass[item.accent ?? "blue"]}`} />
                               <div>
-                                <p className="text-sm font-semibold text-white">{item.name}</p>
-                                <p className="mt-1 text-xs leading-5 text-neutral-400">
+                                <p className="text-sm font-semibold text-slate-900 dark:text-white">{item.name}</p>
+                                <p className="mt-1 text-xs leading-5 text-slate-500 dark:text-neutral-400">
                                   {item.description}
                                 </p>
                               </div>
@@ -383,7 +387,7 @@ function MegaNav({
 
       <Link
         href="/pricing"
-        className="rounded-full px-3 py-2 text-sm font-semibold text-neutral-300 transition hover:bg-white/5 hover:text-white"
+        className="whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-900/[0.05] hover:text-slate-900 dark:text-neutral-300 dark:hover:bg-white/5 dark:hover:text-white"
       >
         Pricing
       </Link>
@@ -395,10 +399,11 @@ export default function Nav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [activeTabs, setActiveTabs] = useState<Record<DropdownName, string>>({
-    Platform: "Governance",
-    Solutions: "By Size",
+    Platform: "Core",
+    Solutions: "By Stage",
+    "Trust Layers": "Inventory & Risk",
+    Frameworks: "AI Governance",
     Resources: "Learn",
-    Frameworks: "AI & Privacy",
   });
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -448,7 +453,8 @@ export default function Nav() {
         />
 
         <div className="relative z-20 hidden items-center gap-2 lg:flex">
-          <NavbarButton href="/login" variant="secondary" className="text-white">
+          <ThemeToggle />
+          <NavbarButton href="/login" variant="secondary">
             Login
           </NavbarButton>
           <NavbarButton href="/book-demo" variant="primary">
@@ -475,17 +481,21 @@ export default function Nav() {
               key={item.name}
               href={item.href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="relative text-neutral-300"
+              className="relative text-slate-700 transition-colors hover:text-slate-900 dark:text-neutral-300 dark:hover:text-white"
             >
               <span className="block text-sm font-medium">{item.name}</span>
             </Link>
           ))}
+          <div className="flex w-full items-center justify-between border-t border-slate-900/[0.06] pt-4 dark:border-white/10">
+            <span className="text-sm font-medium text-slate-500 dark:text-neutral-400">Theme</span>
+            <ThemeToggle />
+          </div>
           <div className="flex w-full flex-col gap-4">
             <NavbarButton
               href="/login"
               onClick={() => setIsMobileMenuOpen(false)}
               variant="secondary"
-              className="w-full text-white"
+              className="w-full"
             >
               Login
             </NavbarButton>

@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CompliVibe — EU AI Act + India DPDP Compliance Platform",
-  description: "One platform for EU AI Act and India DPDP compliance. Auto-classify AI systems, generate Annex IV docs, track obligations, and prove readiness in 48 hours.",
+  title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
+  description: "AI governance, compliance automation, evidence management, risk monitoring, and data observability in one trust infrastructure layer for modern companies.",
   alternates: { canonical: "https://complivibe.in" },
   openGraph: {
-    title: "CompliVibe — EU AI Act + India DPDP Compliance Platform",
-    description: "One platform for EU AI Act and India DPDP compliance. Auto-classify AI systems, generate Annex IV docs, track obligations, and prove readiness in 48 hours.",
+    title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
+    description: "AI governance, compliance automation, evidence management, risk monitoring, and data observability in one trust infrastructure layer for modern companies.",
     url: "https://complivibe.in",
     images: [{ url: "https://complivibe.in/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CompliVibe — EU AI Act + India DPDP Compliance Platform",
+    title: "CompliVibe — AI Trust Infrastructure for AI-First Companies",
     images: ["https://complivibe.in/og-image.png"],
   },
 };
@@ -37,19 +37,19 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="cv-page">
       <Nav />
       <main>
         <Hero />
-        <RegFeed />
-        <LogoCloud />
-        <TrustBadgeStrip />
-        <Stats />
-        <Features />
-        <ProblemSection />
-        <SolutionSection />
         <ProductBentoGrid />
         <AITrustGraph />
+        <Features />
+        <TrustBadgeStrip />
+        <RegFeed />
+        <Stats />
+        <LogoCloud />
+        <ProblemSection />
+        <SolutionSection />
         <DemoVideo />
         <Testimonials />
         <Pricing />
