@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import {
   Check,
-  Sparkles,
   ShieldCheck,
   Archive,
   BadgeCheck,
@@ -28,87 +27,141 @@ const currencyConfig: Record<Currency, { symbol: string; label: string }> = {
 
 type Tier = "starter" | "growth" | "enterprise";
 
+/**
+ * The ONE reserved accent for this whole surface. It is spent entirely on the
+ * Growth "Most Popular" seal and its CTA. Everything else — plan names, prices,
+ * spec panels, Trust Score figures, feature checks — stays on the
+ * --cv-ink / --cv-muted / --cv-border monochrome system so the accent reads as
+ * a stamp of authority rather than decoration. Do not introduce a second one.
+ */
+const SIGNATURE_ACCENT = "#2563eb";
+
+type FeatureGroup = { label: string; items: string[] };
+
 type Plan = {
   tier: Tier;
   name: string;
   accent: string;
-  badge: string;
+  badge?: string;
   bestFor: string;
+  /** Monthly list price. 0 in every currency means "Custom" (see isCustom below). */
   price: Record<Currency, number>;
+  /** Annual list price. Annual = monthly x 12 — there is no annual discount. */
+  annualPrice?: Record<Currency, number>;
+  /** Used instead of annualPrice for Custom tiers to show a starting band. */
+  priceNote?: Record<Currency, string>;
+  subCopy?: string;
   cta: { label: string; href: string };
   highlighted: boolean;
-  features: string[];
+  featureGroups: FeatureGroup[];
 };
 
-// NOTE: prices, hrefs and plan logic preserved from the original; names/copy reframed
-// to AI Trust Infrastructure positioning. Visual fields (badge, bestFor, mini) added.
+// PRICING IS USD-PRIMARY. USD figures below are the contractual list prices.
+//
+// !! FX SNAPSHOT — 1 Aug 2026 !!
+// INR and EUR figures are derived from USD at 1 USD = 95.4 INR and
+// 1 USD = 0.87 EUR, rounded to the nearest ₹100 and nearest €5.
+// These are a point-in-time snapshot, not locked contractual rates — they
+// drift. Re-derive from the USD column before quoting any non-USD number.
 const plans: Plan[] = [
   {
     tier: "starter",
     name: "Starter Trust",
     accent: "#2563eb",
-    badge: "Pilot-ready",
-    bestFor: "Early AI teams mapping governance and evidence for the first time.",
-    price: { INR: 9999, USD: 120, EUR: 110 },
-    cta: { label: "Start Free Trial", href: "/signup?plan=starter" },
+    bestFor: "Seed–Series A, AI-native teams.",
+    price: { USD: 500, INR: 47700, EUR: 435 },
+    annualPrice: { USD: 6000, INR: 572400, EUR: 5220 },
+    cta: { label: "Get Audit-Ready", href: "/signup?plan=starter" },
     highlighted: false,
-    features: [
-      "3 AI systems governed",
-      "2 frameworks (EU AI Act + DPDP)",
-      "Evidence vault (1GB)",
-      "Risk classification",
-      "Trust reports (3/mo)",
-      "Email support",
-      "Weekly regulatory intelligence",
-      "Community Slack access",
+    featureGroups: [
+      {
+        label: "Governance Coverage",
+        items: [
+          "1–2 compliance frameworks (choose your priority: EU AI Act, DPDP, ISO 42001, etc.)",
+          "Up to 5 AI systems governed",
+          "Core risk & obligation mapping",
+        ],
+      },
+      {
+        label: "Trust & Reporting",
+        items: [
+          "Trust Score + audit report included",
+          "Auto-generated model cards & risk assessments (usage-based add-on)",
+        ],
+      },
+      {
+        label: "Support",
+        items: ["Self-serve + email support"],
+      },
     ],
   },
   {
     tier: "growth",
     name: "Growth Trust OS",
     accent: "#7c3aed",
-    badge: "Most popular",
-    bestFor: "Teams turning AI governance, compliance, and evidence into an operating workflow.",
-    price: { INR: 24999, USD: 299, EUR: 279 },
-    cta: { label: "Get Started", href: "/signup?plan=growth" },
+    badge: "Most Popular",
+    bestFor: "Series A–B, the sweet spot.",
+    price: { USD: 1000, INR: 95400, EUR: 870 },
+    annualPrice: { USD: 12000, INR: 1144800, EUR: 10440 },
+    subCopy: "One price, every AI framework.",
+    cta: { label: "Cover Every Framework", href: "/signup?plan=growth" },
     highlighted: true,
-    features: [
-      "Unlimited AI systems",
-      "8 frameworks covered",
-      "Full evidence vault (50GB)",
-      "Advanced risk classification",
-      "Unlimited trust reports",
-      "Control-to-evidence mapping",
-      "Data observability signals",
-      "Priority email + chat support",
-      "Trust posture dashboard",
-      "Audit pack generator",
-      "Team members (5 included)",
-      "Vendor & model risk",
+    featureGroups: [
+      {
+        label: "Governance Coverage",
+        items: [
+          "All frameworks included — EU AI Act, DPDP, ISO 42001, NIST AI RMF, SOC 2, Colorado AI Act",
+          "Up to 25 AI systems governed",
+          "Full risk & obligation mapping across every framework you touch",
+        ],
+      },
+      {
+        label: "Trust & Reporting",
+        items: [
+          "Trust Score + audit report included",
+          "Peer benchmarking against industry cohorts",
+          "Verified badge — public trust signal for your site and sales deck",
+        ],
+      },
+      {
+        label: "Support",
+        items: ["Priority support"],
+      },
     ],
   },
   {
     tier: "enterprise",
     name: "Enterprise Trust Infrastructure",
     accent: "#06b6d4",
-    badge: "Custom rollout",
-    bestFor: "Companies scaling AI trust across teams, vendors, systems, and markets.",
-    price: { INR: 0, USD: 0, EUR: 0 },
-    cta: { label: "Talk to Trust Experts", href: "/contact" },
+    bestFor: "Regulated, multi-framework, multi-entity orgs.",
+    price: { USD: 0, INR: 0, EUR: 0 },
+    priceNote: {
+      USD: "From $3K–5K / mo · $40K–120K+ / yr",
+      INR: "From ₹286K–477K / mo · ₹3.8M–11.4M+ / yr",
+      EUR: "From €2.6K–4.4K / mo · €35K–104K+ / yr",
+    },
+    cta: { label: "Talk to Sales", href: "/contact" },
     highlighted: false,
-    features: [
-      "Everything in Growth",
-      "14 frameworks covered",
-      "Unlimited evidence vault",
-      "SAML SSO / SCIM",
-      "Audit log API",
-      "CI/CD trust gate",
-      "Dedicated CSM",
-      "Custom SLA (99.99%)",
-      "Human review & expert sign-off",
-      "Trust center publishing",
-      "Data residency (India / EU)",
-      "Custom contracts & invoicing",
+    featureGroups: [
+      {
+        label: "Governance Coverage",
+        items: [
+          "All frameworks + custom framework mapping for your regulatory environment",
+          "Unlimited AI systems governed",
+        ],
+      },
+      {
+        label: "Trust & Reporting",
+        items: [
+          "Trust Score + audit report included",
+          "Peer benchmarking included",
+          "Verified badge included",
+        ],
+      },
+      {
+        label: "Support",
+        items: ["Dedicated CSM", "SLA", "DPA", "SSO"],
+      },
     ],
   },
 ];
@@ -149,51 +202,72 @@ const trustStrip = [
 
 /* ------------------------------------------------------------------ */
 /*  Per-plan mini visual                                              */
+/*                                                                    */
+/*  All three share one "spec panel" shell — a single ruled container  */
+/*  rather than floating chips — so they read as an inspection readout */
+/*  belonging to the card, not as loose decoration next to it.         */
 /* ------------------------------------------------------------------ */
+function MiniPanel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="overflow-hidden rounded-[10px] border border-[var(--cv-border)] bg-[var(--cv-bg-soft)]">
+      {children}
+    </div>
+  );
+}
+
+function SpecRow({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
+  return (
+    <div className="flex items-center gap-2.5 px-3 py-2">
+      <Icon className="h-3.5 w-3.5 shrink-0 text-[var(--cv-muted)]" />
+      <span className="text-[11px] font-medium text-[var(--cv-ink)]">{label}</span>
+    </div>
+  );
+}
+
 function StarterMini() {
-  const chips = [
+  const rows = [
     { icon: Boxes, label: "AI inventory" },
     { icon: Archive, label: "Evidence vault" },
     { icon: ScanLine, label: "Trust scan" },
   ];
   return (
-    <div className="flex flex-wrap gap-1.5">
-      {chips.map((c) => {
-        const Icon = c.icon;
-        return (
-          <span
-            key={c.label}
-            className="inline-flex items-center gap-1.5 rounded-full border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-2.5 py-1 text-[11px] font-medium text-[var(--cv-muted)]"
-          >
-            <Icon className="h-3 w-3 text-[#2563eb] dark:text-[#3b82f6]" />
-            {c.label}
-          </span>
-        );
-      })}
-    </div>
+    <MiniPanel>
+      <div className="divide-y divide-[color:var(--cv-border)]">
+        {rows.map((r) => (
+          <SpecRow key={r.label} icon={r.icon} label={r.label} />
+        ))}
+      </div>
+    </MiniPanel>
   );
 }
 
 function GrowthMini() {
   const metrics = [
-    { label: "Trust Score", value: "87", pct: 87, color: "#7c3aed" },
-    { label: "Evidence", value: "91%", pct: 91, color: "#10b981" },
-    { label: "Risk", value: "72%", pct: 72, color: "#f59e0b" },
+    { label: "Trust Score", value: "87", pct: 87 },
+    { label: "Evidence", value: "91%", pct: 91 },
+    { label: "Risk", value: "72%", pct: 72 },
   ];
   return (
-    <div className="grid grid-cols-3 gap-2">
-      {metrics.map((m) => (
-        <div key={m.label} className="rounded-lg border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-2.5 py-2">
-          <div className="font-mono text-base font-bold leading-none" style={{ color: m.color }}>
-            {m.value}
+    <MiniPanel>
+      <div className="grid grid-cols-3 divide-x divide-[color:var(--cv-border)]">
+        {metrics.map((m) => (
+          <div key={m.label} className="px-3 py-2.5">
+            <div className="font-mono text-[17px] font-bold leading-none tabular-nums text-[var(--cv-ink)]">
+              {m.value}
+            </div>
+            <div className="mb-2 mt-1.5 text-[9px] uppercase tracking-[0.1em] text-[var(--cv-muted)]">
+              {m.label}
+            </div>
+            <div className="h-[3px] overflow-hidden rounded-full bg-[var(--cv-border)]">
+              <div
+                className="h-full rounded-full bg-[var(--cv-ink)] opacity-30"
+                style={{ width: `${m.pct}%` }}
+              />
+            </div>
           </div>
-          <div className="mb-1.5 mt-1 text-[9px] uppercase tracking-wide text-[var(--cv-muted)]">{m.label}</div>
-          <div className="h-1 overflow-hidden rounded-full bg-[var(--cv-surface-strong)]">
-            <div className="h-full rounded-full" style={{ width: `${m.pct}%`, backgroundColor: m.color }} />
-          </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </MiniPanel>
   );
 }
 
@@ -204,20 +278,13 @@ function EnterpriseMini() {
     { icon: UserCheck, label: "Dedicated review" },
   ];
   return (
-    <div className="flex flex-col gap-1.5">
-      {rows.map((r) => {
-        const Icon = r.icon;
-        return (
-          <div
-            key={r.label}
-            className="flex items-center gap-2 rounded-lg border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-2.5 py-1.5 text-[11px] font-medium text-[var(--cv-ink)]"
-          >
-            <Icon className="h-3.5 w-3.5 text-[#0891b2] dark:text-[#22d3ee]" />
-            {r.label}
-          </div>
-        );
-      })}
-    </div>
+    <MiniPanel>
+      <div className="divide-y divide-[color:var(--cv-border)]">
+        {rows.map((r) => (
+          <SpecRow key={r.label} icon={r.icon} label={r.label} />
+        ))}
+      </div>
+    </MiniPanel>
   );
 }
 
@@ -241,7 +308,7 @@ const cardItem: Variants = {
 };
 
 export default function Pricing() {
-  const [currency, setCurrency] = useState<Currency>("INR");
+  const [currency, setCurrency] = useState<Currency>("USD");
   const curr = currencyConfig[currency];
   const reduce = useReducedMotion();
 
@@ -318,113 +385,139 @@ export default function Pricing() {
                 whileHover={reduce ? undefined : { y: -6 }}
                 transition={{ type: "spring", stiffness: 300, damping: 24 }}
                 className={clsx(
-                  "relative flex flex-col rounded-[var(--cv-radius-2xl)] p-7",
-                  plan.highlighted
-                    ? "liquid-card glass-highlight z-10 md:-mt-3 md:scale-[1.03]"
-                    : "bento-card glass-highlight"
+                  "bento-card glass-highlight relative flex flex-col rounded-[var(--cv-radius-2xl)] p-7",
+                  plan.highlighted && "z-10 md:-mt-3 md:scale-[1.03]"
                 )}
+                // The recommended plan is separated by elevation alone, using the
+                // existing shadow token — no colour gradient. overflow must be
+                // reset because .bento-card hides it, which would clip the seal
+                // that sits above the card's top edge.
                 style={
                   plan.highlighted
-                    ? {
-                        borderColor: `${plan.accent}55`,
-                        boxShadow:
-                          "0 24px 60px rgba(37,99,235,0.16), 0 8px 24px rgba(124,58,237,0.12), inset 0 1px 0 rgba(255,255,255,0.5)",
-                      }
+                    ? { boxShadow: "var(--cv-shadow-glass)", overflow: "visible" }
                     : undefined
                 }
               >
-                {/* recommended soft gradient glow ring */}
+                {/* certificate double-rule — an engraved inner frame on the
+                    recommended plan, the "stamped document" cue */}
                 {plan.highlighted && (
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute -inset-px -z-10 rounded-[var(--cv-radius-2xl)] opacity-60 blur-[6px]"
-                    style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed 50%, #06b6d4)" }}
+                    className="pointer-events-none absolute inset-[5px] rounded-[calc(var(--cv-radius-2xl)-5px)] border border-[var(--cv-border)]"
                   />
                 )}
 
-                {/* floating popular pill */}
+                {/* seal — the single accented element on this surface */}
                 {plan.highlighted && (
                   <span
-                    className="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1 rounded-full px-3 py-1 text-[11px] font-semibold text-white shadow-[var(--cv-shadow-soft)]"
-                    style={{ background: "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)" }}
+                    className="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white shadow-[var(--cv-shadow-soft)]"
+                    style={{ backgroundColor: SIGNATURE_ACCENT }}
                   >
-                    <Sparkles className="h-3 w-3" />
+                    <BadgeCheck className="h-3.5 w-3.5" />
                     {plan.badge}
                   </span>
                 )}
 
                 {/* badge + name */}
-                <div className="flex flex-col gap-3">
-                  {!plan.highlighted && (
-                    <span
-                      className="inline-flex w-fit items-center gap-1 rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-                      style={{ color: plan.accent, borderColor: `${plan.accent}33`, backgroundColor: `${plan.accent}12` }}
-                    >
+                <div className="relative flex flex-col gap-3">
+                  {!plan.highlighted && plan.badge && (
+                    <span className="inline-flex w-fit items-center rounded-full border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--cv-muted)]">
                       {plan.badge}
                     </span>
                   )}
                   <div>
-                    <h3 className="text-lg font-bold tracking-tight text-[var(--cv-ink)]">{plan.name}</h3>
-                    <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--cv-muted)]">{plan.bestFor}</p>
+                    {/* plan name is a classification label, not a headline —
+                        the price below carries the visual weight */}
+                    <h3 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[var(--cv-ink)]">
+                      {plan.name}
+                    </h3>
+                    <p className="mt-2 text-[12.5px] leading-relaxed text-[var(--cv-muted)]">{plan.bestFor}</p>
                   </div>
                 </div>
 
                 {/* price */}
-                <div className="mt-6 flex items-end gap-1.5">
-                  {isCustom ? (
-                    <span className="text-[2.5rem] font-bold leading-none tracking-tight text-[var(--cv-ink)]">Custom</span>
-                  ) : (
-                    <>
-                      <span className="text-[2.5rem] font-bold leading-none tracking-tight text-[var(--cv-ink)]">
-                        {curr.symbol}
-                        {plan.price[currency].toLocaleString()}
+                <div className="relative mt-6">
+                  <div className="flex items-baseline gap-1">
+                    {isCustom ? (
+                      <span className="text-[2.75rem] font-bold leading-none tracking-[-0.03em] text-[var(--cv-ink)]">
+                        Custom
                       </span>
-                      <span className="pb-1 text-sm text-[var(--cv-muted)]">/ month</span>
-                    </>
+                    ) : (
+                      <>
+                        <span className="text-[1.375rem] font-semibold text-[var(--cv-ink)]">{curr.symbol}</span>
+                        <span className="text-[2.75rem] font-bold leading-none tracking-[-0.03em] tabular-nums text-[var(--cv-ink)]">
+                          {plan.price[currency].toLocaleString()}
+                        </span>
+                        <span className="text-[13px] text-[var(--cv-muted)]">/ month</span>
+                      </>
+                    )}
+                  </div>
+
+                  {plan.annualPrice && (
+                    <p className="mt-2.5 text-[12.5px] tabular-nums text-[var(--cv-muted)]">
+                      {curr.symbol}
+                      {plan.annualPrice[currency].toLocaleString()} / yr billed annually
+                    </p>
+                  )}
+
+                  {plan.priceNote && (
+                    <p className="mt-2.5 text-[12.5px] tabular-nums text-[var(--cv-muted)]">
+                      {plan.priceNote[currency]}
+                    </p>
+                  )}
+
+                  {plan.subCopy && (
+                    <p className="mt-2.5 text-[12.5px] font-semibold text-[var(--cv-ink)]">{plan.subCopy}</p>
                   )}
                 </div>
 
                 {/* mini visual */}
-                <div className="mt-5">{miniByTier[plan.tier]}</div>
+                <div className="relative mt-5">{miniByTier[plan.tier]}</div>
 
                 {/* CTA */}
+                {/* Only the recommended plan gets a filled button — the accent
+                    appears exactly twice on this surface, seal and CTA, and
+                    both belong to the same "Most Popular" treatment. */}
                 <Link
                   href={plan.cta.href}
                   className={clsx(
-                    "mt-6 flex h-11 items-center justify-center rounded-full text-sm font-semibold transition-all",
-                    plan.tier === "growth" && "text-white hover:opacity-90",
+                    "relative mt-6 flex h-11 items-center justify-center rounded-full border text-[13px] font-semibold tracking-[0.01em] transition-all",
+                    plan.tier === "growth" && "border-transparent text-white hover:opacity-90",
                     plan.tier === "starter" &&
-                      "liquid-glass text-[var(--cv-ink)] hover:border-[#2563eb]/40",
+                      "border-[var(--cv-border)] bg-[var(--cv-surface-strong)] text-[var(--cv-ink)] hover:bg-[var(--cv-bg-soft)]",
                     plan.tier === "enterprise" &&
-                      "bg-[var(--cv-ink)] text-[var(--cv-bg)] hover:opacity-90"
+                      "border-[var(--cv-ink)] bg-transparent text-[var(--cv-ink)] hover:bg-[var(--cv-ink)] hover:text-[var(--cv-bg)]"
                   )}
-                  style={
-                    plan.tier === "growth"
-                      ? { background: "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)" }
-                      : undefined
-                  }
+                  style={plan.tier === "growth" ? { backgroundColor: SIGNATURE_ACCENT } : undefined}
                 >
                   {plan.cta.label}
                 </Link>
 
-                {/* features */}
-                <div className="mt-6 border-t border-[var(--cv-border)] pt-5">
-                  <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--cv-muted)]">
-                    What&apos;s included
-                  </p>
-                  <ul className="flex flex-col gap-2">
-                    {plan.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2.5 text-[13px]">
-                        <span
-                          className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full"
-                          style={{ backgroundColor: `${plan.accent}14` }}
-                        >
-                          <Check className="h-2.5 w-2.5" style={{ color: plan.accent }} />
-                        </span>
-                        <span className="text-[var(--cv-muted)]">{f}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* features — each group is a ruled section of a spec sheet:
+                    label on the left, hairline running out to the edge, then
+                    the inclusions. Groups are separated by a rule, not just gap. */}
+                <div className="relative mt-7 border-t border-[var(--cv-border)] pt-6">
+                  {plan.featureGroups.map((group, groupIndex) => (
+                    <div
+                      key={group.label}
+                      className={clsx(groupIndex > 0 && "mt-5 border-t border-[var(--cv-border)] pt-5")}
+                    >
+                      <div className="mb-3 flex items-center gap-3">
+                        <p className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--cv-muted)]">
+                          {group.label}
+                        </p>
+                        <span aria-hidden className="h-px flex-1 bg-[var(--cv-border)]" />
+                      </div>
+                      <ul className="flex flex-col gap-2">
+                        {group.items.map((f) => (
+                          <li key={f} className="flex items-start gap-2.5 text-[13px] leading-relaxed">
+                            <Check className="mt-[3px] h-3.5 w-3.5 flex-shrink-0 text-[var(--cv-muted)]" />
+                            <span className="text-[var(--cv-muted)]">{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             );
@@ -432,7 +525,7 @@ export default function Pricing() {
         </motion.div>
 
         <p className="mt-8 text-center text-[11px] text-[var(--cv-muted)]">
-          Prices in Indian Rupees (INR). USD / EUR equivalents shown. Billed monthly or annually (save 20%).
+          Prices in USD. INR / EUR equivalents shown. Billed monthly or annually.
         </p>
 
         {/* Add-ons — extend your trust layer */}

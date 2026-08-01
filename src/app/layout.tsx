@@ -123,7 +123,7 @@ export default function RootLayout({
           operatingSystem: "Web",
           url: "https://complivibe.in",
           description: "AI Trust Infrastructure platform unifying AI governance, compliance automation, evidence management, risk monitoring, and data observability.",
-          offers: { "@type": "Offer", priceCurrency: "INR", price: "24999" },
+          offers: { "@type": "Offer", priceCurrency: "USD", price: "1000" },
         })}} />
       </head>
       <body className="cv-page font-sans antialiased">
