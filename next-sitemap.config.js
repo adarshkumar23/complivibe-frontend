@@ -6,9 +6,23 @@ module.exports = {
   generateIndexSitemap: false,
   changefreq: 'weekly',
   priority: 0.7,
-  exclude: ['/login', '/signup', '/api/*'],
+  // /blog/unavailable and /articles/unavailable are the throwaway params those
+  // routes emit when the CMS was unreachable during a CMS_FETCH_OPTIONAL build.
+  // /admin/* is the internal CMS panel — never public, never indexed.
+  exclude: [
+    '/login',
+    '/signup',
+    '/api/*',
+    '/admin',
+    '/admin/*',
+    '/blog/unavailable',
+    '/articles/unavailable',
+  ],
   additionalPaths: async () => [
     { loc: '/', priority: 1.0, changefreq: 'weekly' },
+    { loc: '/blog', priority: 0.7, changefreq: 'weekly' },
+    { loc: '/articles', priority: 0.7, changefreq: 'weekly' },
+    { loc: '/faq', priority: 0.7, changefreq: 'monthly' },
     { loc: '/platform', priority: 0.9, changefreq: 'monthly' },
     { loc: '/pricing', priority: 0.9, changefreq: 'weekly' },
     { loc: '/book-demo', priority: 0.9, changefreq: 'monthly' },

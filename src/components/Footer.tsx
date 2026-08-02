@@ -29,6 +29,9 @@ const footerLinks = {
   Resources: [
     { label: "Resources", href: "/resources" },
     { label: "Docs", href: "/docs" },
+    { label: "Blog", href: "/blog" },
+    { label: "Articles", href: "/articles" },
+    { label: "FAQ", href: "/faq" },
     { label: "Customer Stories", href: "/customer-stories" },
     { label: "Changelog", href: "/changelog" },
     { label: "Trust Score", href: "/score" },
