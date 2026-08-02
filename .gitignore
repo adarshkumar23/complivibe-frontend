@@ -46,3 +46,7 @@ devserver.*.log
 nextdev.*.log
 next-debug.*.log
 next-live.*.log
+
+# CMS content pulled at build time by scripts/fetch-content.ts — build
+# artifacts, not source. Regenerate with `npm run fetch:content`.
+src/content/**/*.generated.ts

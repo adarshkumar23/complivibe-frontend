@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import PageHero from "@/components/PageHero";
 import PageSection from "@/components/PageSection";
-import PageBentoCard from "@/components/PageBentoCard";
 import PageCTA from "@/components/PageCTA";
+import ContentShowcase from "@/components/ContentShowcase";
+import ContentTagFilter from "@/components/ContentTagFilter";
+import ContentEmptyState from "@/components/ContentEmptyState";
+import { posts } from "@/content/blog/posts.generated";
+import { collectTags, sortByPublished, toSummary } from "@/lib/content";
+
+const ACCENT = "var(--cv-blue)";
 
 export const metadata: Metadata = {
   title: "Field notes | CompliVibe",
@@ -12,33 +18,51 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://complivibe.in/blog" },
 };
 
-const topics = [
-  { icon: "ShieldCheck", accent: "#2563eb", title: "AI governance", body: "How modern teams govern AI systems, models, and vendors." },
-  { icon: "Workflow", accent: "#7c3aed", title: "Trust infrastructure", body: "Building an operating layer for evidence, risk, and trust." },
-  { icon: "Compass", accent: "#06b6d4", title: "Compliance automation", body: "Turning obligations into evidence-backed workflows." },
-];
-
 export default function BlogPage() {
+  const items = sortByPublished(posts).map(toSummary);
+  const tags = collectTags(items);
+
   return (
     <PageShell>
       <PageHero
         kicker="Field Notes"
         title="Field notes on AI governance and"
         highlight="trust infrastructure."
-        subtitle="Field notes on AI governance, trust infrastructure, and compliance automation. We're publishing soon — follow along or talk to the team in the meantime."
+        subtitle="Working notes on AI governance, trust infrastructure, and compliance automation — written by the team building it."
         primary={{ label: "Talk to the team", href: "/contact" }}
         secondary={{ label: "Explore resources", href: "/resources" }}
       />
 
-      <PageSection kicker="What we'll cover" title="Topics on the way">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-          {topics.map((t) => (
-            <PageBentoCard key={t.title} icon={t.icon} accent={t.accent} title={t.title} body={t.body} />
-          ))}
-        </div>
-        <p className="mx-auto mt-10 max-w-xl text-center text-sm text-[var(--cv-muted)]">
-          The first field notes are in progress. Want an early read? Reach out and we’ll share what we’re working on.
-        </p>
+      <PageSection
+        kicker="Latest"
+        title={items.length === 1 ? "The latest field note" : "Latest field notes"}
+      >
+        {items.length === 0 ? (
+          <ContentEmptyState
+            accent={ACCENT}
+            title="The first field notes are on their way."
+            body="We're writing up what we've learned building the governance layer. Until they land, the platform tour and the docs cover the same ground."
+          />
+        ) : tags.length > 1 ? (
+          // The filter is a client component, so it only mounts where it earns
+          // its JavaScript: a single tag can't filter anything.
+          <ContentTagFilter
+            items={items}
+            tags={tags}
+            basePath="/blog"
+            accent={ACCENT}
+            featureLabel="Latest field note"
+            featureCta="Read field note"
+          />
+        ) : (
+          <ContentShowcase
+            items={items}
+            basePath="/blog"
+            accent={ACCENT}
+            featureLabel="Latest field note"
+            featureCta="Read field note"
+          />
+        )}
       </PageSection>
 
       <PageCTA

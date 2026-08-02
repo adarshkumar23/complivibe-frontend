@@ -582,6 +582,93 @@ body::before {
   }
 }
 
+/* =====================================================================
+   Editorial surfaces — blog, articles, FAQ
+   ===================================================================== */
+
+/* Long-form body copy. The block margins live on the elements <Markdown>
+   emits; these only fix the seam where prose meets its container and let the
+   browser even out ragged line endings. */
+.cv-prose > :first-child {
+  margin-top: 0;
+}
+.cv-prose > :last-child {
+  margin-bottom: 0;
+}
+.cv-prose p,
+.cv-prose li {
+  text-wrap: pretty;
+}
+
+/* FAQ accordion.
+
+   A <details> element removes its content from the box tree while closed, so
+   height cannot be transitioned from a closed state — the usual grid-rows or
+   max-height tricks animate from nothing and look broken. Animating the panel
+   as it is revealed is the honest version: smooth on open, instant on close,
+   and correct in every browser. Overridden by the prefers-reduced-motion block
+   below, which zeroes every animation on the site. */
+@keyframes cv-faq-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cv-faq[open] > .cv-faq-body {
+  animation: cv-faq-open 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =====================================================================
+   Token tints
+   =====================================================================
+
+   Tailwind silently drops the opacity modifier on an arbitrary var() colour —
+   `border-[var(--cv-danger)]/40` compiles to no rule at all, not to a faded
+   border. So every place a token needs to be tinted is mixed here instead.
+   color-mix keeps the result tied to the token, which means it re-tints itself
+   in dark mode rather than needing a second hardcoded value. */
+
+/* --faq-accent is set inline per accordion; this is the fallback. */
+.cv-faq {
+  --faq-accent: var(--cv-blue);
+}
+.cv-faq:hover,
+.cv-faq[open] {
+  border-color: color-mix(in srgb, var(--faq-accent) 40%, transparent);
+}
+.cv-faq[open] .cv-faq-icon {
+  border-color: color-mix(in srgb, var(--faq-accent) 40%, transparent);
+}
+
+/* Translucent sticky bars — the page has to read through them. */
+.cv-blur-bar {
+  background: color-mix(in srgb, var(--cv-bg) 88%, transparent);
+}
+
+/* Admin panel states. */
+.cv-alert-danger {
+  border-color: color-mix(in srgb, var(--cv-danger) 40%, transparent);
+  background: color-mix(in srgb, var(--cv-danger) 10%, transparent);
+  color: var(--cv-danger);
+}
+.cv-btn-danger {
+  border-color: color-mix(in srgb, var(--cv-danger) 40%, transparent);
+  color: var(--cv-danger);
+}
+.cv-btn-danger:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--cv-danger) 10%, transparent);
+}
+.cv-pill-published {
+  border-color: color-mix(in srgb, var(--cv-green) 35%, transparent);
+  background: color-mix(in srgb, var(--cv-green) 10%, transparent);
+  color: var(--cv-green);
+}
+
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .motion-safe-float,
