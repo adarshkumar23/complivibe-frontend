@@ -2,7 +2,8 @@
 
 import { useSyncExternalStore } from "react";
 import Link from "next/link";
-import { LogOut, ShieldCheck } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Inbox, LogOut, ShieldCheck } from "lucide-react";
 import {
   logout,
   subscribeToken,
@@ -23,6 +24,8 @@ export default function AdminHeader() {
     tokenSnapshot,
     tokenServerSnapshot,
   );
+  const pathname = usePathname();
+  const onLeads = pathname?.startsWith("/admin/leads") ?? false;
 
   return (
     <header className="cv-blur-bar sticky top-0 z-40 border-b border-[var(--cv-border)] backdrop-blur">
@@ -36,17 +39,34 @@ export default function AdminHeader() {
         </Link>
 
         {token && (
-          <button
-            type="button"
-            onClick={() => {
-              logout();
-              window.location.assign("/admin");
-            }}
-            className={`${secondaryButtonClass} h-9`}
-          >
-            <LogOut className="h-3.5 w-3.5" />
-            Log out
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Sits behind the same token check as Log out: on the signed-out
+                login screen there is nothing to navigate to, and rendering it
+                would also break the no-token prerender match. The CompliVibe
+                Admin wordmark is the way back to Content. */}
+            <Link
+              href="/admin/leads"
+              aria-current={onLeads ? "page" : undefined}
+              className={`${secondaryButtonClass} h-9 ${
+                onLeads ? "border-[var(--cv-blue)] text-[var(--cv-blue)]" : ""
+              }`}
+            >
+              <Inbox className="h-3.5 w-3.5" />
+              Leads
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => {
+                logout();
+                window.location.assign("/admin");
+              }}
+              className={`${secondaryButtonClass} h-9`}
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              Log out
+            </button>
+          </div>
         )}
       </div>
     </header>

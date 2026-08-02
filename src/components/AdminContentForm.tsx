@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Loader2, Save, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  ImageIcon,
+  Loader2,
+  Save,
+  Trash2,
+  Upload,
+  X,
+} from "lucide-react";
 import {
   CONTENT_STATUSES,
   CONTENT_TYPES,
@@ -13,11 +21,13 @@ import {
   parseTags,
   toSlug,
   updateContent,
+  uploadImage,
   type AdminContent,
   type ContentInput,
   type ContentStatus,
   type ContentType,
 } from "@/lib/adminApi";
+import { resolveMediaUrl } from "@/lib/media";
 import {
   dangerButtonClass,
   fieldErrorClass,
@@ -85,9 +95,73 @@ export default function AdminContentForm({
   const [formError, setFormError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  // Object URL for the file just picked, so the preview appears before the
+  // upload finishes. Held until it is replaced or the form unmounts — see the
+  // effect below — rather than revoked on success, which would blank the
+  // thumbnail for as long as the CMS copy takes to load.
+  const [localPreview, setLocalPreview] = useState<string | null>(null);
+
+  useEffect(
+    () => () => {
+      if (localPreview) URL.revokeObjectURL(localPreview);
+    },
+    [localPreview],
+  );
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
+  }
+
+  /** Puts an upload failure under the Cover image field, like any API error. */
+  function setCoverError(message: string | null) {
+    setFieldErrors((current) => {
+      const next = { ...current };
+      if (message) next.coverImage = message;
+      else delete next.coverImage;
+      return next;
+    });
+  }
+
+  /**
+   * Uploads on selection rather than behind a second "Upload" click. This is
+   * an internal tool and there is nothing to configure between the two steps,
+   * so the extra button would only be a way to forget to press it and wonder
+   * why the cover image never saved.
+   */
+  async function handleCoverFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    // Clear the input so re-picking the same file still fires a change event
+    // — useful after a failed upload.
+    event.target.value = "";
+    if (!file) return;
+
+    setLocalPreview(URL.createObjectURL(file));
+    setCoverError(null);
+    setFormError(null);
+    setUploading(true);
+
+    try {
+      const uploaded = await uploadImage(file);
+      // The CMS-relative URL is what gets stored; resolveMediaUrl turns it
+      // into a full src wherever it is rendered.
+      update("coverImage", uploaded.url);
+    } catch (caught) {
+      setLocalPreview(null);
+      setCoverError(
+        caught instanceof CmsApiError
+          ? caught.message
+          : "Could not upload that image. Try again.",
+      );
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  function clearCoverImage() {
+    setLocalPreview(null);
+    setCoverError(null);
+    update("coverImage", "");
   }
 
   function handleTitleChange(value: string) {
@@ -165,7 +239,11 @@ export default function AdminContentForm({
     }
   }
 
-  const busy = saving || deleting;
+  // Saving mid-upload would store an empty coverImage and silently drop the
+  // image the author is watching upload, so the whole form waits.
+  const busy = saving || deleting || uploading;
+
+  const coverPreview = localPreview ?? resolveMediaUrl(form.coverImage);
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
@@ -302,20 +380,97 @@ export default function AdminContentForm({
         </Field>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <Field
-            label="Cover image"
-            htmlFor="field-cover"
-            error={fieldErrors.coverImage}
-            hint="Optional. Path or URL."
-          >
-            <input
-              id="field-cover"
-              value={form.coverImage}
-              onChange={(event) => update("coverImage", event.target.value)}
-              className={fieldErrors.coverImage ? inputErrorClass : inputClass}
-              placeholder="/images/blog/iso-42001.jpg"
-            />
-          </Field>
+          <div className="sm:col-span-2">
+            <Field
+              label="Cover image"
+              htmlFor="field-cover"
+              error={fieldErrors.coverImage}
+              hint="Optional. Upload a file, or paste a path or an external URL."
+            >
+              <div className="flex flex-col gap-3">
+                {/* Still a plain text field: an uploaded image fills it in, but
+                    pasting a URL or a path under public/ stays just as valid. */}
+                <input
+                  id="field-cover"
+                  value={form.coverImage}
+                  onChange={(event) => {
+                    setLocalPreview(null);
+                    update("coverImage", event.target.value);
+                  }}
+                  className={
+                    fieldErrors.coverImage ? inputErrorClass : inputClass
+                  }
+                  placeholder="/images/blog/iso-42001.jpg"
+                />
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="relative flex h-14 w-24 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-[var(--cv-border)] bg-[var(--cv-bg-soft)]">
+                    {coverPreview ? (
+                      /* eslint-disable-next-line @next/next/no-img-element --
+                         blob: previews and CMS-hosted uploads both need a raw
+                         img; next/image would demand an allow-listed host. */
+                      <img
+                        src={coverPreview}
+                        alt=""
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <ImageIcon className="h-4 w-4 text-[var(--cv-muted)]" />
+                    )}
+                    {uploading && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-[var(--cv-surface-strong)]/70">
+                        <Loader2 className="h-4 w-4 animate-spin text-[var(--cv-muted)]" />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* A label wired to a visually-hidden input: the native file
+                      button cannot be styled, and clicking a label whose input
+                      is disabled is a no-op, so `busy` genuinely blocks it. */}
+                  <label
+                    htmlFor="field-cover-file"
+                    className={`${secondaryButtonClass} ${
+                      busy ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+                    }`}
+                  >
+                    {uploading ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    ) : (
+                      <Upload className="h-3.5 w-3.5" />
+                    )}
+                    {uploading
+                      ? "Uploading…"
+                      : form.coverImage
+                        ? "Replace image"
+                        : "Upload image"}
+                  </label>
+                  <input
+                    id="field-cover-file"
+                    type="file"
+                    accept="image/*"
+                    disabled={busy}
+                    onChange={(event) => void handleCoverFileChange(event)}
+                    className="sr-only"
+                  />
+
+                  {form.coverImage && !uploading && (
+                    <button
+                      type="button"
+                      onClick={clearCoverImage}
+                      className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[var(--cv-muted)] transition-colors hover:text-[var(--cv-ink)]"
+                    >
+                      <X className="h-3 w-3" />
+                      Clear
+                    </button>
+                  )}
+
+                  <p className="text-[12px] text-[var(--cv-muted)]">
+                    JPEG, PNG, WebP, GIF or SVG. Up to 5 MB.
+                  </p>
+                </div>
+              </div>
+            </Field>
+          </div>
 
           <Field label="Author" htmlFor="field-author" error={fieldErrors.author}>
             <input

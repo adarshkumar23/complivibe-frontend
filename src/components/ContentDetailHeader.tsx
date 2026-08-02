@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, CalendarDays, Clock, UserRound } from "lucide-react";
+import { resolveMediaUrl } from "@/lib/media";
 import ContentTagPills from "@/components/ContentTagPills";
 
 /**
@@ -39,6 +40,10 @@ export default function ContentDetailHeader({
   coverImage: string | null;
   accent: string;
 }) {
+  // Rewrites a CMS upload onto the CMS's own origin; a path under public/ or an
+  // external URL comes back untouched.
+  const cover = resolveMediaUrl(coverImage);
+
   return (
     <header className="aurora-bg relative overflow-hidden pt-28 pb-10 md:pt-36 md:pb-14">
       <div className="cv-container">
@@ -98,13 +103,13 @@ export default function ContentDetailHeader({
           )}
         </div>
 
-        {coverImage && (
+        {cover && (
           <figure className="motion-safe-reveal premium-shadow relative mx-auto mt-12 aspect-[16/9] w-full max-w-5xl overflow-hidden rounded-2xl border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] md:aspect-[21/9]">
             {/* eslint-disable-next-line @next/next/no-img-element -- cover URLs come
                 from the CMS and can point anywhere; next/image would need every
                 host allow-listed in next.config.ts. */}
             <img
-              src={coverImage}
+              src={cover}
               alt=""
               decoding="async"
               className="h-full w-full object-cover"

@@ -84,6 +84,67 @@ export interface AdminUser {
   role: string;
 }
 
+// --- Leads ------------------------------------------------------------------
+// Submissions from the public Book a Demo and waitlist forms. Written by
+// src/lib/submitLead.ts (unauthenticated); everything below is admin-only.
+
+export type LeadSource = "BOOK_DEMO" | "WAITLIST";
+export type LeadStatus = "NEW" | "CONTACTED" | "QUALIFIED" | "CLOSED" | "SPAM";
+
+export const LEAD_SOURCES: LeadSource[] = ["BOOK_DEMO", "WAITLIST"];
+export const LEAD_STATUSES: LeadStatus[] = [
+  "NEW",
+  "CONTACTED",
+  "QUALIFIED",
+  "CLOSED",
+  "SPAM",
+];
+
+/** Human labels for the enums, which are stored SCREAMING_SNAKE. */
+export const LEAD_SOURCE_LABELS: Record<LeadSource, string> = {
+  BOOK_DEMO: "Book Demo",
+  WAITLIST: "Waitlist",
+};
+
+export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {
+  NEW: "New",
+  CONTACTED: "Contacted",
+  QUALIFIED: "Qualified",
+  CLOSED: "Closed",
+  SPAM: "Spam",
+};
+
+/** Mirrors the CMS LeadDTO. */
+export interface AdminLead {
+  id: string;
+  source: LeadSource;
+  fullName: string;
+  workEmail: string;
+  company: string | null;
+  role: string | null;
+  interest: string | null;
+  message: string | null;
+  /** Book a Demo only. */
+  companySize: string | null;
+  /** Book a Demo only. */
+  preferredTime: string | null;
+  /** Waitlist only. */
+  companyStage: string | null;
+  status: LeadStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/** Response of `POST /cms-api/uploads`. */
+export interface UploadedImage {
+  /** Root-relative on the CMS, e.g. "/uploads/mgk3f1x9-4c1b.png". Store this
+   *  verbatim in `coverImage`; `resolveMediaUrl` turns it into a usable src. */
+  url: string;
+  filename: string;
+  mimeType: string;
+  size: number;
+}
+
 export interface FieldError {
   field: string;
   message: string;
@@ -449,6 +510,121 @@ export function deleteContent(id: string): Promise<void> {
   });
 }
 
+export interface LeadFilters {
+  source?: LeadSource;
+  status?: LeadStatus;
+}
+
+/**
+ * Every matching lead, newest first. Paged through the same way `listContent`
+ * is, for the same reason: the CMS caps `limit` at 200 and this table only
+ * grows.
+ */
+export async function listLeads(
+  filters: LeadFilters = {},
+): Promise<AdminLead[]> {
+  const collected: AdminLead[] = [];
+  let offset = 0;
+
+  for (;;) {
+    const params = new URLSearchParams({
+      limit: String(LIST_PAGE_SIZE),
+      offset: String(offset),
+    });
+    if (filters.source) params.set("source", filters.source);
+    if (filters.status) params.set("status", filters.status);
+
+    const page = await requestWithMeta<AdminLead[]>(
+      `/leads?${params.toString()}`,
+    );
+
+    collected.push(...page.data);
+
+    if (!page.meta.hasMore || page.data.length === 0) break;
+    offset += page.data.length;
+    if (collected.length > MAX_LIST_ITEMS) break;
+  }
+
+  return collected;
+}
+
+export function getLead(id: string): Promise<AdminLead> {
+  return request<AdminLead>(`/leads/${encodeURIComponent(id)}`, { auth: true });
+}
+
+/** Status is the only mutable field — the CMS rejects any other key with a 400. */
+export function updateLeadStatus(
+  id: string,
+  status: LeadStatus,
+): Promise<AdminLead> {
+  return request<AdminLead>(`/leads/${encodeURIComponent(id)}`, {
+    method: "PUT",
+    body: { status },
+    auth: true,
+  });
+}
+
+export function deleteLead(id: string): Promise<void> {
+  return request<void>(`/leads/${encodeURIComponent(id)}`, {
+    method: "DELETE",
+    auth: true,
+  });
+}
+
+/**
+ * Uploads one image and returns where the CMS put it.
+ *
+ * Bypasses `request()` because that helper JSON-encodes its body and sets
+ * `Content-Type` by hand. A multipart upload needs neither: `FormData` must be
+ * passed to `fetch` untouched so the browser can generate the boundary and set
+ * the header itself. Everything else — the bearer token, the error envelope,
+ * the 401-ends-the-session rule — is kept identical on purpose.
+ *
+ * `token` is optional; the stored session token is used when it is omitted.
+ */
+export async function uploadImage(
+  file: File,
+  token?: string,
+): Promise<UploadedImage> {
+  const bearer = token ?? getToken();
+  if (!bearer) {
+    redirectToLogin();
+    throw new CmsApiError("Not signed in.", 401, "UNAUTHORIZED");
+  }
+
+  const body = new FormData();
+  // Field name is fixed by the CMS: `upload.single("file")`.
+  body.append("file", file);
+
+  let response: Response;
+  try {
+    response = await fetch(`${CMS_API_URL}/uploads`, {
+      method: "POST",
+      headers: { Accept: "application/json", Authorization: `Bearer ${bearer}` },
+      body,
+    });
+  } catch {
+    throw new CmsApiError(
+      `Could not reach the CMS at ${CMS_API_URL}. Check that it is running and that this origin is listed in the CMS's CORS_ORIGINS.`,
+      0,
+      "NETWORK_ERROR",
+    );
+  }
+
+  const payload = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    const { message, code, details } = parseErrorBody(payload, response.status);
+    if (response.status === 401) {
+      clearToken();
+      redirectToLogin();
+    }
+    throw new CmsApiError(message, response.status, code, details);
+  }
+
+  return (payload as { data: UploadedImage }).data;
+}
+
 // --------------------------------------------------------------------------
 // Helpers shared by the admin forms
 // --------------------------------------------------------------------------
@@ -479,6 +655,28 @@ export function parseTags(value: string): string[] {
         .filter(Boolean),
     ),
   );
+}
+
+/**
+ * As `formatAdminDate`, plus the time. A lead's usefulness decays by the hour,
+ * so "02 Aug 2026" alone is not enough to triage by — the same fixed en-GB/UTC
+ * formatting, so it never disagrees with the rest of the panel.
+ */
+export function formatAdminDateTime(iso: string | null): string {
+  if (!iso) return "—";
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "—";
+  return `${date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  })}, ${date.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "UTC",
+  })} UTC`;
 }
 
 /** Fixed en-GB/UTC formatting, matching the public site's date rendering. */

@@ -46,3 +46,29 @@ export const statusPillClass = (status: "DRAFT" | "PUBLISHED"): string =>
   status === "PUBLISHED"
     ? "cv-pill-published inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-semibold"
     : "inline-flex items-center rounded-full border border-[var(--cv-border)] bg-[var(--cv-bg-soft)] px-2.5 py-0.5 text-[11px] font-semibold text-[var(--cv-muted)]";
+
+const pillBase =
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-semibold";
+
+/** Neutral pill used for a lead's source, which is a label rather than a state. */
+export const neutralPillClass = `${pillBase} border-[var(--cv-border)] bg-[var(--cv-bg-soft)] text-[var(--cv-muted)]`;
+
+/**
+ * Lead status pills. Only NEW is coloured — it is the one status that means
+ * "someone still has to do something". Everything else is deliberately quiet so
+ * a long table does not turn into a wall of colour.
+ */
+export const leadStatusPillClass = (
+  status: "NEW" | "CONTACTED" | "QUALIFIED" | "CLOSED" | "SPAM",
+): string => {
+  switch (status) {
+    case "NEW":
+      return `${pillBase} border-[#2563eb]/35 bg-[#2563eb]/[0.10] text-[#2563eb] dark:text-[#60a5fa]`;
+    case "QUALIFIED":
+      return `${pillBase} cv-pill-published`;
+    case "SPAM":
+      return `${pillBase} border-[var(--cv-danger)]/35 bg-[var(--cv-danger)]/[0.08] text-[var(--cv-danger)]`;
+    default:
+      return `${pillBase} border-[var(--cv-border)] bg-[var(--cv-bg-soft)] text-[var(--cv-muted)]`;
+  }
+};

@@ -14,6 +14,7 @@ import {
   sortByPublished,
   toSummary,
 } from "@/lib/content";
+import { absoluteMediaUrl } from "@/lib/media";
 
 const SITE_URL = "https://complivibe.in";
 const ACCENT = "var(--cv-blue)";
@@ -76,7 +77,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     datePublished: post.publishedAt ?? undefined,
     dateModified: post.updatedAt,
     keywords: post.tags.length > 0 ? post.tags.join(", ") : undefined,
-    image: post.coverImage ? `${SITE_URL}${post.coverImage}` : undefined,
+    // A CMS upload already resolves to the CMS's origin, so this only prefixes
+    // the site's own paths — pasting SITE_URL onto everything would point
+    // crawlers at a /uploads/ path this domain does not serve in every setup.
+    image: absoluteMediaUrl(post.coverImage, SITE_URL),
     author: { "@type": "Organization", name: post.author ?? "CompliVibe" },
     publisher: {
       "@type": "Organization",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import type { ContentSummary } from "@/lib/content";
+import { resolveMediaUrl } from "@/lib/media";
 import ContentTagPills from "@/components/ContentTagPills";
 
 /**
@@ -31,7 +32,10 @@ export default function ContentCard({
   index?: number;
 }) {
   const href = `${basePath}/${item.slug}`;
-  const showCover = variant === "feed" && Boolean(item.coverImage);
+  // Rewrites a CMS upload onto the CMS's own origin; a path under public/ or an
+  // external URL comes back untouched.
+  const cover = resolveMediaUrl(item.coverImage);
+  const showCover = variant === "feed" && Boolean(cover);
 
   return (
     <Link
@@ -46,7 +50,7 @@ export default function ContentCard({
               from the CMS and can point anywhere; next/image would need every
               host allow-listed in next.config.ts. */}
           <img
-            src={item.coverImage ?? ""}
+            src={cover ?? ""}
             alt=""
             loading="lazy"
             decoding="async"

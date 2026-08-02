@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { submitWeb3Form } from "@/lib/submitWeb3Form";
+import { leadErrorMessage, submitLead } from "@/lib/submitLead";
 
 const CONTACT_EMAIL = "contact@complivibe.in";
 
@@ -75,27 +75,26 @@ export default function WaitlistForm() {
 
     setStatus("submitting");
     setErrorMsg("");
+
+    // The CMS is the only destination: it stores the signup and the team works
+    // it from /admin/leads. Storing it *is* the submission, so a failure here is
+    // the visitor's problem and has to be shown, with advice they can act on.
     try {
-      await submitWeb3Form({
-        name: form.fullName,
-        email: form.email,
+      await submitLead({
+        source: "WAITLIST",
+        fullName: form.fullName,
+        workEmail: form.email,
         company: form.company,
         role: form.role,
-        company_stage: form.companyStage,
+        companyStage: form.companyStage,
         interest: form.interest,
         message: form.message,
-        subject: "New CompliVibe waitlist signup",
-        source: "website_waitlist",
-        botcheck: "",
       });
       setStatus("success");
     } catch (err) {
+      console.warn("Waitlist signup was not stored in the CMS:", err);
       setStatus("error");
-      setErrorMsg(
-        err instanceof Error
-          ? err.message
-          : `Something went wrong. Please try again or email ${CONTACT_EMAIL}.`,
-      );
+      setErrorMsg(leadErrorMessage(err, CONTACT_EMAIL));
     }
   }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { submitWeb3Form } from "@/lib/submitWeb3Form";
+import { leadErrorMessage, submitLead } from "@/lib/submitLead";
 
 const CONTACT_EMAIL = "contact@complivibe.in";
 
@@ -80,28 +80,27 @@ export default function BookDemoForm() {
 
     setStatus("submitting");
     setErrorMsg("");
+
+    // The CMS is the only destination: it stores the lead and the team works it
+    // from /admin/leads. Storing it *is* the submission, so a failure here is
+    // the visitor's problem and has to be shown, with advice they can act on.
     try {
-      await submitWeb3Form({
-        name: form.fullName,
-        email: form.email,
+      await submitLead({
+        source: "BOOK_DEMO",
+        fullName: form.fullName,
+        workEmail: form.email,
         company: form.company,
         role: form.role,
-        company_size: form.companySize,
-        primary_interest: form.primaryInterest,
-        preferred_time: form.preferredTime,
+        companySize: form.companySize,
+        interest: form.primaryInterest,
+        preferredTime: form.preferredTime,
         message: form.message,
-        subject: "New CompliVibe demo request",
-        source: "website_book_demo",
-        botcheck: "",
       });
       setStatus("success");
     } catch (err) {
+      console.warn("Demo request was not stored in the CMS:", err);
       setStatus("error");
-      setErrorMsg(
-        err instanceof Error
-          ? err.message
-          : `Something went wrong. Please try again or email ${CONTACT_EMAIL}.`,
-      );
+      setErrorMsg(leadErrorMessage(err, CONTACT_EMAIL));
     }
   }
 
