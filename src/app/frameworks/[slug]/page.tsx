@@ -4,6 +4,8 @@ import PageShell from "@/components/PageShell";
 import PageHero from "@/components/PageHero";
 import PageSection from "@/components/PageSection";
 import PageCTA from "@/components/PageCTA";
+import RelatedLinks from "@/components/RelatedLinks";
+import { relatedSolutionsFor } from "@/lib/seo";
 import FrameworkChecklist from "./FrameworkChecklist";
 
 interface FrameworkData {
@@ -184,10 +186,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const resolvedSlug = frameworkSlugAliases[slug] ?? slug;
   const data = frameworksData[resolvedSlug] || { ...fallbackData, name: resolvedSlug.toUpperCase().replace(/-/g, " ") };
+  const title = `${data.name} Compliance Software & Readiness | CompliVibe`;
+  // Kept under ~160 chars so it isn't truncated in search results — data.name
+  // rather than data.fullName, which runs long for statutes like the DPDP Act.
+  const description =
+    `Map ${data.name} obligations to your AI systems, controls, and evidence — ` +
+    `track readiness continuously and generate auditor-ready trust reports.`;
   return {
-    title: `${data.name} readiness & mapping | CompliVibe`,
-    description: `${data.name} mapping and evidence support — connect obligations to AI systems, controls, and trust reports.`,
+    title,
+    description,
     alternates: { canonical: `https://complivibe.in/frameworks/${slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `https://complivibe.in/frameworks/${slug}`,
+      images: [{ url: "https://complivibe.in/og-image.svg", width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -263,6 +277,13 @@ export default async function FrameworkDetailPage({ params }: { params: Promise<
           </span>
         </div>
       </PageSection>
+
+      <RelatedLinks
+        kicker="Who this is for"
+        title={`Teams working toward ${data.name} readiness`}
+        subtitle={`See how ${data.name} obligations show up for specific teams and markets.`}
+        links={relatedSolutionsFor(resolvedSlug)}
+      />
 
       <PageCTA
         title={`Build ${data.name} readiness with CompliVibe.`}

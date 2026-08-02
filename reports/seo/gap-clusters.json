@@ -1,0 +1,2788 @@
+[
+  {
+    "cluster": "editorial:eu ai act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 3,
+    "p1": 2,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what happens if you violate eu ai act",
+      "what documentation does eu ai act require",
+      "what is the eu ai act"
+    ]
+  },
+  {
+    "cluster": "editorial:eu ai act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 2,
+    "p1": 2,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to comply with eu ai act",
+      "how to avoid eu ai act penalties"
+    ]
+  },
+  {
+    "cluster": "editorial:dpdp act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 2,
+    "p1": 2,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to comply with dpdp act",
+      "how to avoid dpdp act fines"
+    ]
+  },
+  {
+    "cluster": "editorial:ai governance",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 5,
+    "p1": 1,
+    "p2": 4,
+    "p3": 0,
+    "keywords": [
+      "why do companies need ai governance",
+      "ai governance trends 2026",
+      "ai governance framework examples",
+      "ai governance policy template",
+      "board level ai governance"
+    ]
+  },
+  {
+    "cluster": "editorial:ai compliance",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 5,
+    "p1": 1,
+    "p2": 4,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for series a startups",
+      "ai compliance readiness checklist",
+      "ai compliance evidence vault",
+      "future of ai compliance",
+      "ai ethics vs ai compliance"
+    ]
+  },
+  {
+    "cluster": "editorial:dpdp act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 2,
+    "p1": 1,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what happens if you violate dpdp act",
+      "what is the dpdp act"
+    ]
+  },
+  {
+    "cluster": "editorial:iso 42001",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to get iso 42001 certified"
+    ]
+  },
+  {
+    "cluster": "editorial:ai risk register",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to build an ai risk register"
+    ]
+  },
+  {
+    "cluster": "editorial:ai model card",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to create an ai model card"
+    ]
+  },
+  {
+    "cluster": "editorial:ai bias audit",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to conduct an ai bias audit"
+    ]
+  },
+  {
+    "cluster": "editorial:evidence collection",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to automate compliance evidence collection"
+    ]
+  },
+  {
+    "cluster": "editorial:how to track",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to track ai regulatory changes"
+    ]
+  },
+  {
+    "cluster": "editorial:ai audit",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to prepare for an ai audit"
+    ]
+  },
+  {
+    "cluster": "editorial:how to map",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to map ai systems to compliance frameworks"
+    ]
+  },
+  {
+    "cluster": "editorial:how to reduce",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to reduce compliance manual work"
+    ]
+  },
+  {
+    "cluster": "editorial:shadow ai",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to detect shadow ai usage"
+    ]
+  },
+  {
+    "cluster": "editorial:third-party ai",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to monitor third-party ai vendors"
+    ]
+  },
+  {
+    "cluster": "editorial:vendor risk",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to assess ai vendor risk"
+    ]
+  },
+  {
+    "cluster": "editorial:how to document",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to document ai risk assessments"
+    ]
+  },
+  {
+    "cluster": "editorial:how to stay",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to stay compliant with multiple ai regulations"
+    ]
+  },
+  {
+    "cluster": "editorial:ai governance",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to build ai governance from scratch"
+    ]
+  },
+  {
+    "cluster": "editorial:ai compliance",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / How-To",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "how to hire an ai compliance officer"
+    ]
+  },
+  {
+    "cluster": "editorial:what is required",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "what is required for high-risk ai systems"
+    ]
+  },
+  {
+    "cluster": "editorial:ai risk assessment",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "what is an ai risk assessment"
+    ]
+  },
+  {
+    "cluster": "editorial:continuous compliance",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "what is continuous compliance monitoring"
+    ]
+  },
+  {
+    "cluster": "editorial:cost of non-compliance",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "cost of non-compliance with ai regulations"
+    ]
+  },
+  {
+    "cluster": "editorial:compliance automation",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "compliance automation vs manual spreadsheets"
+    ]
+  },
+  {
+    "cluster": "editorial:ai risk management",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "enterprise ai risk management framework"
+    ]
+  },
+  {
+    "cluster": "editorial:ai risk scoring",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "automated ai risk scoring"
+    ]
+  },
+  {
+    "cluster": "editorial:ai governance maturity",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 1,
+    "p2": 0,
+    "p3": 0,
+    "keywords": [
+      "ai governance maturity model"
+    ]
+  },
+  {
+    "cluster": "regulation:dpdp act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 25,
+    "p1": 0,
+    "p2": 23,
+    "p3": 2,
+    "keywords": [
+      "dpdp act compliance",
+      "dpdp act compliance checklist",
+      "dpdp act compliance guide",
+      "dpdp act compliance requirements",
+      "dpdp act compliance for saas",
+      "dpdp act gap analysis",
+      "dpdp act audit checklist",
+      "dpdp act certification",
+      "dpdp act certification cost",
+      "dpdp act certification process",
+      "dpdp act penalties",
+      "dpdp act fines",
+      "dpdp act deadline",
+      "dpdp act deadline 2026",
+      "dpdp act implementation guide",
+      "dpdp act implementation timeline",
+      "dpdp act vs gdpr",
+      "dpdp act vs dpdp act",
+      "dpdp act training",
+      "dpdp act policy template",
+      "dpdp act risk assessment template",
+      "soc 2 vs dpdp act",
+      "gdpr vs dpdp act",
+      "ccpa vs dpdp act",
+      "hipaa vs dpdp act"
+    ]
+  },
+  {
+    "cluster": "regulation:china ai regulations",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 22,
+    "p1": 0,
+    "p2": 22,
+    "p3": 0,
+    "keywords": [
+      "china ai regulations",
+      "china ai regulations compliance",
+      "china ai regulations compliance checklist",
+      "china ai regulations compliance guide",
+      "china ai regulations compliance requirements",
+      "china ai regulations compliance for saas",
+      "china ai regulations gap analysis",
+      "china ai regulations audit checklist",
+      "china ai regulations certification",
+      "china ai regulations certification cost",
+      "china ai regulations certification process",
+      "china ai regulations penalties",
+      "china ai regulations fines",
+      "china ai regulations deadline",
+      "china ai regulations deadline 2026",
+      "china ai regulations implementation guide",
+      "china ai regulations implementation timeline",
+      "china ai regulations vs gdpr",
+      "china ai regulations vs dpdp act",
+      "china ai regulations training",
+      "china ai regulations policy template",
+      "china ai regulations risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:uk ai regulation",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 22,
+    "p1": 0,
+    "p2": 22,
+    "p3": 0,
+    "keywords": [
+      "uk ai regulation",
+      "uk ai regulation compliance",
+      "uk ai regulation compliance checklist",
+      "uk ai regulation compliance guide",
+      "uk ai regulation compliance requirements",
+      "uk ai regulation compliance for saas",
+      "uk ai regulation gap analysis",
+      "uk ai regulation audit checklist",
+      "uk ai regulation certification",
+      "uk ai regulation certification cost",
+      "uk ai regulation certification process",
+      "uk ai regulation penalties",
+      "uk ai regulation fines",
+      "uk ai regulation deadline",
+      "uk ai regulation deadline 2026",
+      "uk ai regulation implementation guide",
+      "uk ai regulation implementation timeline",
+      "uk ai regulation vs gdpr",
+      "uk ai regulation vs dpdp act",
+      "uk ai regulation training",
+      "uk ai regulation policy template",
+      "uk ai regulation risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:singapore ai governance framework",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 22,
+    "p1": 0,
+    "p2": 22,
+    "p3": 0,
+    "keywords": [
+      "singapore ai governance framework",
+      "singapore ai governance framework compliance",
+      "singapore ai governance framework compliance checklist",
+      "singapore ai governance framework compliance guide",
+      "singapore ai governance framework compliance requirements",
+      "singapore ai governance framework compliance for saas",
+      "singapore ai governance framework gap analysis",
+      "singapore ai governance framework audit checklist",
+      "singapore ai governance framework certification",
+      "singapore ai governance framework certification cost",
+      "singapore ai governance framework certification process",
+      "singapore ai governance framework penalties",
+      "singapore ai governance framework fines",
+      "singapore ai governance framework deadline",
+      "singapore ai governance framework deadline 2026",
+      "singapore ai governance framework implementation guide",
+      "singapore ai governance framework implementation timeline",
+      "singapore ai governance framework vs gdpr",
+      "singapore ai governance framework vs dpdp act",
+      "singapore ai governance framework training",
+      "singapore ai governance framework policy template",
+      "singapore ai governance framework risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:canada aida",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 22,
+    "p1": 0,
+    "p2": 17,
+    "p3": 5,
+    "keywords": [
+      "canada aida",
+      "canada aida compliance",
+      "canada aida compliance checklist",
+      "canada aida compliance guide",
+      "canada aida compliance requirements",
+      "canada aida compliance for saas",
+      "canada aida gap analysis",
+      "canada aida audit checklist",
+      "canada aida certification",
+      "canada aida certification cost",
+      "canada aida certification process",
+      "canada aida penalties",
+      "canada aida fines",
+      "canada aida deadline",
+      "canada aida deadline 2026",
+      "canada aida implementation guide",
+      "canada aida implementation timeline",
+      "canada aida vs gdpr",
+      "canada aida vs dpdp act",
+      "canada aida training",
+      "canada aida policy template",
+      "canada aida risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:california ai law",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 22,
+    "p1": 0,
+    "p2": 21,
+    "p3": 1,
+    "keywords": [
+      "california ai law",
+      "california ai law compliance",
+      "california ai law compliance checklist",
+      "california ai law compliance guide",
+      "california ai law compliance requirements",
+      "california ai law compliance for saas",
+      "california ai law gap analysis",
+      "california ai law audit checklist",
+      "california ai law certification",
+      "california ai law certification cost",
+      "california ai law certification process",
+      "california ai law penalties",
+      "california ai law fines",
+      "california ai law deadline",
+      "california ai law deadline 2026",
+      "california ai law implementation guide",
+      "california ai law implementation timeline",
+      "california ai law vs gdpr",
+      "california ai law vs dpdp act",
+      "california ai law training",
+      "california ai law policy template",
+      "california ai law risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:new york ai law",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 22,
+    "p1": 0,
+    "p2": 22,
+    "p3": 0,
+    "keywords": [
+      "new york ai law",
+      "new york ai law compliance",
+      "new york ai law compliance checklist",
+      "new york ai law compliance guide",
+      "new york ai law compliance requirements",
+      "new york ai law compliance for saas",
+      "new york ai law gap analysis",
+      "new york ai law audit checklist",
+      "new york ai law certification",
+      "new york ai law certification cost",
+      "new york ai law certification process",
+      "new york ai law penalties",
+      "new york ai law fines",
+      "new york ai law deadline",
+      "new york ai law deadline 2026",
+      "new york ai law implementation guide",
+      "new york ai law implementation timeline",
+      "new york ai law vs gdpr",
+      "new york ai law vs dpdp act",
+      "new york ai law training",
+      "new york ai law policy template",
+      "new york ai law risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:utah ai policy act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 22,
+    "p1": 0,
+    "p2": 22,
+    "p3": 0,
+    "keywords": [
+      "utah ai policy act",
+      "utah ai policy act compliance",
+      "utah ai policy act compliance checklist",
+      "utah ai policy act compliance guide",
+      "utah ai policy act compliance requirements",
+      "utah ai policy act compliance for saas",
+      "utah ai policy act gap analysis",
+      "utah ai policy act audit checklist",
+      "utah ai policy act certification",
+      "utah ai policy act certification cost",
+      "utah ai policy act certification process",
+      "utah ai policy act penalties",
+      "utah ai policy act fines",
+      "utah ai policy act deadline",
+      "utah ai policy act deadline 2026",
+      "utah ai policy act implementation guide",
+      "utah ai policy act implementation timeline",
+      "utah ai policy act vs gdpr",
+      "utah ai policy act vs dpdp act",
+      "utah ai policy act training",
+      "utah ai policy act policy template",
+      "utah ai policy act risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:eu ai act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 21,
+    "p1": 0,
+    "p2": 21,
+    "p3": 0,
+    "keywords": [
+      "eu ai act compliance",
+      "eu ai act compliance checklist",
+      "eu ai act compliance guide",
+      "eu ai act compliance requirements",
+      "eu ai act compliance for saas",
+      "eu ai act gap analysis",
+      "eu ai act audit checklist",
+      "eu ai act certification",
+      "eu ai act certification cost",
+      "eu ai act certification process",
+      "eu ai act penalties",
+      "eu ai act fines",
+      "eu ai act deadline",
+      "eu ai act deadline 2026",
+      "eu ai act implementation guide",
+      "eu ai act implementation timeline",
+      "eu ai act vs gdpr",
+      "eu ai act vs dpdp act",
+      "eu ai act training",
+      "eu ai act policy template",
+      "eu ai act risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:india dpdp act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 21,
+    "p1": 0,
+    "p2": 21,
+    "p3": 0,
+    "keywords": [
+      "india dpdp act compliance",
+      "india dpdp act compliance checklist",
+      "india dpdp act compliance guide",
+      "india dpdp act compliance requirements",
+      "india dpdp act compliance for saas",
+      "india dpdp act gap analysis",
+      "india dpdp act audit checklist",
+      "india dpdp act certification",
+      "india dpdp act certification cost",
+      "india dpdp act certification process",
+      "india dpdp act penalties",
+      "india dpdp act fines",
+      "india dpdp act deadline",
+      "india dpdp act deadline 2026",
+      "india dpdp act implementation guide",
+      "india dpdp act implementation timeline",
+      "india dpdp act vs gdpr",
+      "india dpdp act vs dpdp act",
+      "india dpdp act training",
+      "india dpdp act policy template",
+      "india dpdp act risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:digital personal data protection act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 21,
+    "p1": 0,
+    "p2": 21,
+    "p3": 0,
+    "keywords": [
+      "digital personal data protection act compliance",
+      "digital personal data protection act compliance checklist",
+      "digital personal data protection act compliance guide",
+      "digital personal data protection act compliance requirements",
+      "digital personal data protection act compliance for saas",
+      "digital personal data protection act gap analysis",
+      "digital personal data protection act audit checklist",
+      "digital personal data protection act certification",
+      "digital personal data protection act certification cost",
+      "digital personal data protection act certification process",
+      "digital personal data protection act penalties",
+      "digital personal data protection act fines",
+      "digital personal data protection act deadline",
+      "digital personal data protection act deadline 2026",
+      "digital personal data protection act implementation guide",
+      "digital personal data protection act implementation timeline",
+      "digital personal data protection act vs gdpr",
+      "digital personal data protection act vs dpdp act",
+      "digital personal data protection act training",
+      "digital personal data protection act policy template",
+      "digital personal data protection act risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:iso 42001",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 21,
+    "p1": 0,
+    "p2": 18,
+    "p3": 3,
+    "keywords": [
+      "iso 42001 compliance",
+      "iso 42001 compliance checklist",
+      "iso 42001 compliance guide",
+      "iso 42001 compliance requirements",
+      "iso 42001 compliance for saas",
+      "iso 42001 gap analysis",
+      "iso 42001 audit checklist",
+      "iso 42001 certification",
+      "iso 42001 certification cost",
+      "iso 42001 certification process",
+      "iso 42001 penalties",
+      "iso 42001 fines",
+      "iso 42001 deadline",
+      "iso 42001 deadline 2026",
+      "iso 42001 implementation guide",
+      "iso 42001 implementation timeline",
+      "iso 42001 vs gdpr",
+      "iso 42001 vs dpdp act",
+      "iso 42001 training",
+      "iso 42001 policy template",
+      "iso 42001 risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:iso/iec 42001",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 21,
+    "p1": 0,
+    "p2": 18,
+    "p3": 3,
+    "keywords": [
+      "iso/iec 42001 compliance",
+      "iso/iec 42001 compliance checklist",
+      "iso/iec 42001 compliance guide",
+      "iso/iec 42001 compliance requirements",
+      "iso/iec 42001 compliance for saas",
+      "iso/iec 42001 gap analysis",
+      "iso/iec 42001 audit checklist",
+      "iso/iec 42001 certification",
+      "iso/iec 42001 certification cost",
+      "iso/iec 42001 certification process",
+      "iso/iec 42001 penalties",
+      "iso/iec 42001 fines",
+      "iso/iec 42001 deadline",
+      "iso/iec 42001 deadline 2026",
+      "iso/iec 42001 implementation guide",
+      "iso/iec 42001 implementation timeline",
+      "iso/iec 42001 vs gdpr",
+      "iso/iec 42001 vs dpdp act",
+      "iso/iec 42001 training",
+      "iso/iec 42001 policy template",
+      "iso/iec 42001 risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:nist ai rmf",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 21,
+    "p1": 0,
+    "p2": 21,
+    "p3": 0,
+    "keywords": [
+      "nist ai rmf compliance",
+      "nist ai rmf compliance checklist",
+      "nist ai rmf compliance guide",
+      "nist ai rmf compliance requirements",
+      "nist ai rmf compliance for saas",
+      "nist ai rmf gap analysis",
+      "nist ai rmf audit checklist",
+      "nist ai rmf certification",
+      "nist ai rmf certification cost",
+      "nist ai rmf certification process",
+      "nist ai rmf penalties",
+      "nist ai rmf fines",
+      "nist ai rmf deadline",
+      "nist ai rmf deadline 2026",
+      "nist ai rmf implementation guide",
+      "nist ai rmf implementation timeline",
+      "nist ai rmf vs gdpr",
+      "nist ai rmf vs dpdp act",
+      "nist ai rmf training",
+      "nist ai rmf policy template",
+      "nist ai rmf risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:nist ai risk management framework",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 21,
+    "p1": 0,
+    "p2": 21,
+    "p3": 0,
+    "keywords": [
+      "nist ai risk management framework compliance",
+      "nist ai risk management framework compliance checklist",
+      "nist ai risk management framework compliance guide",
+      "nist ai risk management framework compliance requirements",
+      "nist ai risk management framework compliance for saas",
+      "nist ai risk management framework gap analysis",
+      "nist ai risk management framework audit checklist",
+      "nist ai risk management framework certification",
+      "nist ai risk management framework certification cost",
+      "nist ai risk management framework certification process",
+      "nist ai risk management framework penalties",
+      "nist ai risk management framework fines",
+      "nist ai risk management framework deadline",
+      "nist ai risk management framework deadline 2026",
+      "nist ai risk management framework implementation guide",
+      "nist ai risk management framework implementation timeline",
+      "nist ai risk management framework vs gdpr",
+      "nist ai risk management framework vs dpdp act",
+      "nist ai risk management framework training",
+      "nist ai risk management framework policy template",
+      "nist ai risk management framework risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:colorado ai act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 21,
+    "p1": 0,
+    "p2": 21,
+    "p3": 0,
+    "keywords": [
+      "colorado ai act compliance",
+      "colorado ai act compliance checklist",
+      "colorado ai act compliance guide",
+      "colorado ai act compliance requirements",
+      "colorado ai act compliance for saas",
+      "colorado ai act gap analysis",
+      "colorado ai act audit checklist",
+      "colorado ai act certification",
+      "colorado ai act certification cost",
+      "colorado ai act certification process",
+      "colorado ai act penalties",
+      "colorado ai act fines",
+      "colorado ai act deadline",
+      "colorado ai act deadline 2026",
+      "colorado ai act implementation guide",
+      "colorado ai act implementation timeline",
+      "colorado ai act vs gdpr",
+      "colorado ai act vs dpdp act",
+      "colorado ai act training",
+      "colorado ai act policy template",
+      "colorado ai act risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:gdpr",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 21,
+    "p1": 0,
+    "p2": 7,
+    "p3": 14,
+    "keywords": [
+      "gdpr compliance",
+      "gdpr compliance checklist",
+      "gdpr compliance guide",
+      "gdpr compliance requirements",
+      "gdpr compliance for saas",
+      "gdpr gap analysis",
+      "gdpr audit checklist",
+      "gdpr certification",
+      "gdpr certification cost",
+      "gdpr certification process",
+      "gdpr penalties",
+      "gdpr fines",
+      "gdpr deadline",
+      "gdpr deadline 2026",
+      "gdpr implementation guide",
+      "gdpr implementation timeline",
+      "gdpr vs gdpr",
+      "gdpr training",
+      "gdpr policy template",
+      "gdpr risk assessment template",
+      "ccpa vs gdpr"
+    ]
+  },
+  {
+    "cluster": "regulation:soc 2",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 20,
+    "p1": 0,
+    "p2": 18,
+    "p3": 2,
+    "keywords": [
+      "soc 2 compliance",
+      "soc 2 compliance checklist",
+      "soc 2 compliance guide",
+      "soc 2 compliance requirements",
+      "soc 2 compliance for saas",
+      "soc 2 gap analysis",
+      "soc 2 audit checklist",
+      "soc 2 certification",
+      "soc 2 certification cost",
+      "soc 2 certification process",
+      "soc 2 penalties",
+      "soc 2 fines",
+      "soc 2 deadline",
+      "soc 2 deadline 2026",
+      "soc 2 implementation guide",
+      "soc 2 implementation timeline",
+      "soc 2 vs gdpr",
+      "soc 2 training",
+      "soc 2 policy template",
+      "soc 2 risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:ccpa",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 20,
+    "p1": 0,
+    "p2": 8,
+    "p3": 12,
+    "keywords": [
+      "ccpa",
+      "ccpa compliance",
+      "ccpa compliance checklist",
+      "ccpa compliance guide",
+      "ccpa compliance requirements",
+      "ccpa compliance for saas",
+      "ccpa gap analysis",
+      "ccpa audit checklist",
+      "ccpa certification",
+      "ccpa certification cost",
+      "ccpa certification process",
+      "ccpa penalties",
+      "ccpa fines",
+      "ccpa deadline",
+      "ccpa deadline 2026",
+      "ccpa implementation guide",
+      "ccpa implementation timeline",
+      "ccpa training",
+      "ccpa policy template",
+      "ccpa risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:hipaa",
+    "proposedUrl": "/blog",
+    "gapType": "Blog/Pillar Page",
+    "count": 20,
+    "p1": 0,
+    "p2": 11,
+    "p3": 9,
+    "keywords": [
+      "hipaa compliance",
+      "hipaa compliance checklist",
+      "hipaa compliance guide",
+      "hipaa compliance requirements",
+      "hipaa compliance for saas",
+      "hipaa gap analysis",
+      "hipaa audit checklist",
+      "hipaa certification",
+      "hipaa certification cost",
+      "hipaa certification process",
+      "hipaa penalties",
+      "hipaa fines",
+      "hipaa deadline",
+      "hipaa deadline 2026",
+      "hipaa implementation guide",
+      "hipaa implementation timeline",
+      "hipaa vs gdpr",
+      "hipaa training",
+      "hipaa policy template",
+      "hipaa risk assessment template"
+    ]
+  },
+  {
+    "cluster": "regulation:ccpa",
+    "proposedUrl": "/frameworks/ccpa",
+    "gapType": "Landing/Product Page",
+    "count": 10,
+    "p1": 0,
+    "p2": 7,
+    "p3": 3,
+    "keywords": [
+      "ccpa compliance software",
+      "ccpa compliance platform",
+      "ccpa compliance tool",
+      "ccpa compliance for startups",
+      "ccpa compliance automation",
+      "ccpa readiness assessment",
+      "ccpa for ai companies",
+      "ccpa consultants",
+      "ccpa consulting firm",
+      "ccpa compliance consultants india"
+    ]
+  },
+  {
+    "cluster": "regulation:china ai regulations",
+    "proposedUrl": "/frameworks/china-ai-regulations",
+    "gapType": "Landing/Product Page",
+    "count": 10,
+    "p1": 0,
+    "p2": 10,
+    "p3": 0,
+    "keywords": [
+      "china ai regulations compliance software",
+      "china ai regulations compliance platform",
+      "china ai regulations compliance tool",
+      "china ai regulations compliance for startups",
+      "china ai regulations compliance automation",
+      "china ai regulations readiness assessment",
+      "china ai regulations for ai companies",
+      "china ai regulations consultants",
+      "china ai regulations consulting firm",
+      "china ai regulations compliance consultants india"
+    ]
+  },
+  {
+    "cluster": "regulation:uk ai regulation",
+    "proposedUrl": "/frameworks/uk-ai-regulation",
+    "gapType": "Landing/Product Page",
+    "count": 10,
+    "p1": 0,
+    "p2": 10,
+    "p3": 0,
+    "keywords": [
+      "uk ai regulation compliance software",
+      "uk ai regulation compliance platform",
+      "uk ai regulation compliance tool",
+      "uk ai regulation compliance for startups",
+      "uk ai regulation compliance automation",
+      "uk ai regulation readiness assessment",
+      "uk ai regulation for ai companies",
+      "uk ai regulation consultants",
+      "uk ai regulation consulting firm",
+      "uk ai regulation compliance consultants india"
+    ]
+  },
+  {
+    "cluster": "regulation:singapore ai governance framework",
+    "proposedUrl": "/frameworks/singapore-ai-governance-framework",
+    "gapType": "Landing/Product Page",
+    "count": 10,
+    "p1": 0,
+    "p2": 10,
+    "p3": 0,
+    "keywords": [
+      "singapore ai governance framework compliance software",
+      "singapore ai governance framework compliance platform",
+      "singapore ai governance framework compliance tool",
+      "singapore ai governance framework compliance for startups",
+      "singapore ai governance framework compliance automation",
+      "singapore ai governance framework readiness assessment",
+      "singapore ai governance framework for ai companies",
+      "singapore ai governance framework consultants",
+      "singapore ai governance framework consulting firm",
+      "singapore ai governance framework compliance consultants india"
+    ]
+  },
+  {
+    "cluster": "regulation:canada aida",
+    "proposedUrl": "/frameworks/canada-aida",
+    "gapType": "Landing/Product Page",
+    "count": 10,
+    "p1": 0,
+    "p2": 10,
+    "p3": 0,
+    "keywords": [
+      "canada aida compliance software",
+      "canada aida compliance platform",
+      "canada aida compliance tool",
+      "canada aida compliance for startups",
+      "canada aida compliance automation",
+      "canada aida readiness assessment",
+      "canada aida for ai companies",
+      "canada aida consultants",
+      "canada aida consulting firm",
+      "canada aida compliance consultants india"
+    ]
+  },
+  {
+    "cluster": "regulation:california ai law",
+    "proposedUrl": "/frameworks/california-ai-law",
+    "gapType": "Landing/Product Page",
+    "count": 10,
+    "p1": 0,
+    "p2": 10,
+    "p3": 0,
+    "keywords": [
+      "california ai law compliance software",
+      "california ai law compliance platform",
+      "california ai law compliance tool",
+      "california ai law compliance for startups",
+      "california ai law compliance automation",
+      "california ai law readiness assessment",
+      "california ai law for ai companies",
+      "california ai law consultants",
+      "california ai law consulting firm",
+      "california ai law compliance consultants india"
+    ]
+  },
+  {
+    "cluster": "regulation:new york ai law",
+    "proposedUrl": "/frameworks/new-york-ai-law",
+    "gapType": "Landing/Product Page",
+    "count": 10,
+    "p1": 0,
+    "p2": 10,
+    "p3": 0,
+    "keywords": [
+      "new york ai law compliance software",
+      "new york ai law compliance platform",
+      "new york ai law compliance tool",
+      "new york ai law compliance for startups",
+      "new york ai law compliance automation",
+      "new york ai law readiness assessment",
+      "new york ai law for ai companies",
+      "new york ai law consultants",
+      "new york ai law consulting firm",
+      "new york ai law compliance consultants india"
+    ]
+  },
+  {
+    "cluster": "regulation:utah ai policy act",
+    "proposedUrl": "/frameworks/utah-ai-policy-act",
+    "gapType": "Landing/Product Page",
+    "count": 10,
+    "p1": 0,
+    "p2": 10,
+    "p3": 0,
+    "keywords": [
+      "utah ai policy act compliance software",
+      "utah ai policy act compliance platform",
+      "utah ai policy act compliance tool",
+      "utah ai policy act compliance for startups",
+      "utah ai policy act compliance automation",
+      "utah ai policy act readiness assessment",
+      "utah ai policy act for ai companies",
+      "utah ai policy act consultants",
+      "utah ai policy act consulting firm",
+      "utah ai policy act compliance consultants india"
+    ]
+  },
+  {
+    "cluster": "compare:credo ai",
+    "proposedUrl": "/compare/credo-ai-alternative",
+    "gapType": "Comparison Page",
+    "count": 9,
+    "p1": 0,
+    "p2": 6,
+    "p3": 3,
+    "keywords": [
+      "credo ai alternative",
+      "credo ai alternatives",
+      "credo ai vs",
+      "credo ai competitor",
+      "credo ai competitors",
+      "credo ai review",
+      "credo ai pricing",
+      "credo ai vs complivibe",
+      "complivibe vs credo ai"
+    ]
+  },
+  {
+    "cluster": "compare:vanta",
+    "proposedUrl": "/compare/vanta-alternative",
+    "gapType": "Comparison Page",
+    "count": 9,
+    "p1": 0,
+    "p2": 7,
+    "p3": 2,
+    "keywords": [
+      "vanta alternative",
+      "vanta alternatives",
+      "vanta vs",
+      "vanta competitor",
+      "vanta competitors",
+      "vanta review",
+      "vanta pricing",
+      "vanta vs complivibe",
+      "complivibe vs vanta"
+    ]
+  },
+  {
+    "cluster": "vertical:legaltech",
+    "proposedUrl": "/solutions/legaltech",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for legaltech",
+      "ai governance for legaltech",
+      "ai compliance software for legaltech",
+      "ai risk management for legaltech",
+      "eu ai act compliance for legaltech",
+      "dpdp act compliance for legaltech",
+      "ai governance framework for legaltech",
+      "ai compliance checklist for legaltech",
+      "ai trust platform for legaltech"
+    ]
+  },
+  {
+    "cluster": "vertical:edtech",
+    "proposedUrl": "/solutions/edtech",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for edtech",
+      "ai governance for edtech",
+      "ai compliance software for edtech",
+      "ai risk management for edtech",
+      "eu ai act compliance for edtech",
+      "dpdp act compliance for edtech",
+      "ai governance framework for edtech",
+      "ai compliance checklist for edtech",
+      "ai trust platform for edtech"
+    ]
+  },
+  {
+    "cluster": "vertical:hrtech",
+    "proposedUrl": "/solutions/hrtech",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for hrtech",
+      "ai governance for hrtech",
+      "ai compliance software for hrtech",
+      "ai risk management for hrtech",
+      "eu ai act compliance for hrtech",
+      "dpdp act compliance for hrtech",
+      "ai governance framework for hrtech",
+      "ai compliance checklist for hrtech",
+      "ai trust platform for hrtech"
+    ]
+  },
+  {
+    "cluster": "vertical:genai content companies",
+    "proposedUrl": "/solutions/genai-content-companies",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for genai content companies",
+      "ai governance for genai content companies",
+      "ai compliance software for genai content companies",
+      "ai risk management for genai content companies",
+      "eu ai act compliance for genai content companies",
+      "dpdp act compliance for genai content companies",
+      "ai governance framework for genai content companies",
+      "ai compliance checklist for genai content companies",
+      "ai trust platform for genai content companies"
+    ]
+  },
+  {
+    "cluster": "vertical:ai agent companies",
+    "proposedUrl": "/solutions/ai-agent-companies",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for ai agent companies",
+      "ai governance for ai agent companies",
+      "ai compliance software for ai agent companies",
+      "ai risk management for ai agent companies",
+      "eu ai act compliance for ai agent companies",
+      "dpdp act compliance for ai agent companies",
+      "ai governance framework for ai agent companies",
+      "ai compliance checklist for ai agent companies",
+      "ai trust platform for ai agent companies"
+    ]
+  },
+  {
+    "cluster": "vertical:e-commerce companies",
+    "proposedUrl": "/solutions/e-commerce-companies",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for e-commerce companies",
+      "ai governance for e-commerce companies",
+      "ai compliance software for e-commerce companies",
+      "ai risk management for e-commerce companies",
+      "eu ai act compliance for e-commerce companies",
+      "dpdp act compliance for e-commerce companies",
+      "ai governance framework for e-commerce companies",
+      "ai compliance checklist for e-commerce companies",
+      "ai trust platform for e-commerce companies"
+    ]
+  },
+  {
+    "cluster": "vertical:logistics companies",
+    "proposedUrl": "/solutions/logistics-companies",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for logistics companies",
+      "ai governance for logistics companies",
+      "ai compliance software for logistics companies",
+      "ai risk management for logistics companies",
+      "eu ai act compliance for logistics companies",
+      "dpdp act compliance for logistics companies",
+      "ai governance framework for logistics companies",
+      "ai compliance checklist for logistics companies",
+      "ai trust platform for logistics companies"
+    ]
+  },
+  {
+    "cluster": "vertical:manufacturing companies",
+    "proposedUrl": "/solutions/manufacturing-companies",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for manufacturing companies",
+      "ai governance for manufacturing companies",
+      "ai compliance software for manufacturing companies",
+      "ai risk management for manufacturing companies",
+      "eu ai act compliance for manufacturing companies",
+      "dpdp act compliance for manufacturing companies",
+      "ai governance framework for manufacturing companies",
+      "ai compliance checklist for manufacturing companies",
+      "ai trust platform for manufacturing companies"
+    ]
+  },
+  {
+    "cluster": "vertical:telecom companies",
+    "proposedUrl": "/solutions/telecom-companies",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for telecom companies",
+      "ai governance for telecom companies",
+      "ai compliance software for telecom companies",
+      "ai risk management for telecom companies",
+      "eu ai act compliance for telecom companies",
+      "dpdp act compliance for telecom companies",
+      "ai governance framework for telecom companies",
+      "ai compliance checklist for telecom companies",
+      "ai trust platform for telecom companies"
+    ]
+  },
+  {
+    "cluster": "vertical:media companies",
+    "proposedUrl": "/solutions/media-companies",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for media companies",
+      "ai governance for media companies",
+      "ai compliance software for media companies",
+      "ai risk management for media companies",
+      "eu ai act compliance for media companies",
+      "dpdp act compliance for media companies",
+      "ai governance framework for media companies",
+      "ai compliance checklist for media companies",
+      "ai trust platform for media companies"
+    ]
+  },
+  {
+    "cluster": "vertical:cybersecurity companies",
+    "proposedUrl": "/solutions/cybersecurity-companies",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for cybersecurity companies",
+      "ai governance for cybersecurity companies",
+      "ai compliance software for cybersecurity companies",
+      "ai risk management for cybersecurity companies",
+      "eu ai act compliance for cybersecurity companies",
+      "dpdp act compliance for cybersecurity companies",
+      "ai governance framework for cybersecurity companies",
+      "ai compliance checklist for cybersecurity companies",
+      "ai trust platform for cybersecurity companies"
+    ]
+  },
+  {
+    "cluster": "vertical:recruiting platforms",
+    "proposedUrl": "/solutions/recruiting-platforms",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for recruiting platforms",
+      "ai governance for recruiting platforms",
+      "ai compliance software for recruiting platforms",
+      "ai risk management for recruiting platforms",
+      "eu ai act compliance for recruiting platforms",
+      "dpdp act compliance for recruiting platforms",
+      "ai governance framework for recruiting platforms",
+      "ai compliance checklist for recruiting platforms",
+      "ai trust platform for recruiting platforms"
+    ]
+  },
+  {
+    "cluster": "vertical:marketing agencies",
+    "proposedUrl": "/solutions/marketing-agencies",
+    "gapType": "Landing Page (Vertical)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance for marketing agencies",
+      "ai governance for marketing agencies",
+      "ai compliance software for marketing agencies",
+      "ai risk management for marketing agencies",
+      "eu ai act compliance for marketing agencies",
+      "dpdp act compliance for marketing agencies",
+      "ai governance framework for marketing agencies",
+      "ai compliance checklist for marketing agencies",
+      "ai trust platform for marketing agencies"
+    ]
+  },
+  {
+    "cluster": "geo:singapore",
+    "proposedUrl": "/solutions/singapore",
+    "gapType": "Landing Page (Geo)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software singapore",
+      "ai governance company singapore",
+      "ai compliance consultants singapore",
+      "eu ai act compliance for companies in singapore",
+      "dpdp compliance consultants singapore",
+      "ai trust platform singapore",
+      "ai compliance startup singapore",
+      "ai governance platform singapore",
+      "ai risk management firm singapore"
+    ]
+  },
+  {
+    "cluster": "geo:uae",
+    "proposedUrl": "/solutions/uae",
+    "gapType": "Landing Page (Geo)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software uae",
+      "ai governance company uae",
+      "ai compliance consultants uae",
+      "eu ai act compliance for companies in uae",
+      "dpdp compliance consultants uae",
+      "ai trust platform uae",
+      "ai compliance startup uae",
+      "ai governance platform uae",
+      "ai risk management firm uae"
+    ]
+  },
+  {
+    "cluster": "geo:dubai",
+    "proposedUrl": "/solutions/dubai",
+    "gapType": "Landing Page (Geo)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software dubai",
+      "ai governance company dubai",
+      "ai compliance consultants dubai",
+      "eu ai act compliance for companies in dubai",
+      "dpdp compliance consultants dubai",
+      "ai trust platform dubai",
+      "ai compliance startup dubai",
+      "ai governance platform dubai",
+      "ai risk management firm dubai"
+    ]
+  },
+  {
+    "cluster": "geo:hong kong",
+    "proposedUrl": "/solutions/hong-kong",
+    "gapType": "Landing Page (Geo)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software hong kong",
+      "ai governance company hong kong",
+      "ai compliance consultants hong kong",
+      "eu ai act compliance for companies in hong kong",
+      "dpdp compliance consultants hong kong",
+      "ai trust platform hong kong",
+      "ai compliance startup hong kong",
+      "ai governance platform hong kong",
+      "ai risk management firm hong kong"
+    ]
+  },
+  {
+    "cluster": "geo:canada",
+    "proposedUrl": "/solutions/canada",
+    "gapType": "Landing Page (Geo)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software canada",
+      "ai governance company canada",
+      "ai compliance consultants canada",
+      "eu ai act compliance for companies in canada",
+      "dpdp compliance consultants canada",
+      "ai trust platform canada",
+      "ai compliance startup canada",
+      "ai governance platform canada",
+      "ai risk management firm canada"
+    ]
+  },
+  {
+    "cluster": "geo:australia",
+    "proposedUrl": "/solutions/australia",
+    "gapType": "Landing Page (Geo)",
+    "count": 9,
+    "p1": 0,
+    "p2": 9,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software australia",
+      "ai governance company australia",
+      "ai compliance consultants australia",
+      "eu ai act compliance for companies in australia",
+      "dpdp compliance consultants australia",
+      "ai trust platform australia",
+      "ai compliance startup australia",
+      "ai governance platform australia",
+      "ai risk management firm australia"
+    ]
+  },
+  {
+    "cluster": "compare:arthur ai",
+    "proposedUrl": "/compare/arthur-ai-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 4,
+    "p3": 4,
+    "keywords": [
+      "arthur ai alternative",
+      "arthur ai alternatives",
+      "arthur ai vs",
+      "arthur ai competitor",
+      "arthur ai competitors",
+      "arthur ai review",
+      "arthur ai pricing",
+      "arthur ai vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:holistic ai",
+    "proposedUrl": "/compare/holistic-ai-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 5,
+    "p3": 3,
+    "keywords": [
+      "holistic ai alternative",
+      "holistic ai alternatives",
+      "holistic ai vs",
+      "holistic ai competitor",
+      "holistic ai competitors",
+      "holistic ai review",
+      "holistic ai pricing",
+      "holistic ai vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:lakera",
+    "proposedUrl": "/compare/lakera-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 1,
+    "p3": 7,
+    "keywords": [
+      "lakera alternative",
+      "lakera alternatives",
+      "lakera vs",
+      "lakera competitor",
+      "lakera competitors",
+      "lakera review",
+      "lakera pricing",
+      "lakera vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:guardrails ai",
+    "proposedUrl": "/compare/guardrails-ai-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 3,
+    "p3": 5,
+    "keywords": [
+      "guardrails ai alternative",
+      "guardrails ai alternatives",
+      "guardrails ai vs",
+      "guardrails ai competitor",
+      "guardrails ai competitors",
+      "guardrails ai review",
+      "guardrails ai pricing",
+      "guardrails ai vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:drata",
+    "proposedUrl": "/compare/drata-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 3,
+    "p3": 5,
+    "keywords": [
+      "drata alternative",
+      "drata alternatives",
+      "drata vs",
+      "drata competitor",
+      "drata competitors",
+      "drata review",
+      "drata pricing",
+      "drata vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:onetrust",
+    "proposedUrl": "/compare/onetrust-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 5,
+    "p3": 3,
+    "keywords": [
+      "onetrust alternative",
+      "onetrust alternatives",
+      "onetrust vs",
+      "onetrust competitor",
+      "onetrust competitors",
+      "onetrust review",
+      "onetrust pricing",
+      "onetrust vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:securiti ai",
+    "proposedUrl": "/compare/securiti-ai-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 2,
+    "p3": 6,
+    "keywords": [
+      "securiti ai alternative",
+      "securiti ai alternatives",
+      "securiti ai vs",
+      "securiti ai competitor",
+      "securiti ai competitors",
+      "securiti ai review",
+      "securiti ai pricing",
+      "securiti ai vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:ibm watson openscale",
+    "proposedUrl": "/compare/ibm-watson-openscale-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 3,
+    "p3": 5,
+    "keywords": [
+      "ibm watson openscale alternative",
+      "ibm watson openscale alternatives",
+      "ibm watson openscale vs",
+      "ibm watson openscale competitor",
+      "ibm watson openscale competitors",
+      "ibm watson openscale review",
+      "ibm watson openscale pricing",
+      "ibm watson openscale vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:monitaur",
+    "proposedUrl": "/compare/monitaur-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 4,
+    "p3": 4,
+    "keywords": [
+      "monitaur alternative",
+      "monitaur alternatives",
+      "monitaur vs",
+      "monitaur competitor",
+      "monitaur competitors",
+      "monitaur review",
+      "monitaur pricing",
+      "monitaur vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:fiddler ai",
+    "proposedUrl": "/compare/fiddler-ai-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 5,
+    "p3": 3,
+    "keywords": [
+      "fiddler ai alternative",
+      "fiddler ai alternatives",
+      "fiddler ai vs",
+      "fiddler ai competitor",
+      "fiddler ai competitors",
+      "fiddler ai review",
+      "fiddler ai pricing",
+      "fiddler ai vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:trustarc",
+    "proposedUrl": "/compare/trustarc-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 5,
+    "p3": 3,
+    "keywords": [
+      "trustarc alternative",
+      "trustarc alternatives",
+      "trustarc vs",
+      "trustarc competitor",
+      "trustarc competitors",
+      "trustarc review",
+      "trustarc pricing",
+      "trustarc vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:robust intelligence",
+    "proposedUrl": "/compare/robust-intelligence-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 4,
+    "p3": 4,
+    "keywords": [
+      "robust intelligence alternative",
+      "robust intelligence alternatives",
+      "robust intelligence vs",
+      "robust intelligence competitor",
+      "robust intelligence competitors",
+      "robust intelligence review",
+      "robust intelligence pricing",
+      "robust intelligence vs complivibe"
+    ]
+  },
+  {
+    "cluster": "compare:fairly ai",
+    "proposedUrl": "/compare/fairly-ai-alternative",
+    "gapType": "Comparison Page",
+    "count": 8,
+    "p1": 0,
+    "p2": 2,
+    "p3": 6,
+    "keywords": [
+      "fairly ai alternative",
+      "fairly ai alternatives",
+      "fairly ai vs",
+      "fairly ai competitor",
+      "fairly ai competitors",
+      "fairly ai review",
+      "fairly ai pricing",
+      "fairly ai vs complivibe"
+    ]
+  },
+  {
+    "cluster": "geo:uk",
+    "proposedUrl": "/solutions/uk",
+    "gapType": "Landing Page (Geo)",
+    "count": 8,
+    "p1": 0,
+    "p2": 8,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software uk",
+      "ai governance company uk",
+      "ai compliance consultants uk",
+      "dpdp compliance consultants uk",
+      "ai trust platform uk",
+      "ai compliance startup uk",
+      "ai governance platform uk",
+      "ai risk management firm uk"
+    ]
+  },
+  {
+    "cluster": "persona:cto",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for cto",
+      "ai governance guide for cto",
+      "ai risk management guide for cto",
+      "eu ai act guide for cto",
+      "dpdp act guide for cto",
+      "ai governance responsibilities for cto",
+      "ai risk management responsibilities for cto"
+    ]
+  },
+  {
+    "cluster": "persona:ciso",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for ciso",
+      "ai governance guide for ciso",
+      "ai risk management guide for ciso",
+      "eu ai act guide for ciso",
+      "dpdp act guide for ciso",
+      "ai governance responsibilities for ciso",
+      "ai risk management responsibilities for ciso"
+    ]
+  },
+  {
+    "cluster": "persona:chief compliance officer",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for chief compliance officer",
+      "ai governance guide for chief compliance officer",
+      "ai risk management guide for chief compliance officer",
+      "eu ai act guide for chief compliance officer",
+      "dpdp act guide for chief compliance officer",
+      "ai governance responsibilities for chief compliance officer",
+      "ai risk management responsibilities for chief compliance officer"
+    ]
+  },
+  {
+    "cluster": "persona:data protection officer",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for data protection officer",
+      "ai governance guide for data protection officer",
+      "ai risk management guide for data protection officer",
+      "eu ai act guide for data protection officer",
+      "dpdp act guide for data protection officer",
+      "ai governance responsibilities for data protection officer",
+      "ai risk management responsibilities for data protection officer"
+    ]
+  },
+  {
+    "cluster": "persona:general counsel",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for general counsel",
+      "ai governance guide for general counsel",
+      "ai risk management guide for general counsel",
+      "eu ai act guide for general counsel",
+      "dpdp act guide for general counsel",
+      "ai governance responsibilities for general counsel",
+      "ai risk management responsibilities for general counsel"
+    ]
+  },
+  {
+    "cluster": "persona:head of ai",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for head of ai",
+      "ai governance guide for head of ai",
+      "ai risk management guide for head of ai",
+      "eu ai act guide for head of ai",
+      "dpdp act guide for head of ai",
+      "ai governance responsibilities for head of ai",
+      "ai risk management responsibilities for head of ai"
+    ]
+  },
+  {
+    "cluster": "persona:vp of engineering",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for vp of engineering",
+      "ai governance guide for vp of engineering",
+      "ai risk management guide for vp of engineering",
+      "eu ai act guide for vp of engineering",
+      "dpdp act guide for vp of engineering",
+      "ai governance responsibilities for vp of engineering",
+      "ai risk management responsibilities for vp of engineering"
+    ]
+  },
+  {
+    "cluster": "persona:founder",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for founder",
+      "ai governance guide for founder",
+      "ai risk management guide for founder",
+      "eu ai act guide for founder",
+      "dpdp act guide for founder",
+      "ai governance responsibilities for founder",
+      "ai risk management responsibilities for founder"
+    ]
+  },
+  {
+    "cluster": "persona:product manager",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for product manager",
+      "ai governance guide for product manager",
+      "ai risk management guide for product manager",
+      "eu ai act guide for product manager",
+      "dpdp act guide for product manager",
+      "ai governance responsibilities for product manager",
+      "ai risk management responsibilities for product manager"
+    ]
+  },
+  {
+    "cluster": "persona:risk manager",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for risk manager",
+      "ai governance guide for risk manager",
+      "ai risk management guide for risk manager",
+      "eu ai act guide for risk manager",
+      "dpdp act guide for risk manager",
+      "ai governance responsibilities for risk manager",
+      "ai risk management responsibilities for risk manager"
+    ]
+  },
+  {
+    "cluster": "persona:legal team",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for legal team",
+      "ai governance guide for legal team",
+      "ai risk management guide for legal team",
+      "eu ai act guide for legal team",
+      "dpdp act guide for legal team",
+      "ai governance responsibilities for legal team",
+      "ai risk management responsibilities for legal team"
+    ]
+  },
+  {
+    "cluster": "persona:compliance team",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 7,
+    "p1": 0,
+    "p2": 7,
+    "p3": 0,
+    "keywords": [
+      "ai compliance checklist for compliance team",
+      "ai governance guide for compliance team",
+      "ai risk management guide for compliance team",
+      "eu ai act guide for compliance team",
+      "dpdp act guide for compliance team",
+      "ai governance responsibilities for compliance team",
+      "ai risk management responsibilities for compliance team"
+    ]
+  },
+  {
+    "cluster": "editorial:ai regulation",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 5,
+    "p1": 0,
+    "p2": 5,
+    "p3": 0,
+    "keywords": [
+      "history of ai regulation",
+      "global ai regulation landscape 2026",
+      "ai regulation trends 2026",
+      "how ai regulation affects startups",
+      "how ai regulation affects saas companies"
+    ]
+  },
+  {
+    "cluster": "compare:roundup",
+    "proposedUrl": "/compare",
+    "gapType": "Comparison Page",
+    "count": 4,
+    "p1": 0,
+    "p2": 2,
+    "p3": 2,
+    "keywords": [
+      "best ai governance tools 2026",
+      "best ai compliance software 2026",
+      "top ai trust platforms",
+      "ai compliance platform comparison chart"
+    ]
+  },
+  {
+    "cluster": "editorial:dpdp act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 3,
+    "p1": 0,
+    "p2": 3,
+    "p3": 0,
+    "keywords": [
+      "dpdp act penalties explained",
+      "who needs to comply with the dpdp act",
+      "does dpdp act apply to foreign companies"
+    ]
+  },
+  {
+    "cluster": "editorial:eu ai act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 3,
+    "p1": 0,
+    "p2": 3,
+    "p3": 0,
+    "keywords": [
+      "who needs to comply with the eu ai act",
+      "does the eu ai act apply outside the eu",
+      "prohibited ai practices under eu ai act"
+    ]
+  },
+  {
+    "cluster": "editorial:ai governance",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is ai governance"
+    ]
+  },
+  {
+    "cluster": "editorial:ai trust",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is ai trust"
+    ]
+  },
+  {
+    "cluster": "editorial:ai risk management",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is ai risk management"
+    ]
+  },
+  {
+    "cluster": "editorial:iso 42001",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is iso 42001"
+    ]
+  },
+  {
+    "cluster": "editorial:nist ai rmf",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is nist ai rmf"
+    ]
+  },
+  {
+    "cluster": "editorial:colorado ai act",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is the colorado ai act"
+    ]
+  },
+  {
+    "cluster": "editorial:shadow ai",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is shadow ai"
+    ]
+  },
+  {
+    "cluster": "editorial:ai model card",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is an ai model card"
+    ]
+  },
+  {
+    "cluster": "editorial:ai observability",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is ai observability"
+    ]
+  },
+  {
+    "cluster": "editorial:responsible ai",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is responsible ai"
+    ]
+  },
+  {
+    "cluster": "editorial:what is explainable",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is explainable ai"
+    ]
+  },
+  {
+    "cluster": "editorial:what is algorithmic",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is algorithmic accountability"
+    ]
+  },
+  {
+    "cluster": "editorial:what is a",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / FAQ",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "what is a high-risk ai system"
+    ]
+  },
+  {
+    "cluster": "editorial:nist ai rmf",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "iso 42001 vs nist ai rmf"
+    ]
+  },
+  {
+    "cluster": "editorial:ai act penalties",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai act penalties explained"
+    ]
+  },
+  {
+    "cluster": "editorial:ai act timeline",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai act timeline explained"
+    ]
+  },
+  {
+    "cluster": "editorial:ai act risk",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai act risk categories explained"
+    ]
+  },
+  {
+    "cluster": "editorial:high-risk ai systems",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "high-risk ai systems examples"
+    ]
+  },
+  {
+    "cluster": "editorial:limited-risk ai systems",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "limited-risk ai systems examples"
+    ]
+  },
+  {
+    "cluster": "editorial:ai incident",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai incident reporting requirements"
+    ]
+  },
+  {
+    "cluster": "editorial:ai transparency",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai transparency requirements"
+    ]
+  },
+  {
+    "cluster": "editorial:ai accountability framework",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai accountability framework"
+    ]
+  },
+  {
+    "cluster": "editorial:data protection impact assessment",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "data protection impact assessment for ai"
+    ]
+  },
+  {
+    "cluster": "editorial:algorithmic impact assessment",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "algorithmic impact assessment guide"
+    ]
+  },
+  {
+    "cluster": "editorial:ai vendor due",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai vendor due diligence checklist"
+    ]
+  },
+  {
+    "cluster": "editorial:third party ai",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "third party ai risk explained"
+    ]
+  },
+  {
+    "cluster": "editorial:ai supply chain",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai supply chain risk management"
+    ]
+  },
+  {
+    "cluster": "editorial:building an ai",
+    "proposedUrl": "/blog",
+    "gapType": "Blog Post / Guide",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "building an ai risk taxonomy"
+    ]
+  },
+  {
+    "cluster": "feature:ai model inventory tool",
+    "proposedUrl": "/platform/ai-model-inventory-tool",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai model inventory tool"
+    ]
+  },
+  {
+    "cluster": "feature:ai risk scoring engine",
+    "proposedUrl": "/platform/ai-risk-scoring-engine",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai risk scoring engine"
+    ]
+  },
+  {
+    "cluster": "feature:compliance evidence vault",
+    "proposedUrl": "/platform/compliance-evidence-vault",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "compliance evidence vault"
+    ]
+  },
+  {
+    "cluster": "feature:automated compliance mapping",
+    "proposedUrl": "/platform/automated-compliance-mapping",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "automated compliance mapping"
+    ]
+  },
+  {
+    "cluster": "feature:cross-framework obligation mapping",
+    "proposedUrl": "/platform/cross-framework-obligation-mapping",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "cross-framework obligation mapping"
+    ]
+  },
+  {
+    "cluster": "feature:ai policy management software",
+    "proposedUrl": "/platform/ai-policy-management-software",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai policy management software"
+    ]
+  },
+  {
+    "cluster": "feature:ai vendor risk questionnaire tool",
+    "proposedUrl": "/platform/ai-vendor-risk-questionnaire-tool",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai vendor risk questionnaire tool"
+    ]
+  },
+  {
+    "cluster": "feature:ai incident management platform",
+    "proposedUrl": "/platform/ai-incident-management-platform",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai incident management platform"
+    ]
+  },
+  {
+    "cluster": "feature:ai compliance reporting dashboard",
+    "proposedUrl": "/platform/ai-compliance-reporting-dashboard",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai compliance reporting dashboard"
+    ]
+  },
+  {
+    "cluster": "feature:regulatory change tracking tool",
+    "proposedUrl": "/platform/regulatory-change-tracking-tool",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "regulatory change tracking tool"
+    ]
+  },
+  {
+    "cluster": "feature:ai audit readiness tool",
+    "proposedUrl": "/platform/ai-audit-readiness-tool",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai audit readiness tool"
+    ]
+  },
+  {
+    "cluster": "feature:ai governance workflow automation",
+    "proposedUrl": "/platform/ai-governance-workflow-automation",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai governance workflow automation"
+    ]
+  },
+  {
+    "cluster": "feature:compliance evidence collection software",
+    "proposedUrl": "/platform/compliance-evidence-collection-software",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "compliance evidence collection software"
+    ]
+  },
+  {
+    "cluster": "feature:ai risk heatmap tool",
+    "proposedUrl": "/platform/ai-risk-heatmap-tool",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai risk heatmap tool"
+    ]
+  },
+  {
+    "cluster": "feature:ai compliance api",
+    "proposedUrl": "/platform/ai-compliance-api",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 0,
+    "p3": 1,
+    "keywords": [
+      "ai compliance api"
+    ]
+  },
+  {
+    "cluster": "feature:compliance integration tool",
+    "proposedUrl": "/platform/compliance-integration-tool",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "compliance integration tool"
+    ]
+  },
+  {
+    "cluster": "feature:ai governance dashboard",
+    "proposedUrl": "/platform/ai-governance-dashboard",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai governance dashboard"
+    ]
+  },
+  {
+    "cluster": "feature:ai compliance workflow builder",
+    "proposedUrl": "/platform/ai-compliance-workflow-builder",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai compliance workflow builder"
+    ]
+  },
+  {
+    "cluster": "feature:automated regulatory updates ai",
+    "proposedUrl": "/platform/automated-regulatory-updates-ai",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "automated regulatory updates ai"
+    ]
+  },
+  {
+    "cluster": "feature:ai compliance alerts tool",
+    "proposedUrl": "/platform/ai-compliance-alerts-tool",
+    "gapType": "Feature Page",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai compliance alerts tool"
+    ]
+  },
+  {
+    "cluster": "persona:data protection officer",
+    "proposedUrl": "/solutions/data-protection-officer",
+    "gapType": "Landing Page (Vertical)",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software for data protection officer"
+    ]
+  },
+  {
+    "cluster": "persona:general counsel",
+    "proposedUrl": "/solutions/general-counsel",
+    "gapType": "Landing Page (Vertical)",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software for general counsel"
+    ]
+  },
+  {
+    "cluster": "persona:head of ai",
+    "proposedUrl": "/solutions/head-of-ai",
+    "gapType": "Landing Page (Vertical)",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software for head of ai"
+    ]
+  },
+  {
+    "cluster": "persona:product manager",
+    "proposedUrl": "/solutions/product-manager",
+    "gapType": "Landing Page (Vertical)",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software for product manager"
+    ]
+  },
+  {
+    "cluster": "persona:legal team",
+    "proposedUrl": "/solutions/legal-team",
+    "gapType": "Landing Page (Vertical)",
+    "count": 1,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "keywords": [
+      "ai compliance software for legal team"
+    ]
+  }
+]

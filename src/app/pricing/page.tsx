@@ -6,12 +6,12 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Pricing | CompliVibe",
+  title: "AI Compliance Software Pricing | CompliVibe",
   description:
-    "One platform for AI governance, evidence, compliance, and observability — priced for pilots, built for enterprise rollout. Plans for startups, mid-market, and enterprise AI teams.",
+    "What AI governance and compliance software costs at CompliVibe — plans for startups, mid-market, and enterprise AI teams, priced for pilots and built to scale.",
   alternates: { canonical: "https://complivibe.in/pricing" },
   openGraph: {
-    title: "Pricing | CompliVibe",
+    title: "AI Compliance Software Pricing | CompliVibe",
     description:
       "AI Trust Infrastructure priced for pilots, built for enterprise rollout — governance, evidence, compliance, and observability in one platform.",
     url: "https://complivibe.in/pricing",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing | CompliVibe",
+    title: "AI Compliance Software Pricing | CompliVibe",
     description:
       "AI Trust Infrastructure priced for pilots, built for enterprise rollout — governance, evidence, compliance, and observability in one platform.",
     images: ["https://complivibe.in/og-image.svg"],
@@ -31,7 +31,7 @@ export default function PricingPage() {
     <div className="cv-page">
       <Nav />
       <main className="pt-16">
-        <Pricing />
+        <Pricing as="h1" />
         <ROICalculator />
         <CTA />
       </main>

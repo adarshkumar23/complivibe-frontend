@@ -30,6 +30,16 @@ import {
   HeartPulse,
   TrendingUp,
   Cloud,
+  Building2,
+  ShieldAlert,
+  Terminal,
+  Landmark,
+  Plane,
+  MapPin,
+  Globe2,
+  Flag,
+  Scale,
+  Map,
   type LucideIcon,
 } from "lucide-react";
 
@@ -69,6 +79,16 @@ export const iconRegistry: Record<string, LucideIcon> = {
   HeartPulse,
   TrendingUp,
   Cloud,
+  Building2,
+  ShieldAlert,
+  Terminal,
+  Landmark,
+  Plane,
+  MapPin,
+  Globe2,
+  Flag,
+  Scale,
+  Map,
 };
 
 export type IconName = keyof typeof iconRegistry;

@@ -6,9 +6,9 @@ import PageBentoCard from "@/components/PageBentoCard";
 import PageCTA from "@/components/PageCTA";
 
 export const metadata: Metadata = {
-  title: "Enterprise — AI trust infrastructure at scale | CompliVibe",
+  title: "AI Governance for Enterprises | CompliVibe",
   description:
-    "Govern AI trust across teams, vendors, systems, and markets — with SSO/SAML, custom controls, human review, audit packs, vendor/model risk, trust center, and data observability.",
+    "Enterprise AI governance and risk management across teams, vendors, and markets — with SSO/SAML, custom controls, human review, and audit packs.",
   alternates: { canonical: "https://complivibe.in/enterprise" },
 };
 

@@ -6,6 +6,8 @@ import PageHero from "@/components/PageHero";
 import PageSection from "@/components/PageSection";
 import PageBentoCard, { bentoContainer } from "@/components/PageBentoCard";
 import PageCTA from "@/components/PageCTA";
+import RelatedLinks from "@/components/RelatedLinks";
+import { relatedFrameworksFor } from "@/lib/seo";
 import { solutions } from "@/components/solutions-data";
 
 export default function SolutionTemplate({ slug }: { slug: string }) {
@@ -112,6 +114,13 @@ export default function SolutionTemplate({ slug }: { slug: string }) {
           ))}
         </div>
       </PageSection>
+
+      <RelatedLinks
+        kicker="Frameworks"
+        title="Frameworks that matter here"
+        subtitle={`Obligations ${data.audience} most often need to map, evidence, and report on.`}
+        links={relatedFrameworksFor(slug)}
+      />
 
       <PageCTA
         title={data.ctaTitle}

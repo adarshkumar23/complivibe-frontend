@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import PageShell from "@/components/PageShell";
 import SolutionTemplate from "@/components/SolutionTemplate";
 import { solutions, solutionSlugs } from "@/components/solutions-data";
+import { solutionMetadata } from "@/lib/seo";
 
 // Static solution subpages (e.g. /solutions/startup) shadow this catch-all;
 // this route covers slugs without a dedicated directory (e.g. enterprise).
@@ -15,11 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const data = solutions[slug];
   if (!data) return {};
-  return {
-    title: `${data.audience} | CompliVibe`,
-    description: data.heroSubtitle,
-    alternates: { canonical: `https://complivibe.in/solutions/${slug}` },
-  };
+  return solutionMetadata(slug, data.heroSubtitle);
 }
 
 export default async function SolutionPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -307,7 +307,13 @@ const cardItem: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
-export default function Pricing() {
+/**
+ * `as` controls the heading level only. This section renders on the homepage
+ * (where Hero already owns the h1) and on /pricing (where it is the page's
+ * main heading), so /pricing passes "h1" to avoid shipping a page with none.
+ */
+export default function Pricing({ as = "h2" }: { as?: "h1" | "h2" }) {
+  const Heading = as;
   const [currency, setCurrency] = useState<Currency>("USD");
   const curr = currencyConfig[currency];
   const reduce = useReducedMotion();
@@ -324,10 +330,10 @@ export default function Pricing() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="section-kicker mb-4">Pricing</span>
-          <h2 className="section-title mt-4 text-balance">
+          <Heading className="section-title mt-4 text-balance">
             Start with AI trust. Scale into{" "}
             <span className="text-gradient-trust">infrastructure</span>.
-          </h2>
+          </Heading>
           <p className="section-subtitle mx-auto mt-5">
             One platform for AI governance, evidence, compliance, and observability — priced for
             pilots, built for enterprise rollout.

@@ -6,9 +6,9 @@ import PageBentoCard from "@/components/PageBentoCard";
 import PageCTA from "@/components/PageCTA";
 
 export const metadata: Metadata = {
-  title: "Trust stories from AI-first teams | CompliVibe",
+  title: "CompliVibe Customer Stories & Reviews | CompliVibe",
   description:
-    "How AI-first teams use CompliVibe for AI governance, evidence, and trust readiness. Early use-case patterns — full stories coming soon.",
+    "How AI-first teams use CompliVibe for AI governance, evidence, and trust readiness — early, anonymized use-case patterns from fintech, healthtech, and SaaS.",
   alternates: { canonical: "https://complivibe.in/customer-stories" },
 };
 

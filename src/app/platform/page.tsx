@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Platform — The AI Trust OS",
+  title: "AI Governance Software & Compliance Platform | CompliVibe",
   description:
-    "CompliVibe is the AI Trust OS for modern companies — connecting AI governance, compliance automation, evidence, risk monitoring, and data observability into one operating layer.",
+    "AI governance software connecting compliance automation, evidence, risk monitoring, and data observability into one operating layer for your AI systems.",
   alternates: { canonical: "https://complivibe.in/platform" },
   openGraph: {
     title: "Platform — The AI Trust OS | CompliVibe",
